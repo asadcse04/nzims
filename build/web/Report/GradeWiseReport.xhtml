@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+   
+
+            <h:form id="gradewisereport_frm">
+                
+                <p:growl id="graderptgrl" autoUpdate="false" sticky="false" />
+                
+                <center>
+                    
+                    <p:panelGrid styleClass="panelGrid" style="border: none">
+                        
+                        <p:row>
+                            
+                            <p:column>   
+                    
+                        <p:panelGrid styleClass="panelGrid">
+                     
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                            <p:outputLabel value="Academic Year "/>
+                            </p:column><p:column> 
+                                <p:selectOneMenu id="pasfailrptyear" value="#{gradeWiseReportController.gradeWiseReport.academicyear}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Year.">
+                             <f:selectItem itemLabel="Select Year" itemValue=""/>
+                             <f:selectItems value="#{gradeWiseReportController.academicYearList}"/>
+                            </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                        
+                          <p:row>
+                            <p:column styleClass="label">
+                            <p:outputLabel value="Exam Name "/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="grdwiseexmname" value="#{gradeWiseReportController.gradeWiseReport.examname}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Exam Name.">
+                             <f:selectItem itemLabel="Select Exam" itemValue=""/>
+                             <f:selectItems value="#{gradeWiseReportController.examNameList}"/>
+                             <p:ajax event="change" update="gradewisetbl gradewisechart" listener="#{gradeWiseReportController.showGradeWiseReport()}"/> 
+                            </p:selectOneMenu>
+                            </p:column>   
+                        </p:row> 
+
+                </p:panelGrid> 
+                    
+                                <p:commandButton value="See" update="graderptgrl gradewisetbl gradewisechart" style="margin-top: 8px;margin-left: 100px" action="#{gradeWiseReportController.showGradeWiseReport()}"/>
+
+                
+                         
+                    </p:column> 
+                    
+                            <p:column>
+                      
+                    
+                         <p:dataTable id="gradewisetbl" value="#{gradeWiseReportController.gradeWiselist}" var="gradewisereport" style="width: 500px; margin-top: -20px">
+                
+                        <p:column headerText="Total student">
+                        #{gradewisereport.totalstudent}    
+                        </p:column>
+                        
+                       <p:column headerText="A+">
+                        #{gradewisereport.getaPlus()}    
+                        </p:column>
+                        
+                        <p:column headerText="A">
+                        #{gradewisereport.getA()}    
+                        </p:column>
+                             
+                         <p:column headerText="A-">
+                        #{gradewisereport.getaMinus()}    
+                        </p:column>     
+                        
+                        <p:column headerText="B">
+                        #{gradewisereport.getB()}    
+                        </p:column>
+                        
+                        <p:column headerText="C">
+                        #{gradewisereport.getC()}    
+                        </p:column>
+                             
+                             
+                        <p:column headerText="D">
+                        #{gradewisereport.getD()}    
+                        </p:column>
+                             
+                        
+                        <p:column headerText="F">
+                        #{gradewisereport.getF()}    
+                        </p:column> 
+                             
+                
+                </p:dataTable>
+                    
+                    </p:column>
+                        
+                    </p:row>
+                    
+                    </p:panelGrid>
+                
+                    <p:pieChart id="gradewisechart" value="#{gradeWiseReportController.pieModel}" legendPosition="w"  title="Total School Grade Wise Report" style="width:600px;height:400px;margin-top: 20px" />
+              
+                
+                </center>
+                
+            </h:form>
+
+        
+
+</ui:composition>
+
+

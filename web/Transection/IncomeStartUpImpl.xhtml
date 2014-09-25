@@ -1,0 +1,221 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+
+
+    
+            <h:form id="form">
+
+            <p:growl id="grl" autoUpdate="false"/>
+
+            <center>
+
+            <p:panelGrid styleClass="panelGrid">
+
+                
+                
+                
+                <p:row>
+                    <p:column colspan="2" styleClass="header" style="text-align: center">
+                        Income Transection   
+                    </p:column>    
+                </p:row>
+
+
+               
+                
+                
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputLabel value="*" styleClass="red"/>
+                        <h:outputLabel value="Category"/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{incomeController.catagoryname}" styleClass="inputCombo" style="width: 165px" required="true" requiredMessage="Please Select Category.">
+
+                            <f:selectItem itemLabel="Select Category" itemValue=""/>
+
+                            <f:selectItems value="#{incomeController.catlist}"/>
+
+                            <p:ajax event="change" update="mainhead" />   
+
+                        </p:selectOneMenu>
+                    </p:column>
+
+                </p:row>
+
+
+                
+                
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputLabel value="*" styleClass="red"/>
+                        <h:outputLabel value="Main Head"/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{incomeController.headname}" id="mainhead" styleClass="inputCombo" style="width: 165px" required="true" requiredMessage="Please Select Head Name.">
+
+                            <f:selectItem itemLabel="Select Main Head" itemValue=""/>
+
+                            <f:selectItems value="#{incomeController.mainhdlist}"/>
+
+                            <p:ajax event="change" update="subhead" listener="#{incomeController.getSubheadlist()}" />   
+
+                        </p:selectOneMenu>
+                    </p:column>
+
+                </p:row>
+
+
+                
+                
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputLabel value="*" styleClass="red"/>
+                        <h:outputLabel value="Sub Head"/>
+                    </p:column> <p:column>
+                        <p:selectOneMenu value="#{incomeController.subheadname}" id="subhead" styleClass="inputCombo" style="width: 165px" required="true" requiredMessage="Please Select Sub Head.">
+
+                            <f:selectItem itemLabel="Select Sub Head" itemValue=""/>
+
+                            <f:selectItems value="#{incomeController.subheadlist}"/>
+
+                        </p:selectOneMenu>   
+                    </p:column>
+
+                </p:row>
+
+
+
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="*" styleClass="red"/>
+                        <h:outputLabel value="Total Amount"/>
+                    </p:column><p:column>
+                        <p:inputText value="#{incomeController.income.tranAmount}" styleClass="inputText" required="true" requiredMessage="Please Enter Amount."/>
+                    </p:column>
+
+                </p:row>
+
+
+                
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="Add Voucher No."/>
+                    </p:column><p:column>
+                        <p:inputText value="#{incomeController.income.attachedVoucherNo}" styleClass="inputText"/>  
+                    </p:column>
+
+                </p:row>
+
+
+                
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="Note"/>
+                    </p:column><p:column>
+                        <p:inputText value="#{incomeController.income.note}" styleClass="inputText"/>  
+                    </p:column>
+
+                </p:row>
+
+
+               
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="*" styleClass="red"/>
+                        <h:outputLabel value="Payment Type"/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{incomeController.income.paymentType}" styleClass="inputCombo" style="width: 165px" required="true" requiredMessage="Please Select Payment Type.">
+
+                            <f:selectItem itemLabel="Select Type" itemValue=""/>
+
+                            <f:selectItems value="#{incomeController.paymenttype}"/>
+
+                            <p:ajax event="change" update="bankid" listener="#{incomeController.bankIdWithName()}"/>
+
+                        </p:selectOneMenu> 
+                    </p:column>
+
+                </p:row>
+
+
+                
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="Bank Name"/>
+                    </p:column><p:column>
+                        <p:inputText value="#{incomeController.income.bankName}" styleClass="inputText"/>
+                    </p:column>  
+
+                </p:row>
+
+
+                
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="Bank ID"/>
+                    </p:column><p:column>
+
+                        <p:selectOneMenu id="bankid" value="#{incomeController.bankid}" styleClass="inputCombo" style="width: 165px">
+
+                            <f:selectItem itemLabel="Select ID" itemValue="0-none"/>
+
+                            <f:selectItems value="#{incomeController.bankIdList}"/>
+
+                        </p:selectOneMenu>
+
+                    </p:column>
+
+                </p:row>
+
+                
+                
+                
+                
+                <p:row>
+
+                    <p:column styleClass="label">
+                        <h:outputLabel value="Check No."/>
+                    </p:column><p:column>
+                        <p:inputText value="#{incomeController.income.checkNo}" styleClass="inputText"/>   
+                    </p:column>
+
+                </p:row>
+
+
+
+            
+            </p:panelGrid>
+
+            <p:commandButton value="Add" update="grl form" action="#{incomeController.addIncomeCash()}" style="margin-top: 8px" oncomplete="income.show()"/>         
+
+            </center>
+
+            </h:form>
+
+
+</ui:composition>
+

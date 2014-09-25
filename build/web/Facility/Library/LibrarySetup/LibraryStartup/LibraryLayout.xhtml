@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:tabView id="library" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+        <p:tab title="Book Category"> 
+            <ui:include src="BookCategory/BookCategory.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Book Sub-Category"> 
+            <ui:include src="BookSubCategory/BookSubCategory.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Author"> 
+             <ui:include src="Author/Author.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Publication"> 
+            <ui:include src="Publication/Publication.xhtml"/>
+        </p:tab>
+
+    </p:tabView>
+
+</ui:composition>

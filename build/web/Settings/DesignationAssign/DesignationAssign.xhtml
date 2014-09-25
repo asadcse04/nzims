@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="designationAssignForm">
+
+
+                    <p:dataTable value="#{designationAssignController.teacherList}" var="designationAssign" paginator="true" rows="10" paginatorPosition="bottom" id="t1" style="width: 800px">
+
+                        <p:column headerText="Teacher ID" sortBy="#{designationAssign.teacherID}">
+                            #{designationAssign.teacherID}
+                        </p:column>
+
+                        <p:column headerText="Teacher Name" sortBy="#{designationAssign.teacherName}">
+                            #{designationAssign.teacherName}
+                        </p:column>
+
+                        <p:column headerText="Gender" sortBy="#{designationAssign.gender}">
+                            #{designationAssign.gender}
+                        </p:column>
+
+                        <p:column headerText="Mobile" sortBy="#{designationAssign.contactNo}">
+                            #{designationAssign.contactNo}
+                        </p:column>
+
+                        <p:column headerText="Assign">
+                            <p:commandButton  oncomplete="designationAssignDialog.show()" update=":desiForm" icon="ui-icon-pencil" title="Assign Designation">  
+                                <f:setPropertyActionListener value="#{designationAssign}" target="#{designationAssignController.designationAssign}"/>   
+                            </p:commandButton> 
+
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </h:form>
+
+            </center>
+
+            <p:dialog header="Assign Designation" widgetVar="designationAssignDialog" style="width: 700px">
+
+                <h:form id="desiForm">
+                    <p:growl id="grl2" autoUpdate="false" sticky="false" />
+                    <center>
+                        <p:panelGrid styleClass="panelGrid">
+
+                            <p:row>
+                                <p:column colspan="2" styleClass="Header" style="text-align: center" >Assign Designation  </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label" >
+                                    <h:outputLabel value="Teacher ID"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText value="#{designationAssignController.designationAssign.teacherID}" styleClass="inputText" readonly="true" style="color: red;"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label" >
+                                    <h:outputLabel value="Teacher Name"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText value="#{designationAssignController.designationAssign.teacherName}" styleClass="inputText" readonly="true"  style="color: red;"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value="Category"/>
+                                    <h:outputLabel value="*" styleClass="red"/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{designationAssignController.designationAssign.categoryName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select A Category.">
+                                        <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                        <f:selectItems value="#{designationAssignController.categoryList}"/>
+                                        <p:ajax event="change" listener="#{designationAssignController.designationName_List()}" update="designationName"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value="Designation"/>
+                                    <h:outputLabel value="*" styleClass="red"/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="designationName" value="#{designationAssignController.designationAssign.designationName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select A Category.">
+                                        <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                        <f:selectItems  value="#{designationAssignController.designationList}"/>
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label" >
+                                    <h:outputLabel value="Note"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText value="#{designationAssignController.designationAssign.note}" styleClass="inputText" />
+                                </p:column>
+                            </p:row>
+
+                        </p:panelGrid>
+
+                        <p:commandButton value="Add" actionListener="#{designationAssignController.insertDesignation()}" update="grl2 :designationAssignForm" icon="ui-icon-check" oncomplete="designationAssignDialog.hide();" style="margin-top: 8px;"/>
+
+                    </center>
+                </h:form>
+            </p:dialog>
+
+        </p:layoutUnit>
+    </p:layout>
+</ui:composition>

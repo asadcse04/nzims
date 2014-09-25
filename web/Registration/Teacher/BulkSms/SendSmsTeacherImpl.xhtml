@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="sms_4_tchr_frm">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+        <p:commandButton value="Send SMS" process="@this" update=":sms_4_tchr_frm:send_smsTchr_pnl" oncomplete="dialog_send_smsTchr.show()" title="Send Sms" style="margin-bottom: 6px; margin-top: 6px;"/> 
+
+        <center>
+
+            <p:dataTable value="#{sendSmsTeacherController.teacher_data_model}" var="sms_teacher_tbl" selection="#{sendSmsTeacherController.selectedTeacher}" filteredValue="#{sendSmsTeacherController.teachar_filter_list}"
+
+                         paginator="true" rows="100" paginatorPosition="bottom" scrollable="true" scrollHeight="500" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})">
+
+
+                <p:column selectionMode="multiple" style="width:2%" /> 
+
+                <p:column sortBy="#{sms_teacher_tbl.teacherID}" filterBy="#{sms_teacher_tbl.teacherID}">
+
+                    <f:facet name="header">Teacher ID</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.teacherID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{sms_teacher_tbl.name}" filterBy="#{sms_teacher_tbl.name}">
+
+                    <f:facet name="header">Teacher Name</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.name}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{sms_teacher_tbl.contactNo}" filterBy="#{sms_teacher_tbl.contactNo}">
+
+                    <f:facet name="header">Mobile No</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.contactNo}"/>
+
+                </p:column> 
+
+
+                <p:column sortBy="#{sms_teacher_tbl.gender}" filterBy="#{sms_teacher_tbl.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.gender}"/>
+
+                </p:column>                      
+
+
+                <p:column sortBy="#{sms_teacher_tbl.bloodGroup}" filterBy="#{sms_teacher_tbl.bloodGroup}">
+
+                    <f:facet name="header">Blood Group</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.bloodGroup}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{sms_teacher_tbl.religion}" filterBy="#{sms_teacher_tbl.religion}">
+
+                    <f:facet name="header">Religion</f:facet>  
+
+                    <h:outputText value="#{sms_teacher_tbl.religion}"/>
+
+                </p:column>  
+
+            </p:dataTable> 
+
+        </center> 
+        
+        
+        <p:dialog header="SMS Panel" widgetVar="dialog_send_smsTchr" width="500" height="460">
+
+                <center>
+
+                    <h:panelGrid id="send_smsTchr_pnl" columns="1">
+
+                        <h:outputText value="Write Message Here" />
+                        
+                        <p:selectOneMenu value="#{sendSmsTeacherController.tempCategory}" styleClass="inputCombo" style="width: 185px;">
+                        <f:selectItem itemLabel="Select Temp Category" itemValue=""/>
+                        <f:selectItems value="#{sendSmsTeacherController.templateCategoryList}"/>
+                        <p:ajax event="change" update="counter" listener="#{sendSmsTeacherController.getSmsdetail()}"/>
+                        </p:selectOneMenu>
+
+                        <p:inputTextarea id="counter" counter="display" counterTemplate="{0} characters remaining."  cols="50" rows="15" value="#{sendSmsTeacherController.message}" maxlength="750" />
+                        <h:outputText id="display" /> 
+                    
+                    </h:panelGrid>
+
+                    <p:commandButton value="Send" action="#{sendSmsTeacherController.sendSms_2_Teacher}" ajax="false"/>
+
+                </center>
+
+        </p:dialog>
+
+    </h:form>
+    
+     <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+
+        <f:facet name="start">  
+
+            <p:graphicImage value="/images/Ajax/loading.gif" />  
+
+        </f:facet>  
+
+        <f:facet name="complete">  
+
+            <h:outputText value="" />  
+
+        </f:facet>  
+
+    </p:ajaxStatus>
+
+</ui:composition>

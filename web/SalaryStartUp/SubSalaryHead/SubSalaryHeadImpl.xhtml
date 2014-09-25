@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="50%"> 
+
+            <h:form id="insert_subsalaryhead_frm">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+                
+                
+                  <center>
+
+
+                   <p:panelGrid styleClass="panelGrid">
+                        
+                        <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                             Create Salary Sub Head 
+                            </p:column>    
+                        </p:row> 
+     
+                        <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Sub Head Name"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{subSalaryHeadController.subSalaryHead.subSalaryHeadName}" styleClass="inputText" required="true" requiredMessage="Please Enter Sub Head."/> 
+                            </p:column>    
+                            
+                        </p:row>
+                    
+                      <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{subSalaryHeadController.subSalaryHead.note}" styleClass="inputText" /> 
+                            </p:column>    
+                            
+                        </p:row>
+                        
+                
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" actionListener="#{subSalaryHeadController.addSubSalaryHead()}" style="margin-top: 8px" update="grl :salarystrt_tb:insert_subsalaryhead_frm :salarystrt_tb:subsalaryheadlistList_frm" icon="ui-icon-check" />
+
+               
+                </center>
+
+           
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="subsalaryheadlistList_frm">
+
+                <center>
+
+                    <p:dataTable var="subsalaryheadlist" value="#{subSalaryHeadController.subSalaryHeadList}" id="subsalaryheadlist">
+
+                          <p:column headerText="Head ID">
+
+                              <h:outputLabel value="#{subsalaryheadlist.subSalaryHeadID}"/>
+
+                        </p:column>
+                        
+                        <p:column headerText="Head Name">
+
+                            <h:outputLabel value="#{subsalaryheadlist.subSalaryHeadName}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{subsalaryheadlist.note}"/>
+
+                        </p:column>
+            
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

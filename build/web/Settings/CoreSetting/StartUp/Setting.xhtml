@@ -1,0 +1,385 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:form id="settingFrm">
+
+        <p:tabView dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+            <p:tab title="Academic Year"> 
+
+                <ui:include src="AcademicYear.xhtml"/>
+
+            </p:tab>  
+
+
+            <p:tab title="Class">  
+
+                <ui:include src="SchoolClass.xhtml"/>
+
+            </p:tab>
+
+
+            <p:tab title="Department">  
+
+                <ui:include src="Department.xhtml"/>
+
+            </p:tab>
+       
+            <p:tab title="Shift">  
+
+                <ui:include src="Shift.xhtml"/>
+
+            </p:tab>
+
+            <p:tab title="Section">  
+
+                <ui:include src="Section.xhtml"/>
+
+            </p:tab>
+            
+            
+            <p:tab title="Class Room">  
+
+                <ui:include src="ClassRoom.xhtml"/>
+
+            </p:tab>
+            
+            <p:tab title="Subject">  
+
+                <ui:include src="Subject.xhtml"/>
+
+            </p:tab>
+
+            <p:tab title="Period">  
+
+                <ui:include src="Period.xhtml"/>
+
+            </p:tab>
+
+        </p:tabView>
+
+    </h:form>
+
+    <p:dialog header="Academic Year Update" widgetVar="dialog_Update_acyr" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_AcYr_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="AcdemicYear ID"/>
+
+                    <p:inputText value="#{academicYearController.acYr.acYrID}" readonly="true"/>
+
+
+                    <h:outputText value="Start Date"/>
+
+                    <p:calendar value="#{academicYearController.acYr.startTime}"/>
+
+
+                    <h:outputText value="End Date"/>
+
+                    <p:calendar value="#{academicYearController.acYr.endTime}"/>
+
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{academicYearController.acYr.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_AcYr_frm,:settingFrm" actionListener="#{academicYearController.editAcyr}" oncomplete="dialog_Update_acyr.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+    <p:dialog header="Update Department" widgetVar="dialog_Update_department" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_Department_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Department Name"/>
+
+                    <p:inputText value="#{departmentController.department.departmentName}"/>
+
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{departmentController.department.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_Department_frm,:settingFrm" actionListener="#{departmentController.editDepartment}" oncomplete="dialog_Update_department.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+    <p:dialog header=" School Class Update" widgetVar="dialog_Update_schoolclass" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_schoolclass_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Class Name"/>
+
+                    <p:inputText value="#{schoolClassController.school_class.className}"/>                    
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{schoolClassController.school_class.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_schoolclass_frm,:settingFrm" actionListener="#{schoolClassController.editSchoolClass}" oncomplete="dialog_Update_schoolclass.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+
+    <p:dialog header="Update Class Room" widgetVar="dialog_Update_classroom" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_classroom_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Room No"/>
+
+                    <p:inputText value="#{classRoomController.class_room.roomNo}"/>
+
+                    <h:outputText value="Room Capacity"/>
+
+                    <p:inputText value="#{classRoomController.class_room.roomCapacity}"/>
+
+                    <h:outputText value="Exam Capacity"/>
+
+                    <p:inputText value="#{classRoomController.class_room.examCapacity}"/>
+
+                    <h:outputText value="Location"/>
+
+                    <p:inputTextarea value="#{classRoomController.class_room.location}" maxlength="100"/>
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{classRoomController.class_room.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_classroom_frm,:settingFrm" actionListener="#{classRoomController.editClassRoom}" oncomplete="dialog_Update_classroom.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+
+    <p:dialog header="Update Section" widgetVar="dialog_Update_section" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_Section_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Section Name"/>
+
+                    <p:inputText value="#{sectionController.section.sectionName}"/>
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{sectionController.section.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_Section_frm,:settingFrm" actionListener="#{sectionController.editSection}" oncomplete="dialog_Update_section.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+
+    <p:dialog header="Update Subject" widgetVar="dialog_Update_subjct" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_sbjct_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Subject Name"/>
+
+                    <p:inputText value="#{subjectController.subject.subjectName}"/>
+
+
+                    <h:outputText value="Subject Code"/>
+
+                    <p:inputText value="#{subjectController.subject.subjectCode}"/>
+
+
+                    <h:outputText value="Is Optional" />  
+
+                    <p:selectBooleanCheckbox value="#{subjectController.subject.status}"/> 
+
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{subjectController.subject.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_sbjct_frm,:settingFrm" actionListener="#{subjectController.editSubject}" oncomplete="dialog_Update_subjct.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+    <p:dialog header="Update Shift" widgetVar="dialog_Update_shift" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_Shift_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Shift Name"/>
+
+                    <p:inputText value="#{shiftController.shift.shiftName}"/>
+
+
+                    <h:outputText value="Start Time"/>
+
+                    <p:inputText value="#{shiftController.shift.startTime}"/>
+
+
+                    <h:outputText value="End Time"/>
+
+                    <p:inputText value="#{shiftController.shift.endTime}"/>
+
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{shiftController.shift.note}" maxlength="100"/>
+
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_Shift_frm,:settingFrm" actionListener="#{shiftController.editShift}" oncomplete="dialog_Update_shift.hide()"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+
+    <p:dialog header="Period Update" widgetVar="dialog_Update_prd" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_Period_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Period Name"/>
+
+                    <p:inputText value="#{periodController.period.periodName}"/>
+
+
+                    <h:outputText value="Start Time"/>
+
+                    <p:inputText value="#{periodController.period.startTime}"/>
+
+
+                    <h:outputText value="End Time"/>
+
+                    <p:inputText value="#{periodController.period.endTime}"/>
+
+
+                    <h:outputText value="Shift" />  
+
+                    <p:selectOneMenu value="#{periodController.period.shiftName}" effect="slide" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                        <f:selectItems value="#{periodController.shiftNameData}" />  
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update="update_Period_frm,:settingFrm" actionListener="#{periodController.editPeriod}" oncomplete="dialog_Update_prd.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+
+  
+
+    <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+
+        <f:facet name="start">  
+
+            <p:graphicImage value="/images/Ajax/loading.gif" />  
+
+        </f:facet>  
+
+        <f:facet name="complete">  
+
+            <h:outputText value="" />  
+
+        </f:facet>  
+
+    </p:ajaxStatus>
+
+</ui:composition>

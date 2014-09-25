@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight" style="height: 100%">
+
+        <p:layoutUnit position="center" size="50%" style="height: 600px;" > 
+
+            <h:form id="add_driver">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid" style="height: 100%">
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Driver Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.driverName}" styleClass="inputText" required="true" requiredMessage="Please Enter Driver Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Father's Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.fatherName}" styleClass="inputText" required="true" requiredMessage="Please Enter Father's Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Mother's Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.motherName}" styleClass="inputText" required="true" requiredMessage="Please Enter Mother's Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="National ID"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.nationalID}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Qualification"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.qualification}" styleClass="inputText"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Marital Status"/>
+                            </p:column>
+                            <p:column>
+                                <p:selectOneRadio value="#{driver_Controller.driver.maritalStatus}" >  
+                                    <f:selectItem itemLabel="Single" itemValue="Single" />  
+                                    <f:selectItem itemLabel="Married" itemValue="Married"/> 
+                                </p:selectOneRadio>
+                            </p:column> 
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Religion"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.religion}" styleClass="inputText"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Contact No"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{driver_Controller.driver.contactNo}" styleClass="inputText" required="true" requiredMessage="Please Enter Contact No Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Present Address"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputTextarea value="#{driver_Controller.driver.presentAddress}" styleClass="inputTextarea"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Permanent Address"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputTextarea value="#{driver_Controller.driver.permanentAddress}" styleClass="inputTextarea"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Attached Paper"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputTextarea value="#{driver_Controller.driver.attachePapper}" styleClass="inputTextarea"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputTextarea value="#{driver_Controller.driver.note}" styleClass="inputTextarea"/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Photo"/>
+                            </p:column>
+                            <p:column>
+                                <p:fileUpload value="#{driver_Controller.photoFile}" mode="simple"/>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Save"   actionListener="#{driver_Controller.insertDriver}" update=" grl add_driver grl" style="margin-top: 8px;" />
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

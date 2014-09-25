@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+   
+
+            <h:form id="passfailreport_frm">
+                
+                <p:growl id="pasfailrptgrl" autoUpdate="false" sticky="false" />
+                
+                <center>
+                    
+                    <p:panelGrid styleClass="panelGrid" style="border: none">
+                        
+                        <p:row>
+                            
+                            <p:column>   
+                    
+                        <p:panelGrid styleClass="panelGrid">
+                     
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                            <p:outputLabel value="Academic Year "/>
+                            </p:column><p:column> 
+                            <p:selectOneMenu id="pasfailrptyear" value="#{passFailReportController.passFailReport.academicyear}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Year.">
+                             <f:selectItem itemLabel="Select Year" itemValue=""/>
+                             <f:selectItems value="#{passFailReportController.academicYearList}"/>
+                            </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                        
+                          <p:row>
+                            <p:column styleClass="label">
+                            <p:outputLabel value="Exam Name "/>
+                            </p:column><p:column>
+                             <p:selectOneMenu id="pasfalexmname" value="#{passFailReportController.passFailReport.examname}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Exam Name.">
+                             <f:selectItem itemLabel="Select Exam" itemValue=""/>
+                             <f:selectItems value="#{passFailReportController.examNameList}"/>
+                             <p:ajax event="change" update="passfailtbl passfailchart" listener="#{passFailReportController.showPassFail()}"/>
+                            </p:selectOneMenu>
+                            </p:column>   
+                        </p:row> 
+
+                </p:panelGrid> 
+                    
+                    <p:commandButton value="See" update="pasfailrptgrl passfailtbl passfailchart" style="margin-top: 8px;margin-left: 100px" action="#{passFailReportController.showPassFail()}"/>
+                
+                         
+                    </p:column> 
+                    
+                            <p:column>
+                      
+                    
+                                <p:dataTable id="passfailtbl" value="#{passFailReportController.finalpassfailList}" var="passfailreport" style="width: 500px; margin-top: -20px">
+                
+                        <p:column headerText="Total student">
+                        #{passfailreport.totalstudent}    
+                        </p:column>
+                        
+                        <p:column headerText="Total Fail">
+                        #{passfailreport.totalfail}    
+                        </p:column>
+                        
+                        <p:column headerText="%">
+                        #{passfailreport.totalfailpercentage}    
+                        </p:column>
+                        
+                        <p:column headerText="Total Pass">
+                        #{passfailreport.totalpass}    
+                        </p:column>
+                        
+                         <p:column headerText="%">
+                        #{passfailreport.totalpasspercentage}    
+                        </p:column>                        
+                                             
+              
+                </p:dataTable>
+                    
+                    </p:column>
+                        
+                    </p:row>
+                    
+                    </p:panelGrid>
+                
+                
+                    <p:pieChart id="passfailchart" value="#{passFailReportController.pieModel}"  legendPosition="w"  title="Total School Pass Fail Report" style="width:500px;height:350px;margin-top: 20px" />
+
+                </center>
+                
+            </h:form>
+
+        
+
+</ui:composition>
+
+

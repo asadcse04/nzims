@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="student_List_4_sms_4_sms_frm">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+        
+        <p:commandButton value="Send SMS" process="@this" update=":student_List_4_sms_4_sms_frm:sms_pnl_student" oncomplete="dialog_sms_pnl_student.show()" title="Send Sms" style="margin-bottom: 6px; margin-top: 6px;"/>  
+
+        <center>
+
+            <p:dataTable value="#{sendSmsStudentController.student_data_model}" var="student_List_4_sms" selection="#{sendSmsStudentController.selectedStudentArry}" filteredValue="#{sendSmsStudentController.student_Filter_List}"
+
+                         paginator="true" rows="250" paginatorPosition="bottom" scrollable="true" scrollHeight="500" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})" style="width:auto;">
+
+                <p:column selectionMode="multiple" style="width:2%" /> 
+                 
+                 <p:column sortBy="#{student_List_4_sms.studentID}" filterBy="#{student_List_4_sms.studentID}">
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.studentID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_List_4_sms.studentName}" filterBy="#{student_List_4_sms.studentName}">
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.studentName}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_List_4_sms.gender}" filterBy="#{student_List_4_sms.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.gender}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_List_4_sms.guardianContactNo}" filterBy="#{student_List_4_sms.guardianContactNo}">
+
+                    <f:facet name="header">Guardian Mobile </f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.guardianContactNo}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_List_4_sms.className}" filterBy="#{student_List_4_sms.className}">
+
+                    <f:facet name="header">Class</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.className}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_List_4_sms.deptName}" filterBy="#{student_List_4_sms.deptName}">
+
+                    <f:facet name="header">Department</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.deptName}"/>
+
+                </p:column>  
+                
+                <p:column sortBy="#{student_List_4_sms.shiftName}" filterBy="#{student_List_4_sms.shiftName}">
+
+                    <f:facet name="header">Shift</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.shiftName}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_List_4_sms.sectionName}" filterBy="#{student_List_4_sms.sectionName}">
+
+                    <f:facet name="header">Section</f:facet>  
+
+                    <h:outputText value="#{student_List_4_sms.sectionName}"/>
+
+                </p:column> 
+
+            </p:dataTable> 
+
+        </center>
+        
+          
+
+          <p:dialog header="Send SMS to Guardian" widgetVar="dialog_sms_pnl_student" width="500" height="460" showEffect="drop" hideEffect="drop" modal="false">
+           
+            <center>               
+
+                <h:panelGrid id="sms_pnl_student" columns="1">
+
+                    <h:outputText value="Write your Message" />
+                    
+                    <p:selectOneMenu value="#{sendSmsStudentController.tempCategory}" styleClass="inputCombo" style="width: 185px;">
+                        <f:selectItem itemLabel="Select Temp Category" itemValue=""/>
+                        <f:selectItems value="#{sendSmsStudentController.templateCategoryList}"/>
+                        <p:ajax event="change" update="counter" listener="#{sendSmsStudentController.getSmsdetail()}"/>
+                    </p:selectOneMenu>
+
+                    <p:inputTextarea id="counter" counter="display" counterTemplate="{0} characters remaining." cols="50" rows="15" value="#{sendSmsStudentController.message}" maxlength="750"/>
+                    <h:outputText id="display" /> 
+
+            
+
+                </h:panelGrid>
+
+                <p:commandButton value="send"  action="#{sendSmsStudentController.sendSms_2_Guardian}" ajax="false"/>
+                
+          </center>
+
+        </p:dialog>
+    </h:form>
+    
+     <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+
+        <f:facet name="start">  
+
+            <p:graphicImage value="/images/Ajax/loading.gif" />  
+
+        </f:facet>  
+
+        <f:facet name="complete">  
+
+            <h:outputText value="" />  
+
+        </f:facet>  
+
+    </p:ajaxStatus>
+
+</ui:composition>

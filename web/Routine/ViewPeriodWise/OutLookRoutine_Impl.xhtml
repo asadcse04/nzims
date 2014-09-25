@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <center>
+
+        <h:form id="class_routine_frm">
+
+
+            <p:dataTable value="#{scClassConfigController.listClassConfig}" var="class_cnf_tbl" filteredValue="#{scClassConfigController.filterClassConfig}"
+
+                         paginator="true" rows="10" paginatorPosition="bottom" style="width:850px;">
+
+
+                <p:column sortBy="#{class_cnf_tbl.acyrID}" filterBy="#{class_cnf_tbl.acyrID}">
+
+                    <f:facet name="header">Academic Year</f:facet>  
+
+                    <h:outputText value="#{class_cnf_tbl.acyrID}"/>
+
+                </p:column> 
+
+
+                <p:column sortBy="#{class_cnf_tbl.className}" filterBy="#{class_cnf_tbl.className}">
+
+                    <f:facet name="header">Class</f:facet>  
+
+                    <h:outputText value="#{class_cnf_tbl.className}"/>
+
+                </p:column> 
+
+
+                <p:column sortBy="#{class_cnf_tbl.deptName}" filterBy="#{class_cnf_tbl.deptName}">
+
+                    <f:facet name="header">Department</f:facet>  
+
+                    <h:outputText value="#{class_cnf_tbl.deptName}"/>
+
+                </p:column>
+
+
+                <p:column sortBy="#{class_cnf_tbl.shiftName}" filterBy="#{class_cnf_tbl.shiftName}">
+
+                    <f:facet name="header">Shift</f:facet>  
+
+                    <h:outputText value="#{class_cnf_tbl.shiftName}"/>
+
+                </p:column>
+
+
+                <p:column sortBy="#{class_cnf_tbl.sectionName}" filterBy="#{class_cnf_tbl.sectionName}">
+
+                    <f:facet name="header">Section</f:facet>  
+
+                    <h:outputText value="#{class_cnf_tbl.sectionName}"/>
+
+                </p:column>
+
+                <p:column style="width:3%">  
+
+                    <p:commandButton process="@this" update=":class_rtn_tbl_frm" oncomplete="dialog_view_class_rtn.show()" actionListener="#{outLookRoutineController.viewCompleteRoutine(class_cnf_tbl.scConfigID)}" icon="ui-icon-search" title="View Routine" /> 
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </center>
+
+    <p:dialog header="Class Routine" widgetVar="dialog_view_class_rtn" width="1350" showEffect="clip" hideEffect="blind">
+        <ui:include src="OutLookRoutine.xhtml" /> 
+    </p:dialog>
+
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+  
+    
+    <p:tabView id="transection_startup_tbl" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+
+        <p:tab title="Category"> 
+
+            <ui:include src="CategoryImpl.xhtml"/>
+
+        </p:tab>  
+
+
+        <p:tab title="Main Head">  
+
+           <ui:include src="MainHeadImpl.xhtml"/>
+            
+        </p:tab>
+
+
+        <p:tab title="Sub-Head">  
+         
+            <ui:include src="SubHeadImpl.xhtml"/>
+
+        </p:tab>
+
+
+    </p:tabView>
+
+
+</ui:composition>

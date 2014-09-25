@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form id="stdattendencereport_frm">
+
+        <p:growl id="attendencerptgrl" autoUpdate="false" sticky="false" />
+
+        <center>
+
+            <p:panelGrid styleClass="panelGrid" style="border: none">
+
+                <p:row>
+
+                    <p:column>   
+
+                        <p:panelGrid styleClass="panelGrid">
+
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <p:outputLabel value="Date "/>
+                                </p:column><p:column>
+                                    <p:calendar value="#{studentAttendenceReportController.studentAttendenceReport.date}" styleClass="inputCal" pattern="dd/MM/yyyy"/>
+                                </p:column>   
+                            </p:row> 
+
+                        </p:panelGrid> 
+
+                        <p:commandButton value="See" update="attendencetbl attendencechart" style="margin-top: 8px;margin-left: 100px" action="#{studentAttendenceReportController.showAttendence()}"/>
+
+
+                    </p:column> 
+
+                    <p:column>
+
+
+                        <p:dataTable id="attendencetbl" value="#{studentAttendenceReportController.tottalCompletePresentAbsent}" var="attendencereport" style="width: 500px; margin-top: -20px">
+
+                            <p:column headerText="Total student">
+                                #{attendencereport.totalstudent}    
+                            </p:column>
+
+                            <p:column headerText="Total Present">
+                                #{attendencereport.present}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{attendencereport.presentpercent}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Total Absent">
+                                #{attendencereport.abcent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{attendencereport.abcentpercent}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>    
+                            </p:column>                        
+
+
+                        </p:dataTable>
+
+                    </p:column>
+
+                </p:row>
+
+            </p:panelGrid>
+
+
+            <p:pieChart id="attendencechart" value="#{studentAttendenceReportController.pieModel}"  legendPosition="w"  title="Total School Present Absent Report" style="width:500px;height:350px;margin-top: 20px" />
+
+         
+        </center>
+
+    </h:form>
+
+
+
+</ui:composition>
+
+

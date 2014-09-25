@@ -1,0 +1,252 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+ 
+    <h:form id="usr_frm" enctype="multipart/form-data">
+
+        <p:commandButton id="user_panal_btn" value="User Panal" type="button" style="margin-bottom: 8px;" icon="ui-icon-person"/>
+
+        <p:overlayPanel  for="user_panal_btn" dismissable="false" hideEffect="blind" showCloseIcon="true">
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Create System User
+
+                    </f:facet>
+
+                    <h:outputLabel value="Full Name" />  
+
+                    <p:inputText value="#{systemUserController.system_user.fullName}"/>
+
+
+                    <h:outputLabel value="User Name" />  
+
+                    <p:inputText value="#{systemUserController.system_user.userName}"/>
+
+
+                    <h:outputText value="User Type" />
+
+                    <p:selectOneMenu value="#{systemUserController.system_user.role}">  
+
+                        <f:selectItem itemLabel="Select One Option" itemValue="" />  
+
+                        <f:selectItem itemLabel="Admin" itemValue="Admin" />  
+
+                        <f:selectItem itemLabel="Student" itemValue="Student" />
+                        
+                        <f:selectItem itemLabel="Teacher" itemValue="Teacher" />
+
+                    </p:selectOneMenu>
+
+
+                    <h:outputLabel value="Password" /> 
+
+                    <p:inputText value="#{systemUserController.system_user.password}"/>
+
+
+                    <h:outputLabel value="Mobile No" />  
+
+                    <p:inputText value="#{systemUserController.system_user.mobileNo}"/>
+
+
+                    <h:outputLabel value="Email" />  
+
+                    <p:inputText value="#{systemUserController.system_user.email}"/>
+
+
+                    <h:outputText value="Image Path :" />
+
+                    <p:fileUpload value="#{systemUserController.photoFile}" mode="simple"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Save" action="#{systemUserController.insertSystemUser}" ajax="false" icon="ui-icon-check" style="margin:2%;"/>
+
+            </center>
+            
+            </p:overlayPanel>
+
+    </h:form>
+
+    <h:form id="usr_tbl">
+
+        <p:dataTable value="#{systemUserController.user_List}" var="user_List" filteredValue="#{systemUserController.user_filter_List}" paginator="true" rows="15" paginatorPosition="bottom" style="width:750px;">
+
+            <p:column sortBy="#{user_List.userID}" filterBy="#{user_List.userID}">
+
+                <f:facet name="header">User ID</f:facet>  
+
+                <h:outputText value="#{user_List.userID}"/>
+
+            </p:column>
+
+            <p:column sortBy="#{user_List.fullName}" filterBy="#{user_List.fullName}">
+
+                <f:facet name="header">Full Name</f:facet>  
+
+                <h:outputText value="#{user_List.fullName}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{user_List.userName}" filterBy="#{user_List.userName}">
+
+                <f:facet name="header">User Name</f:facet>  
+
+                <h:outputText value="#{user_List.userName}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{user_List.role}" filterBy="#{user_List.role}">
+
+                <f:facet name="header">User Type</f:facet>  
+
+                <h:outputText value="#{user_List.role}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{user_List.mobileNo}" filterBy="#{user_List.mobileNo}">
+
+                <f:facet name="header">Mobile No</f:facet>  
+
+                <h:outputText value="#{user_List.mobileNo}"/>
+
+            </p:column>
+
+            <p:column style="width:3%">  
+
+                <p:commandButton process="@this" update=":update_usr_frm" oncomplete="dialog_edit_system_user.show()" icon="ui-icon-pencil" title="Edit User">
+
+                    <f:setPropertyActionListener value="#{user_List}" target="#{systemUserController.system_user}"/>  
+
+                </p:commandButton>
+
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+    
+    
+    <!-- Dialog --> 
+
+   
+    <p:dialog header="Edit User" widgetVar="dialog_edit_system_user" resizable="true" width="855">
+
+        <h:form id="update_usr_frm" enctype="multipart/form-data">
+
+            <p:layout style="min-width:750px;min-height:450px;">
+
+                <p:layoutUnit position="west" size="35%">
+
+                    <center>
+
+                        <p:graphicImage  value="/images/userImages/#{systemUserController.system_user.imgPath}" width="150" />
+
+                    </center>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <p:growl id="update_usr_growl" showDetail="true" sticky="false"/>
+
+                    <center>
+
+                        <p:panelGrid columns="2">
+
+                            <f:facet name="header">
+
+                                Update System User
+
+                            </f:facet>
+
+                            <h:outputLabel value="User ID" />  
+
+                            <p:inputText value="#{systemUserController.system_user.userID}"/>
+
+
+                            <h:outputLabel value="Full Name" />  
+
+                            <p:inputText value="#{systemUserController.system_user.fullName}"/>
+
+
+                            <h:outputLabel value="User Name" />  
+
+                            <p:inputText value="#{systemUserController.system_user.userName}"/>
+
+
+                            <h:outputText value="User Type" />
+
+                            <p:selectOneMenu value="#{systemUserController.system_user.role}">  
+
+                                <f:selectItem itemLabel="Select One Option" itemValue="" />  
+
+                                <f:selectItem itemLabel="Admin" itemValue="Admin" />  
+
+                                <f:selectItem itemLabel="User" itemValue="User" />
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputLabel value="Mobile No" />  
+
+                            <p:inputText value="#{systemUserController.system_user.mobileNo}"/>
+
+
+                            <h:outputLabel value="Email" />  
+
+                            <p:inputText value="#{systemUserController.system_user.email}" size="25"/>
+
+
+                            <h:outputLabel value="Active User" /> 
+
+                            <p:selectBooleanCheckbox value="#{systemUserController.system_user.status}"/>
+
+
+                            <h:outputText value="Image Path :" />
+
+                            <p:fileUpload value="#{systemUserController.photoFile}" mode="simple"/>
+
+
+                        </p:panelGrid>
+
+                        <p:commandButton value="Update" action="#{systemUserController.editSystemUser}" ajax="false" icon="ui-icon-pencil" style="margin:2%;"/>
+
+                    </center>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:form>
+
+    </p:dialog>
+
+    <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+
+        <f:facet name="start">  
+
+            <p:graphicImage value="/images/Ajax/loading.gif" />  
+
+        </f:facet>  
+
+        <f:facet name="complete">  
+
+            <h:outputText value="" />  
+
+        </f:facet>  
+
+    </p:ajaxStatus>
+
+</ui:composition>

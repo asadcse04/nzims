@@ -1,0 +1,424 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+   
+        <h:form id="student_view_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <!--________________________________________Student Info_________________________________________________ --> 
+
+
+                <p:panelGrid style="margin-top:20px; width: 650px;" id="student_info">
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;font-size: 14px;"> 
+
+                            <h:outputText value="Student ID "/>
+
+                        </p:column >
+
+                        <p:column style=" font-weight: bold; font-size: 16px;">
+
+                            <h:outputText value="#{studentListController.student.studentID}"/>
+
+                        </p:column>  
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column rowspan="6" style="font-weight: bold;">
+
+                            <p:graphicImage value="/images/studentImages/#{studentListController.student.imgPath}" width="150px" height="160px"/> 
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold; font-size: 14px;">
+
+                            <h:outputText value="Student Name"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <h:outputText value="#{studentListController.student.studentName}"/>
+
+                        </p:column>
+
+                        <p:column  style="font-weight: bold; font-size: 14px;">
+
+                            <h:outputText value="Academic Year"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <h:outputText value="#{studentListController.student.acyr}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+
+                    <p:row>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Gender"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <h:outputText value="#{studentListController.student.gender}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Class"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <h:outputText value="#{studentListController.student.className}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Contact no"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.cntNo}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Department"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.deptName}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Religion"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.religion}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Shift"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.shiftName}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Date of Birth"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.dob}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Section"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.sectionName}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Blood Group"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.bloodGroup}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Roll"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.studentRoll}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+
+
+                <!--________________________________________Address Info_________________________________________________ --> 
+
+
+                <p:panelGrid style="margin-top:20px; width: 650px;" id="address">
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Address "/>
+
+                        </p:column >
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px; height: 50px;"> 
+
+                            <h:outputText value="Present Address "/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.presentAddress}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Permanent Address "/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.permanentAddress}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+
+
+                <!--________________________________________Guardian Info_________________________________________________ --> 
+
+
+                <p:panelGrid style="margin-top:20px; width: 650px;" id="guardian_info">
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Guardian Info "/>
+
+                        </p:column >
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Father’s Name "/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.fatherName}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Father's Occupation"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.fatherOccupation}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Mother’s Name"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.motherName}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Mother’s Occupation"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.motherOccupation}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Guardian"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.guardianName}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Guardian Occupation"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.guardianOccupation}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Monthly Salary"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.guardianSalary}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Guardian's MobileNo"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.guardianContactNo}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column  style="font-weight: bold;    font-size: 14px;"> 
+
+                            <h:outputText value="Guardian's Email"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.guardianEmail}"/>
+
+                        </p:column>
+
+                        <p:column style="font-weight: bold;    font-size: 14px;">
+
+                            <h:outputText value="Relation"/>
+
+                        </p:column>
+
+                        <p:column >
+
+                            <h:outputText value="#{studentListController.student.relation}"/>
+
+                        </p:column>
+
+                    </p:row>
+
+                </p:panelGrid>
+
+            </center>
+
+        </h:form>
+
+</ui:composition>

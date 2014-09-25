@@ -1,0 +1,189 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="40%"> 
+
+            <h:form id="teacher_list_frm">
+
+                <p:dataTable value="#{classTeacherAssignController.teacherList}" var="teacherlist">
+                    <f:facet name="header">
+                        Teacher List
+                    </f:facet>
+                    
+                     <p:column headerText="Teacher Photo">
+                         <p:graphicImage  url="/images/teacherImages/#{teacherlist.imgPath}" style="width: 40px; height:40px"/>    
+                    </p:column>
+                   
+                    <p:column headerText="Teacher ID">
+                        <p:outputLabel  value="#{teacherlist.teacherid}"/>    
+                    </p:column>
+                    
+                    <p:column headerText="Teacher Name">
+                         <p:outputLabel  value="#{teacherlist.teachername}"/>    
+                    </p:column> 
+                    
+                    <p:column headerText="Assign">
+                        <p:commandButton value="Assign" update=":classteacherassign_frm" onclick="classteacherassignDig.show()">
+                            <f:setPropertyActionListener value="#{teacherlist}" target="#{classTeacherAssignController.classTeacherAssign}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>    
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center">
+
+             <h:form id="teacherassign_list_frm">
+
+                 <p:dataTable value="#{classTeacherAssignController.classTeacherAssignList}" var="teacherassignlist">
+                    <f:facet name="header">
+                        Class Teacher  List
+                    </f:facet>
+                   
+                    <p:column headerText="Teacher ID">
+                        <p:outputLabel id="teacherid" value="#{teacherassignlist.teacherid}"/>    
+                    </p:column>
+                    
+                    <p:column headerText="Teacher Name">
+                        <p:outputLabel id="teachername" value="#{teacherassignlist.teachername}"/>    
+                    </p:column> 
+                    
+                    <p:column headerText="Class">
+                        <p:outputLabel id="class" value="#{teacherassignlist.classid}"/>
+                    </p:column>
+                     
+                  <p:column headerText="Edit">
+                      <p:commandButton onclick="classteachereditDig.show()" update=":classteacheredit_frm" title="Edit" icon="ui-icon-pencil">
+                          <f:setPropertyActionListener value="#{teacherassignlist}" target="#{classTeacherAssignController.classTeacherAssign}"/>    
+                      </p:commandButton>
+                  </p:column>
+                 
+                 </p:dataTable>  
+        
+             </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+    
+    <p:dialog id="classignDig" widgetVar="classteacherassignDig" hideEffect="drop" showEffect="slide">
+      
+        <h:form id="classteacherassign_frm">
+            <p:growl id="grl"/>
+            <p:panelGrid styleClass="panelGrid">
+                <p:row>
+                    <p:column colspan="2" styleClass="header" style="text-align: center">
+                      Assign Class Teacher  
+                    </p:column> 
+                   </p:row> 
+                
+                <p:row>
+                    <p:column>
+                     Teacher ID  
+                    </p:column><p:column>
+                        <p:outputLabel value="#{classTeacherAssignController.classTeacherAssign.teacherid}"/>
+                    </p:column>  
+                </p:row> 
+                
+                  <p:row>
+                    <p:column>
+                     Teacher Name 
+                    </p:column><p:column>
+                        <p:outputLabel value="#{classTeacherAssignController.classTeacherAssign.teachername}"/>
+                    </p:column>  
+                </p:row> 
+                
+                   <p:row>
+                    <p:column>
+                     Class ID
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{classTeacherAssignController.classTeacherAssign.classid}">
+                            <f:selectItem itemLabel="Select Class" itemValue=""/>
+                            <f:selectItems value="#{classTeacherAssignController.classList}"/>
+                        </p:selectOneMenu>
+                    </p:column>  
+                </p:row>
+                
+                <p:row>
+                    <p:column colspan="2">
+                        <p:commandButton value="Assign" actionListener="#{classTeacherAssignController.assignClassTeacher()}" update="classteacherassign_frm :teacher_list_frm :teacherassign_list_frm" oncomplete="classteacherassignDig.hide()"/>   
+                    </p:column>
+                </p:row>
+                
+                
+            </p:panelGrid>   
+            
+        </h:form>
+        
+        
+    </p:dialog>
+
+    
+     <p:dialog id="classeditDig" widgetVar="classteachereditDig" hideEffect="drop" showEffect="slide">
+      
+        <h:form id="classteacheredit_frm">
+           
+            <p:growl id="grl"/>
+            <p:panelGrid styleClass="panelGrid">
+                <p:row>
+                    <p:column colspan="2" styleClass="header" style="text-align: center">
+                      Edit Class Teacher  
+                    </p:column> 
+                   </p:row> 
+                
+                <p:row>
+                    <p:column>
+                     Teacher ID  
+                    </p:column><p:column>
+                        <p:outputLabel value="#{classTeacherAssignController.classTeacherAssign.teacherid}"/>
+                    </p:column>  
+                </p:row> 
+                
+                  <p:row>
+                    <p:column>
+                     Teacher Name 
+                    </p:column><p:column>
+                        <p:outputLabel value="#{classTeacherAssignController.classTeacherAssign.teachername}"/>
+                    </p:column>  
+                </p:row> 
+                
+                   <p:row>
+                    <p:column>
+                     Class ID
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{classTeacherAssignController.classTeacherAssign.classid}">
+                            <f:selectItem itemLabel="Select Class" itemValue=""/>
+                            <f:selectItems value="#{classTeacherAssignController.classList}"/>
+                        </p:selectOneMenu>
+                    </p:column>  
+                </p:row>
+                
+                <p:row>
+                    <p:column>
+                        <p:commandButton value="Update" actionListener="#{classTeacherAssignController.updateClassTeacher()}" update=":teacherassign_list_frm" oncomplete="classteachereditDig.hide()"/>   
+                    </p:column><p:column>
+                        <p:commandButton value="Delete" actionListener="#{classTeacherAssignController.deleteClassTeacher()}" update=":teacherassign_list_frm" oncomplete="classteachereditDig.hide()" />   
+                    </p:column>
+                </p:row>
+                
+                
+            </p:panelGrid>   
+            
+        </h:form>
+        
+        
+    </p:dialog>
+    
+</ui:composition>
+

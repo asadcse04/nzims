@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+        <h:form id="update_basic_view_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <p:panelGrid columns="8" style="border: none !important;">
+
+                <h:outputLabel value="Academic Year"/>
+
+                <p:outputLabel value="#{studentBasicViewController.classConfig.acyrID}"  style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Class Name"/>
+
+                <p:outputLabel value="#{studentBasicViewController.classConfig.className}"  style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Shift"/>
+
+                <p:outputLabel value="#{studentBasicViewController.classConfig.shiftName}" style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Section" />
+
+                <p:outputLabel value="#{studentBasicViewController.classConfig.sectionName}" style="font-weight: bold;"/>
+
+            </p:panelGrid>
+
+
+
+            <hr/>
+
+            <p:dataTable  value="#{studentBasicViewController.studentBasicViewList}" var="student_tbl"
+
+                          paginator="false" style="width:750px;">
+
+                <p:column>
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentID}"/>
+
+                </p:column> 
+
+
+                <p:column>
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentName}"/>
+
+                </p:column> 
+
+
+                <p:column>
+
+                    <f:facet name="header">Roll No</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentRoll}"/>
+
+                </p:column> 
+
+                <p:column>
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{student_tbl.gender}"/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">Father's Name</f:facet>  
+
+                    <h:outputText value="#{student_tbl.fatherName}"/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">Guardian Mobile</f:facet>  
+
+                    <h:outputText value="#{student_tbl.guardianContactNo}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Signature</f:facet>  
+
+                    <h:outputText value=" "/>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+        <h:commandButton value="Print" type="button">
+
+            <p:printer target="update_basic_view_frm" />
+
+        </h:commandButton>
+
+
+</ui:composition>

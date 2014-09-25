@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:tabView id="transport" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+        <p:tab title="Route"> 
+            <ui:include src="AddRoute.xhtml"/>
+        </p:tab>  
+
+        <p:tab title="Stops">
+            <ui:include src="AddStops.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Transport Type">
+            <ui:include src="TransportType.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Add Transport"> 
+            <ui:include src="AddTransport.xhtml"/>
+        </p:tab>
+
+    </p:tabView>
+
+</ui:composition>

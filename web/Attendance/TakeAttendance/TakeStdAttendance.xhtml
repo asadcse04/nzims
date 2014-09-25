@@ -1,0 +1,176 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1250px;min-height:600px;">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false" />
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="cnfInfo_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2" style="width:250px;">
+
+                        <f:facet name="header">
+
+                            Information Set
+
+                        </f:facet>
+
+                        <h:outputLabel value="Academic Year"/>
+
+                        <p:outputLabel value="#{studentAttendanceController.classConfig.acyrID}"/>
+
+
+                        <h:outputLabel value="Class Name"/>
+
+                        <p:outputLabel value="#{studentAttendanceController.classConfig.className}"/>
+
+
+                        <h:outputLabel value="Shift"/>
+
+                        <p:outputLabel value="#{studentAttendanceController.classConfig.shiftName}"/>
+
+
+                        <h:outputLabel value="Section"/>
+
+                        <p:outputLabel value="#{studentAttendanceController.classConfig.sectionName}"/>
+
+                    </p:panelGrid>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <h:form id="student_List_4_Attendance_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2" style="margin-bottom:2%;">
+
+                        <h:outputText value="Attendance Date" />
+
+                        <p:calendar value="#{studentAttendanceController.student_attendance.attendance_date}">
+
+                            <p:ajax event="dateSelect" listener="#{studentAttendanceController.AttendanceDate(studentAttendanceController.student_attendance.attendance_date)}"/>
+
+                        </p:calendar>
+
+                        <h:outputText value="Don't want to send sms?" />
+
+                        <p:selectBooleanCheckbox value="#{studentAttendanceController.sms_with_attendance}"/>
+
+                    </p:panelGrid>
+
+                </center>
+
+                <center>
+
+                    <p:dataTable  value="#{studentAttendanceController.studentList}" var="student_tbl"
+
+                                  paginator="false" style="width:750px;">
+
+                        <p:column>
+
+                            <f:facet name="header">Student ID</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentID}"/>
+
+                        </p:column> 
+
+
+                        <p:column>
+
+                            <f:facet name="header">Student Name</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentName}"/>
+
+                        </p:column> 
+
+
+                        <p:column>
+
+                            <f:facet name="header">Roll No</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentRoll}"/>
+
+                        </p:column> 
+
+
+                        <p:column style="width:3%">
+
+                            <f:facet name="header">Absent</f:facet>
+
+                            <center>
+
+                                <p:selectBooleanCheckbox value="#{student_tbl.absent}">
+
+                               <!--     <p:ajax listener="#{studentAttendanceController.Absent(student_tbl,0)}"/> -->
+
+                                </p:selectBooleanCheckbox>
+
+                            </center> 
+
+                        </p:column>
+
+                        <p:column style="width:3%">
+
+                            <f:facet name="header">Remarks</f:facet>
+
+                            <p:selectOneMenu value="#{student_tbl.note}" effect="slide">  
+
+                                <f:selectItem itemLabel="Select" itemValue="" />
+                        
+                                <f:selectItem itemLabel="Leave" itemValue="Leave" />  
+
+                                <f:selectItem itemLabel="Application" itemValue="Application"/> 
+
+                                <f:selectItem itemLabel="Incomplete" itemValue="Incomplete"/> 
+
+                             <!--   <p:ajax listener="#{studentAttendanceController.Absent(student_tbl,1)}"/>  -->
+
+                            </p:selectOneMenu>
+
+                        </p:column>
+                        
+                        <p:column style="width:3%">
+                            <f:facet name="header">Period</f:facet>
+                            <p:selectOneMenu value="#{student_tbl.period}" effect="slide">
+                            
+                                <f:selectItem itemLabel="Select" itemValue="" />
+                                                                             
+                                <f:selectItem itemLabel="4" itemValue="4" />  
+
+                                <f:selectItem itemLabel="3" itemValue="3"/> 
+
+                                <f:selectItem itemLabel="2" itemValue="2"/>
+                                
+                                <f:selectItem itemLabel="1" itemValue="1"/> 
+              
+                            </p:selectOneMenu>  
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center>
+
+                <p:commandButton  value="Finish Attendance"  action="#{studentAttendanceController.finishAttendance}" ajax="false" style="margin-top:1%;margin-left:40%;" icon="ui-icon-check"/>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout> 
+
+</ui:composition>
+

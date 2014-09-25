@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="50%"> 
+            <h:form id="add_stops">
+                <p:growl id="grl" autoUpdate="false" sticky="false" showDetail="true"/>
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Route Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{addStops_Controller.stopName}" styleClass="inputCombo" style="width: 200px;" required="true" requiredMessage="Please Select Route Name.">
+                                    <f:selectItem itemLabel="Select Route" itemValue=""/>
+                                    <f:selectItems value="#{addStops_Controller.routeNameList}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Stops Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{addStops_Controller.addStops.stopsName}" styleClass="inputText" required="true" requiredMessage="Please Enter Stops Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Location Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{addStops_Controller.addStops.stopsLocation}" styleClass="inputText" required="true" requiredMessage="Please Enter location name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{addStops_Controller.addStops.stopsNote}" styleClass="inputTextarea" />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Save"   actionListener="#{addStops_Controller.insertStops}" update="grl :transport:add_stops :transport:addStopForm " style="margin-top: 8px;"  />
+
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+
+        <p:layoutUnit position="center">
+            <center>
+                <h:form id="addStopForm">
+                    <p:dataTable value="#{addStops_Controller.stopsList}" var="addStop" paginator="true" rows="10" paginatorPosition="bottom" id="t1">
+
+                        <p:column headerText="Stops ID" sortBy="#{addStop.stopsID}">
+                            #{addStop.stopsID}
+                        </p:column>
+
+                        <p:column headerText="Stops Name" sortBy="#{addStop.stopsName}">
+                            #{addStop.stopsName} 
+                        </p:column>
+
+                        <p:column headerText="Route Name" sortBy="#{addStop.routeName}">
+                            #{addStop.routeName} 
+                        </p:column>
+
+                        <p:column headerText="Location" sortBy="#{addStop.stopsLocation}">
+                            #{addStop.stopsLocation}
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            #{addStop.stopsNote}
+                        </p:column>
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="stops_update_dialog.show()"  update=":transport:upStopsForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{addStop}" target="#{addStops_Controller.addStops}"/>   
+                            </p:commandButton> 
+                        </p:column>
+
+                    </p:dataTable>     
+                </h:form>
+            </center>
+        </p:layoutUnit>
+
+    </p:layout>
+    
+    <p:dialog widgetVar="stops_update_dialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl22"  autoUpdate="false" sticky="false" showDetail="true"/>
+                <h:form id="upStopsForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate stops  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+                                
+                                <p:outputLabel value="Route Name" />
+                                <p:selectOneMenu  id="sdf" value="#{addStops_Controller.stopName}" style="width:200px;" effect="slide">
+                                    <f:selectItems value="#{addStops_Controller.routeNameList}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Stops ID"/>
+                                <p:inputText id="b_id" value="#{addStops_Controller.addStops.stopsID}" readonly="true"/>
+
+                                <p:outputLabel value="Stops name"/>
+                                <p:inputText id="b_name" value="#{addStops_Controller.addStops.stopsName}" />
+
+                                <p:outputLabel value=" Location"/>
+                                <p:inputText id="b_address" value="#{addStops_Controller.addStops.stopsLocation}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="b_note" value="#{addStops_Controller.addStops.stopsNote}"/> 
+
+                            </p:panelGrid>
+                            <p:commandButton value="Update Info"  update=":transport:upGrl22 :transport:addStopForm" actionListener="#{addStops_Controller.updateStops()}" oncomplete="stops_update_dialog.hide()" style="margin-top: 8px;"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog> 
+
+</ui:composition>

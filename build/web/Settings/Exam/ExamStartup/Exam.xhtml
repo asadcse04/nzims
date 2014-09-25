@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout  style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="create_exam">
+                <center>
+                    
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Create Exam
+
+                    </f:facet>
+
+                    <h:outputLabel value="Exam Name"/>
+
+                    <p:inputText id="c_exam" value="#{examController.exam.examName}" required="true" requiredMessage="You must Provide a Exam Name."/>
+
+                    <h:outputLabel value="Note"/>
+
+                    <p:inputTextarea value="#{examController.exam.note}"/>   
+
+                </p:panelGrid>
+
+                <p:commandButton value="Add" actionListener="#{examController.insertExam}" update="grl :exam_startup_tbl:create_exam :exam_startup_tbl:exam_list" icon="ui-icon-check" style="margin-top: 6px;"/>
+              
+                </center>
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="exam_list">
+
+                    <p:dataTable value="#{examController.exam_list}" var="exam_tbl"
+
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:420px;">
+
+                        <p:column sortBy="#{exam_tbl.examID}">
+
+                            <f:facet name="header">Exam ID</f:facet>  
+
+                            <h:outputText value="#{exam_tbl.examID}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{exam_tbl.examName}">
+
+                            <f:facet name="header">Exam Name</f:facet>  
+
+                            <h:outputText value="#{exam_tbl.examName}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{exam_tbl.note}">
+
+                            <f:facet name="header">Exam Note</f:facet>  
+
+                            <h:outputText value="#{exam_tbl.note}"/>
+
+                        </p:column>
+
+                        <p:column style="width:3%">  
+
+                            <p:commandButton process="@this" update=":exam_startup_tbl:update_Exam_frm" oncomplete="dialog_Update_exam.show()" icon="ui-icon-pencil" title="Update">  
+
+                                <f:setPropertyActionListener value="#{exam_tbl}" target="#{examController.exam}"/>  
+
+                            </p:commandButton>  
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>  
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+    <p:dialog header="Edit Exam" widgetVar="dialog_Update_exam" width="400" showEffect="drop" hideEffect="drop">
+
+        <h:form id="update_Exam_frm">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Exam ID"/>
+
+                    <p:inputText value="#{examController.exam.examID}" readonly="true"/>
+
+
+                    <h:outputText value="Exam Name"/>
+
+                    <p:inputText value="#{examController.exam.examName}"/>
+
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{examController.exam.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Edit" update=":exam_startup_tbl:update_Exam_frm :exam_startup_tbl:exam_list" actionListener="#{examController.editExam}" oncomplete="dialog_Update_exam.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>

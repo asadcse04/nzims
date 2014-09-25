@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="section_wise_attendance_report">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+        <center>
+            <p:panelGrid columns="2">
+
+                <p:outputLabel value="Select Date"/>
+                
+                <p:calendar effect="explode" id="date" value="#{attendanceReportController.currentDate}" pattern="yyyy-MM-dd"/>
+
+            </p:panelGrid>
+            
+            <p:commandButton value="View" actionListener="#{attendanceReportController.sectionWisePsnAbs()}" update="stb" style="margin-top: 5px; margin-bottom: 5px;"/>
+
+        
+            <p:dataTable id="stb" value="#{attendanceReportController.sectionWise_PsnAbs_List}" var="student_tbl"
+
+                         widgetVar="studentTable" rows="18" paginator="true" paginatorPosition="bottom" style="width:1050px;">
+
+
+                <p:column sortBy="#{student_tbl.className}" filterBy="#{student_tbl.className}">
+
+                    <f:facet name="header">Class</f:facet>  
+
+                    <h:outputText value="#{student_tbl.className}"/>
+
+                </p:column>  
+ 
+
+                <p:column sortBy="#{student_tbl.shiftName}" filterBy="#{student_tbl.shiftName}">
+
+                    <f:facet name="header">Shift</f:facet>  
+
+                    <h:outputText value="#{student_tbl.shiftName}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.sectionName}" filterBy="#{student_tbl.sectionName}">
+
+                    <f:facet name="header">Section</f:facet>  
+
+                    <h:outputText value="#{student_tbl.sectionName}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.totalStudent}" filterBy="#{student_tbl.totalStudent}">
+
+                    <f:facet name="header">Total Student</f:facet>  
+
+                    <h:outputText value="#{student_tbl.totalStudent}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_tbl.present}" filterBy="#{student_tbl.present}">
+
+                    <f:facet name="header">Present</f:facet>  
+
+                    <h:outputText value="#{student_tbl.present}"/>
+
+                </p:column>
+
+                <p:column sortBy="#{student_tbl.persentsOfPresent}" filterBy="#{student_tbl.persentsOfPresent}">
+
+                    <f:facet name="header">%</f:facet>  
+
+                    <h:outputText value="#{student_tbl.persentsOfPresent}">
+                     <f:convertNumber pattern="00.00"/>
+                    </h:outputText>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.absent}" filterBy="#{student_tbl.absent}">
+
+                    <f:facet name="header">Absent</f:facet>  
+
+                    <h:outputText value=" #{student_tbl.absent}"/>
+
+                </p:column>  
+                
+                <p:column sortBy="#{student_tbl.persentsOfAbsent}" filterBy="#{student_tbl.persentsOfAbsent}">
+
+                    <f:facet name="header">%</f:facet>  
+
+                    <p:outputLabel value="#{student_tbl.persentsOfAbsent}">
+                        <f:convertNumber pattern="00.00"/>
+                    </p:outputLabel>
+
+                </p:column>  
+
+            </p:dataTable> 
+
+        </center>
+
+    </h:form>
+
+</ui:composition>

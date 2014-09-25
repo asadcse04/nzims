@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight">
+        
+   <h:form id="sbj_mrk_distributiont_frm">
+       
+        <p:layoutUnit position="west" size="40%">
+          
+
+                <h:panelGroup layout="block" styleClass="selection" style="margin-top: 5px; margin-bottom: 10px;">
+
+                    <p:selectManyCheckbox value="#{examConfigController.exmSbjCnf.subject_list}" layout="pageDirection">
+
+                        <f:selectItems value="#{examConfigController.sbjList}" var="sbjOp1"></f:selectItems>
+
+                    </p:selectManyCheckbox>
+
+                </h:panelGroup>
+
+
+        </p:layoutUnit>
+
+
+        <p:layoutUnit position="center">
+
+         
+                <p:growl autoUpdate="true" showDetail="true"/>  
+
+                <center>
+
+                    <p:dataTable id="dmd" value="#{examConfigController.defaultMarkList}" var="dmd_tbl" editable="true" style="margin-top: 0px;">
+
+                        <p:ajax event="rowEdit" listener="#{examConfigController.onEdit}" update=":sbj_mrk_distributiont_frm:dmd" />
+
+                        <p:column sortBy="#{dmd_tbl.dmdId}">
+
+                            <f:facet name="header">ID</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.dmdId}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{dmd_tbl.shortCode}">
+
+                            <f:facet name="header">Short Code</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.shortCode}"/>
+
+                        </p:column> 
+
+                        <p:column headerText="Total Mark" sortBy="#{dmd_tbl.totalMark}">
+
+                            <p:cellEditor>  
+
+                                <f:facet name="output">  
+                                    <h:outputText value="#{dmd_tbl.totalMark}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{dmd_tbl.totalMark}" style="width:50%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+
+                        </p:column> 
+
+                        <p:column headerText="Acceptance" sortBy="#{dmd_tbl.acceptance}">
+
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{dmd_tbl.acceptance}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{dmd_tbl.acceptance}" style="width:50%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+
+                        </p:column>
+
+                        <p:column headerText="PassMark" sortBy="#{dmd_tbl.passMark}">
+
+                            <p:cellEditor>  
+                                <f:facet name="output">  
+                                    <h:outputText value="#{dmd_tbl.passMark}" />  
+                                </f:facet>  
+                                <f:facet name="input">  
+                                    <p:inputText value="#{dmd_tbl.passMark}" style="width:50%"/>  
+                                </f:facet>  
+                            </p:cellEditor>  
+
+                        </p:column>
+
+                        <p:column style="width:6%">  
+                            <p:rowEditor />  
+                        </p:column> 
+
+                        <p:column style="width:3%">
+
+                            <p:commandButton icon="ui-icon-trash" update="dmd" actionListener="#{examConfigController.rmMarkList(dmd_tbl)}" title="delete"/>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                    <p:commandButton value="save" actionListener="#{examConfigController.save_Exam_Mark_Distribution}" ajax="false" style="margin-top: 6px;"/>
+
+                </center>
+
+                
+
+        </p:layoutUnit>
+       
+          </h:form>
+        
+    </p:layout>
+    
+</ui:composition>
+

@@ -1,0 +1,874 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="student_TSheet_view_frm">
+                <center>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Academic Year "/>
+                        <p:selectOneMenu value="#{tabulationSheetController.acyr}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.acyrList}" />
+                            <p:ajax event="change" update="ex_classID" listener="#{tabulationSheetController.scClassList}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Class"/>
+                        <p:selectOneMenu id="ex_classID" value="#{tabulationSheetController.className}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.classList}" />
+                            <p:ajax event="change" update="ex_deptID" listener="#{tabulationSheetController.departmentList}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Department"/>
+                        <p:selectOneMenu id="ex_deptID" value="#{tabulationSheetController.deptName}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.deptList}" />
+                            <p:ajax event="change" update="ex_shiftID" listener="#{tabulationSheetController.shiftNameList}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Shift"/>
+                        <p:selectOneMenu id="ex_shiftID" value="#{tabulationSheetController.shiftName}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.shiftList}" />
+                            <p:ajax event="change" update="ex_sectionID" listener="#{tabulationSheetController.section_List}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Section"/>
+                        <p:selectOneMenu id="ex_sectionID" value="#{tabulationSheetController.sectionName}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.sectionList}" />
+                            <p:ajax event="change" listener="#{tabulationSheetController.Sc_Cnf_ID}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Exam Name"/>
+                        <p:selectOneMenu value="#{tabulationSheetController.examName}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{tabulationSheetController.examList}" />
+                            <p:ajax event="change" update="student_details_report_list_btn" listener="#{tabulationSheetController.Ex_Cnf_ID}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton id="student_details_report_list_btn" value="Search" update=":st_TSheet_tbl_frm" actionListener="#{tabulationSheetController.showAll()}"  disabled="#{tabulationSheetController.exCnfID eq 0}"  icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="st_TSheet_tbl_frm">
+
+                <p:growl autoUpdate="true" showDetail="true"/> 
+
+
+
+                <p:dataTable id="tbll" var="mark_sheet_tbl" value="#{tabulationSheetController.tabulationList}" paginator="true" rows="10" paginatorPosition="top"
+                             style="width:2100px;  position: relative; top: -10px; font-size: 13px;">
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="2" headerText="ID" />
+                            <p:column rowspan="2" headerText="Roll" />
+                            <p:column rowspan="2" headerText="Name" /> 
+                            <p:column colspan="5" headerText="Bangla 1st" /> 
+                            <p:column colspan="5" headerText="Bangla_2nd" />
+                            <p:column colspan="5" headerText="English_1st" />
+                            <p:column colspan="5" headerText="English_2nd" />
+                            <p:column colspan="5" headerText="Bangla" />
+                            <p:column colspan="5" headerText="English" />
+                            <p:column colspan="5" headerText="Math" />
+                            <p:column colspan="5" headerText="Religon" />
+                            <p:column colspan="5" headerText="Ban_Glob_Studies" />
+                            <p:column colspan="5" headerText="Primary_Science" />
+                            <p:column colspan="5" headerText="General_Science" /> 
+                            <p:column colspan="5" headerText="Home_Economics" />
+                            <p:column colspan="5" headerText="I_C_T" />
+                            <p:column colspan="5" headerText="Physical_Education" />
+                            <p:column colspan="5" headerText="Fine_Arts" />
+                            <p:column colspan="5" headerText="Work_Education" />
+                            <p:column colspan="5" headerText="Physics" />
+                            <p:column colspan="5" headerText="Chemistry" />
+                            <p:column colspan="5" headerText="Bilogy" />
+                            <p:column colspan="5" headerText="Higher_Mathe" />
+                            <p:column colspan="5" headerText="Computer" /> 
+                            <p:column colspan="5" headerText="Home_Science" />
+                            <p:column colspan="5" headerText="Accounting" />
+                            <p:column colspan="5" headerText="Finnance_Banking" />
+                            <p:column colspan="5" headerText="Bussiness_Entrep" />
+                            <p:column colspan="5" headerText="Geography" />
+                            <p:column colspan="5" headerText="History" />
+                            <p:column colspan="5" headerText="Civics" />
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="CT" />
+                            <p:column headerText="Total" />
+
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ID}"/>
+                    </p:column>                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.studentRoll}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.stName}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_1st_WR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_1st_OB}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_1st_PR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_1st_CT}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_1st_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_2nd_WR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_2nd_OB}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_2nd_PR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_2nd_CT}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_2nd_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_1st_WR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_1st_OB}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_1st_PR}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_1st_CT}"/>
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_1st_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_2nd_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_2nd_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_2nd_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_2nd_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_2nd_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_WR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bangla_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.english_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.math_WR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.math_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.math_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.math_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.math_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.religon_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.religon_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.religon_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.religon_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.religon_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ban_Glob_Studies_WR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ban_Glob_Studies_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ban_Glob_Studies_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ban_Glob_Studies_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.ban_Glob_Studies_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.primary_Science_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.primary_Science_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.primary_Science_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.primary_Science_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.primary_Science_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.general_Science_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.general_Science_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.general_Science_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.general_Science_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.general_Science_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Economics_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Economics_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Economics_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Economics_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Economics_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.i_C_T_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.i_C_T_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.i_C_T_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.i_C_T_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.i_C_T_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physical_Education_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physical_Education_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physical_Education_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physical_Education_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physical_Education_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.fine_Arts_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.fine_Arts_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.fine_Arts_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.fine_Arts_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.fine_Arts_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.work_Education_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.work_Education_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.work_Education_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.work_Education_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.work_Education_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physics_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physics_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physics_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physics_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.physics_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.chemistry_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.chemistry_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.chemistry_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.chemistry_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.chemistry_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bilogy_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bilogy_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bilogy_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bilogy_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bilogy_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.higher_Mathe_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.higher_Mathe_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.higher_Mathe_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.higher_Mathe_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.higher_Mathe_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.computer_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.computer_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.computer_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.computer_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.computer_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Science_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Science_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Science_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Science_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.home_Science_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.accounting_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.accounting_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.accounting_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.accounting_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.accounting_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finnance_Banking_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finnance_Banking_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finnance_Banking_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finnance_Banking_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finnance_Banking_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bussiness_Entrep_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bussiness_Entrep_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bussiness_Entrep_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bussiness_Entrep_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.bussiness_Entrep_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.geography_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.geography_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.geography_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.geography_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.geography_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.history_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.history_OB}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.history_PR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.history_CT}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.history_total}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.civics_WR}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.civics_OB}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.civics_PR}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.civics_CT}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.civics_total}"/>
+                    </p:column>
+
+
+
+
+
+                </p:dataTable>
+
+
+                <h:commandLink value="Excel">
+                    <p:dataExporter type="xls" target="tbll" fileName="mark_sheet_tbl" pageOnly="true"/>
+                </h:commandLink> <br/>
+
+                <h:commandLink value="PDF">
+
+                    <p:dataExporter type="pdf" target="tbll" fileName="mark_sheet_tbl" pageOnly="true" />
+                </h:commandLink><br/>
+
+                <h:commandLink value="CSV">
+
+                    <p:dataExporter type="csv" target="tbll" fileName="mark_sheet_tbl" pageOnly="true" />
+                </h:commandLink>
+                
+               <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="tbll" />
+
+                </h:commandButton>
+          
+
+
+            </h:form>
+
+            
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

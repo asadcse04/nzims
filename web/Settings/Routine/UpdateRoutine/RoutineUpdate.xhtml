@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="routine_update_frm">
+
+        <center>
+
+            <p:panelGrid columns="2" style="width: 300px;">
+
+                <h:outputText value="Period Name" />
+
+                <p:outputLabel value="#{classRoutineUpdate_Controller.routine_update.periodName}"/>
+
+
+                <h:outputText value="Start Time" />
+
+                <p:outputLabel value="#{classRoutineUpdate_Controller.routine_update.startTime}"/>
+
+
+                <h:outputText value="End Time" />
+
+                <p:outputLabel value="#{classRoutineUpdate_Controller.routine_update.endTime}"/>
+
+
+                <h:outputText value="Subject List"/>  
+
+                <p:selectOneMenu value="#{classRoutineUpdate_Controller.routine_update.subjectName}" style="width:120px;"> 
+
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+
+                    <f:selectItems value="#{classRoutineUpdate_Controller.subjectList}" />
+
+                </p:selectOneMenu>
+
+
+                <h:outputText value="Subject Note"/> 
+
+                <p:inputText value="#{classRoutineUpdate_Controller.routine_update.subjectNote}" size="10" />  
+
+
+                <h:outputText value="Teacher" />
+
+                <p:selectOneMenu value="#{classRoutineUpdate_Controller.selectedTeacher}" converter="tchr" var="t" filter="true" filterMatchMode="startsWith" style="width:120px;">
+
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+
+                    <f:selectItems value="#{classRoutineUpdate_Controller.teachers}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher}"/>
+
+                    <p:column>  
+
+                        #{t.teacherID}
+
+                    </p:column> 
+
+                    <p:column>  
+
+                        #{t.name}
+
+                    </p:column> 
+
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:commandButton value="Update" update=":routine_set_frm" actionListener="#{classRoutineUpdate_Controller.editRoutine}" oncomplete="dialog_updateRoutine.hide()" style="margin-top: 1%;" icon="ui-icon-pencil"/>
+
+        </center>
+
+    </h:form>
+
+</ui:composition>

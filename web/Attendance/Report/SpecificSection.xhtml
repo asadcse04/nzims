@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center" >
+            <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
+
+            <h:form> 
+
+                <center>
+
+                    <p:dataTable value="#{attendanceReportController.classList}" var="school_Cnf_tbl" filteredValue="#{studentAttendanceController.school_configList_filter}"
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:850px;">
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.acyr}" filterBy="#{school_Cnf_tbl.acyr}">
+                            <f:facet name="header">Academic Year</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.acyr}"/>
+                        </p:column> 
+
+                        <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
+                            <f:facet name="header">Class</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.className}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{school_Cnf_tbl.departmentName}" filterBy="#{school_Cnf_tbl.departmentName}">
+                            <f:facet name="header">Department</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.departmentName}"/>
+                        </p:column>  
+
+                        <p:column sortBy="#{school_Cnf_tbl.shiftName}" filterBy="#{school_Cnf_tbl.shiftName}">
+                            <f:facet name="header">Shift</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.shiftName}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{school_Cnf_tbl.sectionName}" filterBy="#{school_Cnf_tbl.sectionName}">
+                            <f:facet name="header">Section</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.sectionName}"/>
+                        </p:column>
+
+                        <p:column style="width:3%">  
+                            <p:commandButton   oncomplete="dialog_StdAttendanceReport.show()" actionListener="#{attendanceReportController.Sc_Cnf_ID(school_Cnf_tbl)}" icon="ui-icon-pencil" title="Next" /> 
+                        </p:column>
+
+                    </p:dataTable>
+                </center>
+            </h:form>           
+
+        </p:layoutUnit>
+
+
+
+    </p:layout>
+
+    <p:dialog header="Attendance Info"  draggable="true" widgetVar="dialog_StdAttendanceReport" width="100%" height="100%" position="middle top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">     
+        <ui:include src="/Attendance/Report/SectionPresentAbsentDetailsReport.xhtml" />            
+    </p:dialog>
+
+</ui:composition>

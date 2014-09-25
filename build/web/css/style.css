@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18 Jun, 2014, 7:17:45 PM
+    Author     : Mastermind
+*/
+
+
+
+body {
+    background: url(./images/macosx/Nuscash.jpg);
+    margin: 0;
+    padding: 0;
+    font-family: geneva, arial, helvetica, sans-serif;
+    font-size:80%;
+}
+
+.ui-menuitem-icon.ui-icon.appleIcon {
+    background: url(./images/macosx/apple.png) no-repeat;
+    width:16px;
+    height:16px;
+    border-radius:0px;
+}
+.ui-menu .ui-menu-parent .ui-menu-child {
+    width: 175px;
+}
+
+
+
+.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd
+{
+
+    border:none;
+
+    overflow: hidden;
+
+}
+.tabHeight 
+{
+    height:590px; 
+}
+.red
+{
+    color: red;
+}
+.header{
+    font-weight: bold;
+    text-align: center;
+}
+
+.ms_continer{
+    width: 960px;
+    margin: 20px 20px auto;  
+}
+.text_bold{
+    font-weight: bold;
+}

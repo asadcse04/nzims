@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:600px;">
+        <p:layoutUnit position="center"> 
+               <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
+            <h:form>                
+                <center>
+
+                    <p:dataTable value="#{studentAttendanceController.school_configList}" var="school_Cnf_tbl" filteredValue="#{studentAttendanceController.school_configList_filter}"
+
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:850px;">
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.acyrID}" filterBy="#{school_Cnf_tbl.acyrID}">
+
+                            <f:facet name="header">Academic Year</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.acyrID}"/>
+
+                        </p:column> 
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
+
+                            <f:facet name="header">Class</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.className}"/>
+
+                        </p:column>  
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.shiftName}" filterBy="#{school_Cnf_tbl.shiftName}">
+
+                            <f:facet name="header">Shift</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.shiftName}"/>
+
+                        </p:column>
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.sectionName}" filterBy="#{school_Cnf_tbl.sectionName}">
+
+                            <f:facet name="header">Section</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.sectionName}"/>
+
+                        </p:column>
+
+
+                        <p:column style="width:3%">  
+
+                            <p:commandButton process="@this" update=":cnfInfo_frm,:student_List_4_Attendance_frm" oncomplete="dialog_student_List_4_Attendance.show()"  actionListener="#{studentAttendanceController.student_List(school_Cnf_tbl)}" icon="ui-icon-pencil" title="Take Attendance" /> 
+
+                        </p:column>
+
+               
+
+                    </p:dataTable>
+                </center>
+            </h:form>           
+        </p:layoutUnit>      
+    </p:layout>
+
+    <p:dialog header="Student Attendance List" widgetVar="dialog_student_List_4_Attendance" width="100%"  position="left top" maximizable="true" minimizable="true" showEffect="clip" hideEffect="blind">
+        <ui:include src="TakeStdAttendance.xhtml"/>
+    </p:dialog>
+    
+        <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+
+        <f:facet name="start">  
+
+            <p:graphicImage value="/images/Ajax/loading.gif" />  
+
+        </f:facet>  
+
+        <f:facet name="complete">  
+
+            <h:outputText value="" />  
+
+        </f:facet>  
+
+    </p:ajaxStatus>
+
+</ui:composition>

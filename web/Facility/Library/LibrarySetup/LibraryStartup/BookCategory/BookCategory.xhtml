@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%"> 
+
+            <h:form id="bookCategory">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >
+                                Create Book Category
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Category Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{bookCategoryController.bookCategory.bookCategoryName}" styleClass="inputText" required="true" requiredMessage="Please Enter Category Name."/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{bookCategoryController.bookCategory.bookCategorynote}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+                       
+                    </p:panelGrid>
+                                       
+                    <p:commandButton value="Add" update=":library:bookCategory_frm" actionListener="#{bookCategoryController.addBookCategory()}"  icon="ui-icon-check" style="margin-top: 8px;" />
+
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form id="bookCategory_frm">
+                <center>
+                    <p:dataTable var="bookCategorylist" value="#{bookCategoryController.bookCategoryAllList}" paginator="true" paginatorPosition="top" rows="10" >
+
+                        <p:column headerText="BookCategory ID" sortBy="#{bookCategorylist.bookCategoryId}">
+                            <h:outputLabel value="#{bookCategorylist.bookCategoryId}"/>
+                        </p:column>
+
+                        <p:column headerText="BookCategory Name" sortBy="#{bookCategorylist.bookCategoryName}">
+                            <h:outputLabel value="#{bookCategorylist.bookCategoryName}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{bookCategorylist.bookCategorynote}"/>
+                        </p:column>
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="bookEditDialog.show()"  update=":library:upbookCategoryForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{bookCategorylist}" target="#{bookCategoryController.bookCategory}"/>   
+                            </p:commandButton>   
+                        </p:column>
+
+                    </p:dataTable>
+                </center>
+            </h:form>
+            
+
+            <p:dialog widgetVar="bookEditDialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl"/>
+                <h:form id="upbookCategoryForm" style="font-size: 12pt">
+
+                    <p:panel header="Upadate BookCategory  information">
+
+                        <p:panelGrid columns="2" style="font-size: medium">
+
+                            <p:outputLabel value="BookCategory ID"/>
+                            <p:inputText id="ct_id" value="#{bookCategoryController.bookCategory.bookCategoryId}" readonly="true"/>
+
+                            <p:outputLabel value="BookCategory Name"/>
+                            <p:inputText id="ct_name" value="#{bookCategoryController.bookCategory.bookCategoryName}" />
+
+                            <p:outputLabel value="Note"/>
+                            <p:inputText id="ct_note" value="#{bookCategoryController.bookCategory.bookCategorynote}"/>                                                       
+
+                            <p:commandButton value="Update Info" update=":library:upGrl :library:bookCategory_frm "  actionListener="#{bookCategoryController.updateBookCategory()}" oncomplete="bookEditDialog.hide()" style="margin-top: 8px;"/>
+
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+            </p:dialog>
+            
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

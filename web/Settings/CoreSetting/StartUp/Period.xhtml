@@ -1,0 +1,122 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="40%">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Period
+
+                    </f:facet>
+
+                    <h:outputText value="Period Name"/>
+
+                    <p:inputText value="#{periodController.period.periodName}"/>
+
+
+                    <h:outputText value="Start Time"/>
+
+                    <p:inputText value="#{periodController.period.startTime}"/>
+
+
+                    <h:outputText value="End Time"/>
+
+                    <p:inputText value="#{periodController.period.endTime}"/>
+
+                    
+                    <h:outputText value="Shift" />  
+
+                    <p:selectOneMenu value="#{periodController.period.shiftName}" effect="slide" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                        <f:selectItems value="#{periodController.shiftNameData}" />  
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+                
+                <p:commandButton value="Save" update=":settingFrm" actionListener="#{periodController.insertPeriod}" icon="ui-icon-check" style="margin: 1%;"/>
+
+            </center>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            
+            <center>
+                
+                <p:dataTable value="#{periodController.periodData}" var="prd_tbl"
+
+                             paginator="true" rows="8" paginatorPosition="bottom" style="width:550px;">
+                    
+                    <p:column sortBy="#{prd_tbl.periodID}">
+
+                        <f:facet name="header">Period ID</f:facet>  
+
+                        <h:outputText value="#{prd_tbl.periodID}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{prd_tbl.periodName}">
+
+                        <f:facet name="header">Period Name</f:facet>  
+
+                        <h:outputText value="#{prd_tbl.periodName}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{prd_tbl.startTime}">
+
+                        <f:facet name="header">Start Time</f:facet>  
+
+                        <h:outputText value="#{prd_tbl.startTime}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{prd_tbl.endTime}">
+
+                        <f:facet name="header">End Time</f:facet>  
+
+                        <h:outputText value="#{prd_tbl.endTime}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{prd_tbl.shiftName}">
+
+                        <f:facet name="header">Shift</f:facet>  
+
+                        <h:outputText value="#{prd_tbl.shiftName}"/>
+
+                    </p:column>
+                    
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_Period_frm" oncomplete="dialog_Update_prd.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{prd_tbl}" target="#{periodController.period}"/>  
+
+                        </p:commandButton>  
+
+                    </p:column>
+                
+                </p:dataTable>
+                
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+    
+</ui:composition>

@@ -1,0 +1,215 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+            <h:form id="student_srch_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+
+                        <h:outputText value="Academic Year "/>
+
+                        <p:selectOneMenu value="#{subjectReportController.examResultOpt.acyr}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.acyrList}" />
+
+                            <p:ajax event="change" update="ex_classID" listener="#{subjectReportController.scClassList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class"/>
+
+                        <p:selectOneMenu id="ex_classID" value="#{subjectReportController.examResultOpt.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.classList}" />
+
+                            <p:ajax event="change" update="ex_deptID" listener="#{subjectReportController.departmentList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Department"/>
+
+                        <p:selectOneMenu id="ex_deptID" value="#{subjectReportController.examResultOpt.deptName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.deptList}" />
+
+                            <p:ajax event="change" update="ex_shiftID,ex_sbj" listener="#{subjectReportController.shiftNameList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Shift"/>
+
+                        <p:selectOneMenu id="ex_shiftID" value="#{subjectReportController.examResultOpt.shiftName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.shiftList}" />
+
+                            <p:ajax event="change" update="ex_sectionID" listener="#{subjectReportController.section_List}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Section"/>
+
+                        <p:selectOneMenu id="ex_sectionID" value="#{subjectReportController.examResultOpt.sectionName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.sectionList}" />
+
+                            <p:ajax event="change" listener="#{subjectReportController.Sc_Cnf_ID}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Subject"/>
+
+                        <p:selectOneMenu id="ex_sbj" value="#{subjectReportController.examResultOpt.subjectName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.subjectList}" />
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Exam"/>
+
+                        <p:selectOneMenu value="#{subjectReportController.examResultOpt.examName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{subjectReportController.examList}" />
+
+                            <p:ajax event="change" update="exmTchr"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Teacher"/>
+
+                        <p:selectOneMenu id="exmTchr" value="#{subjectReportController.selectedTeacher}" converter="tchr" var="t" filter="true" filterMatchMode="startsWith" >  
+
+                            <f:selectItem itemLabel="Select Teacher" itemValue=""/>
+
+                            <f:selectItems value="#{subjectReportController.teachers}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher}"/>
+
+                            <p:column>  
+
+                                #{t.teacherID}
+
+                            </p:column> 
+
+                            <p:column>  
+
+                                #{t.name}
+
+                            </p:column>
+
+                            <p:ajax event="change" update="student_result_list_btn" listener="#{subjectReportController.Ex_Cnf_ID}"/>
+
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton id="student_result_list_btn" value="Search" update="student_srch_frm,:st_mark_list_tbl_frm" actionListener="#{subjectReportController.subject_report_List}"  disabled="#{subjectReportController.exCnfID eq 0}"  icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+        
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="st_mark_list_tbl_frm">
+
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{subjectReportController.subject_report_List}" var="subj_Report" style="width:960px;">
+  
+                
+                <p:column>
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentID}"/>
+
+                </p:column> 
+
+                <p:column >
+
+                    <f:facet name="header">Name</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Roll</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentRoll}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Total</f:facet>  
+
+                    <h:outputText value="#{subj_Report.totalMark}"/>
+
+                </p:column>
+
+                
+                 <p:column>
+
+                    <f:facet name="header">Point</f:facet>  
+
+                    <h:outputText value="#{subj_Report.cgpa}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Grade</f:facet>  
+
+                    <h:outputText value="#{subj_Report.finalGrade}"/>
+
+                </p:column>
+                
+                
+            </p:dataTable> 
+
+
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="st_mark_list_tbl_frm" />
+
+           </h:commandButton>
+</p:layoutUnit>
+        
+</p:layout>
+
+</ui:composition>

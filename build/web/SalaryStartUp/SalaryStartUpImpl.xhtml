@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    
+    
+    <!--
+     
+
+     
+     -->
+    
+    
+    
+    <p:tabView id="salarystrt_tb" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+
+        
+        <p:tab title="Salary Category">  
+
+            <ui:include src="SalaryCategory/SalaryCategoryImpl.xhtml"/>
+            
+        </p:tab>
+        
+        
+        <p:tab title="Salary Head">  
+
+            <ui:include src="SalaryHead/SalaryHeadImpl.xhtml"/>
+            
+        </p:tab>
+
+       <p:tab title="Salary Sub Head">  
+
+            <ui:include src="SubSalaryHead/SubSalaryHeadImpl.xhtml"/>
+            
+        </p:tab>
+    
+    
+    </p:tabView>
+
+
+</ui:composition>

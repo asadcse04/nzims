@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+
+        <title>Inventory Setup</title>
+
+        <style type="text/css">
+
+            .ui-widget, .ui-widget, .ui-widget
+            {
+
+                /*overflow: hidden;
+                */
+                font-size: 90% !important;
+            }
+
+            .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd
+            {
+
+                border:none;
+
+                overflow: hidden;
+
+            }
+
+        </style>
+
+    </h:head>
+
+    <h:body>
+
+        <ui:include src="/MasterPage/Layout.xhtml" />
+
+        <p:layoutUnit position="center">
+
+            <ui:include src="InventoryStartupImpl.xhtml"/>
+
+        </p:layoutUnit>
+
+
+        <p:dialog header="Inventory Type Update" widgetVar="dialog_Update_inventory_type" width="400" showEffect="drop" hideEffect="drop" modal="true">
+
+            <h:form id="update_inventory_type_frm">
+
+                <p:growl autoUpdate="false" sticky="false"/>
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Inventory Type"/>
+
+                        <p:inputText id="invttyp" value="#{inventoryTypeController.inventoryType.inventoryTypeName}"/>
+
+                        <h:outputLabel value="Note"/>
+
+                        <p:inputText value="#{inventoryTypeController.inventoryType.note}"/>  
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Edit" update="update_inventory_type_frm,:inventory_startup_tbl:inventory_type_list" actionListener="#{inventoryTypeController.updateInventoryType}" oncomplete="dialog_Update_inventory_type.hide()" style="margin-top: 1%;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:dialog>
+
+
+        <p:dialog header="Inventory Category Update" widgetVar="dialog_Update_inventoryCategory" width="400" showEffect="drop" hideEffect="drop" modal="true">
+
+            <h:form id="update_inventory_category_frm">
+
+                <p:growl autoUpdate="false" sticky="false"/>
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Inventory Type"/>
+
+                        <p:selectOneMenu value="#{inventoryCategoryController.inventoryCategory.inventoryTypeName}" editable="false">  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{inventoryCategoryController.inventoryTypeNameData}" />  
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Inventory Category"/>
+
+                        <p:inputText id="invttyp" value="#{inventoryCategoryController.inventoryCategory.inventoryCategoryName}"/>
+
+                        <h:outputLabel value="Note"/>
+
+                        <p:inputText value="#{inventoryCategoryController.inventoryCategory.note}"/>  
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Edit" update="update_inventory_category_frm,:inventory_startup_tbl:inventory_category_list" actionListener="#{inventoryCategoryController.editInventoryCategory}" oncomplete="dialog_Update_inventoryCategory.hide()" style="margin-top: 1%;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:dialog>
+
+
+        <p:dialog header="Inventory Group Update" widgetVar="dialog_Update_inventory_group" width="400" showEffect="drop" hideEffect="drop" modal="true">
+
+            <h:form id="update_inventory_group_frm">
+
+                <p:growl autoUpdate="false" sticky="false"/>
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+                        <h:outputLabel value="Inventory Category"/>
+
+                        <p:selectOneMenu value="#{inventoryGroupController.inventoryGroup.inventoryCatagoryName}" editable="false">  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{inventoryGroupController.inventoryCategoryNameData}" />  
+
+                        </p:selectOneMenu>
+
+                        <h:outputLabel value="Inventory Group"/>
+
+                        <p:inputText id="invttyp" value="#{inventoryGroupController.inventoryGroup.inventoryGroupName}"/>
+
+                        <h:outputLabel value="Note"/>
+
+                        <p:inputText value="#{inventoryGroupController.inventoryGroup.note}"/>  
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Edit" update="update_inventory_group_frm,:inventory_startup_tbl:inventory_group_list" actionListener="#{inventoryGroupController.updateInventoryGroup}" oncomplete="dialog_Update_inventory_group.hide()" style="margin-top: 1%;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:dialog>
+
+    </h:body>
+
+</html>
+

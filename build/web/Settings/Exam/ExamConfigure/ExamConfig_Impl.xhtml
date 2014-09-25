@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+        <h:form>
+           
+            <center>
+          
+                <p:panelGrid columns="6" >
+
+                <h:outputText value="Academic Year" />  
+
+                <p:selectOneMenu value="#{examConfigController.exam_config.acyrID}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                    <f:selectItems value="#{examConfigController.acYrList}" />
+
+                    <p:ajax event="change" update="scClassID" listener="#{examConfigController.scClassList}"/>
+
+                </p:selectOneMenu>
+
+
+                <h:outputText value="Class"/>  
+
+                <p:selectOneMenu id="scClassID" value="#{examConfigController.exam_config.className}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue=""/>  
+
+                    <f:selectItems value="#{examConfigController.scList}"/>
+
+                </p:selectOneMenu>
+
+                <h:outputText value="Exam Name" />  
+
+                <p:selectOneMenu id="exmID" value="#{examConfigController.exam_config.examName}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                    <f:selectItems value="#{examConfigController.exmList}" />
+
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+                <p:commandButton value="Save" action="#{examConfigController.saveExamConfig}" ajax="false" style="margin-top: 6px;"/>
+           
+            </center>
+       
+        </h:form>
+
+
+
+    <h:form >
+
+        <p:dataTable value="#{examConfigController.examConfig_List}" var="Exm_config_tbl"  style="margin-top: 10px;">
+
+            <p:column sortBy="#{Exm_config_tbl.acyrID}">
+
+                <f:facet name="header">Academic Year</f:facet>  
+
+                <h:outputText value="#{Exm_config_tbl.acyrID}"/>
+
+            </p:column> 
+
+            <p:column sortBy="#{Exm_config_tbl.className}">
+
+                <f:facet name="header">Class</f:facet>  
+
+                <h:outputText value="#{Exm_config_tbl.className}"/>
+
+            </p:column> 
+
+            <p:column sortBy="#{Exm_config_tbl.examName}">
+
+                <f:facet name="header">Exam Name</f:facet>  
+
+                <h:outputText value="#{Exm_config_tbl.examName}"/>
+
+            </p:column> 
+
+            <p:column style="width:3%">  
+
+                <p:commandButton process="@this" update=":sbj_mrk_distributiont_frm" actionListener="#{examConfigController.subjectList(Exm_config_tbl)}" oncomplete="dialog_sbj_mrk_distribution.show()" icon="ui-icon-pencil" title="NNN"/>  
+
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+    <p:dialog header="Subject Mark Distribution" widgetVar="dialog_sbj_mrk_distribution" width="960" hideEffect="blind" position="left top" maximizable="true" minimizable="true" dynamic="true">
+        <ui:include src="ExamConfig.xhtml"/> 
+    </p:dialog>
+
+</ui:composition>

@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+ <p:layout styleClass="tabHeight">
+
+     <p:layoutUnit position="west" size="20%">
+         
+        <h:form>
+
+            <p:panelGrid columns="2">
+
+                <h:outputText value="Academic Year" />  
+
+                <p:selectOneMenu value="#{sendResultSmsController.examResultObj.acyr}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                    <f:selectItems value="#{sendResultSmsController.acyrList}" />
+
+                    <p:ajax event="change" update="scClassID1" listener="#{sendResultSmsController.acyr_ClassList}"/>
+
+                </p:selectOneMenu>
+
+
+                <h:outputText value="Class"/>  
+
+                <p:selectOneMenu id="scClassID1" value="#{sendResultSmsController.examResultObj.className}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue=""/>  
+
+                    <f:selectItems value="#{sendResultSmsController.classList}"/>
+
+                    <p:ajax event="change" update="exmID1"/>
+
+                </p:selectOneMenu>
+
+
+                <h:outputText value="Exam Name" />  
+
+                <p:selectOneMenu id="exmID1" value="#{sendResultSmsController.examResultObj.examName}" effect="slide" >  
+
+                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                    <f:selectItems value="#{sendResultSmsController.examList}" />
+                    
+                    <p:ajax event="change" update="Ex_btn1" listener="#{sendResultSmsController.get_ExCnf_ID}"/>
+
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <center>
+
+                <p:commandButton id="Ex_btn1" update=":merit1_frm1:merit1" value="Search" actionListener="#{sendResultSmsController.get_Student_List}" style="margin-top: 8px;" icon="ui-icon-check"/>
+
+            </center>
+
+        </h:form>
+         
+       </p:layoutUnit>
+
+     <p:layoutUnit position="center">
+
+    <h:form id="merit1_frm1">
+
+        <p:growl autoUpdate="true" showDetail="true"/>  
+
+        <center>
+
+            <p:dataTable id="merit1" value="#{sendResultSmsController.studentMerit_List}" var="merit1_list_tbl"  style="margin-top:8px;">
+
+
+
+                <p:column sortBy="#{merit1_list_tbl.studentID}">
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.studentID}"/>
+
+                </p:column> 
+                
+                <p:column sortBy="#{merit1_list_tbl.studentRoll}">
+
+                    <f:facet name="header">Student Roll</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.studentRoll}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{merit1_list_tbl.grdnCn}">
+
+                    <f:facet name="header">Guardian Number</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.grdnCn}"/>
+
+                </p:column> 
+                
+                
+                <p:column sortBy="#{merit1_list_tbl.totalMark}">
+
+                    <f:facet name="header">Total Mark</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.totalMark}"/>
+
+                </p:column>
+                
+                
+                
+                <p:column sortBy="#{merit1_list_tbl.CGPA}">
+
+                    <f:facet name="header">CGPA</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.CGPA}"/>
+
+                </p:column>
+                
+                <p:column sortBy="#{merit1_list_tbl.finalGrade}">
+
+                    <f:facet name="header">Final Grade</f:facet>  
+
+                    <h:outputText value="#{merit1_list_tbl.finalGrade}"/>
+
+                </p:column>
+
+            </p:dataTable>
+            
+            <p:commandButton value="Send SMS" actionListener="#{sendResultSmsController.send_Student_Result_to_Parent}" style="margin-top: 7px;"/>
+
+
+        </center>
+
+    </h:form>
+         
+      </p:layoutUnit>
+     
+         </p:layout>
+
+
+
+</ui:composition>

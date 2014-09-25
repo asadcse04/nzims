@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:600px;">
+
+        <p:layoutUnit position="center"> 
+            <h:form>
+
+                <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+                <center>
+
+                    <p:panelGrid columns="2"> 
+
+                        <h:outputText value="Attendance Date" />
+
+                        <p:calendar value="#{teacherAttendanceController.tcrAttendance.attendanceDate}">
+
+                            <p:ajax event="dateSelect" listener="#{teacherAttendanceController.AttendanceDate(teacherAttendanceController.tcrAttendance.attendanceDate)}"/>
+
+
+                        </p:calendar>
+
+                    </p:panelGrid>
+
+                    <p:dataTable value="#{teacherController.teacharList}" var="teacher_tbl" filteredValue="#{teacherController.teachar_Filter_List}" 
+
+                                 style="width:800px; margin-top: 10px; height: 500px; margin-bottom: 15px;">
+
+                        <p:column>
+
+                            <f:facet name="header">Teacher ID</f:facet>  
+
+                            <h:outputText value="#{teacher_tbl.teacherID}"/>
+
+                        </p:column> 
+
+                        <p:column>
+
+                            <f:facet name="header">Teacher Name</f:facet>  
+
+                            <h:outputText value="#{teacher_tbl.name}"/>
+
+                        </p:column> 
+
+                        <p:column>
+
+                            <f:facet name="header">In-Time</f:facet>  
+
+                            <p:inputText value="#{teacherAttendanceController.tcrAttendance.inTime}">
+
+                                <p:ajax update="ot"/>
+
+                            </p:inputText>
+
+                        </p:column>  
+
+                        <p:column>
+
+                            <f:facet name="header">Out-Time</f:facet>  
+
+                            <p:inputText id="ot" value="#{teacherAttendanceController.tcrAttendance.outTime}">
+
+                                <p:ajax update="st"/>
+
+                            </p:inputText>
+
+                        </p:column>  
+
+                        <p:column>
+
+                            <f:facet name="header">Status</f:facet>  
+
+                            <p:selectOneMenu id="st" value="#{teacherAttendanceController.tcrAttendance.status}" style="width:120px;" effect="slide">  
+
+                                <f:selectItem itemLabel="Select One" itemValue="" />  
+
+                                <f:selectItem itemLabel="Present" itemValue="Present" />  
+
+                                <f:selectItem itemLabel="Absent" itemValue="Absent"/> 
+
+                                <f:selectItem itemLabel="Late" itemValue="Late"/>
+
+                                <f:selectItem itemLabel="Leave" itemValue="Leave"/> 
+
+                                <f:selectItem itemLabel="Partial Leave" itemValue="Partial Leave"/> 
+
+                                <p:ajax event="change" listener="#{teacherAttendanceController.saveTcrAttendance(teacher_tbl.teacherID)}"/>
+
+                            </p:selectOneMenu>
+
+                        </p:column>  
+
+                    </p:dataTable> 
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+    </p:layout>
+
+</ui:composition>

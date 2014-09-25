@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+            <h:form id="student_result_details_view_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2">
+                       
+                        <h:outputText value="Subject"/>
+                        <p:selectOneMenu id="ex_sbj" value="#{basicReportController.basicReport.subjectName}" effect="slide" >  
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                            <f:selectItems value="#{basicReportController.subjectList}" />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton id="student_details_report_list_btn" value="Search" update=":st_mark_details_list_tbl_frm" actionListener="#{basicReportController.details_report_List}"    icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+        
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="st_mark_details_list_tbl_frm">
+
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{basicReportController.details_List}" var="details_Report" style="width:970px;">
+  
+                
+                <p:column>
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{details_Report.studentID}"/>
+
+                </p:column> 
+
+                <p:column >
+
+                    <f:facet name="header">Name</f:facet>  
+
+                    <h:outputText value="#{details_Report.studentName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Roll</f:facet>  
+
+                    <h:outputText value="#{details_Report.studentRoll}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">CT</f:facet>  
+
+                    <h:outputText value="#{details_Report.shortCode1}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">WR</f:facet>  
+
+                    <h:outputText value="#{details_Report.shortCode2}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">OB</f:facet>  
+
+                    <h:outputText value="#{details_Report.shortCode3}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">PR</f:facet>  
+
+                    <h:outputText value="#{details_Report.shortCode4}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Avg.Total</f:facet>  
+
+                    <h:outputText value="#{details_Report.average}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Total</f:facet>  
+
+                    <h:outputText value="#{details_Report.totalScore}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Point</f:facet>  
+
+                    <h:outputText value="#{details_Report.gradePoint}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Grade</f:facet>  
+
+                    <h:outputText value="#{details_Report.letterGrade}"/>
+
+                </p:column>
+
+                
+            </p:dataTable> 
+
+
+
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+                    <p:printer target="st_mark_details_list_tbl_frm" />
+           </h:commandButton>
+</p:layoutUnit>
+        
+</p:layout>
+
+</ui:composition>

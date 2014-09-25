@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <p:tabView id="hostel" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+        <p:tab title="Add Hostel"> 
+            <ui:include src="AddHostel/Hostel.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Add Building"> 
+            <ui:include src="AddBuilding/Building.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Add Floor"> 
+            <ui:include src="AddFloor/Floor.xhtml"/>
+        </p:tab> 
+
+        <p:tab title="Add Room"> 
+            <ui:include src="AddRoom/Room.xhtml"/>
+        </p:tab> 
+
+        <p:tab title="Add Seat"> 
+            <ui:include src="AddSeat/Seat.xhtml"/>
+        </p:tab> 
+
+    </p:tabView>
+
+</ui:composition>

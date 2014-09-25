@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="basic_view_tbl_frm">
+
+                    <p:dataTable value="#{studentBasicViewController.school_configList}" var="school_Cnf_tbl"
+
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:780px;">
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.acyrID}" filterBy="#{school_Cnf_tbl.acyrID}">
+
+                            <f:facet name="header">Academic Year</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.acyrID}"/>
+
+                        </p:column> 
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
+
+                            <f:facet name="header">Class</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.className}"/>
+
+                        </p:column> 
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.shiftName}" filterBy="#{school_Cnf_tbl.shiftName}">
+
+                            <f:facet name="header">Shift</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.shiftName}"/>
+
+                        </p:column>
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.sectionName}" filterBy="#{school_Cnf_tbl.sectionName}">
+
+                            <f:facet name="header">Section</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.sectionName}"/>
+
+                        </p:column>
+                        
+                        <p:column sortBy="#{school_Cnf_tbl.totalStudentCount}" filterBy="#{school_Cnf_tbl.totalStudentCount}">
+
+                            <f:facet name="header">Student</f:facet>  
+
+                            <h:outputText value="#{school_Cnf_tbl.totalStudentCount}"/>
+
+                        </p:column>
+
+
+
+                        <p:column style="width:3%">  
+
+                            <p:commandButton  process="@this" update=":update_basic_view_frm" oncomplete="dialog_Update_basic_view.show()"  actionListener="#{studentBasicViewController.student_List(school_Cnf_tbl)}" icon="ui-icon-pencil" title="Basic view" /> 
+
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                </h:form>
+               
+            </center>
+            
+            <p:dialog header="Student Basic View" widgetVar="dialog_Update_basic_view" width="800" height="590"  showEffect="drop" hideEffect="drop" modal="false">
+                <ui:include src="StudentBasicView.xhtml"/>
+            </p:dialog>
+
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

@@ -1,0 +1,187 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+            <h:form id="section_wise_merit_list_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+
+                        <h:outputText value="Academic Year "/>
+
+                        <p:selectOneMenu value="#{examReportController.examResultOpt.acyr}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.acyrList}" />
+
+                            <p:ajax event="change" update="ex_classID" listener="#{examReportController.scClassList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class"/>
+
+                        <p:selectOneMenu id="ex_classID" value="#{examReportController.examResultOpt.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.classList}" />
+
+                            <p:ajax event="change" update="ex_deptID" listener="#{examReportController.departmentList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Department"/>
+
+                        <p:selectOneMenu id="ex_deptID" value="#{examReportController.examResultOpt.deptName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.deptList}" />
+
+                            <p:ajax event="change" update="ex_shiftID" listener="#{examReportController.shiftNameList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Shift"/>
+
+                        <p:selectOneMenu id="ex_shiftID" value="#{examReportController.examResultOpt.shiftName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.shiftList}" />
+
+                            <p:ajax event="change" update="ex_sectionID" listener="#{examReportController.section_List}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Section"/>
+
+                        <p:selectOneMenu id="ex_sectionID" value="#{examReportController.examResultOpt.sectionName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.sectionList}" />
+
+                            <p:ajax event="change" listener="#{examReportController.Sc_Cnf_ID}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Exam"/>
+
+                        <p:selectOneMenu value="#{examReportController.examResultOpt.examName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examReportController.examList}" />
+
+                          <p:ajax event="change" update="section_position_list_btn" listener="#{examReportController.Ex_Cnf_ID}"/>
+
+
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton id="section_position_list_btn" value="Search" update="section_wise_merit_list_frm,:section_position_tbl_frm" actionListener="#{examReportController.sectionMerit_Position_List}"  disabled="#{examReportController.exCnfID eq 0}"  icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+        
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="section_position_tbl_frm">
+
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{examReportController.sectionMerit_position_List}" var="sectionPosition" style="width:960px;">
+  
+                
+                <p:column>
+
+                    <f:facet name="header">Merit</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.sectionPosition}"/>
+
+                </p:column> 
+
+                <p:column >
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.studentID}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.studentName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Student Roll</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.studentRoll}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Total marks</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.totalMarks}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Point</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.cgpa}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                     <f:facet name="header">Grade</f:facet>  
+
+                    <h:outputText value="#{sectionPosition.finalGrade}"/>
+
+                </p:column>
+                
+              
+            </p:dataTable> 
+
+
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="section_position_tbl_frm" />
+
+           </h:commandButton>
+</p:layoutUnit>
+        
+</p:layout>
+
+</ui:composition>

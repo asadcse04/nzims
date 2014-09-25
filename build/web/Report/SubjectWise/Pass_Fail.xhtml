@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="st_mark_pass_fail_list_tbl_frm">
+            <center>
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{basicReportController.exam_passfail_List}" var="pass_fail" style="width:970px;">
+  
+                
+                <p:column>
+
+                    <f:facet name="header">Subject ID</f:facet>  
+
+                    <h:outputText value="#{pass_fail.subjectID}"/>
+
+                </p:column> 
+
+                <p:column >
+
+                    <f:facet name="header">Subject Name</f:facet>  
+
+                    <h:outputText value="#{pass_fail.subjectName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Total Student</f:facet>  
+
+                    <h:outputText value="#{pass_fail.totalStudent}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Fail</f:facet>  
+
+                    <h:outputText value="#{pass_fail.fail}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">%</f:facet>  
+
+                    <h:outputText value="#{((pass_fail.fail *100) / pass_fail.totalStudent)}" >
+                        <f:convertNumber pattern="#0.00" />
+                    </h:outputText>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Pass</f:facet>  
+
+                    <h:outputText value="#{pass_fail.pass}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">%</f:facet>  
+
+                    <h:outputText value="#{(pass_fail.pass * 100) /  pass_fail.totalStudent}">
+                        <f:convertNumber pattern="#0.00" />
+                    </h:outputText>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Teacher Name</f:facet>  
+
+                    <h:outputText value="#{pass_fail.teacherName}"/>
+
+                </p:column>
+                
+                
+            </p:dataTable> 
+
+</center> 
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="st_mark_pass_fail_list_tbl_frm" />
+
+           </h:commandButton>
+</p:layoutUnit>
+       
+</p:layout>
+
+</ui:composition>

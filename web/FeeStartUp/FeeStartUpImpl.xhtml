@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    
+    <!--
+
+        <p:tab title="Fee Sub Head">  
+
+            <ui:include src="SubFeeHead/SubFeeHeadImpl.xhtml"/>
+            
+        </p:tab> -->
+
+    <p:tabView id="feestrt_tb" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+
+        <p:tab title="Month Configuration"> 
+
+            <ui:include src="MonthConfig/MonthConfigImpl.xhtml"/>
+
+        </p:tab> 
+        
+         <p:tab title="Fee Category">  
+
+            <ui:include src="FeeCategory/FeeCategoryImpl.xhtml"/>
+            
+        </p:tab>
+        
+       <p:tab title="Fee Head">  
+
+            <ui:include src="FeeHead/FeeHeadImpl.xhtml"/>
+            
+        </p:tab>
+        
+        <p:tab title="Fee Sub Head">  
+
+            <ui:include src="SubFeeHead/SubFeeHeadImpl.xhtml"/>
+            
+        </p:tab>
+
+
+    </p:tabView>
+
+ 
+
+</ui:composition>

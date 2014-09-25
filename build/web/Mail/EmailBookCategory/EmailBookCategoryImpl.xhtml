@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:900px;">
+
+        <p:layoutUnit position="west" size="30%" style="border: none"> 
+
+            <h:form id="emailBookCategory">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+
+                        <f:facet name="header">
+
+                            Create EmailBookCategory
+
+                        </f:facet>
+
+                        <h:outputLabel value="Category Name"/>
+
+                        <p:inputText id="categoryName" value="#{emailBookCategoryController.emailBookCategory.categoryName}"/>
+
+
+                        <h:outputLabel value="Note"/>
+
+                        <p:inputText id="CategoryNote" value="#{emailBookCategoryController.emailBookCategory.categoryNote}" />
+
+
+                        <p:commandButton value="Add" actionListener="#{emailBookCategoryController.addEmailBookCategory()}" update="grl :emal_book_tb:emailBookCategory :emal_book_tb:emailBookCategory_frm" icon="ui-icon-check" />
+
+                        <p:commandButton type="reset" value="Reset" icon="ui-icon-refresh" />
+
+                    </p:panelGrid>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <h:form id="emailBookCategory_frm">
+
+                <center>
+
+                    <p:dataTable var="emailBookCategorylist" value="#{emailBookCategoryController.emailBookCategoryAllList}" >
+
+                        <p:column headerText="Category ID">
+
+                            <h:outputLabel value="#{emailBookCategorylist.categoryId}"/>
+
+                        </p:column>
+
+
+
+                        <p:column headerText="Category Name">
+
+                            <h:outputLabel value="#{emailBookCategorylist.categoryName}"/>
+
+                        </p:column>
+
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{emailBookCategorylist.categoryNote}"/>
+
+                        </p:column>
+
+
+
+                        <p:column headerText="Edit">
+
+                            <p:commandButton   oncomplete="dig1.show()"  update=":emal_book_tb:upemailBookCategoryForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{emailBookCategorylist}" target="#{emailBookCategoryController.emailBookCategory}"/>   
+                            </p:commandButton>   
+
+                        </p:column>
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+
+            <p:dialog widgetVar="dig1"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="upgrl"/>
+                <h:form id="upemailBookCategoryForm" style="font-size: 12pt">
+
+                    <p:panel header="Upadate Category  information">
+
+                        <p:panelGrid columns="2" style="font-size: medium">
+
+                            <p:outputLabel value="Category ID"/>
+                            <p:inputText id="ect_id" value="#{emailBookCategoryController.emailBookCategory.categoryId}" readonly="true"/>
+
+                            <p:outputLabel value="Category Name"/>
+                            <p:inputText id="ect_name" value="#{emailBookCategoryController.emailBookCategory.categoryName}" />
+
+                            <p:outputLabel value="Note"/>
+                            <p:inputText id="ect_note" value="#{emailBookCategoryController.emailBookCategory.categoryNote}"/>                                                       
+
+
+                            <p:commandButton value="Update Info" update=":emal_book_tb:upgrl :emal_book_tb:emailBookCategory_frm" actionListener="#{emailBookCategoryController.updateEmailBookCategory()}" oncomplete="dig1.hide()"/>
+
+                        </p:panelGrid>
+                   
+                    </p:panel>
+                
+                </h:form>
+            
+            </p:dialog>
+
+        
+        
+        </p:layoutUnit>
+
+    
+    
+    </p:layout>
+
+</ui:composition>
+
+
+
+

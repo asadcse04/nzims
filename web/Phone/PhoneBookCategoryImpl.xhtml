@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    
+    
+    <p:layout style="min-width:1000px;min-height:900px;">
+
+       
+        <p:layoutUnit position="west" size="30%" style="border: none"> 
+
+            <h:form id="insert_phcat_frm">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+
+                    <p:panelGrid styleClass="panelGrid">
+                        
+                       <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                              Create Phonebook Category 
+                            </p:column>   
+                       </p:row>
+
+    
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="*" styleClass="red"/>
+                                <h:outputLabel value="Category Name"/>
+                            </p:column><p:column>
+                                <p:inputText  value="#{phoneBookCategoryController.phoneBookCategory.categoryName}" styleClass="inputText" required="true" requiredMessage="Please Enter Category Name."/>
+                            </p:column>  
+                        </p:row>
+                        
+                        
+                         <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputText  value="#{phoneBookCategoryController.phoneBookCategory.note}" styleClass="inputText"/>
+                            </p:column>  
+                        </p:row>
+                        
+                    </p:panelGrid>
+            
+                    <p:commandButton value="Add" actionListener="#{phoneBookCategoryController.addPhoneBookCategory()}" style="margin-top: 8px" update="grl :phonestrt_tb:phcatList_frm" icon="ui-icon-check" />
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <h:form id="phcatList_frm">
+
+                <center>
+
+                    <p:dataTable var="phcatlist" value="#{phoneBookCategoryController.phoneBookCategoryList}">
+
+                          <p:column headerText="Category ID">
+
+                              <h:outputLabel value="#{phcatlist.categoryId}"/>
+
+                        </p:column>
+                        
+                        <p:column headerText="Category Name">
+
+                            <h:outputLabel value="#{phcatlist.categoryName}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{phcatlist.note}"/>
+
+                        </p:column>
+            
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

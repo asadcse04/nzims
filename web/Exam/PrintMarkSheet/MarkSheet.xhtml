@@ -1,0 +1,334 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="mark_sheet_frm" style="font-size: 15px; ">
+
+        <div class="ms_continer" style="border-style: dotted; border-width:4px; border-color:brown; ">
+
+            <div class="ms_header" style="margin: 30px auto; height: 66px; width: 920px; text-align: center;"> 
+
+                <div style="margin:0px auto; width: 650px;">
+                    <div class="School_Logo" style="float: left; width: 120px; height: 65px;">
+
+                        <p:graphicImage value="/images/Header/#{SchoolLogo}"  alt="School Logo" style="width: 110px; height: 100px;"/> 
+
+                    </div>
+                    <div style="float: left; margin-left: 0px;">
+                        <h1 style="margin: 0px; color: brown; text-shadow: 2px 2px black;">#{SchoolFullName}</h1>
+
+                        <h4 style="margin: 0px; margin-top: 6px;">#{SchoolAddress}</h4>
+                    </div>
+
+                </div>        
+            </div>
+            <div style="width: 300px; margin: 12px auto; text-align: center;">
+                <h2 style="margin: 0px ; color: brown; font-size: 25px;">Academic Transcript</h2>
+                <h4 style="margin: 0px ; margin-top: 3px; font-size: 20px;">#{Examname}</h4>
+            </div>
+
+            <div class="ms_body" style="width: 920px; padding-left: 20px; padding-right: 30px; margin-top: 30px;">
+
+                <div style="height: 170px;">
+                    <p:panelGrid style="float: right; top: -50px; position: relative;">
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Grade"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Mark Range"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Point"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="A+"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="80-100"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="5"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="A"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="70-79"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="4"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="A-"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="60-69"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="3.5"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="B"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="50-59"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="3"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="C"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="40-49"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="2"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="F"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="00-39"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="0"/>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:panelGrid styleClass="MarkSheet_panelGrid">
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Student ID"/>
+                            </p:column><p:column>
+                                <h:outputText  style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.studentID}"/>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="Academic Year"/>
+                            </p:column><p:column>
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.acyr}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column >
+                                <h:outputText value="Name"/>
+                            </p:column><p:column colspan="4"> 
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.studentName}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column >
+                                <h:outputText value="Class"/>
+                            </p:column><p:column colspan="4">
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.className}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Department"/>
+                            </p:column><p:column>
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.deptName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="Shift"/>
+                            </p:column><p:column>
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.shiftName}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Section"/>
+                            </p:column><p:column>
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.sectionName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="Class Roll"/>
+                            </p:column><p:column>
+                                <h:outputText style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.studentRoll}"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </div>
+
+                <p:dataTable value="#{markSheetPrintController.mark_sheet_List}" var="mark_sheet_tbl" paginator="false"
+                             style="width:920px; position: relative; top: -10px; font-size: 13px;">
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="2" headerText="Subject" />      
+                            <p:column colspan="5" headerText="Mark Distribution" />   
+                            <p:column rowspan="2" headerText="CT" />
+                            <p:column rowspan="2" headerText="Total Marks" />
+                            <p:column rowspan="2" headerText="Grade" />
+                            <p:column rowspan="2" headerText="Point" />    
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="Total" />
+                            <p:column headerText="Avg.-80%" />
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.subjectName}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode2}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode3}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode4}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.totalScore}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.average}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode1}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finalScore}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText style="color: #{(mark_sheet_tbl.letterGrade=='F') ? 'red':'black'};" value="#{mark_sheet_tbl.letterGrade}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.gradePoint}"/>
+                    </p:column> 
+
+                </p:dataTable>
+
+                <div style="width: 920px; height: 270px; margin-top: 30px;">
+
+                    <p:panelGrid  style="float: left;">
+                        <p:row> 
+                            <p:column>
+                                <h:outputText value="Total Marks"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="totalmark" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.totalMark}"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Grade"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="total_grade" style="font-weight: bold; color: #{(markSheetPrintController.markSheetPrint.finalGrade != 'F') ? 'black' : 'red'};" value="#{markSheetPrintController.markSheetPrint.finalGrade}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Point"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="total_point" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.CGPA}"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="Position in Class"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="class_position" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.classPosition}"/>
+                            </p:column>
+                        </p:row>
+                        
+                         <p:row>
+                            <p:column>
+                                <h:outputText value="Position in Shift"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="shift_position" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.shiftPosition}"/>
+                            </p:column>                                                    
+                            <p:column>
+                                <h:outputText value="Position in Section"/>
+                            </p:column><p:column>
+                                <p:outputLabel id="position_section" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.sectionPosition}"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Status"/>
+                            </p:column><p:column colspan="3">
+                                <h:outputText id="status" style="font-weight: bold; color: #{(markSheetPrintController.markSheetPrint.status != 'Fail') ? 'green' : 'red'};"  value="#{markSheetPrintController.markSheetPrint.status}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputText value="Remark:"/>
+                            </p:column><p:column colspan="3" style="height: 130px;">
+
+                            </p:column>
+
+                        </p:row>
+
+                    </p:panelGrid>    
+
+
+                    <div style="float: left; width:420px; margin-top: 155px;">                        
+                        <pre style="top: 20px; position: relative;">
+  ----------------------             --------------------
+   Goutom Chandra Mitra                 Class Teacher
+       Head Teacher
+                        </pre>        
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div style="width: 920px;">
+                <pre style="font-size: 9px; margin-left: 6px;">Powered by: Netizen Software Solution,www.netizenbd.com</pre>
+            </div>
+        </div>
+
+    </h:form>
+
+    <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+        <p:printer target="mark_sheet_frm" />
+
+    </h:commandButton>
+
+</ui:composition>

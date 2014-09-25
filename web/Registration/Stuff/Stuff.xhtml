@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+     <h:form id="stuff_tbl_frm">
+         
+        <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
+        
+
+        <center>
+            
+            <p:dataTable value="#{stuff_Reg_Controller.stuffList}" var="stuff_tbl" filteredValue="#{stuff_Reg_Controller.stuff_Filter_List}" 
+
+                         paginator="true" rows="10" paginatorPosition="bottom" style="width:950px; margin-top: 8px; margin-bottom: 15px;">
+
+                <p:column sortBy="#{stuff_tbl.stuffID}" filterBy="#{stuff_tbl.stuffID}">
+
+                    <f:facet name="header">Stuff ID</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.stuffID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{stuff_tbl.name}" filterBy="#{stuff_tbl.name}">
+
+                    <f:facet name="header">Stuff Name</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.name}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{stuff_tbl.gender}" filterBy="#{stuff_tbl.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.gender}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{stuff_tbl.contactNo}" filterBy="#{stuff_tbl.contactNo}">
+
+                    <f:facet name="header">Mobile No</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.contactNo}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{stuff_tbl.bloodGroup}" filterBy="#{stuff_tbl.bloodGroup}">
+
+                    <f:facet name="header">Blood Group</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.bloodGroup}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{stuff_tbl.religion}" filterBy="#{stuff_tbl.religion}">
+
+                    <f:facet name="header">Religion</f:facet>  
+
+                    <h:outputText value="#{stuff_tbl.religion}"/>
+
+                </p:column>  
+                
+              <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":stuff_update_frm" oncomplete="dialog_update_stuff.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{stuff_tbl}" target="#{stuff_Reg_Controller.stuff}"/>  
+
+                        </p:commandButton>  
+
+                </p:column>
+
+            </p:dataTable> 
+
+        </center>
+
+    </h:form>
+    
+    <p:dialog header="Stuff Update" draggable="true" widgetVar="dialog_update_stuff" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
+        <ui:include src="/Registration/Stuff/StuffUpdate.xhtml" />          
+    </p:dialog>
+
+</ui:composition>

@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+            <h:form id="student_subject_wise_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Subject"/>
+
+                        <p:selectOneMenu id="ex_sbj" value="#{basicReportController.basicReport.subjectName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select Subject" itemValue="" />  
+
+                            <f:selectItems value="#{basicReportController.subjectList}" />
+
+                        </p:selectOneMenu>
+
+                       
+                    </p:panelGrid>
+
+                    <p:commandButton id="subject_wise_result_list_btn" value="Search" update=":st_mark_subj_list_tbl_frm" actionListener="#{basicReportController.subject_report_List}"    icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+        
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="st_mark_subj_list_tbl_frm">
+
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{basicReportController.subject_report_List}" var="subj_Report" style="width:960px;">
+  
+                
+                <p:column>
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentID}"/>
+
+                </p:column> 
+
+                <p:column >
+
+                    <f:facet name="header">Name</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Roll</f:facet>  
+
+                    <h:outputText value="#{subj_Report.studentRoll}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Total</f:facet>  
+
+                    <h:outputText value="#{subj_Report.totalMark}"/>
+
+                </p:column>
+
+                
+                 <p:column>
+
+                    <f:facet name="header">Point</f:facet>  
+
+                    <h:outputText value="#{subj_Report.cgpa}"/>
+
+                </p:column>
+                
+                 <p:column>
+
+                    <f:facet name="header">Grade</f:facet>  
+
+                    <h:outputText value="#{subj_Report.finalGrade}"/>
+
+                </p:column>
+                
+                
+            </p:dataTable> 
+
+
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="st_mark_subj_list_tbl_frm" />
+
+           </h:commandButton>
+</p:layoutUnit>
+        
+</p:layout>
+
+</ui:composition>

@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+   
+    <center>
+        <p:dataTable value="#{scClassConfigController.listClassConfig}" var="scCnf_tbl" filteredValue="#{scClassConfigController.filterClassConfig}"
+
+                     paginator="true" rows="12" paginatorPosition="bottom" style="width:750px;">
+
+            <p:column sortBy="#{scCnf_tbl.acyrID}" filterBy="#{scCnf_tbl.acyrID}">
+
+                <f:facet name="header">Academic Year</f:facet>  
+
+                <h:outputText value="#{scCnf_tbl.acyrID}"/>
+
+            </p:column> 
+
+            <p:column sortBy="#{scCnf_tbl.className}" filterBy="#{scCnf_tbl.className}">
+
+                <f:facet name="header">Class</f:facet>  
+
+                <h:outputText value="#{scCnf_tbl.className}"/>
+
+            </p:column> 
+
+
+            <p:column sortBy="#{scCnf_tbl.deptName}" filterBy="#{scCnf_tbl.deptName}">
+
+                <f:facet name="header">Department</f:facet>  
+
+                <h:outputText value="#{scCnf_tbl.deptName}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{scCnf_tbl.shiftName}" filterBy="#{scCnf_tbl.shiftName}">
+
+                <f:facet name="header">Shift</f:facet>  
+
+                <h:outputText value="#{scCnf_tbl.shiftName}"/>
+
+            </p:column>
+
+
+            <p:column sortBy="#{scCnf_tbl.sectionName}" filterBy="#{scCnf_tbl.sectionName}">
+
+                <f:facet name="header">Section</f:facet>  
+
+                <h:outputText value="#{scCnf_tbl.sectionName}"/>
+
+            </p:column>
+
+            <p:column style="width:3%">  
+
+                <p:commandButton process="@this"  update=":routine_set_frm1" oncomplete="dialog_routineSet1.show()" icon="ui-icon-pencil" title="Routine Update">
+
+                    <f:setPropertyActionListener value="#{scCnf_tbl}" target="#{scClassConfigController.classConfig}"/>
+
+                </p:commandButton>
+
+            </p:column>
+
+        </p:dataTable>
+
+    </center>
+
+    <p:dialog header="Routine OutLook" widgetVar="dialog_routineSet1" draggable="true" maximizable="true" minimizable="true" position="left top" width="100%" showEffect="clip" hideEffect="blind" dynamic="true">
+        <ui:include src="DayWiseRoutineOutLook.xhtml" /> 
+    </p:dialog>
+
+    <p:dialog header="Routine Update" widgetVar="dialog_updateRoutine1" width="450" showEffect="clip" hideEffect="blind">
+        <ui:include src="RoutineUpdate.xhtml" /> 
+    </p:dialog>
+
+</ui:composition>
+

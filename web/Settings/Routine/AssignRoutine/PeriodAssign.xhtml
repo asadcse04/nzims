@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="assignTchrSbj_frm">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false" />
+
+        <center>
+
+            <p:panelGrid columns="2" style="width: 300px;">
+
+                <h:outputText value="Period Name"/>
+
+                <p:outputLabel value="#{periodController.period.periodName}" />
+
+
+                <h:outputText value="Subject List"/>  
+
+
+                <p:selectOneMenu value="#{classRoutineController.class_routine.subject}"> 
+
+                    <f:selectItem itemLabel="Select Option" itemValue=""/>
+
+                    <f:selectItems value="#{classRoutineController.class_routine.subject_List}" />
+
+                </p:selectOneMenu>
+
+                <h:outputText value="Subject Note"/> 
+
+                <p:inputText value="#{classRoutineController.class_routine.note}" size="10" />  
+
+
+                <h:outputText value="Teacher" />
+
+                <p:selectOneMenu value="#{classRoutineController.selectedTeacher}" converter="tchr" var="t" filter="true" filterMatchMode="startsWith" style="width:120px;">
+
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+
+                    <f:selectItems value="#{classRoutineController.teachers}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher}"/>
+
+                    <p:column>  
+
+                        #{t.teacherID}
+
+                    </p:column> 
+
+                    <p:column>  
+
+                        #{t.name}
+
+                    </p:column> 
+
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:commandButton value="Save" update="assignTchrSbj_frm,:prd_dt_frm" actionListener="#{classRoutineController.assign_SbjTchr(periodController.period.periodName)}" oncomplete="dialog_assign_TchrSbj.hide()" style="margin-top: 1%;" icon="ui-icon-check"/>
+
+        </center>
+
+    </h:form>
+
+</ui:composition>
+

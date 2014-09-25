@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <center>
+        <p:panelGrid columns="1" styleClass="panelGrid" style="border: #ffffff">
+
+
+            <p:dataTable value="#{balanceReportController.balanceList}" var="p" style="border: none; width: 650px; text-align: right" >
+
+                <p:column headerText="Cash Balance">
+                    <h:outputLabel value="#{p.cashBalance}"/>
+                </p:column>
+
+                <p:column headerText="Bank Balance">
+                    <h:outputLabel value="#{p.bankBalance}"/>
+                </p:column>
+        
+                <p:column headerText="Check Balnce">
+                        <h:outputLabel value="#{p.checkBalance}"/>
+                    </p:column>
+            
+                <p:column headerText="Total Balance">
+                        <h:outputLabel value="#{p.totalBalance}" styleClass="red"/>
+                </p:column>
+              
+            </p:dataTable>
+
+            <p:pieChart id="sample" value="#{balanceReportController.pieModel}" legendPosition="w"  title="Balance Report" style="width:550px;height:400px" />
+
+
+        </p:panelGrid>
+
+    </center>
+
+</ui:composition>
+

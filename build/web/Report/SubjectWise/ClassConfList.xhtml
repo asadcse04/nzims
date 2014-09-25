@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center" >
+            <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
+
+            <h:form> 
+
+                <center>
+
+                    <p:dataTable value="#{basicReportController.classDetList}" var="school_Cnf_tbl" 
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:980px;">
+
+
+                        <p:column sortBy="#{school_Cnf_tbl.acYr}" filterBy="#{school_Cnf_tbl.acYr}">
+                            <f:facet name="header">Academic Year</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.acYr}"/>
+                        </p:column> 
+
+                        <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
+                            <f:facet name="header">Class</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.className}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{school_Cnf_tbl.departmentName}" filterBy="#{school_Cnf_tbl.departmentName}">
+                            <f:facet name="header">Department</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.departmentName}"/>
+                        </p:column>  
+
+                        <p:column sortBy="#{school_Cnf_tbl.shiftName}" filterBy="#{school_Cnf_tbl.shiftName}">
+                            <f:facet name="header">Shift</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.shiftName}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{school_Cnf_tbl.sectionName}" filterBy="#{school_Cnf_tbl.sectionName}">
+                            <f:facet name="header">Section</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.sectionName}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">Exam Name</f:facet>
+                            <p:selectOneMenu value="#{school_Cnf_tbl.examName}" effect="slide" >  
+                                <f:selectItem itemLabel="Select Exam" itemValue="" />  
+                                <f:selectItems value="#{basicReportController.examList}" />
+                            </p:selectOneMenu>
+                        </p:column>
+
+                        <p:column style="width:3%">
+                            <f:facet name="header">Details</f:facet>
+                            <p:commandButton   oncomplete="dialog_DetailsReport.show()" actionListener="#{basicReportController.Sc_Cnf_ID(school_Cnf_tbl)}"  icon="ui-icon-pencil" title="Next" /> 
+
+                        </p:column>
+
+                        <p:column style="width:3%">
+                            <f:facet name="header">Summary</f:facet>
+                            <p:commandButton   oncomplete="dialog_SummaryReport.show()" actionListener="#{basicReportController.Sc_Cnf_ID(school_Cnf_tbl)}"  icon="ui-icon-pencil" title="Next" /> 
+                        </p:column>
+
+                        <p:column style="width:3%">
+                            <f:facet name="header">Pass/Fail</f:facet>
+                            <p:commandButton   oncomplete="dialog_PassFailReport.show()" actionListener="#{basicReportController.pass_fail_report_List(school_Cnf_tbl)}"  icon="ui-icon-pencil" title="Next" /> 
+                        </p:column>
+
+
+                        <p:column style="width:3%">
+                            <f:facet name="header">Grading</f:facet>
+                            <p:commandButton   oncomplete="dialog_GradingReport.show()" actionListener="#{basicReportController.grading_List(school_Cnf_tbl)}"  icon="ui-icon-pencil" title="Next" /> 
+                        </p:column>
+
+                    </p:dataTable>
+                </center>
+            </h:form>           
+
+        </p:layoutUnit>
+
+
+
+    </p:layout>
+
+    <p:dialog header="Details Info"  draggable="true" widgetVar="dialog_DetailsReport" width="100%" height="100%" position="middle top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">     
+        <ui:include src="/Report/SubjectWise/Details.xhtml" />            
+    </p:dialog>
+
+    <p:dialog header="Summary Info"  draggable="true" widgetVar="dialog_SummaryReport" width="100%" height="100%" position="middle top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">     
+        <ui:include src="/Report/SubjectWise/SubjectReport.xhtml" />            
+    </p:dialog>
+
+    <p:dialog header="Pass/Fail Info"  draggable="true" widgetVar="dialog_PassFailReport" width="100%" height="100%" position="middle top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">     
+        <ui:include src="/Report/SubjectWise/Pass_Fail.xhtml" />            
+    </p:dialog>
+
+    <p:dialog header="Grading Info"  draggable="true" widgetVar="dialog_GradingReport" width="100%" height="100%" position="middle top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">     
+        <ui:include src="/Report/SubjectWise/Grading.xhtml" />            
+    </p:dialog>
+
+</ui:composition>

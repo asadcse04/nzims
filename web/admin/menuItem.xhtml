@@ -1,0 +1,234 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:menubar>
+
+
+        <p:submenu icon="ui-icon-home" >               
+            <p:menuitem value="About" onclick="PF('info').show();"></p:menuitem>
+            <p:menuitem value="Password Change" onclick="PF('PasswordChange').show();" icon="ui-icon-bookmark"></p:menuitem>
+            <p:menuitem value="Log Out" action="#{loginController.logout()}" icon="ui-icon-eject"></p:menuitem>
+        </p:submenu> 
+
+        <p:submenu icon="ui-icon-note" label="Insert">
+            <p:submenu icon="ui-icon-person" label="Student">
+                <p:menuitem value="Registration" onclick="PF('studentRegistration').show();" icon="ui-icon-contact"></p:menuitem> 
+                <p:menuitem value="Quick Registration" onclick="PF('QuickstdRegistration').show();" icon="ui-icon-contact"></p:menuitem> 
+                <p:menuitem value="Update" url="/DesktopPencil/Registration/Student/studentUpdateMain.xhtml" icon="ui-icon-script"></p:menuitem> 
+            </p:submenu>  
+
+            <p:submenu icon="ui-icon-person" label="Teacher">
+                <p:menuitem value="Registration" onclick="PF('teacherRegistration').show();" icon="ui-icon-contact"></p:menuitem> 
+               <p:menuitem value="Update" url="/DesktopPencil/Registration/Teacher/TeacherUpdateMain.xhtml" icon="ui-icon-script"></p:menuitem> 
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-person" label="Staff">
+                <p:menuitem value="Registration" onclick="PF('stuffRegistration').show();" icon="ui-icon-bookmark"></p:menuitem> 
+                <p:menuitem value="Update" url="/DesktopPencil/Registration/Stuff/StuffUpdateMain.xhtml" icon="ui-icon-script"></p:menuitem>                     
+            </p:submenu>
+        
+        </p:submenu>
+
+
+        <p:submenu icon="ui-icon-person" label="Information">     
+            <p:submenu icon="ui-icon-person" label="Student">
+                <p:menuitem value="Find A Student" onclick="PF('findStudent').show();" icon="ui-icon-person"></p:menuitem>   
+                <p:menuitem value="At A Glance" onclick="PF('at_A_Glance').show();" icon="ui-icon-person"></p:menuitem>   
+                <p:menuitem value="Correction Sheet" onclick="PF('correctionSheet').show();" icon="ui-icon-person"></p:menuitem>    
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-person" label="Teacher">
+                <p:menuitem value="Find Teacher" onclick="PF('teacherView').show();" icon="ui-icon-person"></p:menuitem>
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-person" label="Staff">
+                <p:menuitem value="Find Staff" onclick="PF('staffView').show();"  icon="ui-icon-person"></p:menuitem>
+            </p:submenu> 
+
+        </p:submenu> 
+
+
+
+        <p:submenu icon="ui-icon-clipboard" label="Attendance">  
+
+            <p:submenu icon="ui-icon-arrowthick-1-s" label="Take Attendance">
+                <p:menuitem value="Student" url="/DesktopPencil/Attendance/TakeAttendance/AttendencePage.xhtml" icon="ui-icon-disk"></p:menuitem>                   
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-bookmark" label="Blank Sheet">
+                <p:menuitem value="Student" onclick="PF('studentAttendanceSheet').show();" icon="ui-icon-clipboard"></p:menuitem>                   
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-calculator" label="Report">
+                <p:submenu icon="ui-icon-calculator" label="Section Wise">
+                    <p:menuitem value="Details" onclick="PF('detailAtdReportDig').show();" icon="ui-icon-copy"></p:menuitem>           
+                    <p:menuitem value="Total" onclick="PF('sectionAtdReportDig').show();" icon="ui-icon-copy"></p:menuitem>           
+                </p:submenu> 
+
+                <p:submenu icon="ui-icon-calculator" label="Institute Wise">
+                    <p:menuitem value="By Date" onclick="PF('AttendenceDateWiseReportDig').show();" icon="ui-icon-copy"></p:menuitem>           
+                    <p:menuitem value="By Graph" onclick="PF('AttendenceReportDig').show();" icon="ui-icon-copy"></p:menuitem>           
+                    <p:menuitem value="Present" onclick="PF('presentReportDig').show();" icon="ui-icon-copy"></p:menuitem>           
+
+                </p:submenu> 
+            </p:submenu> 
+
+
+
+        </p:submenu> 
+
+
+        <p:submenu icon="ui-icon-person" label="Accounts">
+            <p:submenu  label="Student Accounts">
+                <p:submenu icon="ui-icon-note" label="Fee Setup">
+                    <p:menuitem value="Fee Start up" onclick="PF('feestart').show();" icon="ui-icon-script"></p:menuitem> 
+                    <p:menuitem value="Fee Create" onclick="PF('createfee').show();" icon="ui-icon-script"></p:menuitem> 
+                    <p:menuitem value="Fee Configure" onclick="PF('feeconfig').show();" icon="ui-icon-script"></p:menuitem> 
+
+                </p:submenu> 
+
+            </p:submenu> 
+
+            <p:submenu  label="Payroll">
+                <p:submenu icon="ui-icon-note" label="Payroll Setup">
+                    <p:menuitem value="Payroll Startup" onclick="PF('salarystart').show();" icon="ui-icon-script"></p:menuitem> 
+                    <p:menuitem value="Payroll Create" onclick="PF('salarycreate').show();" icon="ui-icon-script"></p:menuitem> 
+                </p:submenu>    
+            </p:submenu>
+
+            <p:submenu label="General Accounts">
+                <p:submenu icon="ui-icon-note" label="Account Setup">
+
+                </p:submenu>
+
+                <p:submenu label="Create Transection">
+
+                </p:submenu>
+
+                <p:submenu label="Report">
+                    <p:submenu icon="ui-icon-note" label="Transection">
+                    </p:submenu>
+
+                    <p:submenu icon="ui-icon-note" label="Graphical View">
+
+                    </p:submenu> 
+                </p:submenu>  
+            </p:submenu>
+        </p:submenu>
+
+
+
+        <p:submenu icon="ui-icon-lightbulb" label="Exam"> 
+            <p:submenu icon="ui-icon-lightbulb" label="Exam Marks">
+                <p:menuitem value="Submit" onclick="PF('markSubmit').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+                <p:menuitem value="SubMarkSubmit" onclick="PF('sujectMarkSubmit').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+                <p:menuitem value="Update" onclick="PF('markUpdate').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+                <p:menuitem value="SubMarkUpdate" onclick="PF('sujectMarkUpdate').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+                <p:menuitem value="MarkFormatSheet" onclick="PF('markFormat').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+
+
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-lightbulb" label="Report">
+                <p:submenu icon="ui-icon-suitcase" label="Subject Wise">
+                    
+               <p:menuitem value="Report" url="/DesktopPencil/Report/SubjectWise/subjectWiseReportDetailsViewMain.xhtml" icon="ui-icon-script"></p:menuitem> 
+
+                    <p:menuitem value="Details" onclick="PF('details').show();" icon="ui-icon-lightbulb"></p:menuitem>
+                    <p:menuitem value="Summary" onclick="PF('subjectreport').show();" icon="ui-icon-eject"></p:menuitem>
+                    <p:menuitem value="Pass/Fail" onclick="PF('pass_fail').show();" icon="ui-icon-eject"></p:menuitem> 
+                    <p:menuitem value="Grading" onclick="PF('grading').show();" icon="ui-icon-eject"></p:menuitem>   
+                </p:submenu>
+
+                <p:submenu icon="ui-icon-suitcase" label="Section Wise">
+                    <p:menuitem value="Tabulation Sheet" onclick="PF('TabulationSheet').show();" ></p:menuitem>
+                    <p:menuitem value="Pass/Fail" onclick="PF('InstituteReport').show();" ></p:menuitem>   
+                    <p:menuitem value="Gradeing" onclick="PF('GradeReport').show();" ></p:menuitem>
+                    <p:menuitem value="Merit List" onclick="PF('section_meritList').show();" icon="ui-icon-eject"></p:menuitem>
+                </p:submenu>
+
+                <p:submenu icon="ui-icon-lightbulb" label="Institute Wise">   
+                    <p:menuitem value="Gradeing" onclick="PF('GradeWiseReportDig').show();" ></p:menuitem>   
+                    <p:menuitem value="Pass/Fail" onclick="PF('PassFailReportDig').show();" ></p:menuitem>   
+                </p:submenu>
+            </p:submenu>
+
+            <p:menuitem value="Print Mark Sheet" onclick="PF('markSheetPrint').show();" icon="ui-icon-lightbulb"></p:menuitem>
+
+
+        </p:submenu> 
+
+        <p:submenu icon="ui-icon-note" label="Message">
+            <p:submenu icon="ui-icon-note" label="Add">
+                <p:menuitem value="Template" onclick="PF('messagetemplate').show();" icon="ui-icon-contact"> </p:menuitem>
+                <p:menuitem value="PhoneBook" onclick="PF('phonebook').show();" icon="ui-icon-contact"> </p:menuitem>
+                <p:menuitem value="MailBook" onclick="PF('mailbook').show();" icon="ui-icon-contact"> </p:menuitem>
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-print" label="Send SMS">
+                <p:menuitem value="To Guardian" onclick="PF('toStudentSMS').show();" icon="ui-icon-arrowreturn-1-n"></p:menuitem>                   
+                <p:menuitem value="To Teacher" onclick="PF('toTeacherSMS').show();" icon="ui-icon-arrowreturnthick-1-n"></p:menuitem>
+                <p:menuitem value="To Staff" onclick="PF('toStaffSMS').show();" icon="ui-icon-arrowreturnthick-1-n"></p:menuitem>
+                <p:menuitem value="FromPhoneBook" onclick="PF('fromPhnbookSMS').show();" icon="ui-icon-arrowreturnthick-1-n"></p:menuitem>
+                <p:menuitem value="To Student" onclick="PF('smsForStudent').show();" icon="ui-icon-arrowreturnthick-1-n" title="Sending directly any message to Student for Inform them via SMS."></p:menuitem>
+
+            </p:submenu> 
+            <p:menuitem value="Balance Status" onclick="PF('BalanceStatus').show();" icon="ui-icon-contact"> </p:menuitem>
+        </p:submenu>
+
+
+
+        <p:submenu icon="ui-icon-wrench" label="Settings">  
+            <p:submenu icon="ui-icon-gear" label="Core Settings">
+                <p:menuitem value="Institute Setup" onclick="PF('instituteSetup').show();" icon="ui-icon-tag"/>
+                <p:menuitem value="Start Up" onclick="PF('startUp').show();" icon="ui-icon-tag"/>
+                <p:menuitem value="Subject Configure" onclick="PF('subjectConfigure').show();" icon="ui-icon-pin-s"/>
+                <p:menuitem value="Book List" onclick="PF('subjectUpdate').show();" icon="ui-icon-document"/> 
+                <p:menuitem value="Class Configure" onclick="PF('classConfigure').show();" icon="ui-icon-pin-s"/> 
+                <p:menuitem value="Class Teacher Assign" onclick="PF('classTeacherAssignDig').show();" icon="ui-icon-pin-s"/> 
+
+
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-person" label="Student">
+                <p:menuitem value="Elective Subject" onclick="PF('subjectAssign').show();" icon="ui-icon-tag"></p:menuitem>   
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-lightbulb" label="Exam">
+                <p:menuitem value="Exam Startup" onclick="PF('examStartup').show();" icon="ui-icon-tag"/>  
+                <p:menuitem value="Exam Configure" onclick="PF('examConfigure').show();" icon="ui-icon-pin-s"/>  
+                <p:menuitem value="MeritList Generate" onclick="PF('meritList').show();" icon="ui-icon-pin-s"/> 
+                <p:menuitem value="Result SMS" onclick="PF('resultSms').show();" icon="ui-icon-lightbulb"></p:menuitem>
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-lightbulb" label="Designation">
+
+                <p:menuitem value="Create Designation" onclick="PF('designationcreate').show();" icon="ui-icon-tag"></p:menuitem>   
+
+                <p:submenu icon="ui-icon-lightbulb" label="Assign">
+                    <p:menuitem value="Teacher" onclick="PF('teacherDegAssign').show();" icon="ui-icon-tag"></p:menuitem>      
+                    <p:menuitem value="Staff" onclick="PF('stuffDegAssign').show();" icon="ui-icon-tag"/>  
+                </p:submenu>    
+
+            </p:submenu>
+
+
+
+            <p:submenu icon="ui-icon-person" label="Create User">                  
+                <p:menuitem value="Teacher" onclick="PF('forTeacher').show();" icon="ui-icon-person"></p:menuitem>      
+                <p:menuitem value="Stuff" onclick="PF('forStuff').show();" icon="ui-icon-eject"></p:menuitem>  
+            </p:submenu>
+
+            <p:submenu icon="ui-icon-lightbulb" label="SMS">
+                <p:menuitem value="Attendence" onclick="PF('studentAttendanceSmsTemp').show();" icon="ui-icon-disk"></p:menuitem>                   
+            </p:submenu>
+
+        </p:submenu>
+
+    </p:menubar>
+
+
+
+</ui:composition>

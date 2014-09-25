@@ -1,0 +1,154 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="institute_setup_frm" enctype="multipart/form-data" style="font-size: 85%;">
+        <center>
+            <p:panelGrid styleClass="panelGrid">
+                
+                <p:row>
+                    <p:column styleClass="header">Institute Setup</p:column>
+                </p:row>
+                
+                <p:row>
+                    <!--
+                    <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Select Institute:"/>
+                    </p:column><p:column style="width: 130px;">
+                        <p:selectOneMenu value="" effect="slide" required="true" requiredMessage="Please Select Institute Name.">  
+                            <f:selectItem itemLabel="Select Institute Name" itemValue="" />  
+                            <f:selectItems value="" />
+                        </p:selectOneMenu>
+                    </p:column>
+                    -->
+                    
+                     <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Institute Id:"/>
+                    </p:column><p:column style="width: 130px;">
+                        <p:inputText value="#{SchoolID}" styleClass="inputText" readonly="true"/>
+                    </p:column>
+                   
+                    
+                    <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Institute Name:"/>
+                    </p:column><p:column style="width: 130px;">
+                        <p:inputText value="#{SchoolName}" styleClass="inputText" readonly="true"/>
+                    </p:column>
+                    
+                    
+
+
+                    <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="ESTD: "/>
+                    </p:column><p:column>
+                        <p:inputMask value="#{instituteSetupController.instituteSetup.estb}" styleClass="inputText" mask="99/99/9999" required="true" requiredMessage="Please Enter ESTD." />
+                    </p:column>
+               
+                </p:row>
+
+                <p:row>                  
+                      <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Contact Number: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.contactNo}" styleClass="inputText" maxlength="11" required="true" requiredMessage="Please Enter the Contact Number.">
+                            <f:validateLength maximum="11" minimum="11" />
+                        </p:inputText>
+                    </p:column>
+                    
+                    
+                    <p:column styleClass="label">
+                        <h:outputText value="Email: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.email}" styleClass="inputText" type="email"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Website: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.webSite}" styleClass="inputText"/>
+                    </p:column>
+
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="EIN No: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.einNo}" styleClass="inputText"/>
+                    </p:column>
+                    
+                    <p:column styleClass="label">
+                        <h:outputText value="Code: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.code}" styleClass="inputText"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Slogan: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{instituteSetupController.instituteSetup.slogan}" styleClass="inputText"/>
+                    </p:column>
+
+                </p:row>
+
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Address "/>
+                    </p:column><p:column>
+                        <p:inputTextarea value="#{instituteSetupController.instituteSetup.address}" styleClass="inputTextarea" style="width: 165px; height: 45px;"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Note: "/>
+                    </p:column><p:column>
+                        <p:inputTextarea value="#{instituteSetupController.instituteSetup.note}" styleClass="inputTextarea" style="width: 165px; height: 45px;"/>
+                    </p:column>
+                    
+                    <p:column styleClass="label">
+                        <h:outputText value="Institute Full Name "/>
+                    </p:column><p:column>
+                        <p:inputTextarea value="#{instituteSetupController.instituteSetup.instituteFullName}" styleClass="inputTextarea" style="width: 165px; height: 45px;"/>
+                    </p:column> 
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="header">Upload Images</p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Logo: "/>
+                    </p:column><p:column>
+                        <p:fileUpload value="#{instituteSetupController.photoFileLogo}" mode="simple" style="width: 168px;" required="true" requiredMessage="Please Upload the Logo."/>
+                    </p:column>
+                </p:row>
+                
+                 <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="BackGround Image: "/>
+                    </p:column><p:column>
+                        <p:fileUpload value="#{instituteSetupController.photoFileBackGImg}" mode="simple" style="width: 168px;"/>
+                    </p:column>
+                </p:row>
+
+            </p:panelGrid>
+
+            <p:commandButton value="Save" update="grw" action="#{instituteSetupController.insertInstituteSetup}" ajax="false" icon="ui-icon-check" style="margin-top: 1%; margin-bottom: 1%;"/>
+
+        </center>
+
+    </h:form>
+
+</ui:composition>
+

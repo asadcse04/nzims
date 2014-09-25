@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="tttttt" style="font-size: 15px; ">
+        <div class="ms_continer" style="border-style: dotted; border-width:4px; border-color:brown; ">
+
+            <div class="ms_body" style="width: 920px; padding-left: 20px; padding-right: 30px; margin-top: 30px;">
+
+                <p:dataTable value="#{stResultInfoController.stResultList}" var="mark_sheet_tbl" paginator="false"
+                             style="width:920px; position: relative; top: -10px; font-size: 13px;">
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="2" headerText="Subject" />      
+                            <p:column colspan="5" headerText="Mark Distribution" />   
+                            <p:column rowspan="2" headerText="CT" />
+                            <p:column rowspan="2" headerText="Total Marks" />
+                            <p:column rowspan="2" headerText="Grade" />
+                            <p:column rowspan="2" headerText="Point" />    
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="WR" />
+                            <p:column headerText="MCQ" />
+                            <p:column headerText="PR" />
+                            <p:column headerText="Total" />
+                            <p:column headerText="Avg.-80%" />
+                        </p:row>
+                    </p:columnGroup>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.subjectName}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode2}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode3}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode4}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.totalScore}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.average}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.shortCode1}"/>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.finalScore}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText style="color: #{(mark_sheet_tbl.letterGrade=='F') ? 'red':'black'};" value="#{mark_sheet_tbl.letterGrade}"/>
+                    </p:column> 
+
+                    <p:column>
+                        <h:outputText value="#{mark_sheet_tbl.gradePoint}"/>
+                    </p:column> 
+                </p:dataTable>
+
+                <div style="width:440px; height: 270px; margin-top: 30px; margin-left: 250px">
+                    <p:dataGrid var="rs" value="#{stResultInfoController.resultSummary}">
+
+                        <p:panelGrid  style="float: left;">
+
+                            <p:row> 
+                                <p:column>
+                                    <h:outputText value="Total Marks"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="totalmark" style="font-weight: bold;" value="#{rs.totalMark}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="Grade"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="total_grade" style="font-weight: bold; color: #{(rs.finalGrade != 'F') ? 'black' : 'red'};" value="#{rs.finalGrade}"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Point"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="total_point" style="font-weight: bold;" value="#{rs.CGPA}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="Position in Class"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="class_position" style="font-weight: bold;" value="#{rs.classPosition}"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Position in Shift"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="shift_position" style="font-weight: bold;" value="#{rs.shiftPosition}"/>
+                                </p:column>                                                    
+                                <p:column>
+                                    <h:outputText value="Position in Section"/>
+                                </p:column><p:column>
+                                    <p:outputLabel id="position_section" style="font-weight: bold;" value="#{rs.sectionPosition}"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Status"/>
+                                </p:column><p:column colspan="3">
+                                    <h:outputText id="status" style="font-weight: bold; color: #{(rs.status != 'Fail') ? 'green' : 'red'};"  value="#{rs.status}"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="Remark:"/>
+                                </p:column><p:column colspan="3" style="height: 130px;">
+
+                                </p:column>
+
+                            </p:row>
+
+                        </p:panelGrid> 
+                    </p:dataGrid>
+                </div>
+            </div>
+            <div style="width: 920px;">
+                <pre style="font-size: 9px; margin-left: 6px;">Powered by: Netizen Software Solution,www.netizenbd.com</pre>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

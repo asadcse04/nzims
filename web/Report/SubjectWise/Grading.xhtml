@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center">
+
+            <h:form id="grading_list_tbl_frm">
+                <center>
+                    <p:growl autoUpdate="true" showDetail="true"/> 
+
+                    <p:dataTable value="#{basicReportController.grading__List}" var="grading" style="width:960px;">
+
+
+                        <p:column>
+
+                            <f:facet name="header">Subject ID</f:facet>  
+
+                            <h:outputText value="#{grading.subjectID}"/>
+
+                        </p:column> 
+
+                        <p:column >
+
+                            <f:facet name="header">Subject Name</f:facet>  
+
+                            <h:outputText value="#{grading.subjectName}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Total Student</f:facet>  
+
+                            <h:outputText value="#{grading.totalStudent}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">A+</f:facet>  
+
+                            <h:outputText value="#{grading.aplus}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">A</f:facet>  
+
+                            <h:outputText value="#{grading.aaa}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">A-</f:facet>  
+
+                            <h:outputText value="#{grading.aminus}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">B</f:facet>  
+
+                            <h:outputText value="#{grading.bbb}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">C</f:facet>  
+
+                            <h:outputText value="#{grading.ccc}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">D</f:facet>  
+
+                            <h:outputText value="#{grading.ddd}"/>
+
+                        </p:column>
+
+
+                        <p:column>
+
+                            <f:facet name="header">F</f:facet>  
+
+                            <h:outputText value="#{grading.fff}"/>
+
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </center>
+            </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                <p:printer target="grading_list_tbl_frm" />
+
+            </h:commandButton>
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

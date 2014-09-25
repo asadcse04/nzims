@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+   
+
+            <h:form id="cash_frm">
+                
+                <center>
+                <h:outputLabel value="From date  "/>
+                <p:calendar value="#{cashReportController.cashReport.fromdate}"/>
+                
+                <h:outputLabel value=" To date  "/>
+                <p:calendar value="#{cashReportController.cashReport.todate}"/><br /> <br />
+                
+                <p:commandButton value="Search" update="cashtbl totalIncomeval totalExpenseval" action="#{cashReportController.showCash()}"  oncomplete="CashReportDig.show()"/>
+
+                
+
+                <p:panelGrid styleClass="panelGrid" style="margin-top: 20px; text-align: right">
+                    <p:row>
+                        <p:column styleClass="header">
+                            <h:outputLabel value="Total Income"/>
+                            </p:column><p:column> 
+                                <h:outputLabel id="totalIncomeval" value="#{cashReportController.totalIncome}"/>
+                        </p:column><p:column>
+                            <h:outputLabel value="Total Expense" styleClass="header"/>
+                            </p:column><p:column> 
+                                <h:outputLabel id="totalExpenseval" value="#{cashReportController.totalExpense}"/>
+                        </p:column>    
+                    </p:row>   
+                </p:panelGrid>
+                
+                    <p:dataTable id="cashtbl" value="#{cashReportController.listCash}" var="lcash" style="width: 850px">
+ 
+                        <p:column headerText="Trn ID">
+                        #{lcash.trnID}    
+                        </p:column>
+                        
+                        <p:column headerText="Trn Name">
+                        #{lcash.trnName}    
+                        </p:column>
+                        
+                        <p:column headerText="Trn Date">
+                        #{lcash.trnDate}    
+                        </p:column>
+                        
+                        <p:column headerText="Payment Type">
+                        #{lcash.paymentType}    
+                        </p:column>
+                        
+                         <p:column headerText="Income">
+                        #{lcash.income}    
+                        </p:column>
+                        
+                         <p:column headerText="Expense">
+                        #{lcash.expense}    
+                        </p:column>
+                    
+                    </p:dataTable>  
+
+               </center>   
+                
+            </h:form>
+
+        
+
+</ui:composition>
+
+

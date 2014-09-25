@@ -1,0 +1,207 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <center>  
+        <h:form id="update_StdAttendanceSite_frm2">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <p:panelGrid columns="10" style="border: none !important;">
+
+                <h:outputLabel value="Academic Year"/>
+
+                <p:outputLabel value="#{studentAttendanceController.classConfig.acyrID}"  style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Class Name"/>
+
+                <p:outputLabel value="#{studentAttendanceController.classConfig.className}"  style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Shift"/>
+
+                <p:outputLabel value="#{studentAttendanceController.classConfig.shiftName}" style="font-weight: bold;"/>
+
+
+                <h:outputLabel value="Section" />
+
+                <p:outputLabel value="#{studentAttendanceController.classConfig.sectionName}" style="font-weight: bold;"/>
+
+                <h:outputLabel value="Month" />
+
+                <p:outputLabel value="....................." style="font-weight: bold;"/>
+
+            </p:panelGrid>
+
+            <hr/>
+
+            <p:dataTable  value="#{studentAttendanceController.studentList}" var="student_tbl"
+
+                          paginator="false" style="width:890px;">
+
+                <p:column>
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentID}"/>
+
+                </p:column> 
+
+
+                <p:column>
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentName}"/>
+
+                </p:column> 
+
+
+                <p:column>
+
+                    <f:facet name="header">Roll No</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentRoll}"/>
+
+                </p:column> 
+
+                <p:column>
+
+                    <f:facet name="header">16</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">17</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">18</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">19</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">20</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">21</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">22</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">23</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">24</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">25</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">26</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">27</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">28</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">29</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">30</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+                <p:column>
+
+                    <f:facet name="header">31</f:facet>  
+
+                    <h:outputText value="  "/>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+        <h:commandButton value="Print" style="margin-top: 10px;">
+
+            <p:printer target="update_StdAttendanceSite_frm2" />
+
+        </h:commandButton>
+
+    </center>  
+
+</ui:composition>

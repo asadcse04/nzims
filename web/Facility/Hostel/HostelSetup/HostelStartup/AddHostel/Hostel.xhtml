@@ -1,0 +1,141 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="30%">
+            <h:form id="hostel_add_form">
+                <p:growl id="grl" autoUpdate="true" sticky="false" showDetail="true"/>
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >Create Hostel</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Hostel Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{hostelController.hostel.hostelName}" styleClass="inputText" required="true" requiredMessage="Please Enter Hostel Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Hostel Type"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{hostelController.hostel.hostelType}" styleClass="inputText" required="true" requiredMessage="Please Enter Hostel Type."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Hostel Address"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{hostelController.hostel.hostelAddress}" styleClass="inputText" required="true" requiredMessage="Please Enter Hostel Address."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{hostelController.hostel.hostelNote}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Add" actionListener="#{hostelController.addHostel()}" update="grl :hostel:hostel_add_form :hostel:hostel_add_list" icon="ui-icon-check" style="margin-top: 8px;"/>
+                </center>
+            </h:form> 
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+
+
+            <h:form id="hostel_add_list">
+                <center>          
+                    <p:dataTable var="hclist" value="#{hostelController.hostelAllList}" paginator="true" paginatorPosition="bottom" rows="10">              
+
+                        <p:column headerText="Hostel ID">
+                            <h:outputLabel value="#{hclist.hostelId}"/>
+                        </p:column>
+
+                        <p:column headerText="Hostel Name">
+                            <h:outputLabel value="#{hclist.hostelName}"/>
+                        </p:column>
+
+                        <p:column headerText="Hostel Type">
+                            <h:outputLabel value="#{hclist.hostelType}"/>
+                        </p:column>
+
+                        <p:column headerText="Hostel Address">
+                            <h:outputLabel value="#{hclist.hostelAddress}"/>
+                        </p:column> 
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{hclist.hostelNote}"/>
+                        </p:column> 
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="hostel_update_dialog.show()"  update=":hostel:upHostelForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{hclist}" target="#{hostelController.hostel}"/>   
+                            </p:commandButton> 
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center>
+
+            </h:form>
+
+            <p:dialog widgetVar="hostel_update_dialog"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="upGrl"/>
+                <h:form id="upHostelForm" style="font-size: 12pt">
+
+                    <center>
+                        <p:panel header="Upadate Hostel  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Hostel Create ID"/>
+                                <p:inputText id="h_id" value="#{hostelController.hostel.hostelId}" readonly="true"/>
+
+                                <p:outputLabel value="Hostel name"/>
+                                <p:inputText id="h_name" value="#{hostelController.hostel.hostelName}" />
+
+                                <p:outputLabel value="Hostel Type"/>
+                                <p:inputText id="h_type" value="#{hostelController.hostel.hostelType}"/>                                                       
+
+                                <p:outputLabel value="Hostel Address"/>
+                                <p:inputText id="h_address" value="#{hostelController.hostel.hostelAddress}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="h_note" value="#{hostelController.hostel.hostelNote}"/>                                                       
+
+                            </p:panelGrid>  
+
+                            <p:commandButton value="Update Info" update=":hostel:hostel_add_list" actionListener="#{hostelController.updateHostel()}" style="margin-top: 8px;" oncomplete="hostel_update_dialog.hide()"/>
+
+                        </p:panel>   
+                    </center>
+                </h:form>
+
+            </p:dialog> 
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

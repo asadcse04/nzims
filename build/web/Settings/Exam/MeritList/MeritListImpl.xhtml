@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+
+            <h:form>
+                <center>
+                    <p:panelGrid columns="2">
+
+                        <h:outputText value="Academic Year" />  
+
+                        <p:selectOneMenu value="#{examResultController.examResultOpt.acyr}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examResultController.acyrList}" />
+
+                            <p:ajax event="change" update="scClassID" listener="#{examResultController.scClassList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class"/>  
+
+                        <p:selectOneMenu id="scClassID" value="#{examResultController.examResultOpt.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue=""/>  
+
+                            <f:selectItems value="#{examResultController.classList}"/>
+
+                            <p:ajax event="change" update="exmID"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Exam Name" />  
+
+                        <p:selectOneMenu id="exmID" value="#{examResultController.examResultOpt.examName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{examResultController.examList}" />
+
+                            <p:ajax event="change" update="Ex_btn" listener="#{examResultController.Ex_Cnf_ID}"/>
+
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton id="Ex_btn" update=":merit_frm:merit" value="Generate" action="#{examResultController.finalResultProcessor}" style="margin-top: 8px;" icon="ui-icon-check"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="merit_frm">
+
+                <p:growl autoUpdate="true" showDetail="true"/>  
+
+                <center>
+
+                    <p:dataTable id="merit" value="#{examResultController.studentMerit_List}" var="merit_list_tbl"  style="margin-top:8px;">
+
+
+
+                        <p:column sortBy="#{merit_list_tbl.studentID}">
+
+                            <f:facet name="header">ID</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.studentID}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{merit_list_tbl.studentName}">
+
+                            <f:facet name="header">Name</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.studentName}"/>
+
+                        </p:column>
+
+                        <p:column sortBy="#{merit_list_tbl.totalMark}">
+
+                            <f:facet name="header">Total Mark</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.totalMark}"/>
+
+                        </p:column>
+
+                        <p:column sortBy="#{merit_list_tbl.totalGpa}">
+
+                            <f:facet name="header">Total Gpa</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.totalGpa}"/>
+
+                        </p:column>
+
+                        <p:column sortBy="#{merit_list_tbl.CGPA}">
+
+                            <f:facet name="header">CGPA</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.CGPA}"/>
+
+                        </p:column>
+
+                        <p:column sortBy="#{merit_list_tbl.finalGrade}">
+
+                            <f:facet name="header">Final Grade</f:facet>  
+
+                            <h:outputText value="#{merit_list_tbl.finalGrade}"/>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <h:commandButton value="Print" type="button" style="margin-top: 7px;">
+
+                        <p:printer target="merit" />
+
+                    </h:commandButton>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

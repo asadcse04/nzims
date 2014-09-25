@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:600px;">
+
+        <p:layoutUnit position="west" size="30%" style="border: none">
+
+            <!--...........................Email book Add..............................-->
+
+            <h:form id="attendenceSmsForm">
+
+                <p:growl id="grl"/>
+                
+                <center>
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="header" style="text-align: center">
+                            Create Template  
+                        </p:column>    
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Message Detail"/>
+                        </p:column><p:column>
+                            <p:inputTextarea counter="display" counterTemplate="{0} characters remaining." value="#{attendenceSmsTemplateController.attendenceSmsTemplate.message}" styleClass="inputTextarea" style="width: 200px" maxlength="100" required="true" requiredMessage="Please Enter Message Template"/>
+                        </p:column>    
+                    </p:row> 
+                    
+                      <p:row>
+                         <p:column colspan="2">
+                         <h:outputText id="display" />    
+                         </p:column>   
+                     </p:row>
+
+                </p:panelGrid>
+                
+                    <p:commandButton value="Add" actionListener="#{attendenceSmsTemplateController.saveSms()}" update="grl :Attdncsmstbl_fm" style="margin-top: 8px" icon="ui-icon-check"/>
+
+                    <p:commandButton type="reset" value="Reset" style="margin-top: 8px" icon="ui-icon-refresh" />
+
+                 </center>
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <!--...........................Email book Show..............................-->
+
+
+            <h:form id="Attdncsmstbl_fm">
+                <center>          
+                    
+                    <p:dataTable var="listAttendence" value="#{attendenceSmsTemplateController.templeteList}" style="width: 600px;">              
+
+                        <p:column headerText="Message ID">
+
+                            <h:outputLabel value="#{listAttendence.id}"/>
+
+                        </p:column> 
+
+                        <p:column headerText="Message Detail">
+
+                            <h:outputLabel value="#{listAttendence.message}"/>
+
+                        </p:column>
+
+
+                        <p:column headerText="Edit">
+
+                            <p:commandButton   oncomplete="attendenceUpdateDig.show()"  update=":updateSmsAtetendenceForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{listAttendence}" target="#{attendenceSmsTemplateController.attendenceSmsTemplate}"/>   
+                            </p:commandButton>   
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center>
+
+            </h:form>
+
+            <!--...........................Email book Update..............................-->
+
+
+            <p:dialog widgetVar="attendenceUpdateDig"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="grl"/>
+
+                <h:form id="updateSmsAtetendenceForm" style="font-size: 12pt">
+
+                 <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="header" style="text-align: center">
+                            Update Template  
+                        </p:column>    
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="Message Detail"/>
+                        </p:column><p:column>
+                            <p:inputTextarea counter="display2" counterTemplate="{0} characters remaining." value="#{attendenceSmsTemplateController.attendenceSmsTemplate.message}" styleClass="inputTextarea" style="width: 200px" maxlength="100"/>
+                        </p:column>    
+                    </p:row>
+                     
+                     <p:row>
+                         <p:column colspan="2">
+                         <h:outputText id="display2" />    
+                         </p:column>   
+                     </p:row>
+
+                </p:panelGrid>
+                
+                    <p:commandButton value="update" actionListener="#{attendenceSmsTemplateController.updateSms()}" update=":Attdncsmstbl_fm" oncomplete="attendenceUpdateDig.hide()" />
+ 
+                </h:form>
+
+            </p:dialog> 
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>
+

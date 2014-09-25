@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="20%">
+
+            <h:form>
+
+                <p:panelGrid columns="2">
+
+                    <h:outputText value="Academic Year" />  
+
+                    <p:selectOneMenu value="#{markSheetPrintController.examResultObj.acyr}" effect="slide" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                        <f:selectItems value="#{markSheetPrintController.acyrList}" />
+
+                        <p:ajax event="change" update="scClassID1" listener="#{markSheetPrintController.acyr_ClassList}"/>
+
+                    </p:selectOneMenu>
+
+
+                    <h:outputText value="Class"/>  
+
+                    <p:selectOneMenu id="scClassID1" value="#{markSheetPrintController.examResultObj.className}" effect="slide" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue=""/>  
+
+                        <f:selectItems value="#{markSheetPrintController.classList}"/>
+
+                        <p:ajax event="change" update="exmID1"/>
+
+                    </p:selectOneMenu>
+
+
+                    <h:outputText value="Exam Name" />  
+
+                    <p:selectOneMenu id="exmID1" value="#{markSheetPrintController.examResultObj.examName}" effect="slide" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                        <f:selectItems value="#{markSheetPrintController.examList}" />
+
+                        <p:ajax event="change" update="Ex_btn1" listener="#{markSheetPrintController.get_ExCnf_ID}"/>
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <center>
+
+                    <p:commandButton id="Ex_btn1" update=":print_mark_sheet_frm" value="Search" actionListener="#{markSheetPrintController.student_Mark_Sheet_Info_List}" style="margin-top: 8px;" icon="ui-icon-check"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="print_mark_sheet_frm">
+
+                <center>
+
+                    <p:dataTable id="mark_sheet_std" value="#{markSheetPrintController.mark_sheet_std_info_List}" var="student_tbl" 
+
+                                 paginator="true" rows="18" paginatorPosition="top" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Students Founded {totalRecords})" style="width:1000px;">
+
+                        <p:column sortBy="#{student_tbl.studentID}" filterBy="#{student_tbl.studentID}">
+
+                            <f:facet name="header">Student ID</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentID}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{student_tbl.studentName}" filterBy="#{student_tbl.studentName}">
+
+                            <f:facet name="header">Student Name</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentName}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{student_tbl.studentRoll}" filterBy="#{student_tbl.studentRoll}">
+
+                            <f:facet name="header">Student Roll</f:facet>  
+
+                            <h:outputText value="#{student_tbl.studentRoll}"/>
+
+                        </p:column>                 
+
+                        <p:column sortBy="#{student_tbl.deptName}" filterBy="#{student_tbl.deptName}">
+
+                            <f:facet name="header">Department</f:facet>  
+
+                            <h:outputText value="#{student_tbl.deptName}"/>
+
+                        </p:column>  
+
+                        <p:column sortBy="#{student_tbl.shiftName}" filterBy="#{student_tbl.shiftName}">
+
+                            <f:facet name="header">Shift</f:facet>  
+
+                            <h:outputText value="#{student_tbl.shiftName}"/>
+
+                        </p:column>  
+
+                        <p:column sortBy="#{student_tbl.sectionName}" filterBy="#{student_tbl.sectionName}">
+
+                            <f:facet name="header">Section</f:facet>  
+
+                            <h:outputText value="#{student_tbl.sectionName}"/>
+
+                        </p:column>  
+
+                        <p:column style="width:3%">  
+
+                            <p:commandButton update=":mark_sheet_frm " oncomplete="dialog_mark_sheet.show()" action="#{markSheetPrintController.total_grade(student_tbl.studentID)}"  icon="ui-icon-pencil" title="Mark Sheet">
+                                <f:setPropertyActionListener value="#{student_tbl}" target="#{markSheetPrintController.markSheetPrint}"/>  
+                            </p:commandButton>
+
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </center>
+
+            </h:form>  
+
+            <p:dialog header="Mark Sheet Print" widgetVar="dialog_mark_sheet" width="100%;" height="590" resizable="true" minimizable="true" maximizable="true" showEffect="drop" hideEffect="drop">
+                <ui:include src="MarkSheet.xhtml"/> 
+            </p:dialog>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

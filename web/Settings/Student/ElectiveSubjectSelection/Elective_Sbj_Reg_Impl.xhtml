@@ -1,0 +1,178 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout style="min-width:1250px;min-height:600px;">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="electiveSbj_reg_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2" style=" margin-bottom: 1%;width: 300px;">
+
+                        <h:outputText value="Academic Year" />  
+
+                        <p:selectOneMenu value="#{electiveSubjectController.elective_subject.acyr}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.acyrList}" />
+
+                            <p:ajax event="change" update="std001_classID" listener="#{electiveSubjectController.scClass_List}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class" />  
+
+                        <p:selectOneMenu id="std001_classID" value="#{electiveSubjectController.elective_subject.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.classList}"/>
+
+                            <p:ajax event="change" update="std001_deptID" listener="#{electiveSubjectController.deptList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Department" />  
+
+                        <p:selectOneMenu id="std001_deptID" value="#{electiveSubjectController.elective_subject.deptName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.deptList}"/>  
+
+                            <p:ajax update="cmpl001_1_Sbj,cmpl001_2_Sbj,electv001_1_Sbj,electv001_2_Sbj,shift001" listener="#{electiveSubjectController.elective_Subject}" />
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Shift" />  
+
+                        <p:selectOneMenu id="shift001" value="#{electiveSubjectController.elective_subject.shiftName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue=""/>  
+
+                            <f:selectItems value="#{electiveSubjectController.shiftList}"/> 
+
+                            <p:ajax update="sctn001" listener="#{electiveSubjectController.section_List}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Section" />  
+
+                        <p:selectOneMenu id="sctn001" value="#{electiveSubjectController.elective_subject.sectionName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.sectionList}" />  
+
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Compulsory subject(1)" />  
+
+                        <p:selectOneMenu id="cmpl001_1_Sbj" value="#{electiveSubjectController.elective_subject.cmpl_1_sbjName}"  effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.elective_SbjList}" />
+
+                        </p:selectOneMenu>
+
+                        <h:outputText value="Compulsory subject(2)" />  
+
+                        <p:selectOneMenu id="cmpl001_2_Sbj" value="#{electiveSubjectController.elective_subject.cmpl_2_sbjName}" disabled="#{(electiveSubjectController.elective_subject.className eq 'Nine') or (electiveSubjectController.elective_subject.className eq 'Ten')}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.elective_SbjList}" />
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Elective subject(1)" />  
+
+                        <p:selectOneMenu id="electv001_1_Sbj" value="#{electiveSubjectController.elective_subject.optn_1_sbjName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.elective_SbjList}" />
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Elective subject(2)" />  
+
+                        <p:selectOneMenu id="electv001_2_Sbj" value="#{electiveSubjectController.elective_subject.optn_2_sbjName}" disabled="#{(electiveSubjectController.elective_subject.className eq 'Nine') or (electiveSubjectController.elective_subject.className eq 'Ten')}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{electiveSubjectController.elective_SbjList}" />
+
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Search" update="electiveSbj_reg_frm,:std001_tbl_frm" actionListener="#{electiveSubjectController.studentList_4_Sbj_Selctn}" icon="ui-icon-search"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <h:form id="std001_tbl_frm">
+
+                <p:growl autoUpdate="true" showDetail="true"/> 
+
+                <p:dataTable id="std001_tbl" value="#{electiveSubjectController.student_data_model}" var="stdnt001_List" selection="#{electiveSubjectController.selectedStudentList}" filteredValue="#{electiveSubjectController.student_Filter_List}">
+
+                    <p:column selectionMode="multiple" style="width:2%" /> 
+
+                    <p:column sortBy="#{stdnt001_List.studentID}" filterBy="#{stdnt001_List.studentID}">
+
+                        <f:facet name="header">Student ID</f:facet>  
+
+                        <h:outputText value="#{stdnt001_List.studentID}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{stdnt001_List.studentRoll}" filterBy="#{stdnt001_List.studentRoll}">
+
+                        <f:facet name="header">Student Roll</f:facet>  
+
+                        <h:outputText value="#{stdnt001_List.studentRoll}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{stdnt001_List.studentName}" filterBy="#{stdnt001_List.studentName}">
+
+                        <f:facet name="header">Student Name</f:facet>  
+
+                        <h:outputText value="#{stdnt001_List.studentName}"/>
+
+                    </p:column> 
+
+                </p:dataTable>
+
+                <center>
+                    <p:commandButton value="Save" action="#{electiveSubjectController.save4thSubject_Selection}" ajax="false" style="margin-top: 8px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

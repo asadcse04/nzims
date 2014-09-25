@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <h:form id="driver_frm">
+        <center>
+            <p:dataTable value="#{driver_Controller.driverData}" var="dirver" paginator="true" rows="10" paginatorPosition="bottom" style="width:950px;">  
+
+                <p:column  sortBy="#{dirver.driverID}" headerText="Driver ID">
+                    <h:outputText value="#{dirver.driverID}"/>
+                </p:column>
+
+                <p:column  sortBy="#{dirver.driverName}" headerText="Driver Name">
+                    <h:outputText value="#{dirver.driverName}"/>
+                </p:column> 
+
+                <p:column sortBy="#{dirver.contactNo}" headerText="Contact No">
+                    <h:outputText value="#{dirver.contactNo}"/>
+                </p:column> 
+                
+                <p:column headerText="Image">
+                    <h:graphicImage  value="/images/DriverImages/#{driver_Controller.driver.image}"   style="height: 50px; width: 50px ;" />
+                </p:column> 
+
+                <p:column style="width:3%">  
+                    <p:commandButton   oncomplete="dialog_update_driver.show()" icon="ui-icon-pencil" title="Update" update=":trans:driver_update_frm">  
+                        <f:setPropertyActionListener  value="#{dirver}" target="#{driver_Controller.driver}"/>  
+                    </p:commandButton>  
+                </p:column>
+
+            </p:dataTable> 
+        </center>
+    </h:form>
+
+    <p:dialog header="Update Driver" widgetVar="dialog_update_driver" width="890" height="550" showEffect="drop" hideEffect="drop" >
+
+        <h:form id="driver_update_frm" enctype="multipart/form-data">
+            <p:growl showDetail="true" autoUpdate="false" sticky="false" id="grl" />
+            <center>
+                <p:panel style="width: 800px;">
+                    <center>      
+                        <p:panelGrid columns="4" style="margin-top: 2%; margin-bottom: 2%;">
+
+                            <h:outputLabel value="Driver Name" />  
+                            <p:inputText value="#{driver_Controller.driver.driverName}" requiredMessage="Name field can not be empty"/>
+
+                            <h:outputLabel value="Father's Name" />  
+                            <p:inputText value="#{driver_Controller.driver.fatherName}" requiredMessage="Father's Name field can not be empty"/>
+
+                            <h:outputLabel value="Mother's Name" />  
+                            <p:inputText value="#{driver_Controller.driver.motherName}" requiredMessage="Mother's Name field can not be empty"/>
+
+                            <h:outputLabel value="Educational Qualification" />  
+                            <p:inputText value="#{driver_Controller.driver.qualification}" requiredMessage="Educational Qualification field can not be empty"/>
+
+                            <h:outputLabel value="Marital Status" />  
+                            <p:selectOneRadio value="#{driver_Controller.driver.maritalStatus}" >  
+                                <f:selectItem itemLabel="Single" itemValue="Single" />  
+                                <f:selectItem itemLabel="Married" itemValue="Married"/> 
+                            </p:selectOneRadio>
+
+                            <h:outputLabel value="Religion" />  
+                            <p:inputText value="#{driver_Controller.driver.religion}"/>
+
+                            <h:outputLabel value="Contact No" />  
+                            <p:inputText value="#{driver_Controller.driver.contactNo}"/>
+
+                            <h:outputLabel value="National ID" />  
+                            <p:inputText value="#{driver_Controller.driver.nationalID}"/>
+
+                            <h:outputLabel value="Present Address" />  
+                            <p:inputTextarea value="#{driver_Controller.driver.presentAddress}" requiredMessage="Present Address field canot be empty"/>
+
+                            <h:outputLabel value="Permanent Address" />  
+                            <p:inputTextarea value="#{driver_Controller.driver.permanentAddress}" requiredMessage="Permanent Address field canot be empty"/>
+
+                            <h:outputLabel value="Photo" />
+                            <p:fileUpload value="#{driver_Controller.photoFile}" mode="simple"/>
+
+                        </p:panelGrid>
+                    </center>
+                    <p:commandButton update="grl :trans:driver_frm :trans:driver_update_frm" value="Update" actionListener="#{driver_Controller.updateDriver()}"  oncomplete="dialog_update_driver.hide()" icon="ui-icon-check" style="margin-top: 10px;"/>
+                </p:panel>
+            </center>
+        </h:form>
+    </p:dialog>
+
+    <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px"></p:ajaxStatus>  
+
+
+</ui:composition>

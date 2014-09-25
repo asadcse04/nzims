@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+   
+            <h:form id="tabfornotice">
+              
+                
+                <p:dataTable id="noticeTable"  value="#{noticePublishController.noticePublishList}" var="notice">
+             
+                    <p:column headerText="Notice ID" sortBy="#{notice.acdNoticeId}">                        
+                        <p:outputLabel value="#{notice.acdNoticeId}"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Notice From">
+                        <p:outputLabel value="#{notice.noticeFrom}"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Notice For">
+                        <p:outputLabel value="#{notice.noticeFor}"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Notice Rating">
+                        <p:rating value="#{notice.rating}" readonly="true"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Notice Detail">
+                        <p:outputLabel value="#{notice.noticeDetails}"/>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Details">
+                        
+                        <p:commandButton  oncomplete="notice_view_diag.show()"  update=":view_notice_Form" icon="ui-icon-search" title="Show">
+                            <f:setPropertyActionListener value="#{notice}" target="#{noticePublishController.noticePublish}"/>   
+                        </p:commandButton>   
+                      
+                    </p:column>
+                    
+                
+                </p:dataTable>   
+
+            </h:form>
+    
+    
+    
+    
+            <p:dialog widgetVar="notice_view_diag" header="Notice Detail" style="text-align: center"  hideEffect="drop" showEffect="slide">
+                    
+                  <p:growl id="view_notice_grl"/>
+                
+                  <h:form id="view_notice_Form" style="font-size: 12pt">
+                    
+                   <center>
+   
+                <p:panelGrid styleClass="panelGrid">
+                        
+                       
+                        <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Notice From"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{noticePublishController.noticePublish.noticeFrom}" styleClass="inputText"/> 
+                            </p:column>    
+                            
+                        </p:row>
+                    
+                      <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Notice For"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{noticePublishController.noticePublish.noticeFor}" styleClass="inputText"/> 
+                            </p:column>    
+                            
+                        </p:row>
+                        
+                    
+                     <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Notice Head"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{noticePublishController.noticePublish.noticeHead}" styleClass="inputText"/> 
+                            </p:column>    
+                            
+                        </p:row>
+                    
+                    
+                     <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Description"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{noticePublishController.noticePublish.noticeDetails}" styleClass="inputTextarea"/> 
+                            </p:column>    
+                            
+                     </p:row>
+                    
+                    
+                     <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Rating"/>
+                            </p:column><p:column>
+                                <p:rating value="#{noticePublishController.noticePublish.rating}" readonly="true"/> 
+                            </p:column>    
+                            
+                        </p:row>
+                
+                    </p:panelGrid>
+        
+
+                   </center>
+                          
+              
+                    
+                </h:form>
+                
+            </p:dialog> 
+
+
+
+</ui:composition>

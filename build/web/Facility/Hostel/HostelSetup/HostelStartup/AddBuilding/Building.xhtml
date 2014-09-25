@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="30%">
+            <h:form id="building_add_form">
+                <p:growl id="grl" autoUpdate="true" sticky="false" showDetail="true"/>
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center"> Add Building </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Hostel Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{buildingController.building.hostelName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a hostel name.">
+                                    <f:selectItem itemLabel="Select hostel" itemValue=""/>
+                                    <f:selectItems value="#{buildingController.hostelNameList}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Building Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{buildingController.building.buildingName}" styleClass="inputText" required="true" requiredMessage="Please Enter Building Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Building Address"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{buildingController.building.buildingAddress}" styleClass="inputText" required="true" requiredMessage="Please Enter Building Address."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{buildingController.building.buildingNote}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Add" actionListener="#{buildingController.addBuilding()}" update="grl :hostel:building_add_form :hostel:building_table" icon="ui-icon-check" style="margin-top: 8px;"/>
+                </center>
+            </h:form> 
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form id="building_table">
+                <center>          
+                    <p:dataTable var="balllist" value="#{buildingController.buildingAllList}" paginator="true" paginatorPosition="bottom" rows="10">              
+
+                        <p:column headerText="Hostel Name">
+                            <h:outputLabel value="#{balllist.hostelName}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Building ID">
+                            <h:outputLabel value="#{balllist.buildingId}"/>
+                        </p:column>
+
+                        <p:column headerText="Building Name">
+                            <h:outputLabel value="#{balllist.buildingName}"/>
+                        </p:column>
+
+                        <p:column headerText="Address">
+                            <h:outputLabel value="#{balllist.buildingAddress}"/>
+                        </p:column> 
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{balllist.buildingNote}"/>
+                        </p:column> 
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="building_update_dialog.show()"  update=":hostel:upBuildingForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{balllist}" target="#{buildingController.building}"/>   
+                            </p:commandButton> 
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+
+            <p:dialog widgetVar="building_update_dialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl2"/>
+                <h:form id="upBuildingForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate Building  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Hostel Name" />
+                                <p:selectOneMenu  id="sdf" value="#{buildingController.building.hostelName}" style="width:200px;" effect="slide">
+                                    <f:selectItems value="#{seatController.hostelNameList}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Building ID"/>
+                                <p:inputText id="b_id" value="#{buildingController.building.buildingId}" readonly="true"/>
+
+                                <p:outputLabel value="Building name"/>
+                                <p:inputText id="b_name" value="#{buildingController.building.buildingName}" />
+
+                                <p:outputLabel value=" Address"/>
+                                <p:inputText id="b_address" value="#{buildingController.building.buildingAddress}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="b_note" value="#{buildingController.building.buildingNote}"/> 
+
+                            </p:panelGrid>
+                            <p:commandButton value="Update Info"  update=":hostel:building_table" actionListener="#{buildingController.updateBuilding()}" oncomplete="building_update_dialog.hide()"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog> 
+
+        </p:layoutUnit>
+    </p:layout>
+</ui:composition>

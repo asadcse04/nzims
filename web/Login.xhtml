@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Login From</title>
+        <style type="text/css">
+
+            .ui-widget, .ui-widget, .ui-widget{
+
+
+                font-size: 90% !important;
+
+            }
+
+            root 
+            { 
+                display: block;
+            }
+
+            h1,h2,h3,h4,h5,h6{
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .ui-widget, .ui-widget, .ui-widget{
+                /*overflow: hidden;*/
+                font-size: 87% !important;
+
+            }
+
+
+            .ui-dialog-tooltip{
+                color: white;  
+            }
+            ui-widget-overlay{
+                background: none !important;
+            }
+
+            .login_body{
+                background: url("../Images/.jpg") no-repeat;
+                font-size: 15px;
+
+            }
+            #container{
+                width: 50%;
+                height: 280px;
+                margin: 30px auto;
+                box-shadow: 2px 2px 10px #888;
+                padding-top: .1px;
+                padding-bottom: 110px;
+                border-radius: 15px 15px 15px 15px;
+               
+            }
+ 
+            .fieldset{
+                margin: 100px auto;
+                width: 50%;
+                margin-top: 40px;
+                margin-bottom: 60px;
+                color:#5d5d5d;
+                text-align: center;
+           
+            }
+            
+            .ui-button-text-icon-left .ui-button-text{
+                width: 40px !important;
+                height: 15px !important;
+                background: deepskyblue;
+                color: white;
+                font-weight: normal;
+            }
+
+            .error_msg{
+                width: 32%;
+                height: 60px;
+                /* border: 1px solid wheat;*/
+                margin:30px auto;
+                font-size: 14px;
+            }
+            #mainFooter
+            {
+                margin-top: 80px;
+                height: 105px;
+            }
+            .TopFooter
+            {
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                color: green;
+                line-height: 40px;
+            }
+
+            .copyRightText
+            {
+                text-align: center;
+                margin-top: 10px;
+                color: #5d5d5d;
+            }
+
+
+        </style>
+        
+    </h:head>
+
+    <h:body styleClass="login_body">
+
+        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="loading...." 
+                  draggable="false" closable="true">
+
+            <p:graphicImage value="/images/Login/load.GIF" />
+
+        </p:dialog>
+
+        <div class="error_msg">
+
+            <p:messages id="messages"/>
+
+        </div>
+
+        <div id="container">
+
+            <div id="content">
+
+                <h:form id="loginFrom">
+
+                    <div Class="fieldset">
+                        
+                        <p:graphicImage value="/images/Login/Pencil.png"  width="340" height="90" />
+
+                        <h:panelGrid id="loginPanalGrid" style="margin-top: 17px; text-align:left;" cellspacing="8" columns="3">
+
+                            <h:panelGroup>
+
+                                <h:outputText value="User Name :"/>
+
+                                <h:outputText style="color:red" value="  "/>
+
+                            </h:panelGroup>
+
+                            <p:inputText id="userName" value="#{loginController.username}" required="true" label="User Name" title="Enter your User Name" validatorMessage="Please Enter format 'userId-instituteId'">
+                                <f:validateRegex pattern="^.{2,20}-.{1,20}$"/>
+                            </p:inputText>
+
+                            <p:tooltip for="userName" showEffect="slide" hideEffect="slide"/>
+
+                            <h:panelGroup>
+
+                                <h:outputText value="Password:"/>
+
+                                <h:outputText style="color:red" value="  "/>
+
+                            </h:panelGroup>
+
+                            <p:password id="password" value="#{loginController.password}" required="true" label="Password" title="Enter your password"/>
+
+                            <p:tooltip for="password" showEffect="slide" hideEffect="slide"/>
+
+                            <h:panelGroup> 
+
+                                <h:outputLabel value="User Type:" />  
+
+                            </h:panelGroup>
+
+                            <p:selectOneMenu value="#{loginController.roleName}" required="true"  requiredMessage="User Type can not be empty." style="width: 130px;">  
+
+                                <f:selectItem itemLabel="Select One" itemValue="" />  
+
+                                <f:selectItem itemLabel="Admin" itemValue="admin"/> 
+
+                                <f:selectItem itemLabel="Teacher" itemValue="teacher"/>
+                  
+
+                            </p:selectOneMenu> <br/>
+   
+                            <p:commandButton id="submitButton" action="#{loginController.login()}" update="loginPanalGrid" value="Login" icon="ui-icon-check" ajax="false"/>
+
+                            <p:commandLink id="link" value="Forgot password?" action="/Dummy/PasswordMessage.xhtml"/>
+
+                        </h:panelGrid>
+
+                    </div>
+
+                </h:form>
+
+            </div>
+
+            <div id="mainFooter">
+
+                <div class="TopFooter">
+
+                    <h2 style="margin: 0px; text-shadow: 2px 2px appworkspace; line-height: 50px;"></h2>
+
+                </div>
+
+            </div>
+        </div>
+
+    </h:body>
+</html>
+

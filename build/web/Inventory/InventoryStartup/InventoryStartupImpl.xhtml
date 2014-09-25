@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:tabView id="inventory_startup_tbl" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+        <p:tab title="Inventory Type"> 
+            <ui:include src="InventoryType/InventoryTypeImpl.xhtml"/>
+        </p:tab>  
+
+        <p:tab title="Inventory Category">  
+            <ui:include src="InventoryCategory/InventoryCategoryImpl.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Inventory Group">  
+            <ui:include src="InventoryGroup/InventoryGroupImpl.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Inventory Sub-Group">  
+            <ui:include src="InventorySubGroup/InventorySubGroupImpl.xhtml"/>
+        </p:tab>
+
+        <p:tab title="Inventory Item">  
+            <ui:include src="InventoryItem/InventoryItemImpl.xhtml"/>
+        </p:tab>
+
+    </p:tabView>
+
+</ui:composition>

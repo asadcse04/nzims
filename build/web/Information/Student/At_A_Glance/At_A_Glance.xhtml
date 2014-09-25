@@ -1,0 +1,151 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight" style="width: 1000px;">
+
+        <p:layoutUnit position="center" size="60%"> 
+
+            <h:form >
+                <p:growl id="grl" autoUpdate="true" sticky="false"/> 
+                <p:inputText id="search" value="#{attendanceInfoController.ID}" >
+                </p:inputText>
+                <p:commandButton value="Find..." update=":st_attendanceform1 " actionListener ="#{attendanceInfoController.showDetails()}" style="margin-left: 8px;"/>
+            </h:form> <br/>
+
+
+            <h:form id="st_attendanceform1" >
+                <p:dataTable var="ListCount" value="#{attendanceInfoController.studentBasicInfoList}" >
+                    <p:column style=" width: 500px;">
+                        <p:panelGrid >
+
+                            <p:row>
+                                <p:column colspan="2"><h:outputText value="Student Summary"  style="font-weight: bold; alignment-adjust:central; "/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Student ID" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.studentID}" styleClass="inputText" style="color: red;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Student Name" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.studentName}" styleClass="inputText" style="color: blue;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Gender" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.gender}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Father's Name" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.fatherName}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Guardian Mobile" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.contactNo}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Class" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.className}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Department" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.deptName}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Shift" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.shiftName}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Section" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.sectionName}" styleClass="inputText"  /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Roll No" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.studentRoll}" styleClass="inputText"  /></p:column>
+                            </p:row>
+
+                        </p:panelGrid>
+                    </p:column>
+                    <p:column styleClass="Header" style="text-align: center; width: 250px;"><p:graphicImage value="/images/studentImages/#{ListCount.imgPath}" styleClass="inputText" width="220px" height="220px"  /></p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+
+        <p:layoutUnit position="south" size="30%" >
+
+            <h:form id="StAttendanceInfo_form" style="width: 300px">
+                <p:growl id="grl" autoUpdate="true" sticky="false" showDetail="true"/>
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >Attendance Info</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <p:outputLabel value="From date  "/>
+                                <p:calendar value="#{attendanceInfoController.attendanceInfo.fromDate}" pattern="yyyy-MM-dd"/>
+                            </p:column>
+                            <p:column styleClass="label" >
+                                <p:outputLabel value="To date  "/>
+                                <p:calendar value="#{attendanceInfoController.attendanceInfo.toDate}" pattern="yyyy-MM-dd"/>
+                            </p:column>
+                        </p:row>
+                        <p:row >
+                            <p:column colspan="2" style="text-align: center" >
+                                <p:commandButton id="ii" value="GO" actionListener="#{attendanceInfoController.showReport()}" onclick="PF('attendanceInfo').show();" update="grl :count_atten :atten_form :StAttendanceInfo_form" icon="ui-icon-check" style="margin-top: 5px; margin-bottom: 5px;"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+                </center>
+            </h:form>
+
+
+            <h:form id="ResultInfo" style="width: 300px; margin-left: 500px; margin-top: -130px; position: relative" >
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="Header" style="text-align: center" >Result Info</p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="Academic Year" /> 
+                            <p:selectOneMenu id="sq1" value="#{stResultInfoController.acYr}" effect="slide" >  
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                                <f:selectItems value="#{stResultInfoController.acyrList}" />
+                            </p:selectOneMenu>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputText value="Exam Name" /> 
+                            <p:selectOneMenu id="sq2" value="#{stResultInfoController.examName}" effect="slide" >  
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                                <f:selectItems value="#{stResultInfoController.examList}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column colspan="2" style="text-align: center">
+                            <p:commandButton id="Ex_btn1" update="ResultInfo :tttttt" value="GO" actionListener="#{stResultInfoController.stResult()}" onclick="PF('stResultInfo').show();" style="margin-top: 5px; margin-bottom: 5px;" icon="ui-icon-check"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

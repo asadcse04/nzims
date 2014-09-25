@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="createDesignationcategory">
+
+                <p:growl id="designation_grl" autoUpdate="true" sticky="false" />
+                
+                <center>
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="header" style="text-align: center">
+                            Create Designation Category    
+                        </p:column>    
+                    </p:row>
+
+                    <p:row>
+                        <p:column  styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Category Name"/>
+                        </p:column><p:column>
+                            <p:inputText id="cfcname" value="#{designationCategoryController.designationCategory.categoryName}" required="true" requiredMessage="Please Provide a Category Name."/>
+                        </p:column>
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column  styleClass="label">
+                            <h:outputLabel value="Note"/>
+                        </p:column><p:column>
+                            <p:inputText id="cfcnote" value="#{designationCategoryController.designationCategory.note}"/>                   
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Add" actionListener="#{designationCategoryController.createDesignationCategory()}" update="designation_grl :designation_strt_tb:createDesignationcategory :designation_strt_tb:designation_categ_list" style="margin-top: 8px" icon="ui-icon-check"/>
+
+                <p:commandButton type="Reset" value="Reset" style="margin-top: 8px" icon="ui-icon-refresh" />
+
+                </center>
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="designation_categ_list">
+
+                    <p:dataTable var="sclist" value="#{designationCategoryController.designationCategoryList}" id="salarycateglist" style="width: 400px;">              
+
+                        <p:column headerText="Category ID">
+
+                            <h:outputLabel value="#{sclist.categoryID}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Category Name">
+
+                            <h:outputLabel value="#{sclist.categoryName}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{sclist.note}"/>
+
+                        </p:column>                   
+
+                    </p:dataTable>
+
+                </h:form>  
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

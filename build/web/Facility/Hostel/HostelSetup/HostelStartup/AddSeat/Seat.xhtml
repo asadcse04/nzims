@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+            <h:form id="seat_add_form">
+                <p:growl id="grl" autoUpdate="true" sticky="false" showDetail="true"/>
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center"> Create Seat </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Hostel Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{seatController.seat.hostelName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a hostel name.">
+                                    <f:selectItem itemLabel="Select hostel" itemValue=""/>
+                                    <f:selectItems value="#{seatController.hostelNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.buildingName_List}" update="buildingName"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Building Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="buildingName" value="#{seatController.seat.buildingName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a building name.">
+                                    <f:selectItem itemLabel="Select building" itemValue=""/>
+                                    <f:selectItems value="#{seatController.buildingNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.floorName_List()}" update="floorName"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Floor Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="floorName" value="#{seatController.seat.floorName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a floor name.">
+                                    <f:selectItem itemLabel="Select floor" itemValue=""/>
+                                    <f:selectItems value="#{seatController.floorNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.roomName_List()}" update="roomName"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Room Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="roomName" value="#{seatController.seat.roomName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a room name.">
+                                    <f:selectItem itemLabel="Select room" itemValue=""/>
+                                    <f:selectItems value="#{seatController.roomNameList}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Seat Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{seatController.seat.seatName}" styleClass="inputText" required="true" requiredMessage="Please Enter Seat Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Location"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{seatController.seat.seatLocation}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{seatController.seat.seatNote}" styleClass="inputText"/>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Add" actionListener="#{seatController.addSeat()}" update=":hostel:seat_add_form :hostel:seat_add_table" icon="ui-icon-check" style="margin-top: 8px;"/>
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form id="seat_add_table">
+                <center> 
+                    <p:dataTable var="seat" value="#{seatController.seatList}" paginator="true" paginatorPosition="top" rows="10">              
+
+                        <p:column headerText="Seat ID" sortBy="#{seat.seatId}">
+                            <h:outputLabel value="#{seat.seatId}"/>
+                        </p:column>
+
+                        <p:column headerText="Seat Name" sortBy="{seat.seatName}">
+                            <h:outputLabel value="#{seat.seatName}"/>
+                        </p:column>
+
+                        <p:column headerText="Location" sortBy="#{seat.seatLocation}">
+                            <h:outputLabel value="#{seat.seatLocation}"/>
+                        </p:column>
+
+                        <p:column headerText="Room Name">
+                            <h:outputLabel value="#{seat.roomName}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{seat.seatNote}"/>
+                        </p:column> 
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="update_seat_dialog.show()"  update=":hostel:upSeatForm :hostel:upSeatForm:roomNameListp" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{seat}" target="#{seatController.seat}"/>   
+                            </p:commandButton>   
+                        </p:column>
+
+                    </p:dataTable>
+                </center>
+            </h:form>
+
+            <p:dialog widgetVar="update_seat_dialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl5" showDetail="true"/>
+
+                <h:form id="upSeatForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate Seat information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Hostel Name" />
+                                <p:selectOneMenu value="#{seatController.seat.hostelName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select Hostel" itemValue=""/>
+                                    <f:selectItems value="#{seatController.hostelNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.buildingName_List}" update="buildingNameList"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Building Name" />
+                                <p:selectOneMenu id="buildingNameList" value="#{seatController.seat.buildingName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select Building" itemValue=""/>
+                                    <f:selectItems value="#{seatController.buildingNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.floorName_List()}" update="floorNameList"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Floor Name" />
+                                <p:selectOneMenu id="floorNameList" value="#{seatController.seat.floorName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select Floor" itemValue=""/>
+                                    <f:selectItems value="#{seatController.floorNameList}"/>
+                                    <p:ajax event="change" listener="#{seatController.roomName_List()}" update="roomNameListp"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Room Name" />
+                                <p:selectOneMenu id="roomNameListp" value="#{seatController.seat.roomName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select room" itemValue=""/>
+                                    <f:selectItems value="#{seatController.roomNameList}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Seat ID"/>
+                                <p:inputText id="s_id" value="#{seatController.seat.seatId}" readonly="true"/>
+
+                                <p:outputLabel value="Seat name"/>
+                                <p:inputText id="s_name" value="#{seatController.seat.seatName}" />
+
+                                <p:outputLabel value=" Location"/>
+                                <p:inputText id="s_address" value="#{seatController.seat.seatLocation}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="s_note" value="#{seatController.seat.seatNote}"/>                                                       
+
+                            </p:panelGrid>  
+                            <p:commandButton value="Update Info"  update=":hostel:seat_add_table" actionListener="#{seatController.updateSeat()}" oncomplete="update_seat_dialog.hide()" style="margin-top: 8px;"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog>
+
+        </p:layoutUnit>
+    </p:layout>
+</ui:composition>
+

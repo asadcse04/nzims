@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <center>
+    <h:form id="instituteReport_frm">
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Academic Year "/>
+            <p:selectOneMenu id="pasfailrptyear" value="#{instituteReportController.instituteWiseReport.acYr}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Enter Year.">
+                <f:selectItem itemLabel="Select Year" itemValue=""/>
+                <f:selectItems value="#{instituteReportController.academicYearList}"/>
+            </p:selectOneMenu>
+
+            <p:outputLabel value="Exam Name "/>
+            <p:selectOneMenu id="pasfalexmname" value="#{instituteReportController.instituteWiseReport.examName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Enter Year.">
+                <f:selectItem itemLabel="Select Exam" itemValue=""/>
+                <f:selectItems value="#{instituteReportController.examNameList}"/>
+            </p:selectOneMenu>
+        </p:panelGrid>
+        <p:commandButton value="Search" update="instbl" action="#{instituteReportController.tableData()}" style="margin-top: 8PX; margin-bottom: 10PX;"/>
+        
+        <p:dataTable id="instbl" value="#{instituteReportController.studentList}" var="student" paginator="true" rows="12" style="width:700px;">
+
+            <f:facet name="header">
+                Pass Fail Report 
+            </f:facet>
+
+            <p:column headerText="Class Name" sortBy="#{student.className}">
+                #{student.className}    
+            </p:column>
+
+            <p:column headerText="Department" sortBy="#{student.departmentName}">
+                #{student.departmentName}    
+            </p:column>
+
+            <p:column headerText="Shift" sortBy="#{student.shiftName} ">
+                #{student.shiftName}    
+            </p:column>
+
+            <p:column headerText="Section" sortBy="#{student.sectionName} ">
+                #{student.sectionName}    
+            </p:column>
+
+            <p:column headerText="Total student" sortBy="#{student.totalStudent}">
+                #{student.totalStudent}    
+            </p:column>
+            
+            <p:column headerText="Pass" sortBy="#{student.totalPass} ">
+                #{student.totalPass}    
+            </p:column>
+
+            <p:column headerText="%" sortBy="#{student.totalPassPercentage}">
+                #{student.totalPassPercentage}    
+            </p:column>                        
+
+            <p:column headerText="Fail" sortBy="#{student.totalFail} ">
+                #{student.totalFail}    
+            </p:column>
+
+            <p:column headerText="%" sortBy="#{student.totalFailPercentage}">
+                #{student.totalFailPercentage}    
+            </p:column>
+
+        </p:dataTable>  
+
+    </h:form>
+
+</center>
+
+</ui:composition>
+
+

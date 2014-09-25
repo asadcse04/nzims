@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        
+
+            <p:layoutUnit position="west" size="40%">
+
+                <h:form >
+                    <center>
+                        <p:panelGrid columns="2">
+                            <h:outputLabel value="Seleect"/>
+                            <p:selectOneMenu value="#{attendanceReportController.status}" effect="slide" >  
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                                <f:selectItem itemLabel="All" itemValue="All" />
+                                <f:selectItem itemLabel="Present" itemValue="Present" />
+                                <f:selectItem itemLabel="Absent" itemValue="Absent" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel value="Date"/>
+                            <p:calendar effect="explode" id="date" value="#{attendanceReportController.specificDate}" pattern="yyyy-MM-dd"/>
+
+                        </p:panelGrid>
+                        <p:commandButton value="View Report" update=":specifics_section__sq_frm" actionListener="#{attendanceReportController.getSpecificSectionAttendance()}"  icon="ui-icon-search"  style="margin-top:7px; margin-left: 10px; margin-bottom: 20px;"/>
+                    </center>         
+                </h:form>
+            </p:layoutUnit>
+            
+            
+
+            <p:layoutUnit position=" center"  >
+                <h:form id="specifics_section__sq_frm" >
+                    <center>
+                        <p:growl autoUpdate="true" showDetail="true"/> 
+                        
+
+                        <p:dataTable value="#{attendanceReportController.specificDateSectionAtd_List}" var="specificAttendance" >
+
+                            <p:column >
+                                <f:facet name="header">Student ID</f:facet>  
+                                <h:outputText value="#{specificAttendance.studentID}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">Student Name</f:facet>  
+                                <h:outputText value="#{specificAttendance.studentName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">Student Roll</f:facet>  
+                                <h:outputText value="#{specificAttendance.studentRoll}"/>
+                            </p:column>
+
+                            <p:column  >
+                                <f:facet name="header">Status</f:facet> 
+                                <h:outputText style="color: #{(specificAttendance.status==0) ? 'green' : 'red'}" value="#{(specificAttendance.status==0) ? 'Present' : 'Absent'}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">Note</f:facet>  
+                                <h:outputText value="#{specificAttendance.note}"/>
+                            </p:column>
+
+                        </p:dataTable> 
+
+                    </center>
+                </h:form>
+                <center>
+                    <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+                        <p:printer target="specifics_section__sq_frm" />
+                    </h:commandButton>
+                </center>
+            </p:layoutUnit>
+        </p:layout>
+
+</ui:composition>

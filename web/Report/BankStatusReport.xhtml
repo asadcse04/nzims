@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <p:panelGrid styleClass="panelGrid"  style="border: none;">
+        
+        <p:row> 
+            <p:column>
+                
+                <p:pieChart id="sample2" value="#{bankStatusController.getPieModel()}" legendPosition="w"  title="Bank Report" style="width:600px;height:500px" />
+
+            </p:column>
+            
+            <p:column>
+                
+                <h:form>
+                
+                <p:dataTable id="tbl" value="#{bankStatusController.bankAccountList}" var="bc"  style="width: 400px">
+                   
+          
+                    <p:column>
+                        <f:facet name="header">Bank Name</f:facet>
+                        <h:outputLabel value="#{bc.bankName}"/>
+                        
+                    </p:column>
+                    
+                    <p:column style="text-align: right">
+                        <f:facet name="header">Balance</f:facet>
+                        <h:outputLabel value="#{bc.blance}  BDT"/>
+                    </p:column>
+                    
+               
+                    <f:facet name="footer">
+                        <h:outputLabel value="Total :"/><h:outputLabel value="#{bankStatusController.totalbalance}" styleClass="red"/>            
+                    </f:facet>
+              
+                </p:dataTable>
+                 
+                 <h:outputLabel value="Export PDF"/>
+                
+                 <h:commandLink>  
+                <p:graphicImage style="width: 20px;height: 20px" value="/images/pdf.png" />  
+                <p:dataExporter type="pdf" target="tbl" fileName="Bank Status Report"  encoding="UTF-8"/> 
+                </h:commandLink> 
+                    
+                    </h:form>
+                            
+            </p:column>
+        
+        </p:row>
+                
+    
+    </p:panelGrid>
+
+
+
+</ui:composition>
+

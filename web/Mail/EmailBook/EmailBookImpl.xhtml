@@ -1,0 +1,176 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:600px;">
+
+        <p:layoutUnit position="west" size="30%" style="border: none">
+
+            <!--...........................Email book Add..............................-->
+
+            <h:form id="emailBook">
+
+                <p:growl id="grl"/>
+                
+                <center>
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="header">
+                            Create EmailBook   
+                        </p:column>    
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column>
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Category  Name"/>
+                        </p:column><p:column>
+                            <p:selectOneMenu id="sch" value="#{emailBookController.emailBookName}" styleClass="inputCombo" style="width: 185px;" required="true" requiredMessage="Please Select Category.">
+                                <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                <f:selectItems value="#{emailBookController.emailBookNameList}"/>
+                            </p:selectOneMenu>
+                        </p:column>    
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Contact  Name"/>
+                        </p:column><p:column>
+                            <p:inputText id="ename" value="#{emailBookController.emailBook.contactName}" styleClass="inputText" required="true" requiredMessage="Please Input Contact Name."/> 
+                        </p:column>
+                    </p:row>
+
+                    
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Email"/>
+                        </p:column><p:column>
+                            <p:inputText id="eaddress" value="#{emailBookController.emailBook.emailAddress}" required="true" requiredMessage="Please Input Email." validatorMessage="Invalid Email format">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />                 
+                            </p:inputText> 
+                        </p:column>
+                    </p:row>
+                    
+                    
+                    
+                     <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Note"/>
+                        </p:column><p:column>
+                             <p:inputText id="enote" value="#{emailBookController.emailBook.emailNote}"/>  
+                        </p:column>
+                    </p:row>
+
+                </p:panelGrid>
+                
+                    <p:commandButton value="Add" actionListener="#{emailBookController.addEmailBook()}" update="grl :emal_book_tb:emailBook :emal_book_tb:emailBook_fm" style="margin-top: 8px" icon="ui-icon-check"/>
+
+                    <p:commandButton type="reset" value="Reset" style="margin-top: 8px" icon="ui-icon-refresh" />
+
+                 </center>
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <!--...........................Email book Show..............................-->
+
+
+            <h:form id="emailBook_fm">
+                <center>          
+                    
+                    <p:dataTable var="emailbookalllist" value="#{emailBookController.emailBookAllList}" style="width: 600px;">              
+
+                        <p:column headerText="Category Name">
+
+                            <h:outputLabel value="#{emailbookalllist.categoryName}"/>
+
+                        </p:column> 
+
+                        <p:column headerText="Contact Name">
+
+                            <h:outputLabel value="#{emailbookalllist.contactName}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Email Address">
+
+                            <h:outputLabel value="#{emailbookalllist.emailAddress}"/>
+
+                        </p:column> 
+
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{emailbookalllist.emailNote}"/>
+
+                        </p:column> 
+
+
+                        <p:column headerText="Edit">
+
+                            <p:commandButton   oncomplete="dig1.show()"  update=":emal_book_tb:upEmailBookForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{emailbookalllist}" target="#{emailBookController.emailBook}"/>   
+                            </p:commandButton>   
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center>
+
+            </h:form>
+
+            <!--...........................Email book Update..............................-->
+
+
+            <p:dialog widgetVar="dig1"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="upgrl1"/>
+
+                <h:form id="upEmailBookForm" style="font-size: 12pt">
+
+                    <p:panel header="Upadate EmailBook  information">
+                        <p:panelGrid columns="2" style="font-size: medium">
+
+                            <p:outputLabel value="Contact ID"/>
+                            <p:inputText id="e_id" value="#{emailBookController.emailBook.contactId}" readonly="true"/>
+
+                            <p:outputLabel value="Contact name"/>
+                            <p:inputText id="e_name" value="#{emailBookController.emailBook.contactName}" />
+
+                            <p:outputLabel value=" Email Address"/>
+                            <p:inputText id="e_address" value="#{emailBookController.emailBook.emailAddress}"/>                                                       
+
+                            <p:outputLabel value="Note"/>
+                            <p:inputText id="e_note" value="#{emailBookController.emailBook.emailNote}"/>                                                       
+
+                            <p:commandButton value="Update Info" update=":emal_book_tb:upgrl1 :emal_book_tb:emailBook_fm" actionListener="#{emailBookController.updateEmailBook}" oncomplete="dig1.hide()"/>
+
+                        </p:panelGrid>    
+                    </p:panel>   
+
+                </h:form>
+
+            </p:dialog> 
+
+
+
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>
+

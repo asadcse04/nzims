@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="30%"> 
+
+            <h:form id="insert_designation_frm">
+
+                <p:growl id="insert_designation_grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                                Create Designation     
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/> 
+                                <h:outputLabel value="Designation Category"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{designationController.designationName}" styleClass="inputCombo" style="width: 185px;" required="true" requiredMessage="Please Select Catagory.">
+                                    <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                    <f:selectItems value="#{designationController.designationNameList}"/>
+                                </p:selectOneMenu>     
+                            </p:column>    
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/> 
+                                <h:outputLabel value="Designation"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{designationController.designation.designationName}" required="true" requiredMessage="Please Enter Designation Name"/>
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputText  value="#{designationController.designation.note}"/>
+                            </p:column>    
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" actionListener="#{designationController.createDesignation()}" update="insert_designation_grl :designation_strt_tb:insert_designation_frm :designation_strt_tb:desgnationList_frm" style="margin-top: 8px" icon="ui-icon-check" />
+
+                    <p:commandButton type="reset" value="Reset" style="margin-top: 8px" icon="ui-icon-refresh" />
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="desgnationList_frm">
+
+                <center>
+
+                    <p:dataTable var="designationlist" value="#{designationController.designationList}" id="desgnationlisttable">
+
+                        <p:column headerText="Designation Name">
+
+                            <h:outputLabel value="#{designationlist.designationName}"/>
+
+                        </p:column>
+
+
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{designationlist.note}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Designation Category">
+
+                            <h:outputLabel value="#{designationlist.designationCategoryID}"/>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

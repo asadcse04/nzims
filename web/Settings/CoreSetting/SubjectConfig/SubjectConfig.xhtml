@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <h:form id="sbjcCnf_frm">
+        <p:growl autoUpdate="false" sticky="false" id="grw1"/> 
+        <center>               
+            <p:panel style="width: 650px; margin:15px 15px 15px 15px;">
+
+                <p:wizard id="sbjcCnf_wrdz" >
+
+                    <p:tab title="General Info">
+
+                        <center>
+
+                            <p:panelGrid columns="2" style="margin-top:5%; margin-bottom:5%;">
+
+                                <h:outputText value="Academic Year" />  
+
+                                <p:selectOneMenu value="#{subjectConfigController.subject_config.acyrID}" effect="slide" >  
+
+                                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                    <f:selectItems value="#{subjectConfigController.academicYearList}" />  
+
+                                </p:selectOneMenu>
+
+
+                                <h:outputText value="Class" />  
+
+                                <p:selectOneMenu value="#{subjectConfigController.subject_config.schoolClassName}" effect="slide" >  
+
+                                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                    <f:selectItems value="#{subjectConfigController.schoolClassList}" />  
+
+                                </p:selectOneMenu>
+
+
+                                <h:outputText value="Department" />  
+
+                                <p:selectOneMenu value="#{subjectConfigController.subject_config.deptName}" effect="slide" >  
+
+                                    <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                    <f:selectItems value="#{subjectConfigController.departmentList}" />  
+
+                                </p:selectOneMenu>
+
+                            </p:panelGrid>
+
+                        </center>
+
+                    </p:tab>
+
+                    <p:tab title="Choose Subject">
+
+                        <h:panelGroup layout="block" styleClass="selection" style="margin-top: 2%; margin-bottom: 1%;">
+
+                            <p:scrollPanel style="width:250px;height:250px;">
+                                
+                            <p:selectManyCheckbox value="#{subjectConfigController.subject_config.subjectList}" layout="pageDirection">
+
+                                <f:selectItems value="#{subjectConfigController.sbjList}" var="sbjOp"></f:selectItems>
+
+                            </p:selectManyCheckbox>
+                                
+                            </p:scrollPanel>
+
+                        </h:panelGroup>
+
+                    </p:tab>
+
+                    <p:tab title="Finish">
+
+                        <p:panelGrid columns="2" style="margin-top:2%; margin-bottom:2%; width: 400px;">
+
+                            <h:outputLabel value="Academic Year" />  
+
+                            <p:outputLabel value="#{subjectConfigController.subject_config.acyrID}"/>
+
+
+                            <h:outputLabel value="Class" />  
+
+                            <p:outputLabel value="#{subjectConfigController.subject_config.schoolClassName}"/>
+
+
+                            <h:outputLabel value="Department" />  
+
+                            <p:outputLabel value="#{subjectConfigController.subject_config.deptName}"/>
+
+
+                            <h:outputLabel value="Subject List" />
+
+                            <p:dataList value="#{subjectConfigController.subject_config.subjectList}" var="sbjitem" itemType="square">
+
+                                #{sbjitem}
+
+                            </p:dataList>
+
+                        </p:panelGrid>
+
+                        <p:commandButton value="Submit" update="sbjcCnf_frm" actionListener="#{subjectConfigController.saveConfig}" icon="ui-icon-check"/>
+
+                    </p:tab>
+
+                </p:wizard>
+
+            </p:panel>
+
+        </center>
+
+    </h:form>
+
+
+</ui:composition>

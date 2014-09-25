@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="create_inventory_Category">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+                        Inventory Category
+                    </f:facet>
+
+                    <h:outputLabel value="Inventory Type*"/>
+                    <p:selectOneMenu value="#{inventoryCategoryController.inventoryCategory.inventoryTypeName}"  required="true" requiredMessage="You must provide a inventory type name">  
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                        <f:selectItems value="#{inventoryCategoryController.inventoryTypeNameData}" />  
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Inventory Category*"/>
+                    <p:inputText id="invttyp" value="#{inventoryCategoryController.inventoryCategory.inventoryCategoryName}" required="true" requiredMessage="You must provide a inventory category"/>
+
+                    <h:outputLabel value="Note"/>
+                    <p:inputText value="#{inventoryCategoryController.inventoryCategory.note}"/>                   
+
+                    <p:commandButton value="Add" actionListener="#{inventoryCategoryController.insertInventoryCategory}" update="grl :inventory_startup_tbl:create_inventory_Category :inventory_startup_tbl:inventory_category_list" icon="ui-icon-check"/>
+                    <p:commandButton type="reset" value="Reset" icon="ui-icon-refresh" />
+
+                </p:panelGrid>
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="inventory_category_list">
+
+                    <p:dataTable var="inventory_catagory_tbl" value="#{inventoryCategoryController.inventoryCategoryData}" >              
+
+                        <p:column headerText="inventory Catagory ID">
+                            <h:outputLabel value="#{inventory_catagory_tbl.inventoryCategoryID}"/>
+                        </p:column>
+
+                        <p:column headerText="inventory Type Name">
+                            <h:outputLabel value="#{inventory_catagory_tbl.inventoryTypeName}"/>
+                        </p:column>
+
+                        <p:column headerText="inventory Catagory Name">
+                            <h:outputLabel value="#{inventory_catagory_tbl.inventoryCategoryName}"/>
+                        </p:column>
+
+                        <p:column headerText="Current Date">
+                            <h:outputLabel value="#{inventory_catagory_tbl.createDate}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{inventory_catagory_tbl.note}"/>
+                        </p:column>  
+
+                        <p:column style="width:3%">  
+                            <!--<p:commandButton process="@this" update=":update_inventory_category_frm" oncomplete="dialog_Update_inventoryCategory.show()" icon="ui-icon-pencil" title="Update">  
+                                    <f:setPropertyActionListener value="#{inventory_catagory_tbl}" target="#{inventoryCategoryController.inventoryCategory}"/>  
+                                </p:commandButton>  -->
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>  
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

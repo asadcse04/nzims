@@ -1,0 +1,110 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="40%">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Shift
+
+                    </f:facet>
+                    
+                    <h:outputText value="Shift Name"/>
+
+                    <p:inputText value="#{shiftController.shift.shiftName}"/>
+                    
+
+                    <h:outputText value="Start Time"/>
+
+                    <p:inputText value="#{shiftController.shift.startTime}"/>
+                    
+
+                    <h:outputText value="End Time"/>
+
+                    <p:inputText value="#{shiftController.shift.endTime}"/>
+                    
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{shiftController.shift.note}" maxlength="100"/>
+                    
+
+                </p:panelGrid>
+
+                <p:commandButton value="Save" update=":settingFrm" actionListener="#{shiftController.insertShift}" icon="ui-icon-check" style="margin: 1%;"/>
+
+            </center>
+
+        </p:layoutUnit>
+        
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <p:dataTable value="#{shiftController.shiftData}" var="shift_tbl"
+
+                             paginator="true" rows="10" paginatorPosition="bottom" style="width:450px;">
+                    
+                    <p:column sortBy="#{shift_tbl.shiftID}">
+
+                        <f:facet name="header">Shift ID</f:facet>  
+
+                        <h:outputText value="#{shift_tbl.shiftID}"/>
+
+                    </p:column>
+
+                    <p:column sortBy="#{shift_tbl.shiftName}">
+
+                        <f:facet name="header">Shift Name</f:facet>  
+
+                        <h:outputText value="#{shift_tbl.shiftName}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{shift_tbl.startTime}">
+
+                        <f:facet name="header">Start Time</f:facet>  
+
+                        <h:outputText value="#{shift_tbl.startTime}"/>
+                       
+                    </p:column>
+
+                    <p:column sortBy="#{shift_tbl.endTime}">
+
+                        <f:facet name="header">End Time</f:facet>  
+
+                        <h:outputText value="#{shift_tbl.endTime}"/>
+                        
+                    </p:column>
+                    
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_Shift_frm" oncomplete="dialog_Update_shift.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{shift_tbl}" target="#{shiftController.shift}"/>  
+
+                        </p:commandButton>  
+
+                    </p:column>
+                    
+                </p:dataTable>
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

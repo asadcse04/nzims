@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:500px;">
+
+        <p:layoutUnit position="west" size="40%" style="border: none"> 
+
+            <h:form id="insert_notice_publish_frm">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                                Create Notice   
+                            </p:column>    
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice Category"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{noticePublishController.noticeCatIdName}" styleClass="inputCombo" style="width: 185px;" required="true" requiredMessage="Please Select Category.">
+                                    <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                    <f:selectItems value="#{noticePublishController.noticeIdCatList}"/>
+                                </p:selectOneMenu>    
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice From"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{noticePublishController.noticePublish.noticeFrom}" required="true" requiredMessage="Please Input Notice Form."/>
+                            </p:column>    
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice For"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{noticePublishController.noticePublish.noticeFor}" styleClass="inputCombo" style="width: 185px;" required="true" requiredMessage="Please Select Notice for.">
+                                    <f:selectItem itemLabel="Select" itemValue=""/>
+                                    <f:selectItems value="#{noticePublishController.noticeforlist}"/>
+                                </p:selectOneMenu>     
+                            </p:column>   
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Start date"/>
+                            </p:column><p:column>
+                                <p:calendar value="#{noticePublishController.noticePublish.startDisplay}" required="true" requiredMessage="Please Select Satrt Date."/>
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="End date"/>
+                            </p:column><p:column>
+                                <p:calendar value="#{noticePublishController.noticePublish.validTill}" required="true" requiredMessage="Please Select End Date."/>
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice Head"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{noticePublishController.noticePublish.noticeHead}" required="true" requiredMessage="Please Enter Notice Head."/>
+                            </p:column>    
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice Details"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{noticePublishController.noticePublish.noticeDetails}" styleClass="inputTextarea" required="true" requiredMessage="Please Enter Notice details."/>
+                            </p:column>    
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Notice Rating"/>
+                            </p:column><p:column>
+                                <p:rating stars="8" value="#{noticePublishController.noticePublish.rating}" cancel="false" required="true" requiredMessage="Please Give Rating"/>
+                            </p:column>    
+                        </p:row>
+
+                    </p:panelGrid>
+                    
+                    <p:commandButton value="Add" actionListener="#{noticePublishController.addNoticePublish()}" update="grl :notice_pub_strt_tb:publishform" style="margin-top: 8px;" />
+
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <center>
+
+                <h:form id="publishform">
+
+
+                    <p:dataTable value="#{noticePublishController.noticePublishList}" var="pblist">
+
+                        <p:column headerText="Notice From">
+                            #{pblist.noticeFrom}   
+                        </p:column>
+
+                        <p:column headerText="Notice for">
+                            #{pblist.noticeFor}   
+                        </p:column>
+
+                        <p:column headerText="Notice head">
+                            #{pblist.noticeHead}   
+                        </p:column>
+
+                        <p:column headerText="Notice Deatils">
+                            #{pblist.noticeDetails}   
+                        </p:column>
+
+                        <p:column headerText="Rating">
+                            <p:rating stars="8" value="#{pblist.rating}" cancel="false" readonly="true"/> 
+                        </p:column>
+
+                    </p:dataTable>     
+
+
+                </h:form>
+
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

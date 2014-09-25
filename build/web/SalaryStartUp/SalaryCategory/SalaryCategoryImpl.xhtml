@@ -1,0 +1,100 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <p:layout style="min-width:1000px;min-height:420px;">
+        
+        <p:layoutUnit position="west" size="50%">
+           
+                    
+    <h:form id="createSalarycategory">
+        
+        <p:growl id="grl" autoUpdate="true" sticky="false" />
+        
+        
+        <center>
+   
+                <p:panelGrid styleClass="panelGrid">
+                        
+                        <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                             Salary Category  
+                            </p:column>    
+                        </p:row> 
+     
+                        <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Category Name"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{salaryCategoryController.salaryCategory.categoryName}" styleClass="inputText" required="true" requiredMessage="Please Enter Category."/> 
+                            </p:column>    
+                            
+                        </p:row>
+                    
+                      <p:row>
+                         
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{salaryCategoryController.salaryCategory.note}" styleClass="inputText"/> 
+                            </p:column>    
+                            
+                        </p:row>
+                        
+                
+                    </p:panelGrid>
+        
+               <p:commandButton value="Add" actionListener="#{salaryCategoryController.createSalary()}" update="grl :salarystrt_tb:createSalarycategory :salarystrt_tb:salary_categ_list" icon="ui-icon-check" style="margin-top: 8px"/>
+
+        </center>
+        
+    
+        
+      </h:form> 
+                
+           
+            
+   </p:layoutUnit>
+        
+         <p:layoutUnit position="center">
+             
+             <center>
+
+            <h:form id="salary_categ_list">
+                
+                <p:dataTable var="sclist" value="#{salaryCategoryController.salaryCategoryList}" id="salarycateglist" style="width: 400px;">              
+                    
+                        <p:column headerText="Category ID">
+                        
+                            <h:outputLabel value="#{sclist.categoryID}"/>
+                        
+                    </p:column>
+                    
+                    <p:column headerText="Category Name">
+                        
+                         <h:outputLabel value="#{sclist.categoryName}"/>
+                        
+                    </p:column>
+                    
+                           <p:column headerText="Note">
+                        
+                               <h:outputLabel value="#{sclist.note}"/>
+                        
+                    </p:column>                   
+                                           
+                </p:dataTable>
+             
+    </h:form>  
+                 
+  </center>
+             
+   </p:layoutUnit>
+        
+ </p:layout>
+    
+</ui:composition>

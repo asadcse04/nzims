@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+  
+
+    <p:tabView id="trans" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+            <p:tab title="Driver List"> 
+
+                <ui:include src="DriverList.xhtml"/>
+
+            </p:tab>
+            
+            <p:tab title="Add Driver"> 
+
+                <ui:include src="AddDriver.xhtml"/>
+
+            </p:tab>  
+
+        </p:tabView>
+
+   
+    
+    </ui:composition>

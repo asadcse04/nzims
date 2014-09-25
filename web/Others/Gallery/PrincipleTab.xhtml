@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+   
+            <h:form id="tabformprinciple">
+                
+
+                <h3>Committee Info</h3>
+    
+             
+                <p:tabView value="#{principleController.principleList}" var="princi">
+        
+                    <p:tab title="#{princi.duration}">
+            
+                        <h:panelGrid columns="2" cellpadding="10">
+                
+                            <p:graphicImage url="/images/principleImage/#{princi.imgpath}" style="width: 300px;height: 250px" />
+                
+                
+                            <h:panelGrid columns="2" style="font-size: 18pt; font-family: fantasy">
+                                <p:outputLabel value="Name"/>
+                                <p:outputLabel value=": #{princi.name}"/>
+                                
+                                <p:outputLabel value="Duration"/>
+                                <p:outputLabel value=": #{princi.duration}"/>
+                                
+                                <p:outputLabel value="Contribution"/>
+                                <p:outputLabel value=": #{princi.contribution}"/>
+                                
+                                <p:outputLabel value="About"/>
+                                <p:outputLabel value=": #{princi.about}"/>
+                                
+                               
+                                
+                            </h:panelGrid>
+            
+                        </h:panelGrid>
+                 </p:tab>
+        
+    
+                </p:tabView>   
+                
+            </h:form>   
+
+
+
+
+
+
+
+</ui:composition>

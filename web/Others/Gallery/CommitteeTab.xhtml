@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+   
+            <h:form id="tabform">
+                
+
+                <h3>Committee Info</h3>
+    
+             
+                <p:tabView value="#{committeeController.committeeList}" var="comtite" orientation="left">
+        
+                    <p:tab title="#{comtite.name}">
+            
+                        <h:panelGrid columns="2" cellpadding="10">
+                
+                            <p:graphicImage url="/images/committeeImage/#{comtite.imgpath}" style="width: 300px;height: 250px" />
+                
+                
+                            <h:panelGrid columns="2" style="font-size: 18pt">
+                                <p:outputLabel value="Name"/>
+                                <p:outputLabel value=": #{comtite.name}"/>
+                                
+                                <p:outputLabel value="Father Name"/>
+                                <p:outputLabel value=": #{comtite.fathername}"/>
+                                
+                                <p:outputLabel value="Designation"/>
+                                <p:outputLabel value=": #{comtite.designation}"/>
+                                
+                                <p:outputLabel value="Address"/>
+                                <p:outputLabel value=": #{comtite.address}"/>
+                                
+                                <p:outputLabel value="About"/>
+                                <p:outputLabel value=": #{comtite.about}"/>
+                                
+                            </h:panelGrid>
+            
+                        </h:panelGrid>
+                 </p:tab>
+        
+    
+                </p:tabView>   
+                
+            </h:form>   
+
+
+
+
+
+
+
+</ui:composition>

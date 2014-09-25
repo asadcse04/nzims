@@ -1,0 +1,170 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%"> 
+
+            <h:form id="publication">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >
+                                Publication
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Publication Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{publicationController.publication.publicationName}" styleClass="inputText" required="true" requiredMessage="Please Enter Publication Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Address"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{publicationController.publication.publicationAddress}" styleClass="inputText" required="true" requiredMessage="Please Enter Publication Address."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Contact No"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{publicationController.publication.contactno}" styleClass="inputText" required="true" requiredMessage="Please Enter Contact No."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="About"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{publicationController.publication.aboutPublication}" styleClass="inputText" required="true" requiredMessage="Please Enter Contact No."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{publicationController.publication.publicationnote}" styleClass="inputText" required="true" requiredMessage="Please Enter Contact No."/>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" actionListener="#{publicationController.addPublication()}" update="grl :library:publication :library:publication_frm" icon="ui-icon-check" style="margin-top: 8px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <h:form id="publication_frm">
+
+                <center>
+
+                    <p:dataTable var="publicationlist" value="#{publicationController.publicationAllList}" paginator="true" paginatorPosition="top" rows="10">
+
+                        <p:column headerText="Publication ID">
+                            <h:outputLabel value="#{publicationlist.publicationId}"/>
+                        </p:column>
+
+                        <p:column headerText="Publication Name">
+                            <h:outputLabel value="#{publicationlist.publicationName}"/>
+                        </p:column>
+
+                        <p:column headerText="Address">
+                            <h:outputLabel value="#{publicationlist.publicationAddress}"/>
+                        </p:column>
+
+                        <p:column headerText="Contact No">
+                            <h:outputLabel value="#{publicationlist.contactno}"/>
+                        </p:column>
+
+                        <p:column headerText="About">
+                            <h:outputLabel value="#{publicationlist.aboutPublication}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{publicationlist.publicationnote}"/>
+                        </p:column>
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="dig1.show()"  update=":library:upPublicationForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{publicationlist}" target="#{publicationController.publication}"/>   
+                            </p:commandButton>   
+                        </p:column>
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+
+            <p:dialog widgetVar="dig1"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="upGrl4"/>
+                <h:form id="upPublicationForm" style="font-size: 12pt">
+
+                    <p:panel header="Upadate Publication  information">
+
+                        <p:panelGrid columns="2" style="font-size: medium">
+
+                            <p:outputLabel value="Publication ID"/>
+                            <p:inputText id="p_id" value="#{publicationController.publication.publicationId}" readonly="true"/>
+
+                            <p:outputLabel value="Publication Name"/>
+                            <p:inputText id="p_name" value="#{publicationController.publication.publicationName}" />
+
+                            <p:outputLabel value="Address"/>
+                            <p:inputText id="p_address" value="#{publicationController.publication.publicationAddress}"/>                                                       
+
+                            <p:outputLabel value="Contact No"/>
+                            <p:inputText id="p_Note" value="#{publicationController.publication.contactno}"/>                                                       
+
+                            <p:outputLabel value="About"/>
+                            <p:inputText id="p_about" value="#{publicationController.publication.aboutPublication}"/>                                                       
+
+                            <p:outputLabel value="Note"/>
+                            <p:inputText id="p_note" value="#{publicationController.publication.publicationnote}"/>                                                       
+
+                            <p:commandButton value="Update Info"  update=":library:upGrl4 :library:publication_frm" actionListener="#{publicationController.updatePublication()}" oncomplete="dig1.hide()"/>
+
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+            </p:dialog>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>
+
+
+

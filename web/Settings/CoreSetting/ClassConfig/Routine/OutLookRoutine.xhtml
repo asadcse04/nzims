@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        
+        <title>View Routine</title>
+
+        <style type="text/css">
+
+            .ui-widget, .ui-widget, .ui-widget
+            {
+                font-size: 95% !important;
+            }
+
+            .ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd
+            {
+                border:none;
+
+                overflow:hidden;
+            }
+
+        </style>
+
+    </h:head>
+
+
+    <h:body>
+
+        <ui:include src="/MasterPage/Layout.xhtml" />
+
+        <p:layoutUnit position="center">
+
+            <ui:include src="OutLookRoutine_Impl.xhtml"/>
+
+        </p:layoutUnit>
+
+        <p:dialog header="Class Routine" widgetVar="dialog_view_class_rtn" width="1350" showEffect="clip" hideEffect="blind">
+
+            <h:form id="class_rtn_tbl_frm">
+
+                <center>
+
+                    <p:dataTable id="class_rtn_tbl" value="#{outLookRoutineController.routineList}" var="complete_rtn_List">
+
+                        <p:column>
+
+                            <f:facet name="header">Day</f:facet>  
+
+                            <h:outputText value="#{complete_rtn_List.dayName}"/>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 1</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_1}" style="font-size: 15px;"/></pre>  
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 2</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_2}" style="font-size: 15px;"/></pre> 
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 3</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_3}" style="font-size: 15px;"/></pre> 
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 4</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_4}" style="font-size: 15px;"/></pre> 
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 5</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_5}" style="font-size: 15px;"/></pre>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 6</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_6}" style="font-size: 15px;"/></pre>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 7</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_7}" style="font-size: 15px;"/></pre>
+
+                        </p:column>
+
+                        <p:column>
+
+                            <f:facet name="header">Period 8</f:facet>  
+
+                            <pre><h:outputText value="#{complete_rtn_List.period_8}" style="font-size: 15px;"/></pre>
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:commandButton value="Print" type="button" icon="ui-icon-print" style="margin-top: 1%;">  
+
+                        <p:printer target="class_rtn_tbl" />  
+
+                    </p:commandButton>
+
+                </center>
+
+            </h:form>
+
+        </p:dialog>
+
+    </h:body>
+
+</html>
+

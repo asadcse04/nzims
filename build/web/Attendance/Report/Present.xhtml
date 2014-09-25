@@ -1,0 +1,189 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <center>
+
+    <h:form id="stdpresent_frm">
+
+        <p:growl id="presentgrl" autoUpdate="false" sticky="false" />
+
+
+
+            
+
+                        <p:panelGrid styleClass="panelGrid">
+
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <p:outputLabel value="Date "/>
+                                </p:column><p:column>
+                                    <p:calendar value="#{presentReportController.presentReport.date}" styleClass="inputCal" pattern="dd/MM/yyyy"/>
+                                </p:column>   
+                            </p:row> 
+
+                        </p:panelGrid> 
+
+                        <p:commandButton value="See" update="presenttbl presenttbl2 presentchart" style="margin-top: 8px" action="#{presentReportController.showPresent()}"/>
+
+
+               
+
+
+                        <p:dataTable id="presenttbl" value="#{presentReportController.presentList}" var="presentreport" style="width: 1000px;" >
+
+                            <p:column headerText="Two total">
+                                #{presentreport.twototal}    
+                            </p:column>
+
+                            <p:column headerText="Two Present">
+                                #{presentreport.twopresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.twopercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Three total">
+                                #{presentreport.threetotal}    
+                            </p:column>
+
+                            <p:column headerText="Two Present">
+                                #{presentreport.threepresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.threepercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Four total">
+                                #{presentreport.fourtotal}    
+                            </p:column>
+
+                            <p:column headerText="Four Present">
+                                #{presentreport.fourpresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.fourpercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Five total">
+                                #{presentreport.fivetotal}    
+                            </p:column>
+
+                            <p:column headerText="Five Present">
+                                #{presentreport.fivepresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.fivepercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Six total">
+                                #{presentreport.sixtotal}    
+                            </p:column>
+
+                            <p:column headerText="Six Present">
+                                #{presentreport.sixpresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.sixpercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+
+                            
+
+                        </p:dataTable> <br />
+                        
+                        <p:dataTable id="presenttbl2" value="#{presentReportController.presentList}" var="presentreport" style="width: 1000px">
+                        
+                        <p:column headerText="Saven total">
+                                #{presentreport.sixtotal}    
+                            </p:column>
+
+                            <p:column headerText="Saven Present">
+                                #{presentreport.sixpresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.savenpercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+
+                            <p:column headerText="Eight total">
+                                #{presentreport.eighttotal}    
+                            </p:column>
+
+                            <p:column headerText="Eight Present">
+                                #{presentreport.eightpresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.eightpercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Nine total">
+                                #{presentreport.ninetotal}    
+                            </p:column>
+
+                            <p:column headerText="Nine Present">
+                                #{presentreport.ninepresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.ninepercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+
+                            <p:column headerText="Ten total">
+                                #{presentreport.tentotal}    
+                            </p:column>
+
+                            <p:column headerText="Ten Present">
+                                #{presentreport.tenpresent}    
+                            </p:column>
+
+                            <p:column headerText="%">
+                                <p:outputLabel value="#{presentReportController.tenpercentage}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </p:outputLabel>   
+                            </p:column>
+                        
+                        </p:dataTable>
+
+
+                        <p:pieChart id="presentchart" value="#{presentReportController.pieModel}"  legendPosition="w"  title="Total School Class Present Report" style="width:500px;height:300px;margin-top: 10px" />
+
+                            
+                        
+
+    </h:form>
+
+        </center>
+
+
+</ui:composition>
+
+
+

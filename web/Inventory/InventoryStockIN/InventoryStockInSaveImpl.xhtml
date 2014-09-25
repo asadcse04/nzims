@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <center>
+        <h:form id="create_inventory_item1" styleClass="tabHeight">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Inventory Stock In Payment
+
+                    </f:facet>
+                    
+                    <h:outputLabel value="Total Amount :"/>
+                    
+                    <h:outputText value="#{inventoryStockInController.calPrice()}" />
+
+                    <h:outputLabel value="Stock Type* :" />
+                    
+                    <p:selectOneMenu value="#{inventoryStockInController.inventoryPayment.stockType}"  required="true" requiredMessage="You must provide a stock type name" >  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />
+                        
+                        <f:selectItem itemLabel="Purchase" itemValue="Purchase" />
+                         
+                        <f:selectItem itemLabel="Donation" itemValue="Donation" />
+                        
+                    </p:selectOneMenu>
+                    
+                   <h:outputLabel value="Stock Note"/>
+                   
+                   <p:inputText id="stockNote" value="#{inventoryStockInController.inventoryPayment.stockNote}" />
+                            
+                    <h:outputLabel value="Payment Type* :"/>
+                    
+                    <p:selectOneMenu id="paymentType" value="#{inventoryStockInController.inventoryPayment.paymentType}"  required="true" requiredMessage="You must provide a payment type">  
+
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                        <f:selectItem itemLabel="Cash" itemValue="Cash" /> 
+                        
+                        <f:selectItem itemLabel="Bank" itemValue="Bank"/> 
+                        
+                    </p:selectOneMenu>              
+                    
+                    <h:outputLabel value="Donner Name :"/>
+
+                    <p:inputText id="donnerName" value="#{inventoryStockInController.inventoryPayment.donnerName}" />
+
+                    <h:outputLabel value="Bank Name :"/>
+
+                    <p:inputText id="bankNane" value="#{inventoryStockInController.inventoryPayment.bankName}" />
+                    
+                    <h:outputLabel value="Voucher No :"/>
+
+                    <p:inputText id="voucherNo" value="#{inventoryStockInController.inventoryPayment.voucherNo}" />
+
+                    <h:outputLabel value="Note"/>
+
+                    <p:inputText value="#{inventoryStockInController.inventoryPayment.note}"/>                   
+
+                    <p:commandButton value="Save" actionListener="#"  icon="ui-icon-check"/> 
+
+                    
+
+                </p:panelGrid>
+                
+            </h:form> 
+        </center>
+
+   </ui:composition>

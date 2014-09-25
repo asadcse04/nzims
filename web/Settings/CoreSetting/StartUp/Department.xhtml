@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <p:layout styleClass="tabHeight">
+        
+        <p:layoutUnit position="west" size="40%">
+            
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+            
+            <center>
+                
+                <p:panelGrid columns="2">
+                    
+                     <f:facet name="header">
+
+                        Department
+
+                    </f:facet>
+                    
+                    <h:outputText value="Department Name"/>
+
+                    <p:inputText value="#{departmentController.department.departmentName}"/>
+
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{departmentController.department.note}" maxlength="100"/>
+                    
+                </p:panelGrid>
+                
+                <p:commandButton value="Save" update=":settingFrm" actionListener="#{departmentController.insertDepartment}" icon="ui-icon-check" style="margin: 1%;"/>
+                
+            </center>
+            
+        </p:layoutUnit>
+        
+        <p:layoutUnit position="center">
+            
+            <center>
+                
+                <p:dataTable value="#{departmentController.departmentData}" var="dept_tbl"
+
+                             paginator="true" rows="10" paginatorPosition="bottom" style="width:500px;">
+                    
+                    <p:column sortBy="#{dept_tbl.departmentID}">
+
+                        <f:facet name="header">Department ID</f:facet>  
+
+                        <h:outputText value="#{dept_tbl.departmentID}"/>
+
+                    </p:column> 
+                    
+                    <p:column sortBy="#{dept_tbl.departmentName}">
+
+                        <f:facet name="header">Department Name</f:facet>  
+
+                        <h:outputText value="#{dept_tbl.departmentName}"/>
+
+                    </p:column> 
+                    
+                    <p:column sortBy="#{dept_tbl.note}">
+
+                        <f:facet name="header">Note</f:facet>  
+
+                        <h:outputText value="#{dept_tbl.note}"/>
+
+                    </p:column> 
+                    
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_Department_frm" oncomplete="dialog_Update_department.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{dept_tbl}" target="#{departmentController.department}"/>  
+
+                        </p:commandButton>  
+
+                    </p:column>
+                
+                </p:dataTable>
+                
+            </center>
+            
+        </p:layoutUnit>
+        
+    </p:layout>
+    
+</ui:composition>

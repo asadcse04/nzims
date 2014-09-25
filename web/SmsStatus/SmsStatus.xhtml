@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+        
+    <p:layout style="height: 250px;">
+        <p:layoutUnit position="center" size="30%">
+            <h:form id="SmsStatus_form">
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >SMS Status</p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Remaining SMS"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{smsStatusController.statusList.smsRemain}" styleClass="red" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Active To"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{smsStatusController.statusList.expireDate}" styleClass="red"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Status"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{smsStatusController.statusList.statusType}" styleClass="red"/>
+                            </p:column>
+                        </p:row>
+                        
+                    </p:panelGrid>
+                </center>
+            </h:form> 
+        </p:layoutUnit>
+    </p:layout>
+</ui:composition>
+

@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="stuff_update_frm" enctype="multipart/form-data">
+        <center>
+            <p:panelGrid styleClass="panelGrid">
+                <p:row>
+                    <p:column styleClass="header">Basic Info.</p:column>
+                </p:row>
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Stuff Name: "/>
+                    </p:column><p:column style="width: 130px;">
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.name}" styleClass="inputText"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Gender: "/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{stuff_Reg_Controller.stuff.gender}" styleClass="inputCombo" style="width: 165px;">
+                            <f:selectItem itemLabel="Select Gender" itemValue="" />
+                            <f:selectItem itemLabel="Male" itemValue="Male" />
+                            <f:selectItem itemLabel="Female" itemValue="Female" />
+                        </p:selectOneMenu>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Date Of Birth: "/>
+                    </p:column><p:column>
+                        <p:calendar value="#{stuff_Reg_Controller.stuff.dob}" navigator="true" effect="slide" styleClass="inputCal"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Father's Name: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.fatherName}" styleClass="inputText"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Mother's Name: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.motherName}" styleClass="inputText"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Educational Qualification:"/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.qualification}" styleClass="inputText"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Passed From: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.passedFrom}" styleClass="inputText"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Blood Group: "/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{stuff_Reg_Controller.stuff.bloodGroup}" styleClass="inputCombo" style="width: 165px;">  
+                            <f:selectItem itemLabel="Select Blood Group" itemValue="" />  
+                            <f:selectItem itemLabel="A+" itemValue="A+" />  
+                            <f:selectItem itemLabel="A-" itemValue="A-"/> 
+                            <f:selectItem itemLabel="B+" itemValue="B+"/> 
+                            <f:selectItem itemLabel="B-" itemValue="B-"/>
+                            <f:selectItem itemLabel="AB+" itemValue="AB+"/> 
+                            <f:selectItem itemLabel="AB-" itemValue="AB-"/> 
+                            <f:selectItem itemLabel="O+" itemValue="O+"/> 
+                            <f:selectItem itemLabel="O-" itemValue="O-"/> 
+                        </p:selectOneMenu>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Marital Status: "/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{stuff_Reg_Controller.stuff.maritalStatus}" styleClass="inputCombo" style="width: 165px;">
+                            <f:selectItem itemLabel="Select Marital Status" itemValue="" />
+                            <f:selectItem itemLabel="Single" itemValue="Single" />  
+                            <f:selectItem itemLabel="Married" itemValue="Married"/> 
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Religion: "/>
+                    </p:column><p:column>
+                        <p:selectOneMenu value="#{stuff_Reg_Controller.stuff.religion}" styleClass="inputCombo" style="width: 165px;">
+                            <f:selectItem itemLabel="Select Religion" itemValue="" />
+                            <f:selectItem itemLabel="Islam" itemValue="Islam" />  
+                            <f:selectItem itemLabel="Hindu" itemValue="Hindu"/> 
+                            <f:selectItem itemLabel="Buddhist" itemValue="Buddhist"/> 
+                            <f:selectItem itemLabel="Christian" itemValue="Christian"/> 
+                            <f:selectItem itemLabel="Other" itemValue="Other"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="header">Contact Info.</p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Present Address: "/>
+                    </p:column><p:column>
+                        <p:inputTextarea value="#{stuff_Reg_Controller.stuff.presentAddress}" styleClass="inputTextarea" style="width: 165px; height: 45px;"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Permanent Address: "/>
+                    </p:column><p:column>
+                        <p:inputTextarea value="#{stuff_Reg_Controller.stuff.permanentAddress}" styleClass="inputTextarea" style="width: 165px; height: 45px;"/>
+                    </p:column>
+
+                    <p:column styleClass="label">
+                        <h:outputText value="Contact Number: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.contactNo}" styleClass="inputText" maxlength="11">
+                            <f:validateLength maximum="11" minimum="11" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Email: "/>
+                    </p:column><p:column>
+                        <p:inputText value="#{stuff_Reg_Controller.stuff.email}" styleClass="inputText" type="email"/>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="header">Upload Photo</p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column styleClass="label">
+                        <h:outputText value="Photo: "/>
+                    </p:column><p:column>
+                        <h:graphicImage  value="/images/StuffImages/#{stuff_Reg_Controller.stuff.imgPath}" style="height: 75px; width: 70px ;" />
+                         <p:fileUpload value="#{stuff_Reg_Controller.photoFile}" mode="simple" style="width: 168px;"/>
+                    </p:column>
+                </p:row>
+
+            </p:panelGrid>
+            
+            <p:commandButton value="Update" update="grw" action="#{stuff_Reg_Controller.updateStuff}" ajax="false" icon="ui-icon-check" style="margin-top: 1%; margin-bottom: 1%;"/>
+      
+        </center>
+
+    </h:form>
+
+</ui:composition>
+
+

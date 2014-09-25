@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style=" width: auto;min-height:420px;" styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="create_inventory_type">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">Inventory Type</f:facet>
+
+                    <h:outputLabel value="Inventory Type*"/>
+                    <p:inputText id="invttyp" value="#{inventoryTypeController.inventoryType.inventoryTypeName}" required="true" requiredMessage="You must Provide a Inventory Type"/>
+
+                    <h:outputLabel value="Note"/>
+                    <p:inputText value="#{inventoryTypeController.inventoryType.note}"/>                   
+
+                    <p:commandButton value="Add" actionListener="#{inventoryTypeController.insertInventoryType}" update="grl :inventory_startup_tbl:create_inventory_type :inventory_startup_tbl:inventory_type_list" icon="ui-icon-check"/>
+                    <p:commandButton type="reset" value="Reset" icon="ui-icon-refresh" />
+
+                </p:panelGrid>
+
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="inventory_type_list">
+
+                    <p:dataTable var="inventory_typ_tbl" value="#{inventoryTypeController.inventoryTypeList}" >              
+
+                        <p:column headerText="inventory Type ID">
+                            <h:outputLabel value="#{inventory_typ_tbl.inventoryTypeID}"/>
+                        </p:column>
+
+                        <p:column headerText="inventory Type Name">
+                            <h:outputLabel value="#{inventory_typ_tbl.inventoryTypeName}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Current Date">
+                            <h:outputLabel value="#{inventory_typ_tbl.createDate}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{inventory_typ_tbl.note}"/>
+                        </p:column>     
+                        
+                         <p:column style="width:3%">  
+                              <p:commandButton  oncomplete="dialog_Update_inventory_type.show()" icon="ui-icon-pencil" title="Update">  
+                                         <f:setPropertyActionListener value="#{inventory_typ_tbl}" target="#{inventoryTypeController.inventoryType}"/>  
+                                      </p:commandButton> 
+                        </p:column>
+                    </p:dataTable>
+                </h:form>  
+            </center>
+        </p:layoutUnit>
+    </p:layout>
+
+</ui:composition>

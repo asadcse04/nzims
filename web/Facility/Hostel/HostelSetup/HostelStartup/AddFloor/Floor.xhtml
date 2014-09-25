@@ -1,0 +1,153 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="30%">
+            <h:form id="floor_form">
+                <p:growl id="grl" autoUpdate="true" sticky="false" showDetail="true" />
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center"> Add Floor </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Hostel Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu value="#{floorController.floor.hostelName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a hostel name.">
+                                    <f:selectItem itemLabel="Select hostel" itemValue=""/>
+                                    <f:selectItems value="#{floorController.hostelNameListdata}"/>
+                                    <p:ajax event="change" listener="#{floorController.buildingName_List}" update="buildingName"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Building Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="buildingName" value="#{floorController.floorName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please select a building name.">
+                                    <f:selectItem itemLabel="Select building" itemValue=""/>
+                                    <f:selectItems value="#{floorController.buildingNameList}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Floor Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{floorController.floor.floorName}" styleClass="inputText" required="true" requiredMessage="Please Enter Floor Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Location"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{floorController.floor.floorLocation}" styleClass="inputText" required="true" requiredMessage="Please Enter Location."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{floorController.floor.floorNote}" styleClass="inputText"/>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Add" actionListener="#{floorController.addFloor()}" update="grl :hostel:floor_form :hostel:floor_table" icon="ui-icon-check" style="margin-top: 8px;"/>
+                </center>
+            </h:form> 
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <h:form id="floor_table">
+                <center>          
+                    <p:dataTable var="table" value="#{floorController.floorAllList}" paginator="true" paginatorPosition="bottom" rows="10">              
+
+                        <p:column headerText="Floor ID" sortBy="#{table.floorId}">
+                            <h:outputLabel value="#{table.floorId}"/>
+                        </p:column>
+
+                        <p:column headerText="Floor Name" sortBy="#{table.floorName}">
+                            <h:outputLabel value="#{table.floorName}"/>
+                        </p:column>
+
+                        <p:column headerText="Location">
+                            <h:outputLabel value="#{table.floorLocation}"/>
+                        </p:column> 
+
+                        <p:column headerText="Building Name">
+                            <h:outputLabel value="#{table.buildingName}"/>
+                        </p:column> 
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{table.floorNote}"/>
+                        </p:column> 
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="floor_update.show()"  update=":hostel:upFloorForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{table}" target="#{floorController.floor}"/>   
+                            </p:commandButton> 
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+
+            <p:dialog widgetVar="floor_update"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl3" showDetail="true"/>
+                <h:form id="upFloorForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate Floor  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Hostel Name" />
+                                <p:selectOneMenu value="#{floorController.floor.hostelName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select Hostel" itemValue=""/>
+                                    <f:selectItems value="#{floorController.hostelNameListdata}"/>
+                                    <p:ajax event="change" listener="#{floorController.buildingName_List}" update="buildingNameList"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Building Name" />
+                                <p:selectOneMenu id="buildingNameList" value="#{floorController.floor.buildingName}" style="width:200px;" effect="slide">
+                                    <f:selectItem itemLabel="Select Building" itemValue=""/>
+                                    <f:selectItems value="#{floorController.buildingNameList}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Floor ID"/>
+                                <p:inputText id="f_id" value="#{floorController.floor.floorId}" readonly="true"/>
+
+                                <p:outputLabel value="Floor name"/>
+                                <p:inputText id="f_name" value="#{floorController.floor.floorName}" />
+
+                                <p:outputLabel value=" Location"/>
+                                <p:inputText id="f_address" value="#{floorController.floor.floorLocation}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="f_note" value="#{floorController.floor.floorNote}"/>                                                       
+
+                            </p:panelGrid> 
+                            <p:commandButton value="Update Info" update=":hostel:floor_table" actionListener="#{floorController.updateFloor()}" oncomplete="floor_update.hide()" style="margin-top: 8px;"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog> 
+        </p:layoutUnit>
+    </p:layout>
+</ui:composition>

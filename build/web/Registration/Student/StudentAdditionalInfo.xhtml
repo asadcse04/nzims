@@ -1,0 +1,194 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="additional_info_student">
+
+        <p:panelGrid columns="2" style="margin-bottom: 8px;">
+            
+            <h:outputLabel value="Student ID"/>
+
+            <p:outputLabel value="#{studentListController.student.studentID}" style="font-weight: bold;"/>
+
+            <h:outputLabel value="Student Name"/>
+
+            <p:outputLabel value="#{studentListController.student.studentName}" style="font-weight: bold;"/>
+
+        </p:panelGrid>
+
+        <p:outputLabel value="Previous Exam Info" style="font-size: 100%; font-weight: bold;"/>
+
+        <p:panelGrid columns="6" style=" margin-bottom: 3px; ">
+
+            <h:outputLabel value="Institute Name" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.instituteName}"/>
+
+
+            <h:outputLabel value="Education Board" />  
+
+            <p:selectOneMenu value="#{student_Reg_Controller.student.eductn_board}" style="width:120px;">
+
+                <f:selectItem itemLabel="Select One" itemValue="Select One" />  
+
+                <f:selectItem itemLabel="Barisal" itemValue="Barisal"/> 
+
+                <f:selectItem itemLabel="Chittagong" itemValue="Chittagong"/>
+
+                <f:selectItem itemLabel="Comilla" itemValue="Comilla"/>
+
+                <f:selectItem itemLabel="Dhaka" itemValue="Dhaka"/>
+
+                <f:selectItem itemLabel="Dinajpur" itemValue="Dinajpur"/>
+
+                <f:selectItem itemLabel="Jessore" itemValue="Jessore"/>
+
+                <f:selectItem itemLabel="Rajshahi" itemValue="Rajshahi"/>
+
+                <f:selectItem itemLabel="Sylhet" itemValue="Sylhet"/>
+
+                <f:selectItem itemLabel="Madrash" itemValue="Madrash"/>
+
+                <f:selectItem itemLabel="Technical" itemValue="Technical"/>
+
+                <f:selectItem itemLabel="DIBS(Dhaka)" itemValue="DIBS(Dhaka)"/>
+
+            </p:selectOneMenu>
+
+
+            <h:outputLabel value="Group" />  
+
+            <p:selectOneMenu value="#{student_Reg_Controller.student.group}" style="width:120px;" >  
+
+                <f:selectItem itemLabel="Select One" itemValue="" />
+
+                <f:selectItem itemLabel="Science" itemValue="Science" />  
+
+                <f:selectItem itemLabel="Commerce" itemValue="Commerce"/> 
+
+                <f:selectItem itemLabel="Arts" itemValue="Arts"/> 
+
+                <f:selectItem itemLabel="Other" itemValue="Other"/> 
+
+            </p:selectOneMenu>
+
+
+            <h:outputLabel value="Exam Name" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.p_examName}"/>
+
+
+            <h:outputLabel value="Exam Roll No" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.examRoll}"/>
+
+
+            <h:outputLabel value="Exam Reg. No" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.examRegNo}"/>
+
+
+            <h:outputLabel value="Exam Grade" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.grade}"/>
+
+
+            <h:outputLabel value="CGPA" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.cgpa}"/>
+
+
+            <h:outputLabel value="Passing Year" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.passingYear}"/>
+
+        </p:panelGrid>
+
+        <p:outputLabel value="Previous Institute Info" style="font-size: 100%; font-weight: bold"/>
+
+
+        <p:panelGrid columns="6" style=" margin-bottom: 3px;">
+
+            <h:outputLabel value="Institute Name" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.collegeName}"/>
+
+
+            <h:outputLabel value="Academic Year" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.academicYear}"/>
+
+
+            <h:outputLabel value="Education Board" />  
+
+            <p:selectOneMenu value="#{student_Reg_Controller.student.prvs_edu_board}" style="width:120px;">
+
+                <f:selectItem itemLabel="Select One" itemValue="" />  
+
+                <f:selectItem itemLabel="Barisal" itemValue="Barisal"/> 
+
+                <f:selectItem itemLabel="Chittagong" itemValue="Chittagong"/>
+
+                <f:selectItem itemLabel="Comilla" itemValue="Comilla"/>
+
+                <f:selectItem itemLabel="Dhaka" itemValue="Dhaka"/>
+
+                <f:selectItem itemLabel="Dinajpur" itemValue="Dinajpur"/>
+
+                <f:selectItem itemLabel="Jessore" itemValue="Jessore"/>
+
+                <f:selectItem itemLabel="Rajshahi" itemValue="Rajshahi"/>
+
+                <f:selectItem itemLabel="Sylhet" itemValue="Sylhet"/>
+
+                <f:selectItem itemLabel="Madrash" itemValue="Madrash"/>
+
+                <f:selectItem itemLabel="Technical" itemValue="Technical"/>
+
+                <f:selectItem itemLabel="DIBS(Dhaka)" itemValue="DIBS(Dhaka)"/>
+
+            </p:selectOneMenu>
+
+
+            <h:outputLabel value="Class Name" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.prvs_className}"/>
+
+
+            <h:outputLabel value="Class Roll No" />  
+
+            <p:inputText value="#{student_Reg_Controller.student.prvs_classRoll}"/>
+
+
+            <h:outputLabel value="Group" />  
+
+            <p:selectOneMenu value="#{student_Reg_Controller.student.prvs_deptName}" style="width:120px;">  
+
+                <f:selectItem itemLabel="Select One" itemValue="" />
+
+                <f:selectItem itemLabel="Science" itemValue="Science" />  
+
+                <f:selectItem itemLabel="Commerce" itemValue="Commerce"/> 
+
+                <f:selectItem itemLabel="Arts" itemValue="Arts"/> 
+
+                <f:selectItem itemLabel="Other" itemValue="Other"/> 
+
+            </p:selectOneMenu>
+
+        </p:panelGrid>  
+
+        <center>
+
+            <p:commandButton update="additional_info_student" value="Save" actionListener="#{student_Reg_Controller.saveAdditionalInfo(studentListController.student.studentID)}" ajax="false" icon="ui-icon-check"/>
+
+        </center>
+
+
+    </h:form>
+
+</ui:composition>
+

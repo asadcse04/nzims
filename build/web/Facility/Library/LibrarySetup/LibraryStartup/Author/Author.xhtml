@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%"> 
+
+            <h:form id="author">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column colspan="2" styleClass="Header" style="text-align: center" >
+                                Author
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Author Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{authorController.author.authorName}" styleClass="inputText" required="true" requiredMessage="Please Enter Author Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="About Author"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{authorController.author.aboutAuthor}" styleClass="inputText" required="true" requiredMessage="Please Enter About Author."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label" >
+                                <h:outputLabel value="Note"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{authorController.author.authornote}" styleClass="inputText" />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" actionListener="#{authorController.addAuthor()}" update="grl :library:author :library:authorlist_frm" icon="ui-icon-check" style="margin-top: 8px;" />
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+        <p:layoutUnit position="center">
+
+            <h:form id="authorlist_frm">
+
+                <center>
+
+                    <p:dataTable var="authorlist" value="#{authorController.allAuthorList}" paginator="true" paginatorPosition="top" rows="10" >
+
+                        <p:column headerText="Author Name">
+                            <h:outputLabel value="#{authorlist.authorName}"/>
+                        </p:column>
+
+                        <p:column headerText="About Author">
+                            <h:outputLabel value="#{authorlist.aboutAuthor}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{authorlist.authornote}"/>
+                        </p:column>
+
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="dig1.show()"  update=":library:upAuthorForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{authorlist}" target="#{authorController.author}"/>   
+                            </p:commandButton>   
+                        </p:column>
+
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+            <p:dialog widgetVar="dig1"  hideEffect="drop" showEffect="slide">
+
+                <p:growl id="upGrl3"/>
+                <h:form id="upAuthorForm" style="font-size: 12pt">
+
+                    <p:panel header="Upadate Author  information">
+
+                        <p:panelGrid columns="2" style="font-size: medium">
+                            <p:outputLabel value="Author ID"/>
+                            <p:inputText id="au_id" value="#{authorController.author.authorId}" readonly="true"/>
+
+                            <p:outputLabel value="Author Name"/>
+                            <p:inputText id="au_name" value="#{authorController.author.authorName}" />
+
+                            <p:outputLabel value="About Author"/>
+                            <p:inputText id="au_note" value="#{authorController.author.aboutAuthor}"/>                                                       
+
+                            <p:outputLabel value="Note"/>
+                            <p:inputText id="au_Note" value="#{authorController.author.authornote}"/>                                                       
+                        </p:panelGrid>
+                        
+                        <p:commandButton value="Update Info" update=":library:upGrl3 :library:authorlist_frm" actionListener="#{authorController.updateAuthor()}" oncomplete="dig1.hide()" style="margin-top: 8px;"/>
+
+                    </p:panel>
+                </h:form>
+            </p:dialog>
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>
+

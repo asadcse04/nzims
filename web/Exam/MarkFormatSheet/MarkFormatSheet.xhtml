@@ -1,0 +1,146 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <center>
+
+        <h:form id="mark_format_sheet_tbl_frm">
+
+            <p:dataTable value="#{outlook_Sbj_ConfigController.sbjCnfList}" var="subject_Cnf_tbl"
+
+                         paginator="true" rows="12" paginatorPosition="bottom" style="width:650px; margin:15px 15px 15px 15px;">
+
+                <p:column sortBy="#{subject_Cnf_tbl.acyrID}">
+
+                    <f:facet name="header">Academic Year</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.acyrID}"/>
+
+                </p:column>
+                
+                <p:column sortBy="#{subject_Cnf_tbl.schoolClassName}">
+
+                    <f:facet name="header">Class</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.schoolClassName}"/>
+
+                </p:column>
+                
+                <p:column sortBy="#{subject_Cnf_tbl.deptName}">
+
+                    <f:facet name="header">Department</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.deptName}"/>
+
+                </p:column>
+
+                <p:column style="width:3%">  
+
+                    <p:commandButton process="@this" update=":view_subjectList_frm1" actionListener="#{outlook_Sbj_ConfigController.subject_bookList(subject_Cnf_tbl)}" oncomplete="dialog_subjectList_view.show()" icon="ui-icon-pencil" title="Create BookList">
+                        <f:setPropertyActionListener value="#{subject_Cnf_tbl}" target="#{outlook_Sbj_ConfigController.sbjCnf}" />  
+                    </p:commandButton>  
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </center>
+    
+    <p:dialog header="Exam Mark Distribution Format" draggable="true" widgetVar="dialog_subjectList_view" width="1000" showEffect="drop" hideEffect="blind">
+
+            <h:form id="view_subjectList_frm1">
+                
+                <p:dataTable id="tbl_ll" value="#{outlook_Sbj_ConfigController.bookList}" var="sbjList" >
+                        <f:facet name="header">
+                            <p:outputLabel value="#{outlook_Sbj_ConfigController.sbjCnf.acyrID}"/>---
+               
+                            <p:outputLabel value="#{outlook_Sbj_ConfigController.sbjCnf.schoolClassName}"/>---
+                  
+                            <p:outputLabel value="#{outlook_Sbj_ConfigController.sbjCnf.deptName}"/> 
+                   
+                        </f:facet>
+                      <p:columnGroup type="header">
+                          <p:row>
+                              <p:column rowspan="2" headerText="Subject" />      
+                              <p:column rowspan="2" headerText="Total Mark" />   
+                              <p:column colspan="3" headerText="Class Test (CT)" />
+                              <p:column colspan="3" headerText="Written (WR)" />
+                              <p:column colspan="3" headerText="Objective (MCQ)" />
+                              <p:column colspan="3" headerText="Practial (PR)" />
+
+                          </p:row>
+                          <p:row>
+                              <p:column headerText="Mark" />
+                              <p:column headerText="Pass" />
+                              <p:column headerText="Accept" />
+                         
+                              <p:column headerText="Mark" />
+                              <p:column headerText="Pass" />
+                              <p:column headerText="Accept" />
+                          
+                              <p:column headerText="Mark" />
+                              <p:column headerText="Pass" />
+                              <p:column headerText="Accept" />
+                          
+                              <p:column headerText="Mark" />
+                              <p:column headerText="Pass" />
+                              <p:column headerText="Accept" />
+                          </p:row>
+                    </p:columnGroup>
+                        <p:column>
+                            <p:outputLabel value="#{sbjList}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                         <p:column>
+                            <p:outputLabel value=" "/>
+                        </p:column>
+                        
+                    </p:dataTable>
+                <p:commandButton value="Print">
+                    <p:printer target="tbl_ll" />
+                </p:commandButton>
+            </h:form>
+        
+        </p:dialog>
+
+</ui:composition>

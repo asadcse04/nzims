@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="prd_dt_frm">
+
+        <center>
+
+            <p:panelGrid columns="2" style="margin-bottom: 20px;">
+
+                <h:outputText value="Configuration ID" />
+
+                <p:outputLabel value="#{classRoutineController.class_routine.scClassCnfID}"/>
+
+
+                <h:outputText value="Shift" />
+
+                <p:outputLabel value="#{classRoutineController.class_routine.shiftName}"/>
+
+
+                <h:outputText value="Day Name" />  
+
+                <p:selectOneMenu value="#{classRoutineController.day}">
+
+                    <f:selectItem itemLabel="Select An Option" itemValue=""/>
+
+                    <f:selectItems value="#{classRoutineController.dayList}"/>
+
+                    <p:ajax event="change"/>
+
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+        </center>
+
+        <p:dataGrid var="prdList" value="#{classRoutineController.class_routine.period_List}" columns="4" rows="12" paginator="false">
+
+            <p:panel header="#{prdList.periodName}" style="text-align:center;">
+
+                <center>
+
+                    <p:panelGrid columns="2" style="width:200px;">
+
+                        <h:outputLabel value="Start Time" />  
+
+                        <p:outputLabel value="#{prdList.startTime}"/>
+
+
+                        <h:outputLabel value="End Time" />  
+
+                        <p:outputLabel value="#{prdList.endTime}"/>
+
+                    </p:panelGrid>
+
+                    <p:commandLink process="@this" update=":assignTchrSbj_frm" value="Assign" oncomplete="dialog_assign_TchrSbj.show()">
+
+                        <f:setPropertyActionListener value="#{prdList}" target="#{periodController.period}"/>
+
+                    </p:commandLink>
+
+                </center>
+
+            </p:panel>
+
+        </p:dataGrid>
+
+    </h:form>
+
+</ui:composition>
+

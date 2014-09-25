@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="30%">
+            
+            
+            
+          
+            
+            <h:form id="count_atten" >
+
+                <p:dataTable var="ListCount" value="#{attendanceInfoController.studentInfocount}" >
+                    <p:column>
+                        <p:panelGrid >
+                            
+                            <p:row>
+                                <p:column colspan="2"><h:outputText value="Attendance Status Summary"  style="font-weight: bold; alignment-adjust:central; "/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Total Working Day" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.presentCount + ListCount.absentCount}" styleClass="inputText" style="color: blue;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Present" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.presentCount}" styleClass="inputText" style="color: green;" /></p:column>
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column><h:outputText value="Absent" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.absentCount}" styleClass="inputText" style="color: red;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Leave" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.leaveCount}" styleClass="inputText" style="color: crimson;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Application" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.applicationCount}" styleClass="inputText" style="color:  blueviolet;" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><h:outputText value="Incomplte" /></p:column>
+                                <p:column><h:outputText value="#{ListCount.incomlieleCount}" styleClass="inputText" style="color: purple;" /></p:column>
+                            </p:row>
+                            
+                        </p:panelGrid>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+                       
+        </p:layoutUnit>
+        
+
+        <p:layoutUnit position="center">
+
+            <h:form id="atten_form">
+                <center>          
+                    <p:dataTable var="StAttenList" value="#{attendanceInfoController.studentInfoList}" paginator="true" paginatorPosition="bottom" rows="10">              
+                        <p:column headerText="Date">
+                            <h:outputLabel value="#{StAttenList.date}"/>
+                        </p:column>
+
+                        <p:column headerText="Status">
+                            <h:outputLabel value="#{StAttenList.absent}" style="color: #{StAttenList.absent=='Absent' ? 'red' :'green'}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{StAttenList.note}"/>
+                        </p:column>
+                    </p:dataTable>
+                </center>
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

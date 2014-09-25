@@ -1,0 +1,190 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+   
+
+            <h:form id="create_fee_frm">
+
+                
+
+                <center>
+
+
+                    <p:panel style="width: 650px;">
+                        
+                        <p:wizard id="crtfeewizard">
+                        
+                          
+                            
+                         <p:tab title="Choose Category Name">     
+                       
+                                 
+                         
+                    <center>
+                    
+                   <p:panelGrid styleClass="panelGrid">
+                       
+                       <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Academic Year"/>    
+                            </p:column><p:column>
+                                <p:selectOneMenu id="acyearid" value="#{feeController.fee.acyearid}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Academic Year.">
+                            <f:selectItem itemLabel="Select Academic Year" itemValue=""/>
+                            <f:selectItems value="#{feeController.academicYearList}"/>
+                           </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                       
+                       
+                   
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Fee Category"/>    
+                            </p:column><p:column>
+                                <p:selectOneMenu id="feecat" value="#{feeController.feeCatName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Enter Category.">
+                            <f:selectItem itemLabel="Select Category" itemValue=""/>
+                            <f:selectItems value="#{feeController.feeCatNameList}"/>
+                            <p:ajax event="change" listener="#{feeController.initFeeHeadNameList()}" update="fee_name"/>
+                           </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                        
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Fee Name"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="fee_name" value="#{feeController.feeHeadName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Enter Fee Name.">
+
+                            <f:selectItem itemLabel="Select Fee" itemValue=""/>
+
+                            <f:selectItems value="#{feeController.feeHeadNameList}"/>
+
+                        </p:selectOneMenu>   
+                                
+                            </p:column>
+                
+                        </p:row>
+                        
+        
+                    </p:panelGrid>
+                          </center> 
+                                
+                     </p:tab>
+                            
+                   
+                    <p:tab title="Choose Sub Fee">
+                    
+                       <center>
+                   
+                   <h:panelGroup layout="block" styleClass="selection" style="margin-top: 5%; margin-bottom: 5%;margin-left:20%;">
+                           
+                    <p:selectManyCheckbox value="#{feeController.fee.subHeadNameList}" layout="pageDirection">
+
+                   <f:selectItems value="#{feeController.subFeeHeadNameList}"/>
+
+                    </p:selectManyCheckbox> 
+                               
+                   </h:panelGroup>
+                    
+                      </center>    
+                                
+                     </p:tab> 
+                            
+                     <p:tab title="Finish">
+                       
+                         <p:growl id="grl" autoUpdate="false"  /> 
+                         
+                       <center>
+                    
+                    <p:panelGrid styleClass="panelGrid">
+                        
+                        
+                         <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Academic Year"/>    
+                            </p:column><p:column>
+                                <p:selectOneMenu id="acyearid2" value="#{feeController.fee.acyearid}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select Academic Year.">
+                            <f:selectItem itemLabel="Select Academic Year" itemValue=""/>
+                            <f:selectItems value="#{feeController.academicYearList}"/>
+                            </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                   
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Fee Category"/>    
+                            </p:column><p:column>
+                                <p:selectOneMenu id="feecat2" value="#{feeController.feeCatName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Category is Required">
+
+                            <f:selectItem itemLabel="Select Year" itemValue=""/>
+
+                            <f:selectItems value="#{feeController.feeCatNameList}"/>
+                            
+                            <p:ajax event="change" listener="#{feeController.initFeeHeadNameList()}" update="fee_name"/>
+
+                           </p:selectOneMenu>
+                            </p:column>   
+                        </p:row>
+                        
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="* " styleClass="red"/>
+                                <h:outputLabel value="Fee Name"/>
+                            </p:column><p:column>
+                                <p:selectOneMenu id="fee_name2" value="#{feeController.feeHeadName}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Fee Name is Required">
+
+                            <f:selectItem itemLabel="Select Fee" itemValue=""/>
+
+                            <f:selectItems value="#{feeController.feeHeadNameList}"/>
+
+                        </p:selectOneMenu>   
+                                
+                            </p:column>
+                
+                        </p:row>
+                        
+                        
+                        <p:row>
+                            
+                            <p:column styleClass="label"> 
+                                <h:outputLabel value="Sub fee List"/> 
+                            </p:column><p:column>
+                              <p:dataList value="#{feeController.fee.subHeadNameList}" var="subitem" itemType="square">
+                             #{subitem}
+                           </p:dataList>  
+                            </p:column>  
+                        
+                        </p:row>
+
+                    </p:panelGrid>  
+                       
+                    <p:commandButton value="Add" actionListener="#{feeController.createFee()}" update="create_fee_frm grl" icon="ui-icon-check" />
+
+                   </center>
+                
+                   </p:tab>     
+                   
+                </p:wizard>        
+                        
+               </p:panel>     
+
+               </center>   
+                
+               
+               
+            </h:form>
+
+        
+
+</ui:composition>

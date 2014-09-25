@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+            <h:form id="insert_principle_frm" enctype="multipart/form-data">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" showDetail="true" />
+
+                <center>
+
+                    <p:panelGrid styleClass="panelGrid">
+                        <p:row>
+                            <p:column colspan="2" styleClass="header" style="text-align: center">
+                                Add Principle 
+                            </p:column>    
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="*" styleClass="red"/>    
+                                <h:outputLabel value="Principle Name"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{principleController.principle.name}" styleClass="inputText" required="true" requiredMessage="Please Input Principle Name."/>   
+                            </p:column>   
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="*" styleClass="red"/>    
+                                <h:outputLabel value="Duration"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{principleController.principle.duration}" styleClass="inputText" required="true" requiredMessage="Please Input Duration." />   
+                            </p:column>   
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">                             
+                                <h:outputLabel value="Contribution"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{principleController.principle.contribution}"  styleClass="inputTextarea" style="width: 170px" />   
+                            </p:column>   
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">                             
+                                <h:outputLabel value="About"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{principleController.principle.about}"  styleClass="inputTextarea" style="width: 170px" />   
+                            </p:column>   
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">   
+                                <h:outputLabel value="*" styleClass="red"/>   
+                                <h:outputLabel value="Image"/>
+                            </p:column><p:column>
+                                <p:fileUpload value="#{principleController.photoFile}" mode="simple" required="true" requiredMessage="please Upload Image" style="width: 180px" />   
+                            </p:column>   
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" icon="ui-icon-check" actionListener="#{principleController.savePrinciple}" ajax="false"  style="margin-top: 8px" />
+
+                </center>
+
+            </h:form>
+
+</ui:composition>

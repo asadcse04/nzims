@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="assignStufffType">
+
+                    <p:dataTable value="#{assignStuffTypeController.userTypeList}" var="userType" paginator="true" rows="10" paginatorPosition="top" id="t1" style="width: 800px">
+
+                        <p:column headerText="Stuff ID" sortBy="#{userType.stuffID}">
+                            #{userType.stuffID}
+                        </p:column>
+
+                        <p:column headerText="Stuff Name" sortBy="#{userType.stuffName}">
+                            #{userType.stuffName}
+                        </p:column>
+
+                        <p:column headerText="Gender" sortBy="#{userType.gender}">
+                            #{userType.gender}
+                        </p:column>
+
+                        <p:column headerText="Mobile" sortBy="#{userType.contactNo}">
+                            #{userType.contactNo}
+                        </p:column>
+
+                        <p:column headerText="Assign">
+                            <p:commandButton oncomplete="assignStuffDialog.show()" update=":assignStuff" icon="ui-icon-pencil" title="Assign User">  
+                                <f:setPropertyActionListener value="#{userType}" target="#{assignStuffTypeController.assignUserType}"/>   
+                            </p:commandButton> 
+                        </p:column>
+
+                    </p:dataTable> 
+
+                </h:form>
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+
+    <p:dialog header="Assign Stuff" widgetVar="assignStuffDialog" modal="ture" style="width: 700px;">
+        
+        <h:form id="assignStuff">
+
+            <p:growl id="grl2" autoUpdate="false" sticky="false" />
+
+            <center>
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="2" styleClass="Header" style="text-align: center" >
+                            Assign Stuff
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column styleClass="label" >
+                            <h:outputLabel value="Stuff Name"/>
+                            <h:outputLabel value="*" styleClass="red"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{assignStuffTypeController.assignUserType.stuffName}" styleClass="inputText" readonly="true" style="color: red;"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column styleClass="label" >
+                            <h:outputLabel value="Mobile No"/>
+                            <h:outputLabel value="*" styleClass="red"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{assignStuffTypeController.assignUserType.contactNo}" styleClass="inputText" readonly="true"  style="color: red;"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column styleClass="label" >
+                            <h:outputLabel value="User Name"/>
+                            <h:outputLabel value="*" styleClass="red"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{assignStuffTypeController.assignUserType.stuffID}" readonly="true" styleClass="inputText" style="color: red;"/>
+                        </p:column>
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column styleClass="label" >
+                            <h:outputLabel value="Enter Password"/>
+                            <h:outputLabel value="*" styleClass="red"/>
+                        </p:column>
+                        <p:column>
+                            <p:password  value="#{assignStuffTypeController.assignUserType.password}" styleClass="inputText" required="true" requiredMessage="Please Enter Password." />
+                        </p:column>
+                    </p:row>
+
+                     <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="User Roles"/>
+                            <h:outputLabel value="*" styleClass="red"/>
+                        </p:column>
+                        <p:column>
+                            <p:selectOneMenu value="#{assignStuffTypeController.assignUserType.userType}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select A User Roles.">
+                                <f:selectItem itemLabel="Select Category" itemValue=""/>
+                                <f:selectItem itemLabel="Admin" itemValue="admin"/>
+                                <f:selectItem itemLabel="Teacher" itemValue="teacher"/>
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+                <p:commandButton value="Add" actionListener="#{assignStuffTypeController.insertStuffType()}" update="grl2 :assignStufffType" icon="ui-icon-check" oncomplete="assignStuffDialog.hide();" style="margin-top: 8px;"/>
+
+            </center>
+
+        </h:form>
+    </p:dialog>
+
+</ui:composition>

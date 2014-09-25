@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="40%">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Subject
+
+                    </f:facet>
+
+                    <h:outputText value="Subject Name"/>
+
+                    <p:inputText value="#{subjectController.subject.subjectName}"/>
+
+                    
+                    <h:outputText value="Subject Code"/>
+
+                    <p:inputText value="#{subjectController.subject.subjectCode}"/>
+
+                    
+                    <h:outputText value="Is Optional" />  
+
+                    <p:selectBooleanCheckbox value="#{subjectController.subject.status}"/> 
+                    
+                    
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{subjectController.subject.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Save" update=":settingFrm" actionListener="#{subjectController.insertSubject}" icon="ui-icon-check" style="margin: 1%;"/>
+
+            </center>
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <p:dataTable value="#{subjectController.sbjList}" var="subj_tbl"
+
+                             paginator="true" rows="8" paginatorPosition="bottom" style="width:500px;">
+
+                    <p:column sortBy="#{subj_tbl.subjectID}">
+
+                        <f:facet name="header">Subject ID</f:facet>  
+
+                        <h:outputText value="#{subj_tbl.subjectID}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{subj_tbl.subjectName}">
+
+                        <f:facet name="header">Subject Name</f:facet>  
+
+                        <h:outputText value="#{subj_tbl.subjectName}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{subj_tbl.subjectCode}">
+
+                        <f:facet name="header">Subject Code</f:facet>  
+
+                        <h:outputText value="#{subj_tbl.subjectCode}"/>
+
+                    </p:column> 
+                    
+                    <p:column sortBy="#{subj_tbl.status}">
+
+                        <f:facet name="header">Is Optional</f:facet>  
+
+                        <h:outputText value="#{subj_tbl.status}"/>
+
+                    </p:column> 
+                    
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_sbjct_frm" oncomplete="dialog_Update_subjct.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{subj_tbl}" target="#{subjectController.subject}"/>  
+
+                        </p:commandButton>  
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

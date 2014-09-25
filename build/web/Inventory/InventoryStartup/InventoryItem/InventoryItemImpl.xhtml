@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="create_inventory_item">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">Inventory Item</f:facet>
+                                            
+                    <h:outputLabel value="Inventory Type*"/>
+                    <p:selectOneMenu value="#{inventoryItemController.inventoryItem.inventoryTypeName}"  required="true" requiredMessage="You must provide a inventory type name">  
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                        <f:selectItems value="#{inventoryItemController.inventoryTypeNameData}" /> 
+                        <p:ajax event="change" listener="#{inventoryItemController.InvItemCatagory_List}" update="invtoryCategory"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Inventory Category*"/>
+                    <p:selectOneMenu id="invtoryCategory" value="#{inventoryItemController.inventoryItem.inventoryCatagoryName}"  required="true" requiredMessage="You must provide a inventory category name">  
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                        <f:selectItems value="#{inventoryItemController.inventoryCategoryNameData}" />  
+                        <p:ajax event="change" listener="#{inventoryItemController.InvItemGRoup_List}" update="invtoryGroup"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Inventory Group*"/>
+                    <p:selectOneMenu id="invtoryGroup" value="#{inventoryItemController.inventoryItem.inventoryGroupName}"  required="true" requiredMessage="You must provide a inventory group name">  
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                        <f:selectItems value="#{inventoryItemController.inventoryGroupNameData}" /> 
+                        <p:ajax event="change" listener="#{inventoryItemController.InvItemSubGroup_list}" update="invtorySubGroup"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Inventory Sub-Group*"/>
+                    <p:selectOneMenu id="invtorySubGroup" value="#{inventoryItemController.inventoryItem.subGroupName}"  required="true" requiredMessage="You must provide a inventory sub-group name">  
+                        <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                        <f:selectItems value="#{inventoryItemController.inventorySubGroupNameData}" />  
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Inventory Item*"/>
+                    <p:inputText id="invtgrop" value="#{inventoryItemController.inventoryItem.inventoryItem}" required="true" requiredMessage="You must provide a inventory sub-group"/>
+
+                    <h:outputLabel value="Note"/>
+                    <p:inputText value="#{inventoryItemController.inventoryItem.note}"/>                   
+
+                    <p:commandButton value="Add" actionListener="#{inventoryItemController.insertInventoryItem}" update="grl :inventory_startup_tbl:create_inventory_item :inventory_startup_tbl:inventory_item_list" icon="ui-icon-check"/>
+                    <p:commandButton type="reset" value="Reset" icon="ui-icon-refresh" />
+
+                </p:panelGrid>
+
+
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="inventory_item_list">
+
+                    <p:dataTable var="inventory_item_tbl" value="#{inventoryItemController.inventoryItemData}" >              
+
+                        <p:column headerText="Item ID">
+                            <h:outputLabel value="#{inventory_item_tbl.inventoryItemID}"/>
+                        </p:column>
+
+                        <p:column headerText="inventory Sub-Group">
+                            <h:outputLabel value="#{inventory_item_tbl.subGroupName}"/>
+                        </p:column>
+
+                        <p:column headerText="inventory Item">
+                            <h:outputLabel value="#{inventory_item_tbl.inventoryItem}"/>
+                        </p:column>
+
+                        <p:column headerText="Current Date">
+                            <h:outputLabel value="#{inventory_item_tbl.createDate}"/>
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            <h:outputLabel value="#{inventory_item_tbl.note}"/>
+                        </p:column>  
+
+                        <p:column style="width:3%">  
+                            <!--   <p:commandButton process="@this" update=":update_inventory_sub_group_frm" oncomplete="dialog_Update_inventory_sub_group.show()" icon="ui-icon-pencil" title="Update">  
+                                   <f:setPropertyActionListener value="#" target="#"/>  
+                               </p:commandButton>  -->
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>  
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

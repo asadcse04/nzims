@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+
+        <title>Phone Setting</title>
+        
+       
+    </h:head>
+
+    <h:body>
+        
+
+        <p:tabView id="phonestrt_tb" dynamic="true" effect="blind" effectDuration="normal" cache="false"> 
+
+        
+         <p:tab title="PhoneBook"> 
+
+            <ui:include src="PhoneBookImpl.xhtml"/>
+
+        </p:tab> 
+            
+       
+            <p:tab title="PhoneBook Category">  
+
+            <ui:include src="PhoneBookCategoryImpl.xhtml"/>
+            
+        </p:tab>
+
+
+     </p:tabView>
+    
+            
+   
+    
+    </h:body>
+
+</html>
+

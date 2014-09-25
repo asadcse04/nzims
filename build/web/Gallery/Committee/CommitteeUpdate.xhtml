@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+            <h:form id="committee_list">
+                <center>
+
+                    <p:dataTable var="cmlist" value="#{committeeController.committeeList}" id="committeelist" 
+
+                                 paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})" style="width:800px; margin-top: 8px; margin-bottom: 15px;">              
+
+                        <p:column headerText="Image">
+
+                            <p:graphicImage url="/images/committeeImage/#{cmlist.imgpath}" width="35px" height="30px"/>
+
+                        </p:column> 
+
+                        <p:column headerText="Name" sortBy="#{cmlist.name}" filterBy="#{cmlist.name}">
+
+                            <h:outputLabel value="#{cmlist.name}"/>
+
+                        </p:column>
+
+                        <p:column headerText="Designation">
+
+                            <h:outputLabel value="#{cmlist.designation}"/>
+
+                        </p:column> 
+
+                        <p:column headerText="Father Name">
+
+                            <h:outputLabel value="#{cmlist.fathername}"/>
+
+                        </p:column> 
+
+
+                        <p:column headerText="Edit">
+
+                            <p:commandButton  oncomplete="committee_update_dig.show()" update=":upCommitteeForm"  icon="ui-icon-pencil" title="Update">
+
+                                <f:setPropertyActionListener value="#{cmlist}" target="#{committeeController.committee}"/>   
+
+                            </p:commandButton>   
+
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                </center>
+
+            </h:form>
+
+
+
+            <p:dialog widgetVar="committee_update_dig" header="Update Committee"  hideEffect="drop" showEffect="slide">
+
+                <h:form id="upCommitteeForm" enctype="multipart/form-data">
+
+                    <p:growl id="comgrl" showDetail="true" sticky="false"/>
+
+                    <center>
+
+                        <p:panelGrid styleClass="panelGrid"> 
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value="Designation"/>   
+                                </p:column> <p:column styleClass="inputText">
+                                    <p:inputText value="#{committeeController.committee.designation}"/>
+                                </p:column>   
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value="Name"/>   
+                                </p:column> <p:column styleClass="inputText">
+                                    <p:inputText value="#{committeeController.committee.name}"/>
+                                </p:column>   
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value=" Father Name"/>   
+                                </p:column> <p:column styleClass="inputText">
+                                    <p:inputText value="#{committeeController.committee.fathername}"/>
+                                </p:column>   
+                            </p:row>
+                            
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value=" Address"/>   
+                                </p:column> <p:column>
+                                    <p:inputTextarea value="#{committeeController.committee.address}" styleClass="inputTextarea" style="width: 152px"/> 
+                                </p:column>   
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <h:outputLabel value="Mobile"/>   
+                                </p:column> <p:column styleClass="inputText">
+                                    <p:inputText value="#{committeeController.committee.mobile}"  maxlength="11" />
+                                </p:column>   
+                            </p:row>
+
+                            <p:row>
+                                <p:column styleClass="label">                                
+                                    <h:outputLabel value="About"/>   
+                                </p:column> <p:column>
+                                    <p:inputTextarea value="#{committeeController.committee.about}" styleClass="inputTextarea" style="width: 152px" />
+                                </p:column>   
+                            </p:row>
+
+                            <p:row>                            
+                                <p:column styleClass="label">                                
+                                    <p:graphicImage value="/images/committeeImage/#{committeeController.committee.imgpath}" width="50px" height="60px"/> 
+                                </p:column><p:column>
+                                    <p:fileUpload value="#{committeeController.photoFile}" mode="simple" style="width: 180px;"/>
+                                </p:column>   
+                            </p:row>            
+
+                        </p:panelGrid> 
+
+                        <p:commandButton value="Update Info" update=":committee_list upCommitteeForm2" actionListener="#{committeeController.updateCommittee()}" ajax="false" style="margin-top: 7px;"/>
+
+                    </center> 
+
+                </h:form>
+
+            </p:dialog> 
+
+</ui:composition>

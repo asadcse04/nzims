@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="teacher_tbl_frm">
+        
+        <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
+        
+        <center>      
+            <p:dataTable value="#{teacherController.teacharList}" var="teacher_tbl" filteredValue="#{teacherController.teachar_Filter_List}" 
+
+                         paginator="true" rows="10" paginatorPosition="bottom" style="width:950px; margin-top: 8px; margin-bottom: 15px;">
+
+                <p:column sortBy="#{teacher_tbl.teacherID}" filterBy="#{teacher_tbl.teacherID}">
+
+                    <f:facet name="header">Teacher ID</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.teacherID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{teacher_tbl.name}" filterBy="#{teacher_tbl.name}">
+
+                    <f:facet name="header">Teacher Name</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.name}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{teacher_tbl.gender}" filterBy="#{teacher_tbl.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.gender}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{teacher_tbl.contactNo}" filterBy="#{teacher_tbl.contactNo}">
+
+                    <f:facet name="header">Mobile No</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.contactNo}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{teacher_tbl.bloodGroup}" filterBy="#{teacher_tbl.bloodGroup}">
+
+                    <f:facet name="header">Blood Group</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.bloodGroup}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{teacher_tbl.religion}" filterBy="#{teacher_tbl.religion}">
+
+                    <f:facet name="header">Religion</f:facet>  
+
+                    <h:outputText value="#{teacher_tbl.religion}"/>
+
+                </p:column>  
+
+                <p:column style="width:3%">  
+
+                    <p:commandButton process="@this" update=":teacher_update_frm" oncomplete="dialog_update_teacher.show()" icon="ui-icon-pencil" title="Update">  
+
+                        <f:setPropertyActionListener value="#{teacher_tbl}" target="#{teacherController.teacher}"/>  
+
+                    </p:commandButton>  
+
+                </p:column>
+
+            </p:dataTable> 
+
+        </center>
+
+    </h:form>
+    
+    <p:dialog header="Update Teachers" widgetVar="dialog_update_teacher" width="auto" height="auto" showEffect="drop" hideEffect="drop">
+         <ui:include src="/Registration/Teacher/TeacherUpdate.xhtml"/> 
+    </p:dialog>
+
+
+</ui:composition>

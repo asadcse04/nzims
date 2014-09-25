@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:form id="student_tbl_frm2">
+
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+        <center>
+
+            <p:dataTable value="#{studentListController.studentList}" var="student_tbl" filteredValue="#{studentListController.student_Filter_List}" 
+
+                         paginator="true" rows="10" paginatorPosition="bottom" style="width:850px;">
+
+                <p:column sortBy="#{student_tbl.studentID}" filterBy="#{student_tbl.studentID}">
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_tbl.studentName}" filterBy="#{student_tbl.studentName}">
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentName}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_tbl.gender}" filterBy="#{student_tbl.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{student_tbl.gender}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.guardianContactNo}" filterBy="#{student_tbl.guardianContactNo}">
+
+                    <f:facet name="header">Guardian Mobile </f:facet>  
+
+                    <h:outputText value="#{student_tbl.guardianContactNo}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.bloodGroup}" filterBy="#{student_tbl.bloodGroup}">
+
+                    <f:facet name="header">Blood Group</f:facet>  
+
+                    <h:outputText value="#{student_tbl.bloodGroup}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.religion}" filterBy="#{student_tbl.religion}">
+
+                    <f:facet name="header">Religion</f:facet>  
+
+                    <h:outputText value="#{student_tbl.religion}"/>
+
+                </p:column>  
+
+                <p:column style="width:3%">  
+
+                    <p:commandButton process="@this" update=":student_view_frm" oncomplete="dialog_view_student.show()" icon="ui-icon-search" title="View">  
+
+                        <f:setPropertyActionListener value="#{student_tbl}" target="#{studentListController.student}"/>  
+
+                    </p:commandButton>  
+
+                </p:column>
+
+            </p:dataTable> 
+
+        </center>
+
+    </h:form>
+    
+    <p:dialog header="View Student" widgetVar="dialog_view_student" width="800" height="560" showEffect="drop" hideEffect="drop">
+        <ui:include src="OutLookStudent.xhtml"/> 
+    </p:dialog>
+
+
+</ui:composition>

@@ -1,0 +1,112 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="50%"> 
+            <h:form id="add_transportTyp">
+                <p:growl id="grl" autoUpdate="false" sticky="false" showDetail="true" />
+                <center>
+                    
+                    <p:panelGrid styleClass="panelGrid">
+                                                                 
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Transport Type"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{transportType_Controller.transportType.transportTypeName}" styleClass="inputText" required="true" requiredMessage="Please Enter Transport Type."/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="About Transport Type"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{transportType_Controller.transportType.about}" styleClass="inputText" required="true" requiredMessage="Please Enter About Transport Type."/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{transportType_Controller.transportType.note}" styleClass="inputTextarea" />
+                            </p:column>
+                        </p:row>
+                        
+                    </p:panelGrid>
+                                        
+                    <p:commandButton value="Save"   actionListener="#{transportType_Controller.insertTransportType}" update="grl add_transportTyp :transport:transportType" style="margin-top: 8px;" />
+
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <center>
+                <h:form id="transportType">
+
+                    <p:dataTable value="#{transportType_Controller.transportTypeList}" var="transportType" paginator="true" rows="10" paginatorPosition="bottom">
+                        
+                        <p:column headerText="Transport Type ID" sortBy="#{transportType.transportTypeID}">
+                              #{transportType.transportTypeID}
+                        </p:column>
+
+                        <p:column headerText="Transport Type Name" sortBy="#{transportType.transportTypeName}">
+                             #{transportType.transportTypeName} 
+                        </p:column>
+
+                        <p:column headerText="About Transport Type" sortBy="#{transportType.about}">
+                              #{transportType.about}
+                        </p:column>
+
+                        <p:column headerText="Note">
+                             #{transportType.note}
+                        </p:column>
+                        
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="transport_update_dialog.show()"  update=":transport:upTransForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{transportType}" target="#{transportType_Controller.transportType}"/>   
+                            </p:commandButton> 
+                        </p:column>
+                        
+                    </p:dataTable>     
+                </h:form>
+            </center>
+        </p:layoutUnit>
+    </p:layout>
+    
+    <p:dialog widgetVar="transport_update_dialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrltt" autoUpdate="false" sticky="false" showDetail="true"/>
+                <h:form id="upTransForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate stops  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Transport ID"/>
+                                <p:inputText id="b_id" value="#{transportType_Controller.transportType.transportTypeID}" readonly="true"/>
+
+                                <p:outputLabel value="Transport name"/>
+                                <p:inputText id="b_name" value="#{transportType_Controller.transportType.transportTypeName}" />
+
+                                <p:outputLabel value=" About"/>
+                                <p:inputText id="b_address" value="#{transportType_Controller.transportType.about}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="b_note" value="#{transportType_Controller.transportType.note}"/> 
+
+                            </p:panelGrid>
+                            <p:commandButton value="Update Info"  update=":transport:upGrltt :transport:transportType" actionListener="#{transportType_Controller.updateTransportType()}" oncomplete="transport_update_dialog.hide()" style="margin-top: 8px;"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog> 
+
+</ui:composition>

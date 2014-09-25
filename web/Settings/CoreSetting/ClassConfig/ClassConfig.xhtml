@@ -1,0 +1,254 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <center>
+
+                <h:form id="scCnf_frm">
+
+                    <p:panelGrid columns="2" style="width:300px;" >
+
+                        <f:facet name="header">Class Configure</f:facet>  
+
+                        <h:outputText value="Academic Year" />  
+
+                        <p:selectOneMenu value="#{scClassConfigController.classConfig.acyrID}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.academicYearList}" />
+                            
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class" />  
+
+                        <p:selectOneMenu id="classID" value="#{scClassConfigController.classConfig.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.schoolClassList}"/>  
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Department" />  
+
+                        <p:selectOneMenu id="deptID" value="#{scClassConfigController.classConfig.deptName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.departmentList}"/>  
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Shift" />  
+
+                        <p:selectOneMenu value="#{scClassConfigController.classConfig.shiftName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.shiftList}" />  
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Section" />  
+
+                        <p:selectOneMenu value="#{scClassConfigController.classConfig.sectionName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.sectionList}" />  
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Room Number" />  
+
+                        <p:selectOneMenu value="#{scClassConfigController.classConfig.roomNum}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{scClassConfigController.sc_roomList}" />  
+
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+                    <p:commandButton update="scCnf_frm,:scCnf_tbl_frm" actionListener="#{scClassConfigController.insertClassConfig}" value="Submit" icon="ui-icon-check" style="margin-top:2%;"/>
+
+                </h:form>
+
+            </center>
+
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <h:form id="scCnf_tbl_frm">
+
+                <p:dataTable value="#{scClassConfigController.listClassConfig}" var="scCnf_tbl" filteredValue="#{scClassConfigController.filterClassConfig}"
+
+                             paginator="true" rows="12" paginatorPosition="bottom" style="width:780px;">
+
+
+
+                    <p:column sortBy="#{scCnf_tbl.acyrID}" filterBy="#{scCnf_tbl.acyrID}">
+
+                        <f:facet name="header">Academic Year</f:facet>  
+
+                        <h:outputText value="#{scCnf_tbl.acyrID}"/>
+
+                    </p:column> 
+
+
+                    <p:column sortBy="#{scCnf_tbl.className}" filterBy="#{scCnf_tbl.className}">
+
+                        <f:facet name="header">Class</f:facet>  
+
+                        <h:outputText value="#{scCnf_tbl.className}"/>
+
+                    </p:column> 
+
+
+                    <p:column sortBy="#{scCnf_tbl.deptName}" filterBy="#{scCnf_tbl.deptName}">
+
+                        <f:facet name="header">Department</f:facet>  
+
+                        <h:outputText value="#{scCnf_tbl.deptName}"/>
+
+                    </p:column>
+
+
+                    <p:column sortBy="#{scCnf_tbl.shiftName}" filterBy="#{scCnf_tbl.shiftName}">
+
+                        <f:facet name="header">Shift</f:facet>  
+
+                        <h:outputText value="#{scCnf_tbl.shiftName}"/>
+
+                    </p:column>
+
+
+                    <p:column sortBy="#{scCnf_tbl.sectionName}" filterBy="#{scCnf_tbl.sectionName}">
+
+                        <f:facet name="header">Section</f:facet>  
+
+                        <h:outputText value="#{scCnf_tbl.sectionName}"/>
+
+                    </p:column>
+
+
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_class_config_frm" oncomplete="dialog_class_config_update.show()" icon="ui-icon-pencil" title="Upadte Class Config">
+
+                            <f:setPropertyActionListener value="#{scCnf_tbl}" target="#{scClassConfigController.classConfig}"/>  
+
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+            <p:dialog header="Update Class Config" widgetVar="dialog_class_config_update" resizable="true" width="500">
+                <center>
+                    <h:form id="update_class_config_frm">
+
+                        <p:growl autoUpdate="true" sticky="true" id="grw"/> 
+
+                        <p:panelGrid columns="2" style="width:300px;" > 
+
+                            <h:outputText value="Academic Year" />  
+
+                            <p:selectOneMenu value="#{scClassConfigController.classConfig.acyrID}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.academicYearList}" />
+
+                                <p:ajax event="change" update="classID2" listener="#{scClassConfigController.scClass_List()}"/> 
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Class" />  
+
+                            <p:selectOneMenu id="classID2" value="#{scClassConfigController.classConfig.className}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.schoolClassList}"/>  
+
+                                <p:ajax event="change" update="deptID2" listener="#{scClassConfigController.deptList}"/>
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Department" />  
+
+                            <p:selectOneMenu id="deptID2" value="#{scClassConfigController.classConfig.deptName}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.departmentList}"/>  
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Shift" />  
+
+                            <p:selectOneMenu value="#{scClassConfigController.classConfig.shiftName}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.shiftList}" />  
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Section" />  
+
+                            <p:selectOneMenu value="#{scClassConfigController.classConfig.sectionName}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.sectionList}" />  
+
+                            </p:selectOneMenu>
+
+
+                            <h:outputText value="Room Number" />  
+
+                            <p:selectOneMenu value="#{scClassConfigController.classConfig.roomNum}" effect="slide" >  
+
+                                <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                                <f:selectItems value="#{scClassConfigController.sc_roomList}" />  
+
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+
+                        <p:commandButton update="update_class_config_frm,:scCnf_tbl_frm" actionListener="#{scClassConfigController.updateClassConfig()}" value="Update" icon="ui-icon-check" oncomplete="dialog_class_config_update.hide()" style="margin-top:2%;"/>
+
+                    </h:form>
+                </center>
+            </p:dialog>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

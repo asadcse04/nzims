@@ -1,0 +1,186 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout  style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="30%">
+
+            <h:form id="exam_default_marks">
+
+                <center>
+
+                    <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                    <p:panelGrid columns="2">
+
+                        <f:facet name="header">
+
+                            Default Marks Division
+
+                        </f:facet>
+
+                        <h:outputText value="Short Code"/>
+
+                        <p:inputText value="#{defaultMarkDivisionController.d_mark_division.shortCode}"/>
+
+
+                        <h:outputText value="Title"/>
+
+                        <p:inputText value="#{defaultMarkDivisionController.d_mark_division.title}"/>
+
+
+                        <h:outputText value="Total Mark"/>
+
+                        <p:inputText value="#{defaultMarkDivisionController.d_mark_division.totalMark}"/>
+
+
+                        <h:outputText value="Acceptance"/>
+
+                        <p:inputText value="#{defaultMarkDivisionController.d_mark_division.acceptance}"/>
+
+
+                        <h:outputText value="Pass Mark"/>
+
+                        <p:inputText value="#{defaultMarkDivisionController.d_mark_division.passMark}"/>
+
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Add" actionListener="#{defaultMarkDivisionController.insert_d_mark_Division}" update="grl :exam_startup_tbl:exam_default_marks :exam_startup_tbl:exam_default_marks_tbl" icon="ui-icon-check" style="margin-top: 6px;"/>
+                </center>
+            </h:form>     
+
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <h:form id="exam_default_marks_tbl">
+
+                    <p:dataTable value="#{defaultMarkDivisionController.dmd_list}" var="dmd_tbl"
+
+                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:550px;">
+
+                        <p:column sortBy="#{dmd_tbl.dmdId}">
+
+                            <f:facet name="header">ID</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.dmdId}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{dmd_tbl.shortCode}">
+
+                            <f:facet name="header">Short Code</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.shortCode}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{dmd_tbl.title}">
+
+                            <f:facet name="header">Title</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.title}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{dmd_tbl.totalMark}">
+
+                            <f:facet name="header">Total Mark</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.totalMark}"/>
+
+                        </p:column> 
+
+                        <p:column sortBy="#{dmd_tbl.acceptance}">
+
+                            <f:facet name="header">Acceptance</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.acceptance}"/>
+
+                        </p:column>
+
+                        <p:column sortBy="#{dmd_tbl.passMark}">
+
+                            <f:facet name="header">Pass Mark</f:facet>  
+
+                            <h:outputText value="#{dmd_tbl.passMark}"/>
+
+                        </p:column>
+
+                        <p:column style="width:3%">  
+
+                            <p:commandButton process="@this" update=":exam_startup_tbl:update_mdiv_frm" oncomplete="dialog_Update_markDivision.show()" icon="ui-icon-pencil" title="Update">  
+
+                                <f:setPropertyActionListener value="#{dmd_tbl}" target="#{defaultMarkDivisionController.d_mark_division}"/>  
+
+                            </p:commandButton>  
+
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>  
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+    <p:dialog header="Edit Mark Division" widgetVar="dialog_Update_markDivision" width="450" showEffect="drop" hideEffect="drop">
+
+         <h:form id="update_mdiv_frm">
+            
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+                    
+                    <h:outputText value="Mark Division ID"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.dmdId}" readonly="true"/>
+                    
+
+                    <h:outputText value="Short Code"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.shortCode}"/>
+                    
+                    
+                    <h:outputText value="Title"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.title}" maxlength="100"/>
+                    
+                    
+                    <h:outputText value="Total Mark"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.totalMark}"/>
+                    
+                    
+                    <h:outputText value="Acceptance"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.acceptance}"/>
+                    
+                    
+                    <h:outputText value="Pass Mark"/>
+
+                    <p:inputText value="#{defaultMarkDivisionController.d_mark_division.passMark}"/>
+
+                </p:panelGrid>
+                
+                <p:commandButton value="Edit" update=":exam_startup_tbl:update_mdiv_frm :exam_startup_tbl:exam_default_marks_tbl" actionListener="#{defaultMarkDivisionController.edit_d_mark_Division}" oncomplete="dialog_Update_markDivision.hide()" style="margin-top: 1%;"/>
+
+            </center>
+
+        </h:form>
+
+    </p:dialog>
+
+</ui:composition>

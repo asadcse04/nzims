@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <p:layout style="min-width:1000px;min-height:420px;">
+
+        <p:layoutUnit position="west" size="30%" style="border: none"> 
+
+            <h:form id="insert_noticecat_frm">
+
+                <p:growl id="grl" autoUpdate="false" sticky="false" />
+
+                <center>
+
+
+                    <p:panelGrid columns="2">
+
+                        <f:facet name="header">
+
+                            Create Notice Category
+
+                        </f:facet>
+
+                        
+                        <h:outputLabel value="Category Name*"/>
+
+                        <p:inputText  value="#{noticeCategoryController.noticeCategory.categoryname}" required="true" requiredMessage="Category Name is Required"/>
+
+                     
+                        <h:outputLabel value="Display Color"/>
+
+                        <p:selectOneMenu value="#{noticeCategoryController.noticeCategory.color}" style="width: 140px;" required="true" requiredMessage="Color is required">
+                        
+                            <f:selectItem itemLabel="Select color" itemValue=""/>
+                            
+                            <f:selectItems value="#{noticeCategoryController.displaycolor}"/>
+                        
+                        </p:selectOneMenu>
+
+
+                        <h:outputLabel value="Noe"/>
+                        
+                        <p:inputText value="#{noticeCategoryController.noticeCategory.note}"/>
+                        
+                        <p:commandButton value="Add" actionListener="#{noticeCategoryController.addNoticeCategory()}" update="grl :notice_pub_strt_tb:noticecat_frm" icon="ui-icon-check" />
+
+                        <p:commandButton type="reset" value="Reset" icon="ui-icon-refresh" update="insert_noticecat_frm" />
+
+                    </p:panelGrid>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+
+
+
+        <p:layoutUnit position="center" style="border: none">
+
+            <h:form id="noticecat_frm">
+
+                <center>
+
+                    <p:dataTable var="noticecatlist" value="#{noticeCategoryController.noticeCategoryList}">
+
+                          <p:column headerText="Category ID">
+
+                              <h:outputLabel value="#{noticecatlist.categoryid}"/>
+
+                        </p:column>
+                        
+                        <p:column headerText="Category Name">
+
+                            <h:outputLabel value="#{noticecatlist.categoryname}"/>
+
+                        </p:column>
+                        
+                        <p:column headerText="Display Color" style="background: #{noticecatlist.color}">
+
+                            <h:outputLabel /> 
+
+                        </p:column>
+
+                        <p:column headerText="Note">
+
+                            <h:outputLabel value="#{noticecatlist.note}"/>
+
+                        </p:column>
+            
+                    </p:dataTable>
+
+                </center> 
+
+            </h:form>
+
+        </p:layoutUnit>
+
+    </p:layout>
+
+</ui:composition>

@@ -1,0 +1,165 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight">
+        <p:layoutUnit position="west" size="37%"> 
+            <h:form id="add_transport1">
+                <p:growl id="grl" autoUpdate="false" sticky="false" showDetail="true" />
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Transport Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{addTransport_Controller.addTransport.vehicleName}" styleClass="inputText" required="true" requiredMessage="Please Enter Transport Name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Type Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+
+                            <p:column>
+                                <p:selectOneMenu value="#{addTransport_Controller.addTransport.typeName}" styleClass="inputCombo" required="true" style="width: 180px;" requiredMessage="Please Select Route Name.">
+                                    <f:selectItem itemLabel="Select Route" itemValue=""/>
+                                    <f:selectItems value="#{addTransport_Controller.transportTypeName}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Transport Description"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputTextarea value="#{addTransport_Controller.addTransport.vehicleDescription}" styleClass="inputTextarea"  required="true" requiredMessage="Please Enter Description."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Special Symbol"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{addTransport_Controller.addTransport.specialSymbol}" styleClass="inputTextarea"  />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Seat Capacity"/>
+                            </p:column><p:column>
+                                <p:inputText value="#{addTransport_Controller.addTransport.seatCapacity}" styleClass="inputTextarea"  />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputTextarea  value="#{addTransport_Controller.addTransport.note}" styleClass="inputTextarea"  />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+                    <p:commandButton value="Save" actionListener="#{addTransport_Controller.insertTransport()}" update="grl :transport:add_transport1 :transport:abc " style="margin-top: 8px;"  />
+
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <center>
+                <h:form id="abc">
+
+                    <p:dataTable value="#{addTransport_Controller.addTransportList}" var="addTransport" paginator="true" rows="10" paginatorPosition="bottom" id="t1">
+
+                        <p:column headerText="Stops ID" sortBy="#{addTransport.vehicleID}">
+                            #{addTransport.vehicleID}
+                        </p:column>
+
+                        <p:column headerText="Transport Name" sortBy="#{addTransport.vehicleName}">
+                            #{addTransport.vehicleName}
+                        </p:column>
+
+                        <p:column headerText="Type Name" sortBy=" #{addTransport.typeName}">
+                            #{addTransport.typeName}
+                        </p:column>
+
+                        <p:column headerText="Description">
+                            #{addTransport.vehicleDescription} 
+                        </p:column>
+
+                        <p:column headerText="Symbol">
+                            #{addTransport.specialSymbol}
+                        </p:column>
+
+                        <p:column headerText="Seat Capacity" sortBy="#{addTransport.seatCapacity}">
+                            #{addTransport.seatCapacity}
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            #{addTransport.note}
+                        </p:column>
+
+                        <p:column headerText="Edit">
+                            <p:commandButton  update=":transport:updAddTransForm" oncomplete="addTransport_update_dialog.show()"  icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{addTransport}" target="#{addTransport_Controller.addTransport}"/>   
+                            </p:commandButton> 
+                        </p:column>
+
+                    </p:dataTable>     
+                </h:form>
+            </center>
+        </p:layoutUnit>
+    </p:layout>
+
+    <p:dialog widgetVar="addTransport_update_dialog"  hideEffect="drop" showEffect="slide">
+        <p:growl id="grlTransportUp" autoUpdate="false" sticky="false" showDetail="true" />
+        
+        <h:form id="updAddTransForm" style="font-size: 12pt">
+            <center>
+                <p:panel header="Upadate information">
+                    <p:panelGrid columns="2" style="font-size: medium">
+
+                        <p:outputLabel value="Type Name" />
+                        <p:selectOneMenu  value="#{addTransport_Controller.addTransport.typeName}"  effect="slide">
+                            <f:selectItems value="#{addTransport_Controller.transportTypeName}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Transport ID"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.vehicleID}" readonly="true"/>
+
+                        <p:outputLabel value="Transport name"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.vehicleName}" />
+
+                        <p:outputLabel value=" Transport Description"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.vehicleDescription}"/>                                                       
+
+                        <p:outputLabel value="Special Symbol"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.specialSymbol}"/> 
+
+                        <p:outputLabel value="Seat Capacity"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.seatCapacity}"/> 
+
+                        <p:outputLabel value="Note"/>
+                        <p:inputText  value="#{addTransport_Controller.addTransport.note}"/> 
+
+                    </p:panelGrid>
+                    <p:commandButton value="Update Info"  update=":transport:grlTransportUp :transport:abc" actionListener="#{addTransport_Controller.updateTransport()}" oncomplete="addTransport_update_dialog.hide()" style="margin-top: 8px;"/>
+                </p:panel>   
+            </center>
+        </h:form>
+    </p:dialog> 
+
+</ui:composition>

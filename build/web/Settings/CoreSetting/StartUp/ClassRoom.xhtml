@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="40%">
+
+            <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
+
+            <center>
+
+                <p:panelGrid columns="2">
+
+                    <f:facet name="header">
+
+                        Class Room
+
+                    </f:facet>
+                    
+                    <h:outputText value="Room No"/>
+
+                    <p:inputText value="#{classRoomController.class_room.roomNo}"/>
+
+                    <h:outputText value="Room Capacity"/>
+
+                    <p:inputText value="#{classRoomController.class_room.roomCapacity}"/>
+                    
+                    <h:outputText value="Exam Capacity"/>
+
+                    <p:inputText value="#{classRoomController.class_room.examCapacity}"/>
+                    
+                    <h:outputText value="Location"/>
+
+                    <p:inputTextarea value="#{classRoomController.class_room.location}" maxlength="100"/>
+                    
+                    <h:outputText value="Note"/>
+
+                    <p:inputTextarea value="#{classRoomController.class_room.note}" maxlength="100"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Save" update=":settingFrm" actionListener="#{classRoomController.insert_Class_Room}" icon="ui-icon-check" style="margin: 1%;"/>
+
+            </center>
+
+        </p:layoutUnit>
+        
+
+        <p:layoutUnit position="center">
+
+            <center>
+
+                <p:dataTable value="#{classRoomController.cl_room_list}" var="cl_rm_tbl"
+
+                             paginator="true" rows="15" paginatorPosition="bottom" style="width:550px;">
+
+                    <p:column sortBy="#{cl_rm_tbl.roomID}">
+
+                        <f:facet name="header">Room ID</f:facet>  
+
+                        <h:outputText value="#{cl_rm_tbl.roomID}"/>
+
+                    </p:column> 
+
+                    <p:column sortBy="#{cl_rm_tbl.roomNo}">
+
+                        <f:facet name="header">Room No</f:facet>  
+
+                        <h:outputText value="#{cl_rm_tbl.roomNo}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{cl_rm_tbl.location}">
+
+                        <f:facet name="header">Location</f:facet>  
+
+                        <h:outputText value="#{cl_rm_tbl.location}"/>
+
+                    </p:column>
+
+                    <p:column sortBy="#{cl_rm_tbl.roomCapacity}">
+
+                        <f:facet name="header">Room Capacity</f:facet>  
+
+                        <h:outputText value="#{cl_rm_tbl.roomCapacity}"/>
+
+                    </p:column>
+                    
+                    <p:column sortBy="#{cl_rm_tbl.examCapacity}">
+
+                        <f:facet name="header">Exam Capacity</f:facet>  
+
+                        <h:outputText value="#{cl_rm_tbl.examCapacity}"/>
+
+                    </p:column>
+                    
+                    <p:column style="width:3%">  
+
+                        <p:commandButton process="@this" update=":update_classroom_frm" oncomplete="dialog_Update_classroom.show()" icon="ui-icon-pencil" title="Update">  
+
+                            <f:setPropertyActionListener value="#{cl_rm_tbl}" target="#{classRoomController.class_room}"/>  
+
+                        </p:commandButton>  
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </center>
+
+        </p:layoutUnit>
+
+    </p:layout>
+  
+</ui:composition>

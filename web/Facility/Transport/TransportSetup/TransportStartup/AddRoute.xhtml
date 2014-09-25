@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="50%"> 
+            <h:form id="add_route">
+                <p:growl id="grl" autoUpdate="false" sticky="false" showDetail="true" />
+                <center>
+                    <p:panelGrid styleClass="panelGrid">
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Route Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{addRoute_Controller.addRouteItem.routeName}" styleClass="inputText" required="true" requiredMessage="Please Enter route name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Location Name"/>
+                                <h:outputLabel value="*" styleClass="red"/>
+                            </p:column>
+                            <p:column>
+                                <p:inputText value="#{addRoute_Controller.addRouteItem.routeLocation}" styleClass="inputText" required="true" requiredMessage="Please Enter location name."/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column styleClass="label">
+                                <h:outputLabel value="Note"/>
+                            </p:column><p:column>
+                                <p:inputTextarea value="#{addRoute_Controller.addRouteItem.routeNote}" styleClass="inputTextarea"  />
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+                    <p:commandButton value="Save"   actionListener="#{addRoute_Controller.insertRoute}" update="grl add_route :transport" style="margin-top: 8px;" />
+                </center>
+            </h:form>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <center>
+                <h:form id="addroutefrm">
+
+                    <p:dataTable value="#{addRoute_Controller.routeList}" var="addRoute" paginator="true" rows="10" paginatorPosition="bottom">
+
+                        <p:column headerText="Route ID" sortBy="#{addRoute.routeID}">
+                            #{addRoute.routeID}
+                        </p:column>
+
+                        <p:column headerText="Route Name" sortBy="#{addRoute.routeName}">
+                            #{addRoute.routeName} 
+                        </p:column>
+
+                        <p:column headerText="Location" sortBy="#{addRoute.routeLocation}">
+                            #{addRoute.routeLocation}
+                        </p:column>
+
+                        <p:column headerText="Note">
+                            #{addRoute.routeNote}
+                        </p:column>
+                        
+                        <p:column headerText="Edit">
+                            <p:commandButton   oncomplete="route_update_dialog.show()"  update=":transport:upRouteForm" icon="ui-icon-pencil" title="Update">
+                                <f:setPropertyActionListener value="#{addRoute}" target="#{addRoute_Controller.addRouteItem}"/>   
+                            </p:commandButton> 
+                        </p:column>
+                        
+                    </p:dataTable>     
+                </h:form>
+            </center>
+        </p:layoutUnit>
+    </p:layout>
+    
+    <p:dialog widgetVar="route_update_dialog"  hideEffect="drop" showEffect="slide">
+                <p:growl id="upGrl2" autoUpdate="false" sticky="false" showDetail="true"/>
+                <h:form id="upRouteForm" style="font-size: 12pt">
+                    <center>
+                        <p:panel header="Upadate route  information">
+                            <p:panelGrid columns="2" style="font-size: medium">
+
+                                <p:outputLabel value="Route ID"/>
+                                <p:inputText id="b_id" value="#{addRoute_Controller.addRouteItem.routeID}" readonly="true"/>
+
+                                <p:outputLabel value="Route name"/>
+                                <p:inputText id="b_name" value="#{addRoute_Controller.addRouteItem.routeName}" />
+
+                                <p:outputLabel value=" Location"/>
+                                <p:inputText id="b_address" value="#{addRoute_Controller.addRouteItem.routeLocation}"/>                                                       
+
+                                <p:outputLabel value="Note"/>
+                                <p:inputText id="b_note" value="#{addRoute_Controller.addRouteItem.routeNote}"/> 
+
+                            </p:panelGrid>
+                            <p:commandButton value="Update Info"  update=":transport:upGrl2 :transport:addroutefrm" actionListener="#{addRoute_Controller.updateRoute()}" oncomplete="route_update_dialog.hide()" style="margin-top: 8px;"/>
+                        </p:panel>   
+                    </center>
+                </h:form>
+            </p:dialog> 
+</ui:composition>

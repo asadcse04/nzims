@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+                
+
+
+         
+           
+    <h:form id="stdform">
+        
+      <p:growl id="stdsrcgrl" autoUpdate="true" sticky="false"/>   
+        
+      <center>
+   
+            <p:panelGrid styleClass="panelGrid">
+             
+                 
+             
+                 <p:row>
+                 <p:column colspan="2" styleClass="label">
+                 <p:inputText id="search" value="#{feeCollectionController.feeInvDetObj.studentid}"/><p:spacer width="20px"/>
+                 <p:commandButton value="Search" id="btsearch" action="#{feeCollectionController.allInfoStudent()}" update="stdsrcgrl stdform" icon="ui-icon-search"/> <br /><br /><br />
+                  <p:watermark  value="Search student by ID" for="search" id="name_watermark" />
+                 <p:tooltip for="btsearch" showEffect="slide" hideEffect="slide"   value="Search student by ID" />
+                 </p:column>
+                 </p:row>
+                 
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Student Name"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="nm" value="#{feeCollectionController.feeInvDetObj.studentname}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                  
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Gender"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="gn" value="#{feeCollectionController.feeInvDetObj.gender}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Father's Name"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="fn" value="#{feeCollectionController.feeInvDetObj.fathername}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Gurdian Mobile"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="gm" value="#{feeCollectionController.feeInvDetObj.contactno}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Academic Year"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="ay" value="#{feeCollectionController.feeInvDetObj.academicyearid}"/>    
+                     </p:column>
+                 </p:row>
+                
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Class"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="cl" value="#{feeCollectionController.feeInvDetObj.classname}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                  <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Department"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="dept" value="#{feeCollectionController.feeInvDetObj.departname}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Shift"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="shft" value="#{feeCollectionController.feeInvDetObj.shiftname}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Section"/>    
+                     </p:column><p:column styleClass="label">
+                         <h:outputLabel id="sec" value="#{feeCollectionController.feeInvDetObj.sectionname}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                 <p:row>
+                     <p:column styleClass="label">
+                         <h:outputLabel value="Roll"/>    
+                     </p:column><p:column styleClass="label" style="width: 300px">
+                         <h:outputLabel id="roll" value="#{feeCollectionController.feeInvDetObj.studentroll}"/>    
+                     </p:column>
+                 </p:row>
+                 
+                
+             </p:panelGrid>
+    
+          <p:commandButton value="Next" onclick="PF('feecollection').show()"/>
+        
+    
+        </center>
+                 
+                 
+          </h:form>
+            
+          
+        
+        
+
+
+</ui:composition>

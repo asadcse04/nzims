@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <center>
+
+        <h:form id="sbjCnf_tbl_frm">
+
+            <p:dataTable value="#{outlook_Sbj_ConfigController.sbjCnfList}" var="subject_Cnf_tbl"
+
+                         paginator="true" rows="12" paginatorPosition="bottom" style="width:650px; margin:15px 15px 15px 15px;">
+
+                <p:column sortBy="#{subject_Cnf_tbl.acyrID}">
+
+                    <f:facet name="header">Academic Year</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.acyrID}"/>
+
+                </p:column>
+                
+                <p:column sortBy="#{subject_Cnf_tbl.schoolClassName}">
+
+                    <f:facet name="header">Class</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.schoolClassName}"/>
+
+                </p:column>
+                
+                <p:column sortBy="#{subject_Cnf_tbl.deptName}">
+
+                    <f:facet name="header">Department</f:facet>  
+
+                    <h:outputText value="#{subject_Cnf_tbl.deptName}"/>
+
+                </p:column>
+
+                <p:column style="width:3%">  
+
+                    <p:commandButton process="@this" update=":view_subjectList_frm" actionListener="#{outlook_Sbj_ConfigController.subject_bookList(subject_Cnf_tbl)}" oncomplete="dialog_view_subjectList.show()" icon="ui-icon-pencil" title="Create BookList"/>  
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </center>
+    
+     <p:dialog header="Create BookList" widgetVar="dialog_view_subjectList" width="400" showEffect="drop" hideEffect="blind">
+
+            <h:form id="view_subjectList_frm">
+
+                <p:panel>
+
+                    <h:outputLabel value="Subject List" />
+
+                    <p:dataList value="#{outlook_Sbj_ConfigController.bookList}" var="sbjList" itemType="square">
+
+                        #{sbjList}
+
+                    </p:dataList>
+
+                </p:panel>
+
+            </h:form>
+
+        </p:dialog>
+
+</ui:composition>
