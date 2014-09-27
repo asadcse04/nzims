@@ -34,6 +34,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
      */
     @Override
     public int getExCnfID(int acyr, String className, String ExamName) {
+        
         int exCnfId = 0;
 
         DB_Connection o;
@@ -43,6 +44,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
         String instituteid = "";
 
         FacesContext context = FacesContext.getCurrentInstance();
@@ -74,7 +76,9 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 exCnfId = rs.getInt(1);
             }
         } catch (SQLException ex) {
+            
             System.out.println("ResultServiceImpl:" + ex);
+            
         } finally {
             try {
                 if (rs != null) {
@@ -87,12 +91,10 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                     con.close();
                 }
             } catch (SQLException e) {
+                
                 System.out.println(e);
             }
-
-            className = null;
-
-            ExamName = null;
+        
         }
 
         return exCnfId;
@@ -299,9 +301,10 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
      * @return
      */
     @Override
-    public List<StudentExamResult> getStudent_insertResult(StudentSubjectMark studentSubjectMark) {
+    
+    public List<StudentSubjectMark> getStudent_insertResult(StudentSubjectMark studentSubjectMark,int examconfigid) {
         
-        List<StudentExamResult> studentList = new ArrayList<>();
+        List<StudentSubjectMark> studentList = new ArrayList<>();
 
         int flag = 0;
 
@@ -376,11 +379,16 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             }
 
             rs = prst.executeQuery();
-
+            
             while (rs.next()) {
                 
-                studentList.add(new StudentExamResult(rs.getString(1), rs.getString(2), rs.getInt(3), "", "", "", ""));
+                studentList.add(new StudentSubjectMark(rs.getString(1), rs.getString(2), rs.getInt(3), "", "", "", ""));
             }
+
+//            while (rs.next()) {
+//                
+//                studentList.add(new StudentExamResult(rs.getString(1), rs.getString(2), rs.getInt(3), "", "", "", ""));
+//            }
 
             System.out.println("Number of student to input mark:" + studentList.size());
         } catch (SQLException e) {
@@ -492,7 +500,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
      * @return
      */
     @Override
-    public boolean insertStudentExamScore(int exCnfID, String subjectName, int teacherID, List<StudentExamResult> examRsList, List<ExamGrade> exmGrdList) {
+    public boolean insertStudentExamScore(int exCnfID, String subjectName, int teacherID, List<StudentSubjectMark> examRsList, List<ExamGrade> exmGrdList) {
         String sc1;
 
         String sc2;
@@ -523,7 +531,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
         List<ExamMarkDivision> exmMark_Div_List;
 
-        Iterator<StudentExamResult> itr;
+        Iterator<StudentSubjectMark> itr;
 
         try {
             db = new DB_Connection();
@@ -560,7 +568,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             rs=prst.executeQuery();
             
             if(rs.next()){
-              resultid=rs.getInt(1);
+              resultid=rs.getInt(1)+1;
             }
             
             else{
@@ -572,9 +580,9 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             itr = examRsList.iterator();
 
             while (itr.hasNext()) {
-                StudentExamResult exmResult = itr.next();
+                StudentSubjectMark exmResult = itr.next();
 
-                prst.setString(1, exmResult.getStudentID());
+                prst.setString(1, exmResult.getStudentid());
 
                 prst.setString(2, subjectName);
 
@@ -586,7 +594,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
                 prst.setString(6, exmResult.getShortcode4());
 
-                prst.setInt(7, exmResult.getExamconfID());
+                prst.setInt(7, exCnfID);
 
                 prst.setInt(8, teacherID);
 
@@ -637,6 +645,316 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
         return false;
     }
+    
+    public boolean processStuduntExamResult(int exCnfID, String subjectName,int teacherID, List<StudentSubjectMark> examRsList,List<ExamGrade> exmGrdList,int acyear) 
+    {   
+        String sc1;
+        
+        String sc2;
+        
+        String sc3;
+        
+        String sc4;
+        
+        
+        DB_Connection db; 
+       
+        Connection cn = null;
+        
+        PreparedStatement prst = null;
+        
+        ResultSet rs = null;
+        
+        ResultSet rs2 = null;
+        
+        String instituteID = "";
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        instituteID = context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        int resultid=1;
+        
+        
+        
+        double sbj_total = 0;
+        
+        double totalScore = 0;
+        
+        double avg = 0;
+        
+        double finalScore = 0;
+        
+        String letterGrd = "";
+        
+        double point = 0;
+        
+        boolean failflag=false;
+        
+        
+        List<ExamMarkDivision> exmMark_Div_List;
+        
+        Iterator<StudentSubjectMark> itr;
+        
+        try
+        {
+            db=new DB_Connection();
+            
+            cn=db.getConnection();
+            
+            exmMark_Div_List=new ArrayList<ExamMarkDivision>();
+            
+      
+            prst=cn.prepareStatement("select ExmSbj_ID, ShortCode, TotalMark, Acceptance, PassMark from exam_mark_division where ExmSbj_ID="
+                    + "(select ExmSbj_ID FROM exam_subject_config where ExCnfID=? and InstituteId=?"
+                    + " and SubjectID=(select SubjectID from subject where SubjectName=?)) and InstituteId=?");
+           
+            
+            prst.setInt(1,exCnfID);
+            
+            prst.setString(2,instituteID);
+            
+            prst.setString(3,subjectName);
+            
+            prst.setString(4,instituteID);
+            
+            rs=prst.executeQuery();
+            
+            while(rs.next())
+            {
+                exmMark_Div_List.add(new ExamMarkDivision(rs.getInt("ExmSbj_ID"),rs.getInt("ShortCode"),rs.getDouble("TotalMark"),rs.getDouble("Acceptance"),rs.getDouble("PassMark")));
+            }
+            
+            System.out.println("Subject Mark division size:"+exmMark_Div_List.size());
+            
+            rs.close();
+            
+            prst.close();
+            
+
+            
+            prst=cn.prepareStatement("insert into student_result values(?,?,(select SubjectID from subject where SubjectName=?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            
+            itr=examRsList.iterator();
+            
+            while(itr.hasNext())
+            {
+                StudentSubjectMark exmResult = itr.next();
+                
+                if ((exmResult.getShortcode1().equals("A")) || (exmResult.getShortcode1().equals("")))
+                {
+                    sc1 = "0";
+                } 
+                else 
+                {
+                    sc1 = exmResult.getShortcode1();
+                }
+
+                if ((exmResult.getShortcode2().equals("A")) || (exmResult.getShortcode2().equals("")))
+                {
+                    sc2 = "0";
+                } 
+                else 
+                {
+                    sc2 = exmResult.getShortcode2();
+                }
+
+                if ((exmResult.getShortcode3().equals("A")) || (exmResult.getShortcode3().equals("")))
+                {
+                    sc3 = "0";
+                } 
+                else 
+                {
+                    sc3 = exmResult.getShortcode3();
+                }
+
+                if ((exmResult.getShortcode4().equals("A")) || (exmResult.getShortcode4().equals("")))
+                {
+                    sc4 = "0";
+                } 
+                else 
+                {
+                    sc4 = exmResult.getShortcode4();
+                }
+                
+                
+                
+                for(int i=0;i<exmMark_Div_List.size();i++)
+                {
+                    sbj_total=sbj_total+(exmMark_Div_List.get(i).getTotalMark()*exmMark_Div_List.get(i).getAcceptance());
+                    
+                    if((exmMark_Div_List.get(i).getShortCode()==1) && (!exmResult.getShortcode1().equals("")))
+                    {
+                         if (Double.parseDouble(sc1) < exmMark_Div_List.get(i).getPassMark())//fail in sba
+                         {
+                             failflag=true;
+                         }
+                         
+                         finalScore = finalScore + (Double.parseDouble(sc1) * exmMark_Div_List.get(i).getAcceptance()); 
+                    }
+                    if((exmMark_Div_List.get(i).getShortCode()==2) && (!exmResult.getShortcode2().equals("")))
+                    {
+                        if (Double.parseDouble(sc2) < exmMark_Div_List.get(i).getPassMark())//fail in ob
+                        {                           
+                            failflag=true;
+                        }
+                       
+                        totalScore = totalScore + Double.parseDouble(sc2);
+
+                        avg = avg + (Double.parseDouble(sc2) * exmMark_Div_List.get(i).getAcceptance());
+
+                        finalScore = finalScore + (Double.parseDouble(sc2) * exmMark_Div_List.get(i).getAcceptance());
+                    }
+                    if((exmMark_Div_List.get(i).getShortCode()==3) && (!exmResult.getShortcode3().equals("")))
+                    {
+                        if (Double.parseDouble(sc3) < exmMark_Div_List.get(i).getPassMark()) //fail in sb
+                        {
+                            failflag=true; 
+                        }
+                        
+                        totalScore = totalScore + Double.parseDouble(sc3);
+
+                        avg = avg + (Double.parseDouble(sc3) * exmMark_Div_List.get(i).getAcceptance());
+
+                        finalScore = finalScore + (Double.parseDouble(sc3) * exmMark_Div_List.get(i).getAcceptance());
+                    }
+                    if((exmMark_Div_List.get(i).getShortCode()==4) && (!exmResult.getShortcode4().equals("")))
+                    {
+                        if (Double.parseDouble(sc4) < exmMark_Div_List.get(i).getPassMark()) //fail in pr
+                        {
+                            failflag=true;
+                        }
+                        
+                        totalScore = totalScore + Double.parseDouble(sc4);
+
+                        avg = avg + (Double.parseDouble(sc4) * exmMark_Div_List.get(i).getAcceptance());
+
+                        finalScore = finalScore + (Double.parseDouble(sc4) * exmMark_Div_List.get(i).getAcceptance());
+                    }
+                }//End for
+                
+                for(int i=0;i<exmGrdList.size();i++)
+                {
+                    if(exmGrdList.get(i).getGradeNumber()<=((finalScore/sbj_total)*100))
+                    {
+                        letterGrd=exmGrdList.get(i).getLetterGrade();
+                        
+                        point=exmGrdList.get(i).getPoint();
+                        
+                        break;
+                    }
+                }
+                
+                if(failflag)
+                {
+                    letterGrd="F";
+                    
+                    point=0.0;
+                    
+                    failflag=false;
+                }
+                
+                prst.setInt(1, exmResult.getResultid());
+                
+                prst.setString(2,exmResult.getStudentid());
+                
+                prst.setString(3,subjectName);
+                
+                prst.setString(4,exmResult.getShortcode1());
+                
+                prst.setString(5,exmResult.getShortcode2());
+                
+                prst.setString(6,exmResult.getShortcode3());
+                
+                prst.setString(7,exmResult.getShortcode4());
+                
+                prst.setDouble(8,totalScore);
+                
+                prst.setDouble(9,avg);
+                
+                prst.setDouble(10,finalScore);
+                
+                prst.setString(11,letterGrd);
+                
+                prst.setDouble(12,point);
+                
+                prst.setInt(13,exCnfID);
+                
+                prst.setInt(14,teacherID);//TeacherID
+                
+                prst.setString(15,"note");
+                
+                prst.setDouble(16,sbj_total);
+                
+                prst.setString(17, instituteID);
+ 
+                prst.setInt(18, acyear);
+                
+                prst.addBatch();
+                
+                resultid++;
+                
+                sbj_total = 0;
+
+                totalScore = 0;
+
+                avg = 0;
+
+                finalScore = 0;
+
+                letterGrd = "";
+
+                point = 0;
+                
+            }//End main while
+            
+            int[] i=prst.executeBatch();
+            
+            System.out.println("Number of student has given exam mark::"+i.length);
+            
+            return true;
+        }
+        catch(SQLException ex)
+        {
+            System.out.println(ex);
+        }
+        finally
+        {
+            try
+            {
+                
+                 if(rs2!=null)
+                {
+                    rs2.close();
+                }
+                if(rs!=null)
+                {
+                    rs.close();
+                }
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(cn!=null)
+                {
+                    cn.close();
+                }
+            }
+            catch(SQLException ex)
+            {
+                System.out.println(ex);
+            }
+            
+            subjectName=null;
+            
+            examRsList.clear();
+            
+            exmGrdList.clear();
+        }
+        
+        return false;
+    }
+
 
     /**
      *
@@ -1212,7 +1530,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
     }
 
     @Override
-    public int editStudentResult(int exCnfID, String subjectName, List<ViewStudentResult> stdSubjMarkList, List<ExamGrade> exmGrdList) {
+    public int editStudentResult(int exCnfID, String subjectName, List<StudentSubjectMark> stdSubjMarkList, List<ExamGrade> exmGrdList) {
 
         DB_Connection db;
 
@@ -1234,23 +1552,23 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 prst = cn.prepareStatement("update student_subject_mark set ShortCode1=?,ShortCode2=?,ShortCode3=?,ShortCode4=? "
                         + " where ResultID=? and ExCnfID=? and StudentID=? and SubjectID=? and InstituteID=?");
 
-                prst.setString(1, stdSubjMarkList.get(i).getShortCode1());
+                prst.setString(1, stdSubjMarkList.get(i).getShortcode1());
 
-                prst.setString(2, stdSubjMarkList.get(i).getShortCode2());
+                prst.setString(2, stdSubjMarkList.get(i).getShortcode2());
 
-                prst.setString(3, stdSubjMarkList.get(i).getShortCode3());
+                prst.setString(3, stdSubjMarkList.get(i).getShortcode3());
 
-                prst.setString(4, stdSubjMarkList.get(i).getShortCode4());
+                prst.setString(4, stdSubjMarkList.get(i).getShortcode4());
 
-                prst.setInt(5, stdSubjMarkList.get(i).getResultID());
+                prst.setInt(5, stdSubjMarkList.get(i).getResultid());
 
-                prst.setInt(6, stdSubjMarkList.get(i).getExamConfigID());
+                prst.setInt(6, stdSubjMarkList.get(i).getExamconfigid());
 
-                prst.setString(7, stdSubjMarkList.get(i).getStudentID());
+                prst.setString(7, stdSubjMarkList.get(i).getStudentid());
 
-                prst.setInt(8, stdSubjMarkList.get(i).getSubjectID());
+                prst.setInt(8, stdSubjMarkList.get(i).getSubjectid());
 
-                prst.setString(9, stdSubjMarkList.get(i).getInstituteID());
+                prst.setString(9, stdSubjMarkList.get(i).getInstituteid());
 
                 prst.executeUpdate();
 
@@ -1258,21 +1576,26 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             }
 
         } catch (SQLException ex) {
+            
             System.out.println(ex);
 
             System.out.println("Student result update problem...");
         } finally {
             try {
                 if (rs != null) {
+                    
                     rs.close();
                 }
                 if (prst != null) {
+                    
                     prst.close();
                 }
                 if (cn != null) {
+                    
                     cn.close();
                 }
             } catch (SQLException e) {
+                
                 System.out.println(e);
             }
 
@@ -1288,8 +1611,9 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
     }
 
     @Override
-    public List<ViewStudentResult> studentExamResult(int exCnfID, int scCnfID, String subjectName) {
-        List<ViewStudentResult> studentResultList = new ArrayList<ViewStudentResult>();
+    public List<StudentSubjectMark> getUpdateSubjectMarkList(int exCnfID, StudentSubjectMark studentSubjectMark) {
+       
+        List<StudentSubjectMark> studentResultList = new ArrayList<>();
 
         DB_Connection db;
 
@@ -1316,7 +1640,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
             prst = cn.prepareStatement("select status from subject where SubjectName=?");
 
-            prst.setString(1, subjectName);
+            prst.setString(1, studentSubjectMark.getSubjectName());
 
             rs = prst.executeQuery();
 
@@ -1331,7 +1655,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 qr = "SELECT sr.ResultID, sr.StudentID,sb.StudentName,sb.StudentRoll,sr.ShortCode1, sr.ShortCode2, sr.ShortCode3, sr.ShortCode4, sr.ExCnfID, sr.SubjectID, sr.InstituteID "
                         + " FROM student_subject_mark sr,teacher t,student_basic_info sb,student_identification si where sr.StudentID=sb.StudentID and sr.StudentID=si.StudentID and sr.teacherID=t.teacherID "
                         + "and sr.InstituteID=sb.InstituteID and sr.InstituteID=si.InstituteID and sr.InstituteID=t.InstituteID and sr.InstituteID='" + instituteID + "' and sr.ExCnfID=?"
-                        + " and sr.SubjectID=(select SubjectID from subject where SubjectName=?) and si.ClassConfigID IN(" + getScCnf_id_List(scCnfID) + ") order by sb.StudentRoll";
+                        + " and sr.SubjectID=(select SubjectID from subject where SubjectName=?) and si.ClassConfigID IN(" + studentSubjectMark.getScConfigID()+ ") order by sb.StudentRoll";
             } else if (sbj_st == 1)//for departmental elective subject..
             {
                 qr = "SELECT sr.ResultID, sr.StudentID,sb.StudentName,sb.StudentRoll,sr.ShortCode1, sr.ShortCode2, sr.ShortCode3, sr.ShortCode4, sr.ExCnfID, sr.SubjectID, sr.InstituteID "
@@ -1350,26 +1674,32 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                         + " FROM student_subject_mark sr,teacher t,student_basic_info sb,student_identification si,student_4th_subject_wrap sw where "
                         + "sr.StudentID=sb.StudentID and sr.StudentID=si.StudentID and sr.StudentID=sw.StudentID and sr.SubjectID=sw.SubjectID and sr.teacherID=t.teacherID "
                         + " and sr.InstituteID=sb.InstituteID and sr.InstituteID=si.InstituteID and sr.InstituteID=t.InstituteID and sr.InstituteID='" + instituteID + "' and sr.ExCnfID=?"
-                        + " and sr.SubjectID=(select SubjectID from subject where SubjectName=?) and si.ClassConfigID IN(" + getScCnf_id_List(scCnfID) + ") order by sb.StudentRoll";
+                        + " and sr.SubjectID=(select SubjectID from subject where SubjectName=?) and si.ClassConfigID IN(" +studentSubjectMark.getScConfigID()+ ") order by sb.StudentRoll";
             }
             prst = cn.prepareStatement(qr);
 
             prst.setInt(1, exCnfID);
 
-            prst.setString(2, subjectName);
+            prst.setString(2, studentSubjectMark.getSubjectName());
 
             if ((sbj_st == 1) || (sbj_st == 2)) {
-                prst.setInt(3, scCnfID);
+                prst.setInt(3, studentSubjectMark.getScConfigID());
             }
 
             rs = prst.executeQuery();
-
-            while (rs.next()) {
-                studentResultList.add(new ViewStudentResult(rs.getInt("sr.ResultID"), rs.getString("sr.StudentID"), rs.getString("sb.StudentName"), rs.getInt("sb.StudentRoll"), rs.getString("sr.ShortCode1"), rs.getString("sr.ShortCode2"), rs.getString("sr.ShortCode3"), rs.getString("sr.ShortCode4"), rs.getInt("sr.ExCnfID"), rs.getInt("sr.SubjectID"), rs.getString("sr.InstituteID")));
+            
+             while (rs.next()) {
+                studentResultList.add(new StudentSubjectMark(rs.getInt("sr.ResultID"), rs.getString("sr.StudentID"), rs.getString("sb.StudentName"), rs.getInt("sb.StudentRoll"), rs.getString("sr.ShortCode1"), rs.getString("sr.ShortCode2"), rs.getString("sr.ShortCode3"), rs.getString("sr.ShortCode4"), rs.getInt("sr.ExCnfID"), rs.getInt("sr.SubjectID"), rs.getString("sr.InstituteID")));
             }
 
+//            while (rs.next()) {
+//                studentResultList.add(new ViewStudentResult(rs.getInt("sr.ResultID"), rs.getString("sr.StudentID"), rs.getString("sb.StudentName"), rs.getInt("sb.StudentRoll"), rs.getString("sr.ShortCode1"), rs.getString("sr.ShortCode2"), rs.getString("sr.ShortCode3"), rs.getString("sr.ShortCode4"), rs.getInt("sr.ExCnfID"), rs.getInt("sr.SubjectID"), rs.getString("sr.InstituteID")));
+//            }
+
             System.out.println("Total Student:" + studentResultList.size());
-        } catch (SQLException ex) {
+        } 
+        
+        catch (SQLException ex) {
             System.out.println(ex);
         } finally {
             try {
@@ -1386,7 +1716,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 System.out.println(e);
             }
 
-            subjectName = null;
+            
         }
 
         return studentResultList;

@@ -34,11 +34,55 @@ public class StudentSubjectMark implements Serializable
     
     private String teacherName;
     
+    private int resultid;
+    private String studentid;
+    private String studentname;
+    private int roll;
+    private String shortcode1;
+    private String shortcode2;
+    private String shortcode3;
+    private String shortcode4;
+    private int examconfigid;
+    private int subjectid;
+    private String instituteid;
+    
+    
+   
+    
     private List<String> subjectlist;
     
     
     public StudentSubjectMark() {
     }
+
+    public StudentSubjectMark(int resultid, String studentid, String studentname, int roll, String shortcode1, String shortcode2, String shortcode3, String shortcode4, int examconfigid, int subjectid, String instituteid) {
+        this.resultid = resultid;
+        this.studentid = studentid;
+        this.studentname = studentname;
+        this.roll = roll;
+        this.shortcode1 = shortcode1;
+        this.shortcode2 = shortcode2;
+        this.shortcode3 = shortcode3;
+        this.shortcode4 = shortcode4;
+        this.examconfigid = examconfigid;
+        this.subjectid = subjectid;
+        this.instituteid = instituteid;
+    }
+    
+    
+    
+
+    public StudentSubjectMark(String studentid, String studentname, int roll, String shortcode1, String shortcode2, String shortcode3, String shortcode4) {
+        this.studentid = studentid;
+        this.studentname = studentname;
+        this.roll = roll;
+        this.shortcode1 = shortcode1;
+        this.shortcode2 = shortcode2;
+        this.shortcode3 = shortcode3;
+        this.shortcode4 = shortcode4;
+    }
+    
+    
 
     public StudentSubjectMark(int acyr, String className,String shiftName, String sectionName, String  deptName, List<String> subjectlist) {
         this.acyr = acyr;
@@ -194,6 +238,94 @@ public class StudentSubjectMark implements Serializable
 
     public void setSubjectlist(List<String> subjectlist) {
         this.subjectlist = subjectlist;
+    }
+
+    public String getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(String studentid) {
+        this.studentid = studentid;
+    }
+
+    public String getStudentname() {
+        return studentname;
+    }
+
+    public void setStudentname(String studentname) {
+        this.studentname = studentname;
+    }
+
+    public int getRoll() {
+        return roll;
+    }
+
+    public void setRoll(int roll) {
+        this.roll = roll;
+    }
+
+    public String getShortcode1() {
+        return shortcode1;
+    }
+
+    public void setShortcode1(String shortcode1) {
+        this.shortcode1 = shortcode1;
+    }
+
+    public String getShortcode2() {
+        return shortcode2;
+    }
+
+    public void setShortcode2(String shortcode2) {
+        this.shortcode2 = shortcode2;
+    }
+
+    public String getShortcode3() {
+        return shortcode3;
+    }
+
+    public void setShortcode3(String shortcode3) {
+        this.shortcode3 = shortcode3;
+    }
+
+    public String getShortcode4() {
+        return shortcode4;
+    }
+
+    public void setShortcode4(String shortcode4) {
+        this.shortcode4 = shortcode4;
+    }
+
+    public int getResultid() {
+        return resultid;
+    }
+
+    public void setResultid(int resultid) {
+        this.resultid = resultid;
+    }
+
+    public int getExamconfigid() {
+        return examconfigid;
+    }
+
+    public void setExamconfigid(int examconfigid) {
+        this.examconfigid = examconfigid;
+    }
+
+    public int getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(int subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public String getInstituteid() {
+        return instituteid;
+    }
+
+    public void setInstituteid(String instituteid) {
+        this.instituteid = instituteid;
     }
     
     

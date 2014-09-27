@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.pencil.Dummy.Student.StudentSubjectMark;
-
 
 import com.pencil.Dummy.Teacher.Teacher;
 import com.pencil.Dummy.Teacher.TeacherConverter;
@@ -26,183 +24,177 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-
 /**
  *
  * @author apple
  */
 @ManagedBean
 @ViewScoped
-public class StudentSubjectMarkController implements Serializable
-{
+public class StudentSubjectMarkController implements Serializable {
+
     private int scCnfID;
-    
+
     private int exCnfID;
-    
+
     private String subjectName;
-    
-    
-    
+
+    private int disableoptioninsert = 0;
+    private int disableoptionupdate = 0;
+
     private ExamResult examResultOpt;
-    
+
     private StudentSubjectMark studentSubjectMark;
-    
+
     private SubjectConfig sbjConfig;
-    
-    
+
     private List<String> acyrList;
-    
+
     private List<String> classList;
-    
+
     private List<String> deptList;
-    
+
     private List<String> shiftList;
-    
+
     private List<String> sectionList;
-    
+
     private List<String> examList;
-    
+
     private List<String> subjectList;
-    
-    
-    private List<StudentExamResult> student_subject_markList;
-    
+
     private List<StudentMeritList> studentMerit_List;
-    
+
     private List<ExamGrade> exmGrdList;
-    
-    
-    Sc_ClassConfigService sc_service_dao=new Sc_ClassCofigService_Impl();
-    
-    SubjectConfigService sbjserviceDao=new SubjectConfigService_Impl();
-    
-    StudentSubjectMarkService stdsubmarkservice=new StudentSubjectMarkServiceImpl();
-    
-    Sc_ClassConfigService scCnfService=new Sc_ClassCofigService_Impl();
-    
-    
+
+    Sc_ClassConfigService sc_service_dao = new Sc_ClassCofigService_Impl();
+
+    SubjectConfigService sbjserviceDao = new SubjectConfigService_Impl();
+
+    StudentSubjectMarkService stdsubmarkservice = new StudentSubjectMarkServiceImpl();
+
+    Sc_ClassConfigService scCnfService = new Sc_ClassCofigService_Impl();
+
     private Teacher selectedTeacher;
-    
+
     private List<Teacher> teachers;
-    
+
     private List<StudentSubjectMark> school_configList;
 
-    
-    TeacherConverter tc=new TeacherConverter();
-    
-    
+    TeacherConverter tc = new TeacherConverter();
+
     private ViewStudentResult strs;
-    
-    private List<ViewStudentResult> student_result_complete_list;
-            
-    
-    Presentation pr=new Presentation();
+
+   
+
+    private List<StudentSubjectMark> studentSubjectMarkList ;
+
+    Presentation pr = new Presentation();
 
     /**
      * Creates a new instance of ExamResultController
      */
-    public StudentSubjectMarkController() 
-    {
-        this.acyrList=pr.infoList("acyr");
-        
-        this.examList=pr.infoList("exmNm");
+    public StudentSubjectMarkController() {
+        this.acyrList = pr.infoList("acyr");
 
-        this.exmGrdList=stdsubmarkservice.examGradeList();
-        
-        this.school_configList=stdsubmarkservice.scClassSubMarkInsert_List_ed();
- 
+        this.examList = pr.infoList("exmNm");
+
+        this.exmGrdList = stdsubmarkservice.examGradeList();
+
+        this.school_configList = stdsubmarkservice.scClassSubMarkInsert_List_ed();
+
     }
-    
+
     /**
      *
      */
-    public void scClassList()
-    {
-        this.classList=sc_service_dao.listScClass(this.examResultOpt.getAcyr());
+    public void scClassList() {
+        this.classList = sc_service_dao.listScClass(this.examResultOpt.getAcyr());
     }
-    
+
     /**
      *
      */
-    public void departmentList()
-    {
-        this.deptList=sc_service_dao.listScDept(this.examResultOpt.getAcyr(),this.examResultOpt.getClassName());
+    public void departmentList() {
+        this.deptList = sc_service_dao.listScDept(this.examResultOpt.getAcyr(), this.examResultOpt.getClassName());
     }
-    
+
     /**
      *
      */
-    public void shiftNameList()
-    {
+    public void shiftNameList() {
         this.getSbjConfig().setAcyrID(this.examResultOpt.getAcyr());
-        
+
         this.getSbjConfig().setSchoolClassName(this.examResultOpt.getClassName());
-        
+
         this.getSbjConfig().setDeptName(this.examResultOpt.getDeptName());
-        
-        this.shiftList=sc_service_dao.listScShift(this.examResultOpt.getAcyr(),this.examResultOpt.getDeptName(),this.examResultOpt.getClassName());
-        
-        this.subjectList=sbjserviceDao.bookList(this.getSbjConfig());
-    }
-    
-    /**
-     *
-     */
-    public void section_List()
-    {
-        this.sectionList=sc_service_dao.listScSection(this.examResultOpt.getAcyr(),this.examResultOpt.getDeptName(),this.examResultOpt.getClassName(),this.examResultOpt.getShiftName());
-    }
-    
-    /**
-     *
-     */
-    public void Sc_Cnf_ID()
-    {
-        this.scCnfID=stdsubmarkservice.ScCnfID(this.studentSubjectMark);
+
+        this.shiftList = sc_service_dao.listScShift(this.examResultOpt.getAcyr(), this.examResultOpt.getDeptName(), this.examResultOpt.getClassName());
+
+        this.subjectList = sbjserviceDao.bookList(this.getSbjConfig());
     }
 
     /**
      *
      */
-    public void Ex_Cnf_ID()
-    {
- 
-        this.setExCnfID(stdsubmarkservice.getExCnfID(this.studentSubjectMark.getAcyr(),this.studentSubjectMark.getClassName(),this.studentSubjectMark.getExamName()));
+    public void section_List() {
+        this.sectionList = sc_service_dao.listScSection(this.examResultOpt.getAcyr(), this.examResultOpt.getDeptName(), this.examResultOpt.getClassName(), this.examResultOpt.getShiftName());
     }
-    
+
     /**
      *
      */
-    
-    public void mark(){
-       
-        this.subjectList=stdsubmarkservice.subjectList(this.studentSubjectMark);
-
-        this.teachers=tc.getTeacherList();  
+    public void Sc_Cnf_ID() {
+        this.scCnfID = stdsubmarkservice.ScCnfID(this.studentSubjectMark);
     }
-   
-    public void studentList()
-    {
-        
-        this.student_subject_markList=stdsubmarkservice.getStudent_insertResult(this.studentSubjectMark);
-        
+
+    /**
+     *
+     */
+    public void Ex_Cnf_ID() {
+
+        this.setExCnfID(stdsubmarkservice.getExCnfID(this.studentSubjectMark.getAcyr(), this.studentSubjectMark.getClassName(), this.studentSubjectMark.getExamName()));
+    }
+
+    /**
+     *
+     */
+    public void mark() {
+
+        this.subjectList = stdsubmarkservice.subjectList(this.studentSubjectMark);
+
+        this.teachers = tc.getTeacherList();
+    }
+
+    public void studentList() {
+
+       this.exCnfID=stdsubmarkservice.getExCnfID(this.studentSubjectMark.getAcyr(), this.studentSubjectMark.getClassName(), this.studentSubjectMark.getExamName());
+
+        System.out.println("Ex_Cnf_ID is " + exCnfID);
+
+        this.studentSubjectMarkList = stdsubmarkservice.getUpdateSubjectMarkList(this.exCnfID, this.studentSubjectMark);
+
+        if (this.studentSubjectMarkList.isEmpty()) {
+
+            this.studentSubjectMarkList = stdsubmarkservice.getStudent_insertResult(this.studentSubjectMark, this.getExCnfID());
+
+            this.disableoptioninsert = 1;
      
-        
-        System.out.println("size "+this.subjectList.size());
-        
+
+        } else {
+
+            this.disableoptionupdate = 1;
+        }
+
     }
-    
-    public void student_Complete_Result_List()
-    {
-        
+
+    public void student_Complete_Result_List() {
+
         Ex_Cnf_ID();
-        
+
         System.out.println("yes exam conf ok");
-        
-        this.student_result_complete_list=stdsubmarkservice.studentExamResult(this.exCnfID,this.scCnfID,this.examResultOpt.getSubjectName());
-    
+
+        //this.studentSubjectMarkList = stdsubmarkservice.studentExamResult(this.exCnfID, this.scCnfID, this.examResultOpt.getSubjectName());
     }
-    
+
     /**
      *
      * @param event
@@ -213,7 +205,6 @@ public class StudentSubjectMarkController implements Serializable
 //        
 //        FacesContext.getCurrentInstance().addMessage(null,msg);
 //    }
-    
 //   public void onCellEdit(CellEditEvent event)
 //    {
 //        Object oldValue = event.getOldValue();
@@ -227,24 +218,21 @@ public class StudentSubjectMarkController implements Serializable
 //            FacesContext.getCurrentInstance().addMessage(null, msg);
 //        }
 //    }
-   
-    public void updateStudentResult()
-    {
-        if(stdsubmarkservice.editStudentResult(this.exCnfID,this.examResultOpt.getSubjectName(),student_result_complete_list,this.exmGrdList)==1)
-        {
-             System.out.println("Student result update successfully..........");
-             
-             FacesMessage msg = new FacesMessage("Student result update successfully....","");
-             
-             FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-        else
-        {
-             System.out.println("Student  result update failed.......");
+    public void updateStudentResult() {
+       
+        if (stdsubmarkservice.editStudentResult(this.exCnfID, this.studentSubjectMark.getSubjectName(), studentSubjectMarkList, this.exmGrdList) == 1) {
             
-             FacesMessage msg = new FacesMessage("Student  result update failed....","");
-             
-             FacesContext.getCurrentInstance().addMessage(null, msg);
+            System.out.println("Student result update successfully..........");
+
+            FacesMessage msg = new FacesMessage("Student result update successfully....", "");
+
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } else {
+            System.out.println("Student  result update failed.......");
+
+            FacesMessage msg = new FacesMessage("Student  result update failed....", "");
+
+            FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
 
@@ -252,32 +240,40 @@ public class StudentSubjectMarkController implements Serializable
      *
      * @return
      */
-    public String saveStudent_Subject_Result()
-    {
+    public String saveStudent_Subject_Result() {
         FacesContext context = FacesContext.getCurrentInstance();
-        
-        if(stdsubmarkservice.insertStudentExamScore(this.getExCnfID(),this.studentSubjectMark.getSubjectName(),this.selectedTeacher.getTeacherID(),this.student_subject_markList,this.exmGrdList))
-        {
-              context.addMessage(null, new FacesMessage("Successful","Insert subject mark..."));
+
+        if (stdsubmarkservice.insertStudentExamScore(this.getExCnfID(), this.studentSubjectMark.getSubjectName(), this.selectedTeacher.getTeacherID(), studentSubjectMarkList, this.exmGrdList)) {
+            context.addMessage(null, new FacesMessage("Successful", "Insert subject mark..."));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Subject mark insertion failed...!", ""));
         }
-        else
-        {
-             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Subject mark insertion failed...!",""));
-        }
-        
+
         return "index.xhtml";
+    }
+    
+    
+    public void processStudentResult(){
+       
+         FacesContext context = FacesContext.getCurrentInstance();
+
+        if (stdsubmarkservice.processStuduntExamResult(this.getExCnfID(), this.studentSubjectMark.getSubjectName(), this.selectedTeacher.getTeacherID(), studentSubjectMarkList, this.exmGrdList,this.studentSubjectMark.getAcyr())) {
+            context.addMessage(null, new FacesMessage("Successful, Result Process", "Insert subject mark..."));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Result insertion failed...!", ""));
+        }
     }
 
     /**
      *
      */
     public void finalResultProcessor()//generate merit list
-        {
+    {
         FacesContext context = FacesContext.getCurrentInstance();
-        
-        stdsubmarkservice.generateMeritList(this.exCnfID,stdsubmarkservice.scCnfID(this.examResultOpt.getClassName()),this.exmGrdList);  
-        
-        this.studentMerit_List=stdsubmarkservice.StudentMeritList(this.exCnfID);
+
+        stdsubmarkservice.generateMeritList(this.exCnfID, stdsubmarkservice.scCnfID(this.examResultOpt.getClassName()), this.exmGrdList);
+
+        this.studentMerit_List = stdsubmarkservice.StudentMeritList(this.exCnfID);
     }
 
     /**
@@ -381,11 +377,9 @@ public class StudentSubjectMarkController implements Serializable
     /**
      * @return the examResultOpt
      */
-    public ExamResult getExamResultOpt() 
-    {
-        if(this.examResultOpt==null)
-        {
-            this.examResultOpt=new ExamResult();
+    public ExamResult getExamResultOpt() {
+        if (this.examResultOpt == null) {
+            this.examResultOpt = new ExamResult();
         }
         return this.examResultOpt;
     }
@@ -400,11 +394,9 @@ public class StudentSubjectMarkController implements Serializable
     /**
      * @return the sbjConfig
      */
-    public SubjectConfig getSbjConfig()
-    {
-        if(this.sbjConfig==null)
-        {
-            this.sbjConfig=new SubjectConfig();
+    public SubjectConfig getSbjConfig() {
+        if (this.sbjConfig == null) {
+            this.sbjConfig = new SubjectConfig();
         }
         return this.sbjConfig;
     }
@@ -430,19 +422,7 @@ public class StudentSubjectMarkController implements Serializable
         this.scCnfID = scCnfID;
     }
 
-    /**
-     * @return the student_subject_markList
-     */
-    public List<StudentExamResult> getStudent_subject_markList() {
-        return student_subject_markList;
-    }
-
-    /**
-     * @param student_subject_markList the student_subject_markList to set
-     */
-    public void setStudent_subject_markList(List<StudentExamResult> student_subject_markList) {
-        this.student_subject_markList = student_subject_markList;
-    }
+   
 
     /**
      * @return the exCnfID
@@ -475,11 +455,9 @@ public class StudentSubjectMarkController implements Serializable
     /**
      * @return the selectedTeacher
      */
-    public Teacher getSelectedTeacher()
-    {
-        if(this.selectedTeacher==null)
-        {
-            this.selectedTeacher=new Teacher();
+    public Teacher getSelectedTeacher() {
+        if (this.selectedTeacher == null) {
+            this.selectedTeacher = new Teacher();
         }
         return selectedTeacher;
     }
@@ -504,6 +482,7 @@ public class StudentSubjectMarkController implements Serializable
     public void setStudentMerit_List(List<StudentMeritList> studentMerit_List) {
         this.studentMerit_List = studentMerit_List;
     }
+
     /**
      * @return the exmGrdList
      */
@@ -519,27 +498,11 @@ public class StudentSubjectMarkController implements Serializable
     }
 
     /**
-     * @return the student_result_complete_list
-     */
-    public List<ViewStudentResult> getStudent_result_complete_list() {
-        return student_result_complete_list;
-    }
-
-    /**
-     * @param student_result_complete_list the student_result_complete_list to set
-     */
-    public void setStudent_result_complete_list(List<ViewStudentResult> student_result_complete_list) {
-        this.student_result_complete_list = student_result_complete_list;
-    }
-
-    /**
      * @return the strs
      */
-    public ViewStudentResult getStrs()
-    {
-        if(this.strs==null)
-        {
-            this.strs=new ViewStudentResult();
+    public ViewStudentResult getStrs() {
+        if (this.strs == null) {
+            this.strs = new ViewStudentResult();
         }
         return this.strs;
     }
@@ -552,9 +515,9 @@ public class StudentSubjectMarkController implements Serializable
     }
 
     public StudentSubjectMark getStudentSubjectMark() {
-        if(this.studentSubjectMark==null){
-            
-            this.studentSubjectMark=new StudentSubjectMark();
+        if (this.studentSubjectMark == null) {
+
+            this.studentSubjectMark = new StudentSubjectMark();
         }
         return studentSubjectMark;
     }
@@ -562,11 +525,7 @@ public class StudentSubjectMarkController implements Serializable
     public void setStudentSubjectMark(StudentSubjectMark studentSubjectMark) {
         this.studentSubjectMark = studentSubjectMark;
     }
-    
-    
-    
 
-    
     public List<StudentSubjectMark> getSchool_configList() {
         return school_configList;
     }
@@ -583,6 +542,28 @@ public class StudentSubjectMarkController implements Serializable
         this.subjectName = subjectName;
     }
 
+    public int getDisableoptioninsert() {
+        return disableoptioninsert;
+    }
 
-    
+    public void setDisableoptioninsert(int disableoptioninsert) {
+        this.disableoptioninsert = disableoptioninsert;
+    }
+
+    public int getDisableoptionupdate() {
+        return disableoptionupdate;
+    }
+
+    public void setDisableoptionupdate(int disableoptionupdate) {
+        this.disableoptionupdate = disableoptionupdate;
+    }
+
+    public List<StudentSubjectMark> getStudentSubjectMarkList() {
+        return studentSubjectMarkList;
+    }
+
+    public void setStudentSubjectMarkList(List<StudentSubjectMark> studentSubjectMarkList) {
+        this.studentSubjectMarkList = studentSubjectMarkList;
+    }
+
 }
