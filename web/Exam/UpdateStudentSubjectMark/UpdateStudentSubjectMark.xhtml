@@ -4,101 +4,128 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <p:layout styleClass="tabHeight">
-        
-        <p:layoutUnit position="west" size="25%">
+
+  
+
+    <h:form>                
+
+        <center>
             
-            <h:form id="student_srch_update_Mark_frm">
+            
+            <p:dataTable value="#{studentSubjectMarkController.school_configList}" var="school_Cnf_tbl" paginator="true" rows="10" paginatorPosition="bottom" style="width:850px;">
 
-                <center>
 
-                    <p:panelGrid columns="2">
+                <p:column sortBy="#{school_Cnf_tbl.acyr}" filterBy="#{school_Cnf_tbl.acyr}">
 
-                        <h:outputText value="Academic Year "/>
+                    <f:facet name="header">Academic Year</f:facet>  
 
-                        <p:selectOneMenu value="#{studentSubjectMarkController.examResultOpt.acyr}" effect="slide" >  
+                    <h:outputText value="#{school_Cnf_tbl.acyr}"/>
 
-                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                </p:column> 
 
-                            <f:selectItems value="#{studentSubjectMarkController.acyrList}" />
 
-                            <p:ajax event="change" update="ex_classID" listener="#{studentSubjectMarkController.scClassList}"/>
+                <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
 
-                        </p:selectOneMenu>
+                    <f:facet name="header">Class</f:facet>  
 
-                        <h:outputText value="Class"/>
+                    <h:outputText value="#{school_Cnf_tbl.className}"/>
 
-                        <p:selectOneMenu id="ex_classID" value="#{studentSubjectMarkController.examResultOpt.className}" effect="slide" >  
+                </p:column>  
 
-                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
 
-                            <f:selectItems value="#{studentSubjectMarkController.classList}" />
+                <p:column sortBy="#{school_Cnf_tbl.shiftName}" filterBy="#{school_Cnf_tbl.shiftName}">
 
-                            <p:ajax event="change" update="ex_deptID" listener="#{studentSubjectMarkController.departmentList}"/>
+                    <f:facet name="header">Shift</f:facet>  
 
-                        </p:selectOneMenu>
+                    <h:outputText value="#{school_Cnf_tbl.shiftName}"/>
 
-                        <h:outputText value="Department"/>
+                </p:column>
 
-                        <p:selectOneMenu id="ex_deptID" value="#{studentSubjectMarkController.examResultOpt.deptName}" effect="slide" >  
 
-                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                <p:column sortBy="#{school_Cnf_tbl.sectionName}" filterBy="#{school_Cnf_tbl.sectionName}">
 
-                            <f:selectItems value="#{studentSubjectMarkController.deptList}" />
+                    <f:facet name="header">Section</f:facet>  
 
-                            <p:ajax event="change" update="ex_shiftID,ex_sbj" listener="#{studentSubjectMarkController.shiftNameList}"/>
+                    <h:outputText value="#{school_Cnf_tbl.sectionName}"/>
 
-                        </p:selectOneMenu>
+                </p:column>
+                
+                <p:column sortBy="#{school_Cnf_tbl.deptName}" filterBy="#{school_Cnf_tbl.deptName}">
 
-                        <h:outputText value="Shift"/>
+                    <f:facet name="header">Department</f:facet>  
 
-                        <p:selectOneMenu id="ex_shiftID" value="#{studentSubjectMarkController.examResultOpt.shiftName}" effect="slide" >  
+                    <h:outputText value="#{school_Cnf_tbl.deptName}"/>
 
-                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+                </p:column>
 
-                            <f:selectItems value="#{studentSubjectMarkController.shiftList}" />
+                <p:column style="width:3%">  
 
-                            <p:ajax event="change" update="ex_sectionID" listener="#{studentSubjectMarkController.section_List}"/>
+                    <p:commandButton icon="ui-icon-pencil" action="#{studentSubjectMarkController.mark()}" update=":st_subject_mark_update_tbl_frm" title="Input Mark" oncomplete="std_sub_mark_update_Dig.show()"> 
+                        <f:setPropertyActionListener value="#{school_Cnf_tbl}" target="#{studentSubjectMarkController.studentSubjectMark}"/>
+                    </p:commandButton>
 
-                        </p:selectOneMenu>
+                </p:column>
 
-                        <h:outputText value="Section"/>
 
-                        <p:selectOneMenu id="ex_sectionID" value="#{studentSubjectMarkController.examResultOpt.sectionName}" effect="slide" >  
 
-                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+            </p:dataTable>
+        </center>
+    </h:form>
 
-                            <f:selectItems value="#{studentSubjectMarkController.sectionList}" />
 
-                            <p:ajax event="change" listener="#{studentSubjectMarkController.Sc_Cnf_ID}"/>
 
-                        </p:selectOneMenu>
 
-                        <h:outputText value="Subject"/>
+    <p:dialog widgetVar="std_sub_mark_update_Dig">
+        
+        <p:layout style="width: 1350px; height: 550px">
 
-                        <p:selectOneMenu id="ex_sbj" value="#{studentSubjectMarkController.examResultOpt.subjectName}" effect="slide" >  
+              <p:layoutUnit position="west" size="25%">
+                  
+        <h:form id="st_subject_mark_update_tbl_frm">
+            
+            <center>
+
+            <p:growl id="gwl" autoUpdate="true" showDetail="true"/> 
+            
+            <p:panelGrid styleClass="panelGrid">
+                
+                <p:row>
+                <p:column>
+                  <h:outputText value="Subject:"/>
+                </p:column> <p:column> 
+                    <p:selectOneMenu value="#{studentSubjectMarkController.studentSubjectMark.subjectName}" effect="slide" style="width: 185px" >  
 
                             <f:selectItem itemLabel="Select An Option" itemValue="" />  
 
                             <f:selectItems value="#{studentSubjectMarkController.subjectList}" />
 
-                        </p:selectOneMenu>
+                    </p:selectOneMenu>
+                  
+                  </p:column>
+                </p:row>    
 
-                        <h:outputText value="Exam"/>
-
-                        <p:selectOneMenu value="#{studentSubjectMarkController.examResultOpt.examName}" effect="slide" >  
+                <p:row>
+                    
+                <p:column>
+                <h:outputText value="Exam"/>
+                </p:column> <p:column>
+                        <p:selectOneMenu value="#{studentSubjectMarkController.studentSubjectMark.examName}" effect="slide" style="width: 185px">  
 
                             <f:selectItem itemLabel="Select An Option" itemValue="" />  
 
                             <f:selectItems value="#{studentSubjectMarkController.examList}" />
 
-                     
-
                         </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                
+               
 
+                <p:row>
+                    <p:column>
                         <h:outputText value="Teacher"/>
-
-                            <p:selectOneMenu  value="#{studentSubjectMarkController.selectedTeacher}" converter="tchr" var="t" filter="true" filterMatchMode="startsWith" style="width: 185px">  
+                     </p:column><p:column>
+                        <p:selectOneMenu  value="#{studentSubjectMarkController.selectedTeacher}" converter="tchr" var="t" filter="true" filterMatchMode="startsWith" style="width: 185px">  
 
                             <f:selectItem itemLabel="Select Teacher" itemValue=""/>
 
@@ -115,122 +142,132 @@
                                 #{t.name}
 
                             </p:column>
-                            
-                            <p:ajax event="change" update="student_srch_inputSubjectMark_btn" listener="#{studentSubjectMarkController.Ex_Cnf_ID}"/>
 
                         </p:selectOneMenu>
+                       </p:column> 
+                   </p:row>     
 
-                     
+            </p:panelGrid>
+            
+            <p:commandButton value="Search" update=":update_give_std_mark" action="#{studentSubjectMarkController.studentList()}"  style="margin-top: 10px"/> 
+             
+         
+               
+          
+            
+            </center>
+            
+              </h:form>
+            
+            </p:layoutUnit>
 
-                    </p:panelGrid>
+              <p:layoutUnit position="center">
+                  
+                  <h:form id="update_give_std_mark">
+              
+            <p:dataTable id="st_mark_update_tbl" value="#{studentSubjectMarkController.studentSubjectMarkList}" var="stdntList" editable="true" editMode="cell" widgetVar="cellCars" scrollable="true" scrollHeight="518">
 
-                    <p:commandButton id="student_srch_inputSubjectMark_btn" value="Search" update="student_srch_update_Mark_frm,:st_mark_list_tblfrm" actionListener="#{studentSubjectMarkController.student_Complete_Result_List}"  disabled="#{studentSubjectMarkController.exCnfID eq 0}"  icon="ui-icon-search"  style="margin-top:7px;"/>
+            <!--        <p:ajax event="cellEdit" listener="#{studentSubjectMarkController.onCellEdit}" update=":st_mark_input_tbl_frm:gwl" />  -->
 
-                </center>
+                <p:column sortBy="#{stdntList.studentid}">
 
-            </h:form>
+                    <f:facet name="header">Student ID</f:facet>  
 
-        </p:layoutUnit> 
+                    <h:outputText value="#{stdntList.studentid}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{stdntList.studentname}">
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{stdntList.studentname}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{stdntList.roll}">
+
+                    <f:facet name="header">Student Roll</f:facet>  
+
+                    <h:outputText value="#{stdntList.roll}"/>
+
+                </p:column> 
+
+                <p:column headerText="CT" style="width:100px;">
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{stdntList.shortcode1}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{stdntList.shortcode1}" style="width:90%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+
+                </p:column> 
+
+                <p:column headerText="WR" style="width:100px;">
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{stdntList.shortcode2}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{stdntList.shortcode2}" style="width:90%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+
+                </p:column> 
+
+                <p:column headerText="OB" style="width:100px;">
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{stdntList.shortcode3}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{stdntList.shortcode3}" style="width:90%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+
+                </p:column> 
+
+                <p:column headerText="PR" style="width:100px;">
+
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{stdntList.shortcode4}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{stdntList.shortcode4}" style="width:90%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+
+                </p:column>
 
 
-        <p:layoutUnit position="center">
 
-            <h:form id="st_mark_list_tblfrm">
+            </p:dataTable>
 
-                <p:growl id="gwl" autoUpdate="true" showDetail="true"/> 
+            <center>
 
-                <p:dataTable id="st_mark_input_tbl" value="#{studentSubjectMarkController.student_result_complete_list}" var="stdntList" editable="true" editMode="cell" widgetVar="cellCars" scrollable="true" scrollHeight="518">
+                <p:commandButton value="Result Process" action="#{studentSubjectMarkController.processStudentResult()}" ajax="false" style="margin-top:7px;" />
 
-             <!--       <p:ajax event="cellEdit" listener="#{studentSubjectMarkController.onCellEdit}" update=":st_mark_input_tbl_frm:gwl" /> -->
+             
 
-                    <p:column sortBy="#{stdntList.studentID}">
+            </center>
+                      
+                 </h:form>
+                  
+           </p:layoutUnit>       
 
-                        <f:facet name="header">Student ID</f:facet>  
+      
+              
+              
+        </p:layout>
+    </p:dialog>
+        
+        
 
-                        <h:outputText value="#{stdntList.studentID}"/>
-
-                    </p:column> 
-
-                    <p:column sortBy="#{stdntList.studentName}">
-
-                        <f:facet name="header">Student Name</f:facet>  
-
-                        <h:outputText value="#{stdntList.studentName}"/>
-
-                    </p:column> 
-
-                    <p:column sortBy="#{stdntList.studentRoll}">
-
-                        <f:facet name="header">Student Roll</f:facet>  
-
-                        <h:outputText value="#{stdntList.studentRoll}"/>
-
-                    </p:column> 
-
-                    <p:column headerText="CT" style="width:100px;">
-
-                        <p:cellEditor>  
-                            <f:facet name="output">  
-                                <h:outputText value="#{stdntList.shortCode1}" />  
-                            </f:facet>  
-                            <f:facet name="input">  
-                                <p:inputText value="#{stdntList.shortCode1}" style="width:90%"/>  
-                            </f:facet>  
-                        </p:cellEditor>  
-
-                    </p:column> 
-
-                    <p:column headerText="WR" style="width:100px;">
-
-                        <p:cellEditor>  
-                            <f:facet name="output">  
-                                <h:outputText value="#{stdntList.shortCode2}" />  
-                            </f:facet>  
-                            <f:facet name="input">  
-                                <p:inputText value="#{stdntList.shortCode2}" style="width:90%"/>  
-                            </f:facet>  
-                        </p:cellEditor>  
-
-                    </p:column> 
-
-                    <p:column headerText="OB" style="width:100px;">
-
-                        <p:cellEditor>  
-                            <f:facet name="output">  
-                                <h:outputText value="#{stdntList.shortCode3}" />  
-                            </f:facet>  
-                            <f:facet name="input">  
-                                <p:inputText value="#{stdntList.shortCode3}" style="width:90%"/>  
-                            </f:facet>  
-                        </p:cellEditor>  
-
-                    </p:column> 
-
-                    <p:column headerText="PR" style="width:100px;">
-
-                        <p:cellEditor>  
-                            <f:facet name="output">  
-                                <h:outputText value="#{stdntList.shortCode4}" />  
-                            </f:facet>  
-                            <f:facet name="input">  
-                                <p:inputText value="#{stdntList.shortCode4}" style="width:90%"/>  
-                            </f:facet>  
-                        </p:cellEditor>  
-
-                    </p:column> 
-
-                </p:dataTable>
-
-                <center>
-
-                    <p:commandButton value="Save" action="#{studentSubjectMarkController.updateStudentResult}" update="st_mark_list_tblfrm" oncomplete="sujectMarkUpdate.show()" style="margin-top:7px;"/>
-
-                </center>
-
-            </h:form>
-
-        </p:layoutUnit>
-
-    </p:layout>  
-
+        
 </ui:composition>

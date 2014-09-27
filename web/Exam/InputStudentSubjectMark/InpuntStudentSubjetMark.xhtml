@@ -109,7 +109,7 @@
                 <p:column>
                 <h:outputText value="Exam"/>
                 </p:column> <p:column>
-                        <p:selectOneMenu value="#{studentSubjectMarkController.examResultOpt.examName}" effect="slide" style="width: 185px">  
+                        <p:selectOneMenu value="#{studentSubjectMarkController.studentSubjectMark.examName}" effect="slide" style="width: 185px">  
 
                             <f:selectItem itemLabel="Select An Option" itemValue="" />  
 
@@ -149,9 +149,9 @@
 
             </p:panelGrid>
             
-            <p:commandButton value="Mark Input" update=":give_std_mark" action="#{studentSubjectMarkController.studentList()}" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top: 10px"/> 
+            <p:commandButton value="Search" update=":give_std_mark" action="#{studentSubjectMarkController.studentList()}" style="margin-top: 10px"/> 
              
-            <p:commandButton value="Mark Update" update=":give_std_mark" action="#{studentSubjectMarkController.student_Complete_Result_List()}" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top: 10px"/> 
+         
                
           
             
@@ -165,31 +165,31 @@
                   
                   <h:form id="give_std_mark">
               
-            <p:dataTable id="st_mark_input_tbl" value="#{studentSubjectMarkController.student_subject_markList}" var="stdntList" editable="true" editMode="cell" widgetVar="cellCars" scrollable="true" scrollHeight="518">
+            <p:dataTable id="st_mark_input_tbl" value="#{studentSubjectMarkController.studentSubjectMarkList}" var="stdntList" editable="true" editMode="cell" widgetVar="cellCars" scrollable="true" scrollHeight="518">
 
             <!--        <p:ajax event="cellEdit" listener="#{studentSubjectMarkController.onCellEdit}" update=":st_mark_input_tbl_frm:gwl" />  -->
 
-                <p:column sortBy="#{stdntList.studentID}">
+                <p:column sortBy="#{stdntList.studentid}">
 
                     <f:facet name="header">Student ID</f:facet>  
 
-                    <h:outputText value="#{stdntList.studentID}"/>
+                    <h:outputText value="#{stdntList.studentid}"/>
 
                 </p:column> 
 
-                <p:column sortBy="#{stdntList.studentName}">
+                <p:column sortBy="#{stdntList.studentname}">
 
                     <f:facet name="header">Student Name</f:facet>  
 
-                    <h:outputText value="#{stdntList.studentName}"/>
+                    <h:outputText value="#{stdntList.studentname}"/>
 
                 </p:column> 
 
-                <p:column sortBy="#{stdntList.studentRoll}">
+                <p:column sortBy="#{stdntList.roll}">
 
                     <f:facet name="header">Student Roll</f:facet>  
 
-                    <h:outputText value="#{stdntList.studentRoll}"/>
+                    <h:outputText value="#{stdntList.roll}"/>
 
                 </p:column> 
 
@@ -251,7 +251,9 @@
 
             <center>
 
-                <p:commandButton value="Save" action="#{studentSubjectMarkController.saveStudent_Subject_Result}" ajax="false" style="margin-top:7px;"/>
+                <p:commandButton value="Save" action="#{studentSubjectMarkController.saveStudent_Subject_Result()}" update="st_mark_input_tbl" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top:7px; margin-left: 6px;" disabled="#{studentSubjectMarkController.disableoptioninsert eq 0}"/>
+
+                <p:commandButton value="Update" action="#{studentSubjectMarkController.updateStudentResult()}" update="st_mark_input_tbl" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top:7px;" disabled="#{studentSubjectMarkController.disableoptionupdate eq 0}"/>
 
             </center>
                       
