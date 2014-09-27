@@ -408,13 +408,13 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
             while (itr.hasNext()) {
                 StudentMeritList sml = itr.next();
 
-                smsBody.append("Student ID-");
+//                smsBody.append("Student ID-");
+//
+//                smsBody.append(sml.getStudentID());
 
-                smsBody.append(sml.getStudentID());
+ //               smsBody.append("::");
 
-                smsBody.append("::");
-
-                smsBody.append("Roll-");
+                smsBody.append("Student Roll-");
 
                 smsBody.append(sml.getStudentRoll());
 
@@ -438,27 +438,27 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 
                 smsBody.append(" ");
 
-                smsBody.append("::Merit Position::");
-
-                smsBody.append(" ");
-
-                smsBody.append("CP-");
-
-                smsBody.append(sml.getcP());
-
+//                smsBody.append("::Merit Position::");
+//
+//                smsBody.append(" ");
+//
+//                smsBody.append("CP-");
+//
+//                smsBody.append(sml.getcP());
+//
                 smsBody.append("::");
 
-                smsBody.append("SP-");
+                smsBody.append("Merit Position-");
 
                 smsBody.append(sml.getsP());
 
                 smsBody.append("::");
-
-                smsBody.append("SecP-");
-
-                smsBody.append(sml.getSecP());
-
-                smsBody.append(" ");
+//
+//                smsBody.append("SecP-");
+//
+//                smsBody.append(sml.getSecP());
+//
+//                smsBody.append(" ");
 
                 smsBody.append(" ");
 
