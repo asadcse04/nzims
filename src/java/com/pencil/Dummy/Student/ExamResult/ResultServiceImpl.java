@@ -428,9 +428,7 @@ public class ResultServiceImpl implements Serializable,StudentExamResultService
             
             prst.close();
             
-            
-             
-            
+
             
             prst=cn.prepareStatement("insert into student_result values(null,?,(select SubjectID from subject where SubjectName=?),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
