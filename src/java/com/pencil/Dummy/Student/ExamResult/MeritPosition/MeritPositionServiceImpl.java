@@ -411,9 +411,9 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 //                smsBody.append("Student ID-");
 //
 //                smsBody.append(sml.getStudentID());
-
- //               smsBody.append("::");
-
+//
+//                smsBody.append("::");
+                
                 smsBody.append("Student Roll-");
 
                 smsBody.append(sml.getStudentRoll());
@@ -445,14 +445,16 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 //                smsBody.append("CP-");
 //
 //                smsBody.append(sml.getcP());
+                
+                smsBody.append("::");
+                
+                 smsBody.append("From:");
+
+//                smsBody.append("Merit Position-");
 //
-                smsBody.append("::");
-
-                smsBody.append("Merit Position-");
-
-                smsBody.append(sml.getsP());
-
-                smsBody.append("::");
+//                smsBody.append(sml.getsP());
+//
+//                smsBody.append("::");
 //
 //                smsBody.append("SecP-");
 //
@@ -477,9 +479,11 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 
                 smsBody.setLength(0);
 
-                if (smsCount <= smsBal) {
-                    break;
-                }
+//                if (smsCount <= smsBal) {
+//                    
+//                    break;
+//                    
+//                }
             }//end while
 
             System.out.println("Result SMS Send::" + smsCount);
