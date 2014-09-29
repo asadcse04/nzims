@@ -20,7 +20,7 @@ public interface StudentExamResultService
     
     public StringBuilder scCnfID(String className);  
     
-    public boolean insertStudentExamScore(int exCnfID,String subjectName,int teacherID,List<StudentExamResult> examRsList,List<ExamGrade> exmGrdList);
+    public boolean insertStudentExamScore(int exCnfID,String subjectName,String teacherID,List<StudentExamResult> examRsList,List<ExamGrade> exmGrdList);
     
     public void generateMeritList(int exCnfID,StringBuilder scCnfID,List<ExamGrade> exmGrdList);
     

@@ -347,7 +347,7 @@ public class ResultServiceImpl implements Serializable,StudentExamResultService
      * @return
      */
     @Override
-    public boolean insertStudentExamScore(int exCnfID, String subjectName,int teacherID, List<StudentExamResult> examRsList,List<ExamGrade> exmGrdList) 
+    public boolean insertStudentExamScore(int exCnfID, String subjectName,String teacherID, List<StudentExamResult> examRsList,List<ExamGrade> exmGrdList) 
     {   
         String sc1;
         
@@ -575,7 +575,7 @@ public class ResultServiceImpl implements Serializable,StudentExamResultService
                 
                 prst.setInt(12,exCnfID);
                 
-                prst.setInt(13,teacherID);//TeacherID
+                prst.setString(13,teacherID);//TeacherID
                 
                 prst.setString(14,"note");
                 
