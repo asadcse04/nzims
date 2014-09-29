@@ -39,10 +39,10 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
         String studentID = null;
 
         String instituteID = "";
-
+        String userID="";
         FacesContext context = FacesContext.getCurrentInstance();
-
         instituteID = context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        userID=context.getExternalContext().getSessionMap().get("UserID").toString();
 
         try {
             prst = con.prepareStatement("select max(cast(StudentID  as unsigned)) as StudentID from student_basic_info where InstituteID=?");
@@ -164,8 +164,24 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
             prst.setInt(4, stdReg.getStudentRoll());
 
             prst.execute();
+            
+             prst=con.prepareStatement("insert into student_academic_info (StudentID,StudentRoll,Ac_Year,ClassID,DeptID,SectionID,ShiftID,InstituteID,UserID)values(?,?,?,(select ClassID from class where ClassName=?),(select DepartmentID from department where DepartmentName=?),"
+                       + "(select SectionID from section where SectionName=? and InstituteID=?),(select ShiftID from shift where ShiftName=?),?,?)");
 
-            con.commit();
+               prst.setString(1, stdReg.getStudentID() + "-" + instituteID);
+               prst.setInt(2,stdReg.getStudentRoll());
+               prst.setString(3, String.valueOf(stdReg.getAcyr()));
+               prst.setString(4, stdReg.getClassName());
+               prst.setString(5, stdReg.getDeptName());
+               prst.setString(6, stdReg.getSectionName());
+               prst.setString(7, instituteID);
+               prst.setString(8, stdReg.getShiftName());
+               prst.setString(9, instituteID);
+               prst.setString(10, userID);
+           
+             prst.execute();
+               
+             con.commit();
 
             return true;
 
@@ -599,10 +615,10 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
         PreparedStatement prst = null;
 
         String SchoolID = "";
-
+        String userID=""; 
         FacesContext context = FacesContext.getCurrentInstance();
-
         SchoolID = context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        userID=context.getExternalContext().getSessionMap().get("UserID").toString();
 
         try {
 
@@ -622,8 +638,25 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
 
             prst.setString(2, stdReg.getStudentID());
 
-            prst.setString(3, SchoolID);
+            prst.setString(3, SchoolID);          
+            
+            prst.executeUpdate();
 
+           
+           
+            prst=con.prepareStatement("update student_academic_info set Ac_Year=?,ClassID=(select ClassID from class where ClassName=?),DeptID=(select DepartmentID from department where DepartmentName=?),SectionID=(select SectionID from section where SectionName=? and InstituteID=?),ShiftID=(select ShiftID from shift where ShiftName=?),UserID=?,StudentRoll=? where StudentID=? and InstituteID=?");
+            
+            prst.setString(1, String.valueOf(stdReg.getAcyr()));
+            prst.setString(2, stdReg.getClassName());
+            prst.setString(3, stdReg.getDeptName());
+            prst.setString(4, stdReg.getSectionName());
+            prst.setString(5, SchoolID);
+            prst.setString(6, stdReg.getShiftName());
+            prst.setString(7, userID);
+            prst.setInt(8, stdReg.getStudentRoll());
+            prst.setString(9, stdReg.getStudentID());
+            prst.setString(10, SchoolID);
+            
             prst.executeUpdate();
 
             return true;
