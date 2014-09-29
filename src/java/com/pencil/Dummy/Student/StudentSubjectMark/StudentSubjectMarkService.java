@@ -24,7 +24,7 @@ public interface StudentSubjectMarkService
     
     public List<StudentSubjectMark> scClassSubMarkInsert_List_ed();
     
-    public boolean insertStudentExamScore(int exCnfID,String subjectName,int teacherID,List<StudentSubjectMark> examRsList,List<ExamGrade> exmGrdList);
+    public boolean insertStudentExamScore(int exCnfID,String subjectName,String teacherID,List<StudentSubjectMark> examRsList,List<ExamGrade> exmGrdList);
     
     public void generateMeritList(int exCnfID,StringBuilder scCnfID,List<ExamGrade> exmGrdList);
     
@@ -42,7 +42,7 @@ public interface StudentSubjectMarkService
     
     public List<String> subjectList(StudentSubjectMark sbj_cnf);
     
-    public boolean processStuduntExamResult(int exCnfID, String subjectName, int teacherID, List<StudentSubjectMark> examRsList, List<ExamGrade> exmGrdList,int acyear);
+    public boolean processStuduntExamResult(int exCnfID, String subjectName, String teacherID, List<StudentSubjectMark> examRsList, List<ExamGrade> exmGrdList,int acyear);
     
     
 

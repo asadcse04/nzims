@@ -20,57 +20,67 @@ public class ExamGrade implements Serializable
     private double gradeNumber;
     
     private double point;
+    
+    private int rangelow;
+    
+    private int rangehigh;
 
     public ExamGrade() {
     }
 
-    public ExamGrade(String letterGrade, double gradeNumber, double point) {
+    public ExamGrade(String letterGrade, double gradeNumber, double point, int rangelow, int rangehigh) {
         this.letterGrade = letterGrade;
         this.gradeNumber = gradeNumber;
         this.point = point;
+        this.rangelow = rangelow;
+        this.rangehigh = rangehigh;
     }
+    
+    
 
-    /**
-     * @return the letterGrade
-     */
     public String getLetterGrade() {
         return letterGrade;
     }
 
-    /**
-     * @param letterGrade the letterGrade to set
-     */
     public void setLetterGrade(String letterGrade) {
         this.letterGrade = letterGrade;
     }
 
-    /**
-     * @return the gradeNumber
-     */
     public double getGradeNumber() {
         return gradeNumber;
     }
 
-    /**
-     * @param gradeNumber the gradeNumber to set
-     */
     public void setGradeNumber(double gradeNumber) {
         this.gradeNumber = gradeNumber;
     }
 
-    /**
-     * @return the point
-     */
     public double getPoint() {
         return point;
     }
 
-    /**
-     * @param point the point to set
-     */
     public void setPoint(double point) {
         this.point = point;
     }
+
+    public int getRangelow() {
+        return rangelow;
+    }
+
+    public void setRangelow(int rangelow) {
+        this.rangelow = rangelow;
+    }
+
+    public int getRangehigh() {
+        return rangehigh;
+    }
+
+    public void setRangehigh(int rangehigh) {
+        this.rangehigh = rangehigh;
+    }
+
+  
+
+   
     
     
 }

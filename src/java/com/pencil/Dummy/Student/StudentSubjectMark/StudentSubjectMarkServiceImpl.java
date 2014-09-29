@@ -500,7 +500,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
      * @return
      */
     @Override
-    public boolean insertStudentExamScore(int exCnfID, String subjectName, int teacherID, List<StudentSubjectMark> examRsList, List<ExamGrade> exmGrdList) {
+    public boolean insertStudentExamScore(int exCnfID, String subjectName, String teacherID, List<StudentSubjectMark> examRsList, List<ExamGrade> exmGrdList) {
         String sc1;
 
         String sc2;
@@ -596,7 +596,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
                 prst.setInt(7, exCnfID);
 
-                prst.setInt(8, teacherID);
+                prst.setString(8, teacherID);
 
                 prst.setString(9, userid);
 
@@ -646,7 +646,8 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
         return false;
     }
     
-    public boolean processStuduntExamResult(int exCnfID, String subjectName,int teacherID, List<StudentSubjectMark> examRsList,List<ExamGrade> exmGrdList,int acyear) 
+    @Override
+    public boolean processStuduntExamResult(int exCnfID, String subjectName,String teacherID, List<StudentSubjectMark> examRsList,List<ExamGrade> exmGrdList,int acyear) 
     {   
         String sc1;
         
@@ -673,7 +674,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
         instituteID = context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
-        int resultid=1;
+     
         
         
         
@@ -701,6 +702,8 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             db=new DB_Connection();
             
             cn=db.getConnection();
+            
+            cn.setAutoCommit(false);
             
             exmMark_Div_List=new ArrayList<ExamMarkDivision>();
             
@@ -831,19 +834,53 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
 
                         finalScore = finalScore + (Double.parseDouble(sc4) * exmMark_Div_List.get(i).getAcceptance());
                     }
+                    
                 }//End for
                 
-                for(int i=0;i<exmGrdList.size();i++)
-                {
-                    if(exmGrdList.get(i).getGradeNumber()<=((finalScore/sbj_total)*100))
-                    {
-                        letterGrd=exmGrdList.get(i).getLetterGrade();
+                
+                
+                for(ExamGrade a:exmGrdList){
+                  
+                    if( ((finalScore/sbj_total)*100)>=a.getRangelow() && ((finalScore/sbj_total)*100)<= a.getRangehigh())
+                  
+                    {                       
+                        letterGrd=a.getLetterGrade();
+                        point=a.getPoint();
                         
-                        point=exmGrdList.get(i).getPoint();
-                        
-                        break;
+                      
                     }
                 }
+                
+                
+                
+//                for(int i=0;i<exmGrdList.size();i++)
+//                {
+//                    if( ((finalScore/sbj_total)*100)>=exmGrdList.get(i).getRangelow() && ((finalScore/sbj_total)*100)<= exmGrdList.get(i).getRangehigh())
+//                    {
+//                        letterGrd=exmGrdList.get(i).getLetterGrade();
+//                        
+//                        point=exmGrdList.get(i).getPoint();
+//                         
+//                      
+//                    }
+//                }
+                
+                
+//                outer_loop:
+//                for(int i=0;i<exmGrdList.size();i++)
+//                {
+//                    if(exmGrdList.get(i).getGradeNumber()<=((finalScore/sbj_total)*100))
+//                    {
+//                        letterGrd=exmGrdList.get(i).getLetterGrade();
+//                        
+//                        point=exmGrdList.get(i).getPoint();
+//                         
+//                        break outer_loop;
+//                    }
+//                }
+                
+           
+
                 
                 if(failflag)
                 {
@@ -880,7 +917,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 
                 prst.setInt(13,exCnfID);
                 
-                prst.setInt(14,teacherID);//TeacherID
+                prst.setString(14,teacherID);//TeacherID
                 
                 prst.setString(15,"note");
                 
@@ -891,8 +928,7 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
                 prst.setInt(18, acyear);
                 
                 prst.addBatch();
-                
-                resultid++;
+  
                 
                 sbj_total = 0;
 
@@ -909,6 +945,8 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
             }//End main while
             
             int[] i=prst.executeBatch();
+            
+            cn.commit();
             
             System.out.println("Number of student has given exam mark::"+i.length);
             
@@ -1439,12 +1477,13 @@ public class StudentSubjectMarkServiceImpl implements Serializable, StudentSubje
         List<ExamGrade> exmGrdList = new ArrayList<ExamGrade>();
 
         try {
-            prst = con.prepareStatement("SELECT LetterGrade, GradeNumber, Point FROM examgrade  where InstituteID='" + instituteID + "'");
+            prst = con.prepareStatement("SELECT LetterGrade, GradeNumber, Point, range_low, range_high FROM examgrade  where InstituteID='"+instituteID+"' ");
 
             rs = prst.executeQuery();
 
             while (rs.next()) {
-                exmGrdList.add(new ExamGrade(rs.getString("LetterGrade"), rs.getDouble("GradeNumber"), rs.getDouble("Point")));
+                
+                exmGrdList.add(new ExamGrade(rs.getString("LetterGrade"), rs.getDouble("GradeNumber"), rs.getDouble("Point"),rs.getInt("range_low"),rs.getInt("range_high")));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

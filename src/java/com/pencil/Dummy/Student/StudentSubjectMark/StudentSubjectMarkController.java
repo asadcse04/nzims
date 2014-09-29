@@ -17,6 +17,7 @@ import com.pencil.SubjectConfigure.SubjectConfig;
 import com.pencil.SubjectConfigure.SubjectConfigService;
 import com.pencil.SubjectConfigure.SubjectConfigService_Impl;
 import java.io.Serializable;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -164,11 +165,30 @@ public class StudentSubjectMarkController implements Serializable {
         this.teachers = tc.getTeacherList();
     }
 
+    public void studentResultList(){
+        
+         this.studentSubjectMarkList = new ArrayList<>();
+        
+         this.exCnfID=stdsubmarkservice.getExCnfID(this.studentSubjectMark.getAcyr(), this.studentSubjectMark.getClassName(), this.studentSubjectMark.getExamName());
+
+        System.out.println("Ex_Cnf_ID is " + exCnfID);
+        
+        
+
+       
+        
+        this.studentSubjectMarkList = stdsubmarkservice.getUpdateSubjectMarkList(this.exCnfID, this.studentSubjectMark);
+        
+    }
+    
     public void studentList() {
+        
+         this.studentSubjectMarkList = new ArrayList<>();
 
        this.exCnfID=stdsubmarkservice.getExCnfID(this.studentSubjectMark.getAcyr(), this.studentSubjectMark.getClassName(), this.studentSubjectMark.getExamName());
 
         System.out.println("Ex_Cnf_ID is " + exCnfID);
+       
 
         this.studentSubjectMarkList = stdsubmarkservice.getUpdateSubjectMarkList(this.exCnfID, this.studentSubjectMark);
 
@@ -254,6 +274,7 @@ public class StudentSubjectMarkController implements Serializable {
     
     
     public void processStudentResult(){
+        
        
          FacesContext context = FacesContext.getCurrentInstance();
 
