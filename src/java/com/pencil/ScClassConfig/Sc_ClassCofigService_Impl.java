@@ -63,7 +63,7 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             }
             
             prst = con.prepareStatement("insert into classconfig values(?,?,(select departmentID from department where departmentName=?),"
-                    + "(SELECT ClassID FROM class where ClassName=?),(SELECT ShiftID FROM shift where ShiftName=?),(SELECT SectionID FROM section where SectionName=? and InstituteID=?),?,?)");
+                    + "(SELECT ClassID FROM class where ClassName=?),(SELECT ShiftID FROM shift where ShiftName=?),(SELECT SectionID FROM section where SectionName=? and InstituteID=?),?,?,?)");
         
             
             prst.setInt(1, classconfid);
@@ -83,6 +83,8 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             prst.setString(8,cnf.getRoomNum());
             
             prst.setString(9, instituteid);
+            
+            prst.setString(10, classconfid+"-"+instituteid);
             
             prst.execute();
              
