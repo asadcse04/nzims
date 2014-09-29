@@ -60,7 +60,7 @@ public class ExamConfigService_Impl implements Serializable,ExamConfigService
                 exCnfID=1;
             }
             
-            prst = con.prepareStatement("insert into exam_config values(?,?,(SELECT ClassID FROM class where ClassName=?),(select Exam_ID from exam where ExamName=? and instituteID=?),?)");
+            prst = con.prepareStatement("insert into exam_config values(?,?,(SELECT ClassID FROM class where ClassName=?),(select Exam_ID from exam where ExamName=? and instituteID=?),?,?)");
             
             prst.setInt(1,exCnfID);
             
@@ -73,6 +73,8 @@ public class ExamConfigService_Impl implements Serializable,ExamConfigService
             prst.setString(5,exc.getInstituteID());
             
             prst.setString(6,exc.getInstituteID());
+            
+            prst.setString(7, exCnfID+"-"+exc.getInstituteID());
            
             prst.execute();
            
