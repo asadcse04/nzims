@@ -89,7 +89,7 @@ public class SendSms_Teacher_ServiceImpl implements SendSms_Teacher_Service,Seri
                 {
                     if (count <= smsBal)
                     {
-                        prst.setInt(1, teacher.getTeacherID());
+                        prst.setString(1, teacher.getTeacherID());
 
                         prst.setString(2, teacher.getContactNo());
 
