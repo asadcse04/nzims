@@ -251,7 +251,7 @@
 
             <center>
 
-                <p:commandButton value="Save" action="#{studentSubjectMarkController.saveStudent_Subject_Result()}" update="st_mark_input_tbl" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top:7px; margin-left: 6px;" disabled="#{studentSubjectMarkController.disableoptioninsert eq 0}"/>
+                <p:commandButton value="Save" action="#{studentSubjectMarkController.saveStudent_Subject_Result()}" update="st_mark_input_tbl" ajax="false" style="margin-top:7px; margin-left: 6px;" disabled="#{studentSubjectMarkController.disableoptioninsert eq 0}"/>
 
                 <p:commandButton value="Update" action="#{studentSubjectMarkController.updateStudentResult()}" update="st_mark_input_tbl" oncomplete="std_sub_mark_insert_Dig.show()" style="margin-top:7px;" disabled="#{studentSubjectMarkController.disableoptionupdate eq 0}"/>
 
