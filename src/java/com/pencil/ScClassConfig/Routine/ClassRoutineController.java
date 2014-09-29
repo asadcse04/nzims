@@ -100,7 +100,7 @@ public class ClassRoutineController implements Serializable
                 
         this.class_routine.setNote("");
                 
-        this.selectedTeacher.setTeacherID(0);
+        this.selectedTeacher.setTeacherID("");
          
     }
     

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ClassRoutineService
 {
-    public boolean save_Assign_Subject_Tchr(ClassRoutine cr,String dayName,String prdName,int tchrid);
+    public boolean save_Assign_Subject_Tchr(ClassRoutine cr,String dayName,String prdName,String tchrid);
     
     public List<ClassRoutineUpdate> viewRoutine(int ClassCnfID,String day,String shift);
     

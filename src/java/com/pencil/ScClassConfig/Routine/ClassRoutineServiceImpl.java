@@ -31,7 +31,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
      * @return
      */
     @Override
-    public boolean save_Assign_Subject_Tchr(ClassRoutine cr, String dayName , String prdName, int tchrid)
+    public boolean save_Assign_Subject_Tchr(ClassRoutine cr, String dayName , String prdName, String tchrid)
     {
         DB_Connection o=new DB_Connection(); 
        
@@ -57,7 +57,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
             
             prst.setString(4,cr.getShiftName());
             
-            prst.setInt(5,tchrid);
+            prst.setString(5,tchrid);
             
             rs = prst.executeQuery();
             
@@ -86,7 +86,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
             
                 prst.setString(5,cr.getShiftName());
             
-                prst.setInt(6,tchrid);
+                prst.setString(6,tchrid);
             
                 prst.setString(7,cr.getSubject());
             
@@ -129,7 +129,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
 
             prdName = null;
 
-            tchrid = 0;
+            tchrid = null;
         }
         
         return false;
@@ -169,7 +169,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
             
             while(rs.next())
             {
-                routineList.add(new ClassRoutineUpdate(ClassCnfID,day,rs.getString("p.PeriodName"),rs.getString("p.StartTime"),rs.getString("p.EndTime"),shift,rs.getString("sbj.SubjectName"),rs.getString("rw.SubjectNote"),rs.getInt("rw.TeacherID"),rs.getString("t.TeacherName")));
+                routineList.add(new ClassRoutineUpdate(ClassCnfID,day,rs.getString("p.PeriodName"),rs.getString("p.StartTime"),rs.getString("p.EndTime"),shift,rs.getString("sbj.SubjectName"),rs.getString("rw.SubjectNote"),rs.getString("rw.TeacherID"),rs.getString("t.TeacherName")));
             }
         }
         catch(SQLException e)
@@ -246,7 +246,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
             
             prst.setString(4,crUpdate.getShiftName());
             
-            prst.setInt(5,crUpdate.getTeacherID());
+            prst.setString(5,crUpdate.getTeacherID());
             
             rs = prst.executeQuery();
             
@@ -265,7 +265,7 @@ public class ClassRoutineServiceImpl implements Serializable,ClassRoutineService
                         + " PeriodID=(select periodID from period where periodName=? and shiftID=(select shiftID from shift where shiftName=?))"
                         + " and ShiftID=(select shiftID from shift where shiftName=?)");
                 
-                prst.setInt(1,crUpdate.getTeacherID());
+                prst.setString(1,crUpdate.getTeacherID());
                 
                 prst.setString(2,crUpdate.getSubjectName());
                 

@@ -81,7 +81,7 @@ public class ClassRoutineUpdate_Controller implements Serializable
         
         boolean flag=false;
         
-        if(this.routine_update.getTeacherID()==this.selectedTeacher.getTeacherID())
+        if(this.routine_update.getTeacherID().equals(this.selectedTeacher.getTeacherID()))
         {
             flag=true;
         }

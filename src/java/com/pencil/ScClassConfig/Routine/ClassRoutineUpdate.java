@@ -30,7 +30,7 @@ public class ClassRoutineUpdate implements Serializable
     private String subjectNote;
     
     
-    private int teacherID;
+    private String teacherID;
     
     private String teacherName;
     
@@ -40,7 +40,7 @@ public class ClassRoutineUpdate implements Serializable
         
     }
 
-    public ClassRoutineUpdate(int sc_cnf_id, String day, String periodName, String startTime, String endTime, String shiftName, String subjectName, String subjectNote, int teacherID, String teacherName) {
+    public ClassRoutineUpdate(int sc_cnf_id, String day, String periodName, String startTime, String endTime, String shiftName, String subjectName, String subjectNote, String teacherID, String teacherName) {
         this.sc_cnf_id = sc_cnf_id;
         this.day = day;
         this.periodName = periodName;
@@ -170,14 +170,14 @@ public class ClassRoutineUpdate implements Serializable
     /**
      * @return the teacherID
      */
-    public int getTeacherID() {
+    public String getTeacherID() {
         return teacherID;
     }
 
     /**
      * @param teacherID the teacherID to set
      */
-    public void setTeacherID(int teacherID) {
+    public void setTeacherID(String teacherID) {
         this.teacherID = teacherID;
     }
 
