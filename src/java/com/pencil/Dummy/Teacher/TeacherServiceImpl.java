@@ -39,6 +39,8 @@ public class TeacherServiceImpl implements Serializable,TeacherService
         
         int teacherID=0;
         
+        String finalTeacherid="";
+        
         String SchoolID="";
         
         FacesContext context = FacesContext.getCurrentInstance();
@@ -53,13 +55,15 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             
             
-            prst = con.prepareStatement("SELECT max(TeacherID) as TeacherID FROM teacher");
-           
+            prst = con.prepareStatement("SELECT max(TeacherID) as TeacherID FROM teacher where InstituteID=?");
+            prst.setString(1, SchoolID);
+            
             rs = prst.executeQuery();
 
             if (rs.next()) 
             {
-                teacherID = rs.getInt("TeacherID");
+                teacherID = rs.getInt("TeacherID")+1;
+                
             }
             if (teacherID ==0)
             {
@@ -67,13 +71,13 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             }
             
             
-            tchr.setTeacherID(++teacherID);
+           
             
             
             
             prst = con.prepareStatement("insert into teacher values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                
-            prst.setInt(1,tchr.getTeacherID());
+            prst.setString(1,teacherID+"-"+SchoolID);
              
             prst.setString(2,tchr.getName());
                  
@@ -104,7 +108,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             prst.close();
             
             
-            prst = con.prepareStatement("insert into teacher_contact_info values(?,?,?,?,(select max(TeacherID) from teacher where InstituteID=?),?)");
+            prst = con.prepareStatement("insert into teacher_contact_info values(?,?,?,?,?,?)");
             
             prst.setString(1,tchr.getContactNo());
             
@@ -114,7 +118,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             prst.setString(4,tchr.getPermanentAddress());
             
-            prst.setString(5, SchoolID);
+            prst.setString(5, teacherID+"-"+SchoolID);
             
             prst.setString(6, SchoolID);
             
@@ -198,7 +202,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
            while(rs.next())
            {
-               tchrList.add(new Teacher(rs.getInt("t.TeacherID"),rs.getString("t.TeacherName"),rs.getString("t.Gender"),rs.getDate("t.DOB"),rs.getString("t.FatherName"),
+               tchrList.add(new Teacher(rs.getString("t.TeacherID"),rs.getString("t.TeacherName"),rs.getString("t.Gender"),rs.getDate("t.DOB"),rs.getString("t.FatherName"),
                        
                        rs.getString("t.MotherName"),rs.getString("t.Qualification"),rs.getString("t.PassedFrom"),rs.getString("t.BloodGroup"),rs.getString("t.MaritalStatus"),rs.getString("t.Religion"),rs.getString("t.ImgPath"),rs.getString("tc.ContactNo"),rs.getString("tc.Email"),rs.getString("tc.PresentAddress"),rs.getString("tc.PermanentAddress")));
            }
@@ -283,7 +287,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
 
             prst.setString(11, SchoolID+"_"+tchr.getTeacherID()+"_"+tchr.getImgPath());
 
-            prst.setInt(12, tchr.getTeacherID());
+            prst.setString(12, tchr.getTeacherID());
             
             prst.setString(13, SchoolID);
             
@@ -303,7 +307,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
 
             prst.setString(4, tchr.getPermanentAddress());
 
-            prst.setInt(5, tchr.getTeacherID());
+            prst.setString(5, tchr.getTeacherID());
             
             prst.setString(6, SchoolID);
             

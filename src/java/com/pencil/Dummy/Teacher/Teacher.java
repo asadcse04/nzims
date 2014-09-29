@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Teacher implements Serializable
 {
-    private int teacherID;
+    private String teacherID;
     
     private String name;
     
@@ -54,7 +54,7 @@ public class Teacher implements Serializable
         
     }
 
-    public Teacher(int teacherID, String name, String gender, Date dob, String fatherName, String motherName, String qualification, String passedFrom, String bloodGroup, String maritalStatus, String religion, String imgPath, String contactNo, String email, String presentAddress, String permanentAddress) {
+    public Teacher(String teacherID, String name, String gender, Date dob, String fatherName, String motherName, String qualification, String passedFrom, String bloodGroup, String maritalStatus, String religion, String imgPath, String contactNo, String email, String presentAddress, String permanentAddress) {
         this.teacherID = teacherID;
         this.name = name;
         this.gender = gender;
@@ -76,14 +76,14 @@ public class Teacher implements Serializable
     /**
      * @return the teacherID
      */
-    public int getTeacherID() {
+    public String getTeacherID() {
         return teacherID;
     }
 
     /**
      * @param teacherID the teacherID to set
      */
-    public void setTeacherID(int teacherID) {
+    public void setTeacherID(String teacherID) {
         this.teacherID = teacherID;
     }
 
@@ -304,13 +304,13 @@ public class Teacher implements Serializable
         {
             return false;
         }
-        return ((Teacher)obj).teacherID==this.teacherID;
+        return ((Teacher)obj).teacherID.equals(this.teacherID);
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + this.teacherID;
+        hash = 29 * hash + Integer.parseInt(this.teacherID);
         return hash;
     }
 

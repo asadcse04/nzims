@@ -50,11 +50,11 @@ public class TeacherConverter implements Converter,Serializable
         {
             try
             {
-                int id = Integer.parseInt(submittedValue); 
+                String id = submittedValue; 
                 
                 for(Teacher t:teacherList)
                 {
-                    if(t.getTeacherID()==id)
+                    if(t.getTeacherID().equals(id))
                     {
                         //System.out.println(t.getTeacherID());
                         
