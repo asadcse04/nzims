@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 
 /**
@@ -24,7 +25,7 @@ public class StudentRegServiceImpl implements Serializable,StudentRegService
 {
 
     @Override
-    public boolean quickStudentReg(int scCnf_ID, List<StudentReg> studentList)
+    public boolean quickStudentReg(int scCnf_ID, List<StudentReg> studentList,StudentReg studentReg)
    {
         
         DB_Connection o=new DB_Connection(); 
@@ -32,43 +33,74 @@ public class StudentRegServiceImpl implements Serializable,StudentRegService
         Connection con=o.getConnection();
         
         PreparedStatement  prst = null;
+            
+        String institueID="";
+        String userID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        userID=context.getExternalContext().getSessionMap().get("UserID").toString();
         
         try
         {
         con.setAutoCommit(false);
         
         for (StudentReg stdreg : studentList) {
+            if(stdreg.getStudentName()!=null){
 
                Long.parseLong(stdreg.getGuardianContactNo());
                
-               prst=con.prepareStatement("insert into student_basic_info (StudentID,StudentName,StudentRoll,Gender,Status) values(?,?,?,?,?)");
+               prst=con.prepareStatement("insert into student_basic_info (StudentID,StudentName,StudentRoll,Gender,Status,CntNo,InstituteID,UserID) values(?,?,?,?,?,?,?,?)");
                
-               prst.setString(1, String.valueOf(stdreg.getStudentId()));
+               prst.setString(1, String.valueOf(stdreg.getStudentId())+"-"+institueID);
                prst.setString(2, stdreg.getStudentName());   
                prst.setInt(3, stdreg.getStudentRoll());
                prst.setString(4, stdreg.getGender());
                prst.setBoolean(5,true);
+               prst.setString(6, stdreg.getGuardianContactNo());
+               prst.setString(7, institueID);
+               prst.setString(8, userID);
                
                prst.execute();
                prst.close();
          
                
-               prst=con.prepareStatement("insert into student_guardian_info (FatherName,ContactNo,StudentID) values(?,?,?)");
+               prst=con.prepareStatement("insert into student_guardian_info (FatherName,ContactNo,StudentID,InstituteID) values(?,?,?,?)");
             
                prst.setString(1,stdreg.getFatherName());
                prst.setString(2,stdreg.getGuardianContactNo());
-               prst.setString(3,String.valueOf(stdreg.getStudentId()));
+               prst.setString(3,String.valueOf(stdreg.getStudentId())+"-"+institueID);
+               prst.setString(4, institueID);
                
                prst.execute();
                prst.close();
                
-               prst=con.prepareStatement("insert into student_identification (ClassConfigID,StudentID) values(?,?)");
+               prst=con.prepareStatement("insert into student_identification (ClassConfigID,StudentID,StudentRoll,InstituteID) values(?,?,?,?)");
             
                prst.setInt(1,scCnf_ID);
-               prst.setString(2,String.valueOf(stdreg.getStudentId()));
-            
+               prst.setString(2,String.valueOf(stdreg.getStudentId())+"-"+institueID);
+               prst.setInt(3, stdreg.getStudentRoll());
+               prst.setString(4, institueID);
+               
+               
                prst.execute();
                prst.close();
+               
+               prst=con.prepareStatement("insert into student_academic_info (StudentID,StudentRoll,Ac_Year,ClassID,DeptID,SectionID,ShiftID,InstituteID,UserID)values(?,?,?,(select ClassID from class where ClassName=?),(select DepartmentID from department where DepartmentName=?),"
+                       + "(select SectionID from section where SectionName=? and InstituteID=?),(select ShiftID from shift where ShiftName=?),?,?)");
+               prst.setString(1, String.valueOf(stdreg.getStudentId())+"-"+institueID);
+               prst.setInt(2,stdreg.getStudentRoll());
+               prst.setString(3, String.valueOf(studentReg.getAcyr()));
+               prst.setString(4, studentReg.getClassName());
+               prst.setString(5, studentReg.getDeptName());
+               prst.setString(6, studentReg.getSectionName());
+               prst.setString(7, institueID);
+               prst.setString(8, studentReg.getShiftName());
+               prst.setString(9, institueID);
+               prst.setString(10, userID);
+               
+               prst.execute();
+               prst.close();
+            }
                
           
         }

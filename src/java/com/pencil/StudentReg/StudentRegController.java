@@ -113,7 +113,7 @@ public class StudentRegController  implements Serializable
 //        }
         
 
-        if (std_Service.quickStudentReg(this.scCnfID, this.stdViewList))
+        if (std_Service.quickStudentReg(this.scCnfID, this.stdViewList,this.studentReg))
         {
             context.addMessage(null, new FacesMessage("Successful", "Student registration complete..."));
         }

@@ -16,5 +16,5 @@ public interface StudentRegService
 {
      public List<StudentReg> getStudent_insertList();
      
-     public boolean quickStudentReg( int scCnf_ID, List<StudentReg> stdList);
+     public boolean quickStudentReg( int scCnf_ID, List<StudentReg> stdList,StudentReg studentReg);
 }
