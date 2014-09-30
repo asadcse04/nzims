@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Stuff_Reg implements Serializable{
    
-    private int stuffID;
+    private String stuffID;
     
     private String name;
     
@@ -53,7 +53,7 @@ public class Stuff_Reg implements Serializable{
         
     }
 
-    public Stuff_Reg(int stuffID, String name, String gender, Date dob, String fatherName, String motherName, String qualification, String passedFrom, String bloodGroup, String maritalStatus, String religion, String imgPath, String contactNo, String email, String presentAddress, String permanentAddress) 
+    public Stuff_Reg(String stuffID, String name, String gender, Date dob, String fatherName, String motherName, String qualification, String passedFrom, String bloodGroup, String maritalStatus, String religion, String imgPath, String contactNo, String email, String presentAddress, String permanentAddress) 
     {
         this.stuffID = stuffID;
         this.name = name;
@@ -76,14 +76,14 @@ public class Stuff_Reg implements Serializable{
     /**
      * @return the stuffID
      */
-    public int getStuffID() {
+    public String getStuffID() {
         return stuffID;
     }
 
     /**
      * @param stuffID the othersID to set
      */
-    public void setStuffID(int stuffID) {
+    public void setStuffID(String stuffID) {
         this.stuffID = stuffID;
     }
 
