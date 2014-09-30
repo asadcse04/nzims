@@ -43,7 +43,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
         int stuffID = 0;
         
          try {
-           prst = con.prepareStatement("select max(StuffID) as StuffID from stuff where InstituteID=?");
+           prst = con.prepareStatement("select max(cast(StuffID as unsigned)) as StuffID from stuff where InstituteID=?");
            
            prst.setString(1, SchoolID);
            
@@ -51,15 +51,14 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
 
             if (rs.next()) 
             {
-                stuffID = rs.getInt("StuffID");
+                stuffID = rs.getInt("StuffID")+1;
             }
             if (stuffID ==0)
             {
                 stuffID = 60000;
                 
             }
-
-            stuff.setStuffID(stuffID+1);
+ 
         }
 
         catch (SQLException e)
@@ -92,7 +91,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
             
             prst = con.prepareStatement("insert into stuff values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
-            prst.setInt(1,stuff.getStuffID());
+            prst.setString(1,stuffID+"-"+SchoolID);
                
             prst.setString(2,stuff.getName());
                  
@@ -127,7 +126,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
             prst.close();
             
             
-            prst = con.prepareStatement("insert into stuff_contact_info values(?,?,?,?,(select max(StuffID) from stuff where InstituteID=?),?)");
+            prst = con.prepareStatement("insert into stuff_contact_info values(?,?,?,?,?,?)");
             
             prst.setString(1,stuff.getContactNo());
             
@@ -137,7 +136,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
             
             prst.setString(4,stuff.getPermanentAddress());
             
-            prst.setString(5, SchoolID);
+            prst.setString(5, stuffID+"-"+SchoolID);
             
             prst.setString(6, SchoolID);
             
@@ -227,7 +226,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
 
             prst.setString(11, stuffup.getImgPath());
             
-            prst.setInt(12, stuffup.getStuffID());
+            prst.setString(12, stuffup.getStuffID());
             
             prst.setString(13, SchoolID);
 
@@ -245,7 +244,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
 
             prst.setString(4, stuffup.getPermanentAddress());
             
-            prst.setInt(5, stuffup.getStuffID());
+            prst.setString(5, stuffup.getStuffID());
             
             prst.setString(6, SchoolID);
             
@@ -320,7 +319,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
            while(rs.next())
            {
                stuffList.add(new Stuff_Reg(
-                       rs.getInt("StuffID"),
+                       rs.getString("StuffID"),
                        rs.getString("StuffName"),
                        rs.getString("Gender"),
                        rs.getDate("DOB"),
