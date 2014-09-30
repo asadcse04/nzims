@@ -55,7 +55,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             
             
-            prst = con.prepareStatement("SELECT max(TeacherID) as TeacherID FROM teacher where InstituteID=?");
+            prst = con.prepareStatement("SELECT max(cast(TeacherID as unsigned)) as TeacherID FROM teacher where InstituteID=?");
             prst.setString(1, SchoolID);
             
             rs = prst.executeQuery();
