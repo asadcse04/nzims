@@ -11,6 +11,7 @@ import com.pencil.InstituteSetup.InstituteSetupService;
 import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SMS.SMS_Service;
 import java.io.Serializable;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 
 /**
@@ -381,6 +384,14 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
     @Override
     public boolean send_Student_result_Sms(List<StudentMeritList> studentList, SMS_Service smsC) {
         
+        DB_Connection o = new DB_Connection();
+
+        Connection con = o.getConnection();
+        
+        Connection cn = o.getSms_db_Connection();
+        
+        CallableStatement cs = null;
+        
         String instituteID="";
         
         String instituteName="";
@@ -404,7 +415,7 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
         int smsBal = smsC.getSmsCurrent_Ac_Balance(instituteId);//schoolid
 
         //int smsBal=smsC.getSmsCurrent_Ac_Balance(1);//schoolid
-        if (smsBal != 0) {
+        if (smsBal != 0 && smsBal>=studentList.size()) {
             while (itr.hasNext()) {
                 StudentMeritList sml = itr.next();
 
@@ -488,10 +499,27 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 
             System.out.println("Result SMS Send::" + smsCount);
 
-            if (smsCount == studentList.size()) {
-                flag = true;
-            }
+            try {
+                
+                cs = cn.prepareCall("{call smsCntManage(?,?)}");
 
+                        cs.setInt(1, smsCount);
+
+                        //cs.setInt(2, 1);
+                        
+                         cs.setInt(2, instituteId);
+
+                        cs.execute();
+
+                con.commit();
+                
+            } catch (SQLException ex) {
+                
+                Logger.getLogger(MeritPositionServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                        
+            flag = true;
+            
             studentList.clear();
         }
 
