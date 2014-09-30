@@ -74,7 +74,7 @@ public class SendSMS_Stuff_ServiceImpl implements SendSMS_Stuff_Service {
                 {
                     if (count <= smsBal)
                     {
-                        prst.setInt(1, stuff.getStuffID());
+                        prst.setString(1, stuff.getStuffID());
 
                         prst.setString(2, stuff.getContactNo());
 
