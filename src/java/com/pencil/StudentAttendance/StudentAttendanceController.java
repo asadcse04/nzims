@@ -44,6 +44,7 @@ public class StudentAttendanceController {
     
     private ScClassConfig classConfig;
     
+    
     private StringBuilder scCnf_id_List;
     
     private List<ScClassConfig> school_configList;
@@ -67,6 +68,8 @@ public class StudentAttendanceController {
     private int sms_bal;
     
     private boolean sms_with_attendance;
+    
+    private int checkdata=0;
 
     /**
      * Creates a new instance of StudentAttendanceController
@@ -257,6 +260,27 @@ public class StudentAttendanceController {
      *
      * @return
      */
+    
+    
+    public void checkAttendance(){
+        
+         setScCnf_id_List(scCnfService.scClassConfig_ID_List(this.getClassConfig()));
+        
+        if(serviceDao.checkAttendance(this.student_attendance.getAttendance_date(),this.getScCnf_id_List())>0){
+        
+            this.checkdata=1;
+        }
+        
+        else{
+        
+            finishAttendance();
+            
+        }
+    
+    } 
+    
+    
+   
     public String finishAttendance()
     {
         setScCnf_id_List(scCnfService.scClassConfig_ID_List(this.getClassConfig()));
@@ -265,23 +289,23 @@ public class StudentAttendanceController {
         
         if(this.student_attendance.getAttendance_date()!=null && !this.studentList.isEmpty())
         {
-            if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==200)
+            if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==200)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully with sending text sms..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==150)
+            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==150)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully but no text sms send for the attendance..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==100)
+            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==100)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully with no absent student..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==111)
+            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==111)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully but sms_count !=cntno count..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==0)
+            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==0)
             {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Failed to take attendance.. !",""));
             }
@@ -460,6 +484,10 @@ public class StudentAttendanceController {
      * @return the classConfig
      */
     public ScClassConfig getClassConfig() {
+        if(this.classConfig==null){
+            
+            this.classConfig=new ScClassConfig();
+        }
         return classConfig;
     }
 
@@ -497,4 +525,14 @@ public class StudentAttendanceController {
     public void setSms_with_attendance(boolean sms_with_attendance) {
         this.sms_with_attendance = sms_with_attendance;
     }
+
+    public int getCheckdata() {
+        return checkdata;
+    }
+
+    public void setCheckdata(int checkdata) {
+        this.checkdata = checkdata;
+    }
+    
+    
 }

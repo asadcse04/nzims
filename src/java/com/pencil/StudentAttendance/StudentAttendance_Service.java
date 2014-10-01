@@ -21,5 +21,7 @@ public interface StudentAttendance_Service
     
     public boolean saveAttendance(StudentAttendance sa);
     
-    public int completeAttendance(Date ad,List<Student_Registration> studentList,StringBuilder scnf,int smsBalnc,boolean sms_with_attendance);
+    public int completeAttendance(Date ad,ScClassConfig scClassConfig,List<Student_Registration> studentList,StringBuilder scnf,int smsBalnc,boolean sms_with_attendance);
+    
+    public int checkAttendance(Date ad,StringBuilder scCnf);
 }

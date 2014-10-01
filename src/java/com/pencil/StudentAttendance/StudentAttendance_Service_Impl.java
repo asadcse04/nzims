@@ -194,7 +194,7 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
     }
 
     @Override
-    public int completeAttendance(Date ad, List<Student_Registration> studentList,StringBuilder scCnf,int smsBalnc,boolean sms_with_attendance)
+    public int completeAttendance(Date ad,ScClassConfig scClassConfig, List<Student_Registration> studentList,StringBuilder scCnf,int smsBalnc,boolean sms_with_attendance)
     {
         List<String> studentID=new ArrayList<String>();
         
@@ -206,57 +206,28 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
         
         Statement stmt = null;
         
+        Statement stmt2 = null;
+        
         ResultSet rs = null;
+        
+        String institueID="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
                
         StringBuilder std_list_id=new StringBuilder();
         
         int rc=0;//response code
         
+        int presentStudent=0;
+        
+        int absentStudent=0; 
+        
+        int totalStudent=0;
+        
         System.out.println(scCnf.toString());
         
-        try
-        {
-            prst=con.prepareStatement("select distinct sa.StudentID FROM student_attendence sa,student_identification si where si.StudentID=sa.StudentID "
-                    + "and si.ClassConfigID IN('"+scCnf.toString()+"') and sa.AttendanceDate=?");
-           
-            //prst.setString(1,scCnf.toString());
-            
-            prst.setDate(1,new java.sql.Date(ad.getTime()));
-            
-            rs = prst.executeQuery();
-            
-            while(rs.next())
-            {
-                studentID.add(rs.getString("StudentID"));
-            }
-        }
-        catch(SQLException e)
-        {
-            System.out.println(e);
-            
-            System.out.println("I am not ok block-1......................");
-        }  
-        finally
-        {
-            try
-            {
-                if(rs!=null)
-                {
-                    rs.close();
-                }
-                if(prst!=null)
-                {
-                    prst.close();
-                }
-            }
-            catch(SQLException e)
-            {
-                System.out.println(e);
-                
-                System.out.println("I am not ok block-2");
-            }
-        }
-  
         try
         {
             stmt=con.createStatement();
@@ -268,35 +239,37 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
             System.out.println("I am not ok block-3");
         }
         
-   
-        
-        
-        
-        //if(!studentID.isEmpty())
-        //{
-        for (int i = 0; i < studentID.size(); i++)
-        {
-            for (int j = 0; j < studentList.size(); j++)
-            {
-                if (studentID.get(i).equals(studentList.get(j).getStudentID()))
-                {
-                    studentList.remove(j);
-                }
-            }//End inner For
-
-                //System.out.println("Absent Student:"+studentID.get(i));
-            std_list_id.append(studentID.get(i));
-
-            std_list_id.append(" ");
-
-        }
         
         //End Outer For
         //}
         
+       totalStudent=studentList.size();
         
        Iterator<Student_Registration> itr=studentList.iterator();
-        
+    
+       
+       
+       try{
+           prst=con.prepareStatement("delete from student_attendence where AttendanceDate=? and InstituteID=? and ClassConfigID=?");
+           prst.setDate(1, new java.sql.Date(ad.getTime()));
+           prst.setString(2, institueID);
+           prst.setString(3, scCnf.toString());
+           int a=prst.executeUpdate();
+           System.out.println("student_attendence "+a);
+           
+           prst=con.prepareStatement("delete from student_attendace_info where AttendanceDate=? and ClassConfigID=? and InstituteID=?");
+           prst.setDate(1, new java.sql.Date(ad.getTime()));
+           prst.setString(3, institueID);
+           prst.setString(2,scCnf.toString());
+           
+           int b=prst.executeUpdate();
+       System.out.println("student_attendence_info "+a);
+       }
+       catch(SQLException ex){
+           ex.printStackTrace();
+       }
+      
+       
         while(itr.hasNext())
         {
             Student_Registration sr=itr.next();
@@ -306,14 +279,16 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
 //            stmt.addBatch("insert into student_attendence values('"+new java.sql.Date(ad.getTime())+"',"+false+",'"+5+"','"+sr.getStudentID()+"')");
                 if(sr.isAbsent()){
                     
-                    stmt.addBatch("insert into student_attendence(AttendanceDate,Absent,Note,Period,StudentID) values('"+new java.sql.Date(ad.getTime())+"',"+true+",'"+sr.getNote()+"','"+sr.getPeriod()+"','"+sr.getStudentID()+"')");
+                    stmt.addBatch("insert into student_attendence(AttendanceDate,Absent,Note,Period,StudentID,ClassConfigID,InstituteID) values('"+new java.sql.Date(ad.getTime())+"',"+true+",'"+sr.getNote()+"','"+sr.getPeriod()+"','"+sr.getStudentID()+"','"+scCnf.toString()+"','"+institueID+"')");
                     
                     std_list_id.append(sr.getStudentID());
 
                     std_list_id.append(",");
+                    
+                    absentStudent=absentStudent+1;
                 }
-                else
-                    stmt.addBatch("insert into student_attendence(AttendanceDate,Absent,Note,Period,StudentID) values('"+new java.sql.Date(ad.getTime())+"',"+false+",'"+"present"+"','"+5+"','"+sr.getStudentID()+"')");
+//                else
+//                    stmt.addBatch("insert into student_attendence(AttendanceDate,Absent,Note,Period,StudentID) values('"+new java.sql.Date(ad.getTime())+"',"+false+",'"+"present"+"','"+5+"','"+sr.getStudentID()+"')");
             }
             catch(SQLException e)
             {
@@ -323,9 +298,18 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
             }    
         }
         
+        presentStudent=totalStudent-absentStudent;
+        
+        
+        
         try
         {
+            
             stmt.executeBatch();
+           
+            prst=con.prepareStatement("insert into student_attendace_info(AttendanceDate,Present,Absent,total,ClassConfigID,InstituteID) values('"+new java.sql.Date(ad.getTime())+"',"+presentStudent+",'"+absentStudent+"','"+totalStudent+"','"+scCnf.toString()+"','"+institueID+"')");
+            
+            prst.execute();
             
             if(!sms_with_attendance)
             {
@@ -606,6 +590,77 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
         }
       
         return scCnfList;
+    }
+    
+    public int checkAttendance(Date ad,StringBuilder scCnf){
+    
+        DB_Connection o = new DB_Connection();
+
+        Connection con = o.getConnection();
+
+        PreparedStatement prst = null;
+        
+        ResultSet rs=null;
+        
+        int checkdata=0;
+        
+        String institueID="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        System.out.println("check attendence sccnfid"+scCnf);
+        
+        try {
+            prst = con.prepareStatement("select StudentID from student_attendence where AttendanceDate=? and InstituteID=? and ClassConfigID=?");
+            
+            prst.setDate(1, new java.sql.Date(ad.getTime()));
+            
+            prst.setString(2, institueID);
+            
+            prst.setString(3, scCnf.toString());
+
+            rs = prst.executeQuery();
+
+            if(rs.next()){
+                
+                System.out.println("data paise");
+                
+                checkdata=1;
+            }
+            
+            return checkdata;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+           
+            try {
+                
+                  if (rs != null) {
+
+                    rs.close();
+
+                }
+                if (prst != null) {
+
+                    prst.close();
+
+                }
+
+                if (con != null) {
+
+                    con.close();
+                }
+
+            } catch (SQLException e) {
+
+                System.out.println(e);
+            }
+        }
+        
+        return checkdata;    
     }
     
 }
