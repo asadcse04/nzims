@@ -890,7 +890,7 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
         
         try
         {
-            prst = con.prepareStatement("SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName"
+            prst = con.prepareStatement("SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,scCnf.ClassConfigID"
                     + " FROM classconfig scCnf,class c,shift s,section sctn where scCnf.ClassID=c.ClassID and scCnf.InstituteID=sctn.InstituteID"
                     + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.InstituteID=? group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName order by scCnf.ScConfigID");
             
@@ -899,7 +899,7 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
              
             while(rs.next())
             {
-                scCnfList.add(new ScClassConfig(rs.getInt("scCnf.AcYrID"),rs.getString("c.ClassName"),rs.getString("s.ShiftName"),rs.getString("sctn.SectionName")));
+                scCnfList.add(new ScClassConfig(rs.getInt("scCnf.AcYrID"),rs.getString("c.ClassName"),rs.getString("s.ShiftName"),rs.getString("sctn.SectionName"),rs.getString("scCnf.ClassConfigID")));
             }
         }
         catch(SQLException e)
