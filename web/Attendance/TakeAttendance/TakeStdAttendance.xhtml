@@ -163,10 +163,14 @@
                     </p:dataTable>
 
                 </center>
+                
+                
 
-                <p:commandButton  value="Finish Attendance"  action="#{studentAttendanceController.finishAttendance}" ajax="false" style="margin-top:1%;margin-left:40%;" icon="ui-icon-check"/>
+                <p:commandButton  value="Finish Attendance" update="checkid" oncomplete="dialog_student_List_4_Attendance.show()"  action="#{studentAttendanceController.checkAttendance()}" style="margin-top:1%;margin-left:40%;" icon="ui-icon-check"/>
 
-            </h:form>
+                <p:commandButton id="checkid" value="Attendance already taken.Do you want to update it?" ajax="false" action="#{studentAttendanceController.finishAttendance}" disabled="#{studentAttendanceController.checkdata eq 0}"/>
+           
+        </h:form>
 
         </p:layoutUnit>
 
