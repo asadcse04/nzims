@@ -62,12 +62,12 @@ public class TeacherServiceImpl implements Serializable,TeacherService
 
             if (rs.next()) 
             {
-                teacherID = rs.getInt("TeacherID")+1;
+                teacherID = rs.getInt("TeacherID");
                 
             }
             if (teacherID ==0)
             {
-                teacherID = 50000;  
+                teacherID = 80000;  
             }
             
             
@@ -77,7 +77,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             prst = con.prepareStatement("insert into teacher values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                
-            prst.setString(1,teacherID+"-"+SchoolID);
+            prst.setString(1,(teacherID+1)+"T"+SchoolID);
              
             prst.setString(2,tchr.getName());
                  
@@ -118,7 +118,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             prst.setString(4,tchr.getPermanentAddress());
             
-            prst.setString(5, teacherID+"-"+SchoolID);
+            prst.setString(5, teacherID+"T"+SchoolID);
             
             prst.setString(6, SchoolID);
             
