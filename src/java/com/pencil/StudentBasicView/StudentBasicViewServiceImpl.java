@@ -51,13 +51,15 @@ public class StudentBasicViewServiceImpl implements StudentBasicViewService,Seri
         {    
             prst = con.prepareStatement("SELECT scCnf.ScConfigID FROM classconfig scCnf,class c,shift s,section sctn where scCnf.ClassID=c.ClassID and scCnf.InstituteID=sctn.InstituteID and scCnf.InstituteID='"+instituteID+"'"
                     + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.ClassID=(SELECT ClassID FROM class where ClassName=?)"
-                    + " and scCnf.ShiftID=(SELECT ShiftID FROM shift where ShiftName=?) and scCnf.SectionID=(SELECT SectionID FROM section where SectionName=?)");
+                    + " and scCnf.ShiftID=(SELECT ShiftID FROM shift where ShiftName=?) and scCnf.SectionID=(SELECT SectionID FROM section where SectionName=? and instituteid=?)");
        
             prst.setString(1,scCnf.getClassName());
             
             prst.setString(2,scCnf.getShiftName());
             
             prst.setString(3,scCnf.getSectionName());
+            
+            prst.setString(4,instituteID);
             
             rs = prst.executeQuery();
             
@@ -74,7 +76,7 @@ public class StudentBasicViewServiceImpl implements StudentBasicViewService,Seri
             String qr=implode_scCnfID(scCnfId_List,",");
             
             
-            prst = con.prepareStatement("SELECT si.StudentID,s.StudentName,s.StudentRoll,s.Gender,g.FatherName,g.ContactNo FROM student_identification si,student_basic_info s,student_guardian_info g where"
+            prst = con.prepareStatement("SELECT si.StudentID,s.StudentName,s.StudentRoll,s.Gender,g.FatherName,g.ContactNo,s.ImgPath FROM student_identification si,student_basic_info s,student_guardian_info g where"
                     + " si.StudentID=s.StudentID and si.StudentID=g.StudentID and si.InstituteID=s.InstituteID and si.InstituteID=g.InstituteID and si.InstituteID='"+instituteID+"'"
                     + " and si.ClassConfigID IN("+qr+") order by s.StudentRoll");
             
@@ -82,7 +84,7 @@ public class StudentBasicViewServiceImpl implements StudentBasicViewService,Seri
             
             while(rs.next())
             {
-                stdList.add(new Student_Registration(rs.getString("si.StudentID"),rs.getString("s.StudentName"),rs.getInt("s.StudentRoll"),rs.getString("s.Gender"),rs.getString("g.FatherName"),rs.getString("g.ContactNo")));
+                stdList.add(new Student_Registration(rs.getString("si.StudentID"),rs.getString("s.StudentName"),rs.getInt("s.StudentRoll"),rs.getString("s.Gender"),rs.getString("g.FatherName"),rs.getString("g.ContactNo"),rs.getString("s.ImgPath")));
             }
         }
         catch(SQLException e)
