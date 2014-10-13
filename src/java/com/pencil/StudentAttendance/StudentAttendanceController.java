@@ -286,26 +286,28 @@ public class StudentAttendanceController {
         setScCnf_id_List(scCnfService.scClassConfig_ID_List(this.getClassConfig()));
         
         FacesContext context = FacesContext.getCurrentInstance();
-        
+             
         if(this.student_attendance.getAttendance_date()!=null && !this.studentList.isEmpty())
         {
-            if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==200)
+            int response = serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance);
+            
+            if(response==200)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully with sending text sms..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==150)
+            else if(response==150)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully but no text sms send for the attendance..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==100)
+            else if(response==100)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully with no absent student..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==111)
+            else if(response==111)
             {
                 context.addMessage(null, new FacesMessage("Successful Take attendance succesfully but sms_count !=cntno count..",""));
             }
-            else if(serviceDao.completeAttendance(this.student_attendance.getAttendance_date(),this.classConfig,this.studentList,this.getScCnf_id_List(),this.sms_bal,this.sms_with_attendance)==0)
+            else if(response==0)
             {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Failed to take attendance.. !",""));
             }
@@ -322,9 +324,12 @@ public class StudentAttendanceController {
         this.studentList.clear();
         
        // return "index.xhtml";
-        return "/Attendance/TakeAttendance/AttendencePage.xhtml";
+        
+        return "/DesktopPencil/Attendance/TakeAttendance/AttendencePage.xhtml";
+   
     }
     
+   
     /**
      * @return the school_configList
      */
