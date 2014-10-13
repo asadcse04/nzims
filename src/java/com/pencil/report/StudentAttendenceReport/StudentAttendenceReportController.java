@@ -43,27 +43,36 @@ public class StudentAttendenceReportController implements Serializable {
 
         this.tottalPresentAbsent = new ArrayList<StudentAttendenceReport>();
         this.tottalPresentAbsent.clear();
-        this.tottalPresentAbsent = servicedao.AttendenceList(studentAttendenceReport);
-
-        this.totalstudent = tottalPresentAbsent.get(0).getTotalstudent();
-        this.totalpresent = tottalPresentAbsent.get(0).getPresent();
-        this.totalabsent = tottalPresentAbsent.get(0).getAbcent();
-
-        try {
-            this.presentprecentage =(float)(totalpresent * 100) / totalstudent;
-        } catch (Exception e) {
-            this.presentprecentage = 0;
-        }
-
-        try {
-            this.absentpercentage =(float)(totalabsent * 100) / totalstudent;
-        } catch (Exception f) {
-            this.absentpercentage = 0;
-        }
-
         this.tottalCompletePresentAbsent = new ArrayList<StudentAttendenceReport>();
         this.tottalCompletePresentAbsent.clear();
-        this.tottalCompletePresentAbsent.add(new StudentAttendenceReport(totalstudent, totalpresent, presentprecentage, totalabsent, absentpercentage));
+        
+        totalpresent=0;
+        totalabsent=0;
+        
+        this.tottalPresentAbsent = servicedao.AttendenceList(studentAttendenceReport);
+
+        if(!tottalPresentAbsent.isEmpty())
+        {
+            
+            this.totalstudent = tottalPresentAbsent.get(0).getTotalstudent();
+            this.totalpresent = tottalPresentAbsent.get(0).getPresent();
+            this.totalabsent = tottalPresentAbsent.get(0).getAbcent();
+
+            try {
+                this.presentprecentage =(float)(totalpresent * 100) / totalstudent;
+            } catch (Exception e) {
+                this.presentprecentage = 0;
+            }
+
+            try {
+                this.absentpercentage =(float)(totalabsent * 100) / totalstudent;
+            } catch (Exception f) {
+                this.absentpercentage = 0;
+            }         
+            this.tottalCompletePresentAbsent.add(new StudentAttendenceReport(totalstudent, totalpresent, presentprecentage, totalabsent, absentpercentage));
+            
+        }
+        
 
     }
 
@@ -106,10 +115,10 @@ public class StudentAttendenceReportController implements Serializable {
 
     public PieChartModel getPieModel() {
         
-        this.pieModel=new PieChartModel();
-         
+         this.pieModel=new PieChartModel();
+        
          this.pieModel.clear();
-         
+
          this.pieModel.set("Present",totalpresent);
          
          this.pieModel.set("Absent", totalabsent);

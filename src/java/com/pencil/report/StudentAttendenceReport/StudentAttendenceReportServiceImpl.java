@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,22 +31,28 @@ public class StudentAttendenceReportServiceImpl implements StudentAttendenceRepo
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
 
-            prst = con.prepareStatement("select (select count(StudentID) from student_attendence where AttendanceDate=?) as totalstudent,\n"
-                    + "(select count(StudentID) from student_attendence where AttendanceDate=? and Absent=false) as present,\n"
-                    + "(select count(StudentID) from student_attendence where AttendanceDate=? and Absent=true) as absent from dual");
+//            prst = con.prepareStatement("select (select count(StudentID) from student_attendence where AttendanceDate=?) as totalstudent,\n"
+//                    + "(select count(StudentID) from student_attendence where AttendanceDate=? and Absent=false) as present,\n"
+//                    + "(select count(StudentID) from student_attendence where AttendanceDate=? and Absent=true) as absent from dual");
+            
+            prst = con.prepareStatement("select total,Present,Absent from student_attendace_info where AttendanceDate=? and InstituteID=? ");
 
             prst.setDate(1, new java.sql.Date(studentAttendenceReport.getDate().getTime()));
-            prst.setDate(2, new java.sql.Date(studentAttendenceReport.getDate().getTime()));
-            prst.setDate(3, new java.sql.Date(studentAttendenceReport.getDate().getTime()));
-
+            prst.setString(2, institueID);
+            
+            
             rs = prst.executeQuery();
 
             while (rs.next()) {
 
-                list.add(new StudentAttendenceReport(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+                list.add(new StudentAttendenceReport(rs.getInt("total"), rs.getInt("Present"), rs.getInt("Absent")));
 
             }
 
