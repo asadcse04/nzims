@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,40 +32,42 @@ public class StdAtdnDateWiseRptServiceImpl implements StdAtdnDateWiseRptService{
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
 
         try {
 
-            prst = con.prepareStatement("select sa.AttendanceDate, count(sa.studentid) total,\n" +
-                                        "(select count(s.studentid) from student_attendence s where absent='0' and s.AttendanceDate= sa.AttendanceDate) present,\n" +
-                                        "(select count(s.studentid) from student_attendence s where absent='1' and s.AttendanceDate=sa.AttendanceDate) absent\n" +
-                                        "from student_attendence sa where AttendanceDate between ? and ? group by AttendanceDate;");
+            prst = con.prepareStatement("select AttendanceDate,total,Present,Absent from  student_attendace_info where AttendanceDate between ? and ? and InstituteID=? group by AttendanceDate");
 
             prst.setDate(1, new java.sql.Date(stdAtdnDateWiseRpt.getFromdate().getTime()));
             prst.setDate(2, new java.sql.Date(stdAtdnDateWiseRpt.getTodate().getTime()));
+            prst.setString(3, institueID);
 
 
             rs = prst.executeQuery();
 
             while (rs.next()) {       
                 
-                int total;
+                int total=rs.getInt("total");
                
                 double presentp;
                 
                 double absentp;
-                
-                total = rs.getInt(3) + rs.getInt(4);
+   
                 
                 if (total == 0) {
                     presentp = 0;
                     absentp = 0;
                 } 
                 else {
-                    presentp = (float)(rs.getInt(3) * 100) / total;
-                    absentp = (float)(rs.getInt(4) * 100)/ total;
+                    presentp = (float)(rs.getInt("Present") * 100) / total;
+                    absentp = (float)(rs.getInt("Absent") * 100)/ total;
                 } 
 
-                list.add(new StdAtdnDateWiseRpt(rs.getDate(1), rs.getInt(2), rs.getInt(3),presentp,rs.getInt(4),absentp));
+                list.add(new StdAtdnDateWiseRpt(rs.getDate("AttendanceDate"), rs.getInt("total"), rs.getInt("Present"),presentp,rs.getInt("Absent"),absentp));
 
             }
             
