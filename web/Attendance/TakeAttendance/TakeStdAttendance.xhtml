@@ -166,7 +166,7 @@
                 
                 
 
-                <p:commandButton  value="Finish Attendance" update="checkid" oncomplete="dialog_student_List_4_Attendance.show()"  action="#{studentAttendanceController.checkAttendance()}" style="margin-top:1%;margin-left:40%;" icon="ui-icon-check"/>
+                <p:commandButton  value="Finish Attendance" update="checkid" ajax="false"  action="#{studentAttendanceController.checkAttendance()}" style="margin-top:1%;margin-left:40%;" icon="ui-icon-check"/>
 
                 <p:commandButton id="checkid" value="Attendance already taken.Do you want to update it?" ajax="false" action="#{studentAttendanceController.finishAttendance}" disabled="#{studentAttendanceController.checkdata eq 0}"/>
            
