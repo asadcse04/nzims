@@ -145,7 +145,7 @@ public class FeeCollectionController implements Serializable{
      
      this.studentlist=new ArrayList<FeeInvDetObj>();
       
-     this.studentlist=servicedao.getStudentAllinfo(this.feeInvDetObj.getStudentid());
+     this.studentlist=servicedao.getStudentAllinfo(this.feeInvDetObj.getStudentID());
      
      if(this.studentlist.size()< 1)
      

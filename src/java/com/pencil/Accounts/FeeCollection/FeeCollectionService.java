@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface FeeCollectionService {
   
-    public List<FeeInvDetObj> getStudentAllinfo(int id);
+    public List<FeeInvDetObj> getStudentAllinfo(String id);
     
     public double getFeeAmount(FeeInvDetObj feeInvDetObj);
 }
