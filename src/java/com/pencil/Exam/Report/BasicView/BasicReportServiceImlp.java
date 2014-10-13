@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -29,14 +30,21 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         List<BasicReport> scCnfList = new ArrayList<BasicReport>();
 
         try {
-            prst = con.prepareStatement(" select scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName\n"
-                    + " from classconfig scCnf,class c,shift s,section sctn, department dpt where scCnf.ClassID=c.ClassID \n"
-                    + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=dpt.DepartmentID group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName order by scCnf.ScConfigID ");
-
+            prst = con.prepareStatement("select scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName\n" +
+                                        " from classconfig scCnf,class c,shift s,section sctn, department dpt where scCnf.ClassID=c.ClassID \n" +
+                                        " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=dpt.DepartmentID and scCnf.InstituteID=sctn.InstituteID and scCnf.InstituteID=? \n" +
+                                        " group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName order by scCnf.ScConfigID ");
+            
+            prst.setString(1, institueID);
+            
             rs = prst.executeQuery();
 
             while (rs.next()) {
@@ -485,6 +493,8 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+       
 
         List<BasicReport> subj_mark_List = new ArrayList<BasicReport>();
 
