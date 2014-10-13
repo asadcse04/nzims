@@ -51,47 +51,21 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
 
             if (rs.next()) 
             {
-                stuffID = rs.getInt("StuffID")+1;
+                stuffID = rs.getInt("StuffID");
             }
             if (stuffID ==0)
             {
-                stuffID = 60000;
+                stuffID = 90000;
                 
             }
  
-        }
-
-        catch (SQLException e)
-        {
-            System.out.println(e);
-        } 
-        finally 
-        {
-            try
-            {
-                if (rs != null)
-                {
-                    rs.close();
-                }
-                if (prst != null)
-                {
-                    prst.close();
-                }
-            } 
-            catch (SQLException e) 
-            {
-                System.out.println(e);
-            }
-        }    
-        try
-        {
             con.setAutoCommit(false);
             
             Long.parseLong(stuff.getContactNo());
             
             prst = con.prepareStatement("insert into stuff values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
-            prst.setString(1,stuffID+"-"+SchoolID);
+            prst.setString(1,(stuffID+1)+"S"+SchoolID);
                
             prst.setString(2,stuff.getName());
                  
@@ -113,12 +87,10 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
             
             prst.setString(11,stuff.getReligion());
 
-            prst.setString(12,(stuffID+1)+"_"+stuff.getImgPath());
+            prst.setString(12,stuffID+"S"+ SchoolID+stuff.getImgPath());
             
             prst.setString(13, SchoolID);
-            
-            
-            
+ 
             int a= prst.executeUpdate();
             
             System.out.println("a="+ a);
@@ -136,7 +108,7 @@ public class Stuff_Reg_ServiceImpl implements Serializable, Stuff_Reg_Service
             
             prst.setString(4,stuff.getPermanentAddress());
             
-            prst.setString(5, stuffID+"-"+SchoolID);
+            prst.setString(5, stuffID+"S"+SchoolID);
             
             prst.setString(6, SchoolID);
             
