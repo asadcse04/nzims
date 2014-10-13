@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -50,6 +51,10 @@ public class PresentReportServiceImpl implements PresentReportService {
 
         ResultSet rs = null;
         ResultSet rs2 = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
 
@@ -59,60 +64,64 @@ public class PresentReportServiceImpl implements PresentReportService {
             while (rs2.next()) {
                 int classid = rs2.getInt(1);
 
-                prst = con.prepareStatement("select(select count(Absent) from student_attendence st, student_identification si \n" +
-                                            "where st.studentid=si.studentid \n" +
-                                            "and si.classconfigid in\n" +
-                                            "(select scconfigid from classconfig where classid=?)\n" +
-                                            "and  st.AttendanceDate=?) as total ,\n" +
-                                            "(select count(Absent) FROM student_attendence st, student_identification si \n" +
-                                            "where st.studentid=si.studentid \n" +
-                                            "and si.classconfigid \n" +
-                                            "in(select scconfigid from classconfig where classid=?)\n" +
-                                            "and  AttendanceDate=? and Absent='0')as present from dual;");
+//                prst = con.prepareStatement("select(select count(Absent) from student_attendence st, student_identification si \n" +
+//                                            "where st.studentid=si.studentid \n" +
+//                                            "and si.classconfigid in\n" +
+//                                            "(select scconfigid from classconfig where classid=?)\n" +
+//                                            "and  st.AttendanceDate=?) as total ,\n" +
+//                                            "(select count(Absent) FROM student_attendence st, student_identification si \n" +
+//                                            "where st.studentid=si.studentid \n" +
+//                                            "and si.classconfigid \n" +
+//                                            "in(select scconfigid from classconfig where classid=?)\n" +
+//                                            "and  AttendanceDate=? and Absent='0')as present from dual;");
+                
+                prst=con.prepareStatement("SELECT sum(present), sum(absent), sum(total) FROM nzims_db.student_attendace_info "
+                                            + "where ClassConfigID in(select ScConfigID from classconfig where ClassID=?) \n" +
+                                            " and AttendanceDate=? and InstituteID=? group by AttendanceDate");
                 
                 prst.setInt(1, classid);
                 prst.setDate(2, new java.sql.Date(presentReport.getDate().getTime()));
-                prst.setInt(3, classid);
-                prst.setDate(4, new java.sql.Date(presentReport.getDate().getTime()));
+                prst.setString(3, institueID);
+                
                 rs = prst.executeQuery();
 
                 if (rs.next()) {
                     
-                    if(classid==1){
-                    twototal = rs.getInt(1);
-                    twopresent = rs.getInt(2);
+                    if(classid==21){
+                    twototal = rs.getInt("sum(total)");
+                    twopresent = rs.getInt("sum(present)");
                     }
-                    if(classid==2){
-                    threetotal = rs.getInt(1);
-                    threepresent = rs.getInt(2);
+                    if(classid==22){
+                    threetotal = rs.getInt("sum(total)");
+                    threepresent = rs.getInt("sum(present)");
                     }
-                    if(classid==3){
-                    fourtotal = rs.getInt(1);
-                    fourpresent = rs.getInt(2);
+                    if(classid==23){
+                    fourtotal = rs.getInt("sum(total)");
+                    fourpresent = rs.getInt("sum(present)");
                     }
-                    if(classid==4){
-                    fivetotal = rs.getInt(1);
-                    fivepresent = rs.getInt(2);
+                    if(classid==24){
+                    fivetotal = rs.getInt("sum(total)");
+                    fivepresent = rs.getInt("sum(present)");
                     }
-                    if(classid==5){
-                    sixtotal = rs.getInt(1);
-                    sixpresent = rs.getInt(2);
+                    if(classid==25){
+                    sixtotal = rs.getInt("sum(total)");
+                    sixpresent = rs.getInt("sum(present)");
                     }
-                    if(classid==6){
-                    saventotal = rs.getInt(1);
-                    savenpresent = rs.getInt(2);
+                    if(classid==26){
+                    saventotal = rs.getInt("sum(total)");
+                    savenpresent = rs.getInt("sum(present)");
                     }
-                      if(classid==7){
-                    eighttotal = rs.getInt(1);
-                    eightpresent = rs.getInt(2);
+                      if(classid==27){
+                    eighttotal = rs.getInt("sum(total)");
+                    eightpresent = rs.getInt("sum(present)");
                     }
-                        if(classid==8){
-                    ninetotal = rs.getInt(1);
-                    ninepresent = rs.getInt(2);
+                        if(classid==28){
+                    ninetotal = rs.getInt("sum(total)");
+                    ninepresent = rs.getInt("sum(present)");
                     }
-                          if(classid==9){
-                    tentotal = rs.getInt(1);
-                    tenpresent = rs.getInt(2);
+                          if(classid==29){
+                    tentotal = rs.getInt("sum(total)");
+                    tenpresent = rs.getInt("sum(present)");
                     }
 
                 }
