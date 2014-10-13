@@ -948,13 +948,19 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
         
         ResultSet rs = null;
         
+        String instituteid="";
+         
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        instituteid=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         StringBuilder scCnfID = new StringBuilder();
         
         try
         {    
             prst = con.prepareStatement("SELECT scCnf.ScConfigID FROM classconfig scCnf,class c,shift s,section sctn where scCnf.AcYrID=? and scCnf.ClassID=c.ClassID"
                     + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.ClassID=(SELECT ClassID FROM class where ClassName=?)"
-                    + " and scCnf.ShiftID=(SELECT ShiftID FROM shift where ShiftName=?) and scCnf.SectionID=(SELECT SectionID FROM section where SectionName=?)");
+                    + " and scCnf.ShiftID=(SELECT ShiftID FROM shift where ShiftName=?) and scCnf.SectionID=(SELECT SectionID FROM section where SectionName=? and instituteid=?)");
        
             prst.setInt(1,scCnf.getAcyrID());
             
@@ -963,6 +969,8 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             prst.setString(3,scCnf.getShiftName());
             
             prst.setString(4,scCnf.getSectionName());
+            
+             prst.setString(5,instituteid);
             
             rs = prst.executeQuery();
             
@@ -1100,6 +1108,12 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
         
         ResultSet rs = null;
         
+         String instituteid="";
+         
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        instituteid=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try
         {
             o=new DB_Connection();
@@ -1109,7 +1123,7 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             prst=con.prepareStatement("select ScConfigID from classconfig where AcYrID=? and DeptID=(select DepartmentID from department where DepartmentName=?)"
                     + " and ClassID=(select ClassID from class where ClassName=?)"
                     + " and shiftID=(select ShiftID from shift where ShiftName=?)"
-                    + " and SectionID=(select SectionID from section where SectionName=?)");
+                    + " and SectionID=(select SectionID from section where SectionName=? and instituteid=?)");
             
             prst.setInt(1,acyr);
             
@@ -1120,6 +1134,8 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             prst.setString(4,shiftName);
             
             prst.setString(5,sectionName);
+            
+            prst.setString(6,instituteid);
             
             rs=prst.executeQuery();
             
