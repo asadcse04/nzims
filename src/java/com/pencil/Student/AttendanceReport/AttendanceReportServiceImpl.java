@@ -30,27 +30,38 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+         
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         List<AttendanceReport> stdAttendance_List = new ArrayList<AttendanceReport>();
 
-        String query = " SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,"
-                + "(select count(studentid) from student_attendence where attendancedate=? and"
-                + " studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) total,"
-                + " (select count(studentid) from student_attendence where absent=false and attendancedate=?"
-                + " and studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) present,"
-                + " (select count(studentid) from student_attendence where absent=true and attendancedate=?"
-                + " and studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) absent"
-                + " FROM classconfig scCnf,class c,shift s,section sctn, department d where scCnf.ClassID=c.ClassID"
-                + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=d.departmentid order by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName";
+//        String query = " SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,"
+//                + "(select count(studentid) from student_attendence where attendancedate=? and"
+//                + " studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) total,"
+//                + " (select count(studentid) from student_attendence where absent=false and attendancedate=?"
+//                + " and studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) present,"
+//                + " (select count(studentid) from student_attendence where absent=true and attendancedate=?"
+//                + " and studentid in(select studentid from student_identification where classconfigid=scCnf.scconfigid)) absent"
+//                + " FROM classconfig scCnf,class c,shift s,section sctn, department d where scCnf.ClassID=c.ClassID"
+//                + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=d.departmentid order by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName";
+        
+          String query = "SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,sa.total,sa.present,sa.absent\n" +
+        " FROM classconfig scCnf,class c,shift s,section sctn, department d, student_attendace_info sa where scCnf.ClassID=c.ClassID\n" +
+        " and sa.instituteid=sctn.instituteid and sa.ClassConfigID=scCnf.ScConfigID\n" +
+        " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=d.departmentid \n" +
+        " and sa.AttendanceDate=? and sa.InstituteID=? \n" +
+        " order by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName ";      
 
         try {
             prst = con.prepareStatement(query);
 
             prst.setDate(1, new java.sql.Date(currentDate.getTime()));
 
-            prst.setDate(2, new java.sql.Date(currentDate.getTime()));
-
-            prst.setDate(3, new java.sql.Date(currentDate.getTime()));
+            prst.setString(2, institueID);
 
             rs = prst.executeQuery();
 
@@ -59,14 +70,14 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
                 double presentp;
                 double absentp;
 
-                total = (double) (rs.getInt("present") + rs.getInt("absent"));
+                total = (double) (rs.getInt("sa.total")) ;
 
                 if (total == 0) {
                     presentp = 0;
                     absentp = 0;
                 } else {
-                    presentp = (double) (rs.getInt("present") * 100) / total;
-                    absentp = (double) (rs.getInt("absent") * 100) / total;
+                    presentp = (double) (rs.getInt("sa.present") * 100) / total;
+                    absentp = (double) (rs.getInt("sa.absent") * 100) / total;
                 }
 
                 stdAttendance_List.add(new AttendanceReport(rs.getString("c.classname"), rs.getString("s.shiftname"), rs.getString("sctn.SectionName"), rs.getInt("total"),
@@ -104,7 +115,7 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
 
         ResultSet rs = null;
         
-         String institueID="";
+        String institueID="";
         FacesContext context=FacesContext.getCurrentInstance();
         institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
@@ -179,14 +190,19 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         List<AttendanceReport> scCnfList = new ArrayList<AttendanceReport>();
 
         try {
             prst = con.prepareStatement(" select scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName\n"
                     + " from classconfig scCnf,class c,shift s,section sctn, department dpt where scCnf.ClassID=c.ClassID and scCnf.InstituteID=sctn.InstituteID\n"
-                    + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=dpt.DepartmentID group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName order by scCnf.ScConfigID ");
+                    + " and sctn.InstituteID=? and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=dpt.DepartmentID group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName order by scCnf.ScConfigID ");
 
+            prst.setString(1, institueID);
             rs = prst.executeQuery();
 
             while (rs.next()) {
@@ -224,6 +240,13 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+         
+        String institueID="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
             o = new DB_Connection();
@@ -234,7 +257,7 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
                     + " and DeptID=(select DepartmentID from department where DepartmentName=?)"
                     + " and ClassID=(select ClassID from class where ClassName=?)"
                     + " and shiftID=(select ShiftID from shift where ShiftName=?)"
-                    + " and SectionID=(select SectionID from section where SectionName=?)");
+                    + " and SectionID=(select SectionID from section where SectionName=? and instituteid=?)");
 
             prst.setString(1, sq.getAcyr());
 
@@ -245,6 +268,8 @@ public class AttendanceReportServiceImpl implements AttendanceReportService {
             prst.setString(4, sq.getShiftName());
 
             prst.setString(5, sq.getSectionName());
+            
+            prst.setString(6, institueID);
 
             rs = prst.executeQuery();
             while (rs.next()) {
