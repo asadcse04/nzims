@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <p:layout styleClass="tabHeight">
+    <p:layout>
 
         <p:layoutUnit position="center" >
             <p:commandButton value="Go To Main" action="/DesktopPencil/admin/index.xhtml?faces-redirect=true" style="margin-top: 9px;"/>
@@ -14,7 +14,7 @@
                 <center>
 
                     <p:dataTable value="#{basicReportController.classDetList}" var="school_Cnf_tbl" 
-                                 paginator="true" rows="10" paginatorPosition="bottom" style="width:980px;">
+                                 paginator="true" rows="10" paginatorPosition="both" style="width:1250px; height:600px">
 
 
                         <p:column sortBy="#{school_Cnf_tbl.acYr}" filterBy="#{school_Cnf_tbl.acYr}">
