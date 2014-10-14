@@ -139,8 +139,7 @@
             <p:submenu icon="ui-icon-lightbulb" label="Report">
                 <p:submenu icon="ui-icon-suitcase" label="Subject Wise">
                     
-               <p:menuitem value="Report" url="/DesktopPencil/Report/SubjectWise/subjectWiseReportDetailsViewMain.xhtml" icon="ui-icon-script"></p:menuitem> 
-
+                    <p:menuitem value="Report" url="/DesktopPencil/Report/SubjectWise/subjectWiseReportDetailsViewMain.xhtml" icon="ui-icon-script"></p:menuitem> 
                     <p:menuitem value="Details" onclick="PF('details').show();" icon="ui-icon-lightbulb"></p:menuitem>
                     <p:menuitem value="Summary" onclick="PF('subjectreport').show();" icon="ui-icon-eject"></p:menuitem>
                     <p:menuitem value="Pass/Fail" onclick="PF('pass_fail').show();" icon="ui-icon-eject"></p:menuitem> 
@@ -162,6 +161,16 @@
 
             <p:menuitem value="Print Mark Sheet" onclick="PF('markSheetPrint').show();" icon="ui-icon-lightbulb"></p:menuitem>
 
+            
+            <p:submenu icon="ui-icon-lightbulb" label="Tabulation Sheet">
+             
+            <p:submenu icon="ui-icon-lightbulb" label="I-Report">
+              <p:menuitem value="One to Five" onclick="PF('demoReportFor_1-5').show();"  icon="ui-icon-lightbulb"></p:menuitem>
+              <p:menuitem value="Six to Eight"  icon="ui-icon-lightbulb"></p:menuitem>
+              
+            </p:submenu>   
+                
+            </p:submenu>
 
         </p:submenu> 
 
