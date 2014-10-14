@@ -213,7 +213,7 @@ public class GradeWiseReportController implements Serializable {
         Connection con = o.getConnection();
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("ClassConfigId", 2);
-        String reportClass1_5 = "com/pencil/ReportRun/markShitReport_1_5.jasper";
+        String reportClass1_5 = "com/pencil/Report1/markShitReport_1_5.jasper";
         InputStream is1_5 = this.getClass().getClassLoader().getResourceAsStream(reportClass1_5);
         try {
 
