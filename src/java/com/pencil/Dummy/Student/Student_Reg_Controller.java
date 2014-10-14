@@ -160,11 +160,11 @@ public class Student_Reg_Controller implements Serializable {
         }
         else
         {
-            this.student.setImgPath(photoFile.getFileName());
+            this.student.setImgPath(student.getStudentID() + "_" +photoFile.getFileName());
 
             if (serviceDao.completeStudentUpdate(this.student))
             {
-                uploadService.uploadImg("studentImages",institueID+"_"+this.student.getStudentID()+"_"+photoFile.getFileName(), photoFile);
+                uploadService.uploadImg("studentImages",this.student.getStudentID()+"_"+photoFile.getFileName(), photoFile);
 
                 context.addMessage(null, new FacesMessage("Successful", "Student registration update complete..."));
             }

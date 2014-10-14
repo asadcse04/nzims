@@ -520,18 +520,10 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
 
             prst.setDate(4, new java.sql.Date(stdUpt.getDob().getTime()));
 
-            prst.setBoolean(5, true);
-            
-            if(stdUpt.getImgPath()!=null)
+            prst.setBoolean(5, true);      
             
             prst.setString(6, stdUpt.getImgPath());
             
-            else{
-
-                prst.setString(6, SchoolID + "_" + stdUpt.getStudentID() + "_" + stdUpt.getImgPath());
-            
-            }
-
             prst.setString(7, stdUpt.getReligion());
 
             prst.setString(8, stdUpt.getBloodGroup());
