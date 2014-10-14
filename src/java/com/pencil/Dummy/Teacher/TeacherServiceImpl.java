@@ -12,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
+import org.codehaus.groovy.util.ReleaseInfo;
 
 /**
  *
@@ -49,8 +52,8 @@ public class TeacherServiceImpl implements Serializable,TeacherService
          
         try
         {
+          
             con.setAutoCommit(false);
-            
             Long.parseLong(tchr.getContactNo());
             
             
@@ -70,11 +73,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
                 teacherID = 80000;  
             }
             
-            
-           
-            
-            
-            
+ 
             prst = con.prepareStatement("insert into teacher values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                
             prst.setString(1,(teacherID+1)+"T"+SchoolID);
@@ -104,10 +103,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             prst.setString(13, SchoolID);
             
             prst.execute();
-            
-            prst.close();
-            
-            
+  
             prst = con.prepareStatement("insert into teacher_contact_info values(?,?,?,?,?,?)");
             
             prst.setString(1,tchr.getContactNo());
@@ -118,19 +114,26 @@ public class TeacherServiceImpl implements Serializable,TeacherService
             
             prst.setString(4,tchr.getPermanentAddress());
             
-            prst.setString(5, teacherID+"T"+SchoolID);
+            prst.setString(5, (teacherID+1)+"T"+SchoolID);
             
             prst.setString(6, SchoolID);
             
             prst.execute();
-           
+            
             con.commit();
 
             return true;    
         }
         catch(SQLException e)
         {
-            System.out.println(e);
+            
+            try {
+                con.rollback();
+                
+                System.out.println(e);
+            } catch (SQLException ex) {
+                Logger.getLogger(TeacherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         catch(NumberFormatException n)
         {
@@ -140,6 +143,8 @@ public class TeacherServiceImpl implements Serializable,TeacherService
         {
             try
             {
+                
+                
                 if(rs!=null)
                 {
                    rs.close();
@@ -152,6 +157,8 @@ public class TeacherServiceImpl implements Serializable,TeacherService
                 {
                     con.close();
                 }
+                
+                
             }
             catch(SQLException e)
             {
@@ -285,7 +292,7 @@ public class TeacherServiceImpl implements Serializable,TeacherService
 
             prst.setString(10, tchr.getReligion());
 
-            prst.setString(11, SchoolID+"_"+tchr.getTeacherID()+"_"+tchr.getImgPath());
+            prst.setString(11, tchr.getImgPath());
 
             prst.setString(12, tchr.getTeacherID());
             
