@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,34 +32,43 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         PreparedStatement prst = null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try {
-            prst = con.prepareStatement("insert into cash values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
-            prst.setDate(1, new java.sql.Date(new Date().getTime()));
+            con.setAutoCommit(false);
             
-            prst.setString(2, "Expense");
+            prst = con.prepareStatement("insert into cash values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
-            prst.setString(3, expense.getTranName());
+            prst.setString(1, institueID);
             
-            prst.setDouble(4, expense.getTranAmount());
+            prst.setDate(2, new java.sql.Date(new Date().getTime()));
             
-            prst.setInt(5, expense.getTrSubHeadID());
+            prst.setString(3, "Expense");
             
-            prst.setString(6, expense.getInvoiceID());
+            prst.setString(4, expense.getTranName());
             
-            prst.setString(7, expense.getPaymentType());
+            prst.setDouble(5, expense.getTranAmount());
             
-            prst.setString(8, expense.getAttachedVoucherNo());
+            prst.setInt(6, expense.getTrSubHeadID());
             
-            prst.setString(9, expense.getNote());
+            prst.setString(7, expense.getInvoiceID());
             
-            prst.setInt(10, expense.getBankID());
+            prst.setString(8, expense.getPaymentType());
             
-            prst.setString(11, expense.getBankName());
+            prst.setString(9, expense.getAttachedVoucherNo());
             
-            prst.setString(12, expense.getCheckNo());
+            prst.setString(10, expense.getNote());
             
-            prst.setString(13, null);
+            prst.setInt(11, expense.getBankID());
+            
+            prst.setString(12, expense.getBankName());
+            
+            prst.setString(13, expense.getCheckNo());
+            
+            prst.setString(14, null);
             
             int add = prst.executeUpdate();
             
@@ -66,12 +76,14 @@ public class ExpenseServiceImpl implements ExpenseService {
             if(expense.getBankID() !=0)
             {
             
-            prst=con.prepareStatement("update bank_account set TotalWithdraw=(TotalWithdraw+"+expense.getTranAmount()+"), Balance=(TotalDiposit-TotalWithdraw) where BankAcID="+expense.getBankID()+"");
+            prst=con.prepareStatement("update bank_account set TotalWithdraw=(TotalWithdraw+"+expense.getTranAmount()+"), Balance=(TotalDiposit-TotalWithdraw) where BankAcID="+expense.getBankID()+" and InstituteID=?");
 
+            prst.setString(1, institueID);
+            
             int up=prst.executeUpdate();
             
             
-            prst=con.prepareStatement("insert into banktrn_details (BankID,Date,Status,Amount,AmountType,TrnName,SubheadName,SubheadID,CheckNo) values (?,?,?,?,?,?,?,?,?)");
+            prst=con.prepareStatement("insert into banktrn_details (BankID,Date,Status,Amount,AmountType,TrnName,SubheadName,SubheadID,CheckNo,InstituteID) values (?,?,?,?,?,?,?,?,?,?)");
             
             prst.setInt(1, expense.getBankID());
             
@@ -91,11 +103,15 @@ public class ExpenseServiceImpl implements ExpenseService {
             
             prst.setString(9, expense.getCheckNo());
             
+            prst.setString(10, institueID);
+            
             int insertBankTranDetails=prst.executeUpdate();
             
             
-           prst=con.prepareStatement("update cash_summery set bankOut=(bankOut+"+expense.getTranAmount()+"),bankBalance=(bankIn-bankOut) where ID=1");
+           prst=con.prepareStatement("update cash_summery set bankOut=(bankOut+"+expense.getTranAmount()+"),bankBalance=(bankIn-bankOut) where InstituteID=?");
             
+           prst.setString(1, institueID);
+           
            int upcashsummurybank=prst.executeUpdate();  
             
             }
@@ -103,7 +119,8 @@ public class ExpenseServiceImpl implements ExpenseService {
            
             if(expense.getPaymentType().equals("Cash")){
             
-            prst=con.prepareStatement("update cash_summery set cashOut=(cashOut+"+expense.getTranAmount()+"),cashBalance=(cashIn-cashOut) where ID=1");
+            prst=con.prepareStatement("update cash_summery set cashOut=(cashOut+"+expense.getTranAmount()+"),cashBalance=(cashIn-cashOut) where InstituteID=?");
+            prst.setString(1, institueID);
             
             int upcashsummurycash=prst.executeUpdate();
                 
@@ -112,13 +129,13 @@ public class ExpenseServiceImpl implements ExpenseService {
             
             if(expense.getPaymentType().equals("Check")){
             
-            prst=con.prepareStatement("update cash_summery set checkOut=(checkOut+"+expense.getTranAmount()+"),checkBalance=(checkIn-checkOut) where ID=1");
-            
+            prst=con.prepareStatement("update cash_summery set checkOut=(checkOut+"+expense.getTranAmount()+"),checkBalance=(checkIn-checkOut) where InstituteID=?");
+            prst.setString(1, institueID);
             int upcashsummurycash=prst.executeUpdate();
                 
             }
             
-            
+            con.commit();
             
             return true;
             
@@ -169,11 +186,17 @@ public class ExpenseServiceImpl implements ExpenseService {
         
         ResultSet rs=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try {
-            prst = con.prepareStatement("select TrCatagoryName from transectioncatagory where TrType=?");
+            prst = con.prepareStatement("select TrCatagoryName from transectioncatagory where TrType=? and InstituteID=?");
             
             prst.setString(1, expense);
           
+            prst.setString(2, institueID);
+            
             rs=prst.executeQuery();
         
         while(rs.next()){
@@ -232,11 +255,17 @@ public class ExpenseServiceImpl implements ExpenseService {
         
         ResultSet rs=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try {
-            prst = con.prepareStatement("select TrSubHeadID,SubHeadName from transection_subhead where TrMainHeadID=(select TrMainHeadID from transection_mainhead where MainHeadName=?)");
+            prst = con.prepareStatement("select TrSubHeadID,SubHeadName from transection_subhead where TrMainHeadID=(select TrMainHeadID from transection_mainhead where MainHeadName=? and InstituteID=?) and InstituteID=?");
             
             prst.setString(1, subhead);
-          
+            prst.setString(2,institueID );
+            prst.setString(3, institueID);
+            
             rs=prst.executeQuery();
         
         while(rs.next()){
@@ -292,9 +321,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         
         ResultSet rs=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try {
-            prst = con.prepareStatement("select BankAcID,BankName from bank_account");
-            
+            prst = con.prepareStatement("select BankAcID,BankName from bank_account where InstituteID=?");
+            prst.setString(1, institueID);
             rs=prst.executeQuery();
         
             while(rs.next()){
