@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,13 +29,17 @@ public class BankGroupServiceImpl implements BankGroupService {
 
         PreparedStatement prst = null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try 
         {
-            prst = con.prepareStatement("insert into bank_group values (null, ?, ?)");
+            prst = con.prepareStatement("insert into bank_group values (null,?, ?, ?)");
             
-            prst.setString(1, bankGroup.getBankGroupName());
-            
-            prst.setString(2, bankGroup.getNote());
+            prst.setString(1, institueID);
+            prst.setString(2, bankGroup.getBankGroupName());
+            prst.setString(3, bankGroup.getNote());
 
             int add = prst.executeUpdate();
 
@@ -83,15 +88,19 @@ public class BankGroupServiceImpl implements BankGroupService {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
-            prst = con.prepareStatement("select * from bank_group");
-
+            prst = con.prepareStatement("select * from bank_group where InstituteID=?");
+            prst.setString(1, institueID);
             rs = prst.executeQuery();
 
             while (rs.next()) 
             {
-               bankGroupList.add(new BankGroup(rs.getInt(1), rs.getString(2), rs.getString(3)));
+               bankGroupList.add(new BankGroup(rs.getInt(1), rs.getString(3), rs.getString(4)));
 
             }
 
