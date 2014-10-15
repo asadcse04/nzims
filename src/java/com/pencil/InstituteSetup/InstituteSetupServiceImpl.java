@@ -38,7 +38,7 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
         
         try
         {          
-            prst = con.prepareStatement("update institute_setup set Address=?,ESTB=?,ContactNo=?,Email=?,WebSite=?,EINNo=?,Code=?,Slogan=?,Note=?,Logo=?,BackGroundImg=?,InstituteFullName=? where InstituteID=?");
+            prst = con.prepareStatement("update institute_setup set Address=?,ESTB=?,ContactNo=?,Email=?,WebSite=?,EINNo=?,Code=?,Slogan=?,Note=?,Logo=?,BackGroundImg=?,InstituteFullName=?,AcademicYear=? where InstituteID=?");
 
             prst.setString(1,instituteSetup.getAddress());
             
@@ -64,7 +64,9 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
             
             prst.setString(12,instituteSetup.getInstituteFullName());
             
-            prst.setString(13, instituteID);
+            prst.setString(13, instituteSetup.getAcdemicyear());
+            
+            prst.setString(14, instituteID);
             
             prst.execute();
            
@@ -192,7 +194,7 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
             
             while(rs.next())
             {
-                instituteList.add(new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"),rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg")));
+                instituteList.add(new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"),rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"),rs.getString("AcademicYear")));
             }
 
             rs.close();
@@ -253,7 +255,7 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
             
             while(rs.next())
             {
-                instituteSetup=new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"));
+                instituteSetup=new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"),rs.getString("AcademicYear"));
             }
 
             rs.close();
@@ -317,7 +319,7 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
             
             while(rs.next())
             {
-                instituteSetup=new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"));
+                instituteSetup=new InstituteSetup(rs.getString("InstituteID"),rs.getString("InstituteName"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"),rs.getString("AcademicYear"));
             }
 
             rs.close();

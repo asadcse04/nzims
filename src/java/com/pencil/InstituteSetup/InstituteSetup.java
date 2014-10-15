@@ -41,6 +41,8 @@ public class InstituteSetup  implements Serializable
         
     private String backgroundImgPath;
     
+    private String Acdemicyear;
+    
   
     
    
@@ -50,7 +52,7 @@ public class InstituteSetup  implements Serializable
         
     }
 
-    public InstituteSetup(String instituteID, String instituteName, String instituteFullName, String address, String estb, String contactNo, String email, String webSite, String einNo, String code, String slogan, String note, String imgPath, String backgroundImgPath) {
+    public InstituteSetup(String instituteID, String instituteName, String instituteFullName, String address, String estb, String contactNo, String email, String webSite, String einNo, String code, String slogan, String note, String imgPath, String backgroundImgPath,String Acdemicyear) {
         this.instituteID = instituteID;
         this.instituteName = instituteName;
         this.instituteFullName = instituteFullName;
@@ -65,6 +67,7 @@ public class InstituteSetup  implements Serializable
         this.note = note;
         this.imgPath = imgPath;
         this.backgroundImgPath = backgroundImgPath;
+        this.Acdemicyear=Acdemicyear;
     }
   
     
@@ -182,6 +185,15 @@ public class InstituteSetup  implements Serializable
     public void setBackgroundImgPath(String backgroundImgPath) {
         this.backgroundImgPath = backgroundImgPath;
     }
+
+    public String getAcdemicyear() {
+        return Acdemicyear;
+    }
+
+    public void setAcdemicyear(String Acdemicyear) {
+        this.Acdemicyear = Acdemicyear;
+    }
+    
     
     
 }
