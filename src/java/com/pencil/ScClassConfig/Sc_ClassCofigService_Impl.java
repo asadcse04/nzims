@@ -63,7 +63,7 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             }
             
             prst = con.prepareStatement("insert into classconfig values(?,?,(select departmentID from department where departmentName=?),"
-                    + "(SELECT ClassID FROM class where ClassName=?),(SELECT ShiftID FROM shift where ShiftName=?),(SELECT SectionID FROM section where SectionName=? and InstituteID=?),?,?,?)");
+                    + "(SELECT ClassID FROM class where ClassName=?),?,(SELECT ShiftID FROM shift where ShiftName=?),?,(SELECT SectionID FROM section where SectionName=? and InstituteID=?),?,?,?,?)");
         
             
             prst.setInt(1, classconfid);
@@ -74,17 +74,23 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
             
             prst.setString(4,cnf.getClassName());
             
-            prst.setString(5,cnf.getShiftName());
+            prst.setString(5,cnf.getClassName());
             
-            prst.setString(6,cnf.getSectionName());
+            prst.setString(6,cnf.getShiftName());
             
-            prst.setString(7,instituteid);
+            prst.setString(7,cnf.getShiftName());
             
-            prst.setString(8,cnf.getRoomNum());
+            prst.setString(8,cnf.getSectionName());
             
-            prst.setString(9, instituteid);
+            prst.setString(9,instituteid);
             
-            prst.setString(10, classconfid+"-"+instituteid);
+            prst.setString(10,cnf.getSectionName());
+
+            prst.setString(11,cnf.getRoomNum());
+            
+            prst.setString(12, instituteid);
+            
+            prst.setString(13, classconfid+"-"+instituteid);
             
             prst.execute();
              
@@ -890,16 +896,16 @@ public class Sc_ClassCofigService_Impl implements Serializable,Sc_ClassConfigSer
         
         try
         {
-            prst = con.prepareStatement("SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,scCnf.ClassConfigID"
-                    + " FROM classconfig scCnf,class c,shift s,section sctn where scCnf.ClassID=c.ClassID and scCnf.InstituteID=sctn.InstituteID"
-                    + " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.InstituteID=? group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName order by scCnf.ScConfigID");
+            prst = con.prepareStatement("SELECT scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,scCnf.ClassConfigID,scCnf.ScConfigID\n" +
+"FROM classconfig scCnf,class c,shift s,section sctn where scCnf.ClassID=c.ClassID and scCnf.InstituteID=sctn.InstituteID\n" +
+"and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.InstituteID=? group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName order by scCnf.ScConfigID");
             
             prst.setString(1, instituteid);
             rs = prst.executeQuery();
              
             while(rs.next())
             {
-                scCnfList.add(new ScClassConfig(rs.getInt("scCnf.AcYrID"),rs.getString("c.ClassName"),rs.getString("s.ShiftName"),rs.getString("sctn.SectionName"),rs.getString("scCnf.ClassConfigID")));
+                scCnfList.add(new ScClassConfig(rs.getInt("scCnf.AcYrID"),rs.getString("c.ClassName"),rs.getString("s.ShiftName"),rs.getString("sctn.SectionName"),rs.getString("scCnf.ClassConfigID"),rs.getInt("scCnf.ScConfigID")));
             }
         }
         catch(SQLException e)
