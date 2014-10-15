@@ -17,4 +17,8 @@ public interface FeeCollectionService {
     public List<FeeInvDetObj> getStudentAllinfo(String id);
     
     public double getFeeAmount(FeeInvDetObj feeInvDetObj);
+    
+    public boolean saveFeeRecord(List<FeeInvDetObj> listInvoice,FeeInvDetObj feeInvDetObj);
+    
+    public boolean sendSms(FeeInvDetObj feeInvDetObj, int smsBal);
 }

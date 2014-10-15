@@ -29,6 +29,8 @@ public class FeeInvDetObj implements Serializable {
     
     private String feename;
     
+    private int feeid;
+    
     private double amount;
     
     private double concession;
@@ -64,6 +66,8 @@ public class FeeInvDetObj implements Serializable {
     private String departname;
     private String shiftname;
     private String sectionname;
+    
+    private double totalAmount;
     
     
     private String[] selectedmonths;
@@ -114,7 +118,7 @@ public class FeeInvDetObj implements Serializable {
     
     // Fee List Controller
     
-    public FeeInvDetObj(String feename, double amount, double concession, double penalty, double actualAmount, double paidAmount, double due) {
+    public FeeInvDetObj(int feeid,String feename, double amount, double concession, double penalty, double actualAmount, double paidAmount, double due) {
         this.feename = feename;
         this.amount = amount;
         this.concession = concession;
@@ -122,6 +126,7 @@ public class FeeInvDetObj implements Serializable {
         this.actualAmount = actualAmount;
         this.paidAmount = paidAmount;
         this.due = due;
+        this.feeid=feeid;
     }
     
     
@@ -424,6 +429,15 @@ public class FeeInvDetObj implements Serializable {
         return classname;
     }
 
+    public int getFeeid() {
+        return feeid;
+    }
+
+    public void setFeeid(int feeid) {
+        this.feeid = feeid;
+    }
+    
+
     /**
      * @param classname the classname to set
      */
@@ -505,6 +519,14 @@ public class FeeInvDetObj implements Serializable {
      */
     public void setArraysize(int arraysize) {
         this.arraysize = arraysize;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
     
    
