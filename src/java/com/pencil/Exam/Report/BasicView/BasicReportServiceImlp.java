@@ -38,7 +38,7 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
         List<BasicReport> scCnfList = new ArrayList<BasicReport>();
 
         try {
-            prst = con.prepareStatement("select scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName\n" +
+            prst = con.prepareStatement("select scCnf.AcYrID,c.ClassName,c.classid,s.ShiftName,sctn.SectionName,dpt.DepartmentName\n" +
                                         " from classconfig scCnf,class c,shift s,section sctn, department dpt where scCnf.ClassID=c.ClassID \n" +
                                         " and scCnf.ShiftID=s.ShiftID and scCnf.SectionID=sctn.SectionID and scCnf.DeptID=dpt.DepartmentID and scCnf.InstituteID=sctn.InstituteID and scCnf.InstituteID=? \n" +
                                         " group by scCnf.AcYrID,c.ClassName,s.ShiftName,sctn.SectionName,dpt.DepartmentName order by scCnf.ScConfigID ");
@@ -48,7 +48,7 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
             rs = prst.executeQuery();
 
             while (rs.next()) {
-                scCnfList.add(new BasicReport(rs.getInt("scCnf.AcYrID"), rs.getString("c.ClassName"), rs.getString("dpt.DepartmentName"), rs.getString("s.ShiftName"), rs.getString("sctn.SectionName")));
+                scCnfList.add(new BasicReport(rs.getInt("scCnf.AcYrID"), rs.getString("c.ClassName"), rs.getString("dpt.DepartmentName"), rs.getString("s.ShiftName"), rs.getString("sctn.SectionName"), rs.getInt("c.classid")));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -83,6 +83,10 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
             o = new DB_Connection();
@@ -93,7 +97,7 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
                     + " and DeptID=(select DepartmentID from department where DepartmentName=?)"
                     + " and ClassID=(select ClassID from class where ClassName=?)"
                     + " and shiftID=(select ShiftID from shift where ShiftName=?)"
-                    + " and SectionID=(select SectionID from section where SectionName=?)");
+                    + " and SectionID=(select SectionID from section where SectionName=? and instituteid='"+institueID+"')");
 
             prst.setInt(1, sq.getAcYr());
 
@@ -104,6 +108,8 @@ public class BasicReportServiceImlp implements BasicReportService, Serializable 
             prst.setString(4, sq.getShiftName());
 
             prst.setString(5, sq.getSectionName());
+            
+            //prst.setString(6, institueID);
 
             rs = prst.executeQuery();
             while (rs.next()) {

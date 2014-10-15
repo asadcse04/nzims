@@ -35,8 +35,11 @@
         <p:submenu icon="ui-icon-person" label="Information">     
             <p:submenu icon="ui-icon-person" label="Student">
                 <p:menuitem value="Find A Student" onclick="PF('findStudent').show();" icon="ui-icon-person"></p:menuitem>   
+               <p:menuitem value="All Student View" onclick="PF('allStudentView').show();" icon="ui-icon-person"></p:menuitem>   
                 <p:menuitem value="At A Glance" onclick="PF('at_A_Glance').show();" icon="ui-icon-person"></p:menuitem>   
                 <p:menuitem value="Correction Sheet" onclick="PF('correctionSheet').show();" icon="ui-icon-person"></p:menuitem>    
+           
+            
             </p:submenu>
 
             <p:submenu icon="ui-icon-person" label="Teacher">
@@ -86,11 +89,13 @@
                     <p:menuitem value="Fee Start up" onclick="PF('feestart').show();" icon="ui-icon-script"></p:menuitem> 
                     <p:menuitem value="Fee Create" onclick="PF('createfee').show();" icon="ui-icon-script"></p:menuitem> 
                     <p:menuitem value="Fee Configure" onclick="PF('feeconfig').show();" icon="ui-icon-script"></p:menuitem> 
-
                 </p:submenu> 
+             
+                <p:menuitem value="Fee Collection" onclick="PF('stdsrc').show();" icon="ui-icon-script"></p:menuitem> 
 
             </p:submenu> 
 
+            
             <p:submenu  label="Payroll">
                 <p:submenu icon="ui-icon-note" label="Payroll Setup">
                     <p:menuitem value="Payroll Startup" onclick="PF('salarystart').show();" icon="ui-icon-script"></p:menuitem> 
@@ -125,7 +130,7 @@
                 <p:menuitem value="Submit" onclick="PF('markSubmit').show();" icon="ui-icon-lightbulb"></p:menuitem>  
                 <p:menuitem value="SubMarkSubmit" onclick="PF('sujectMarkSubmit').show();" icon="ui-icon-lightbulb"></p:menuitem>  
                 <p:menuitem value="Update" onclick="PF('markUpdate').show();" icon="ui-icon-lightbulb"></p:menuitem>  
-                <p:menuitem value="SubMarkUpdate" onclick="PF('sujectMarkUpdate').show();" icon="ui-icon-lightbulb"></p:menuitem>  
+                <p:menuitem value="ResultProcess" onclick="PF('sujectMarkUpdate').show();" icon="ui-icon-lightbulb"></p:menuitem>  
                 <p:menuitem value="MarkFormatSheet" onclick="PF('markFormat').show();" icon="ui-icon-lightbulb"></p:menuitem>  
 
 
@@ -134,8 +139,7 @@
             <p:submenu icon="ui-icon-lightbulb" label="Report">
                 <p:submenu icon="ui-icon-suitcase" label="Subject Wise">
                     
-               <p:menuitem value="Report" url="/DesktopPencil/Report/SubjectWise/subjectWiseReportDetailsViewMain.xhtml" icon="ui-icon-script"></p:menuitem> 
-
+                    <p:menuitem value="Report" url="/DesktopPencil/Report/SubjectWise/subjectWiseReportDetailsViewMain.xhtml" icon="ui-icon-script"></p:menuitem> 
                     <p:menuitem value="Details" onclick="PF('details').show();" icon="ui-icon-lightbulb"></p:menuitem>
                     <p:menuitem value="Summary" onclick="PF('subjectreport').show();" icon="ui-icon-eject"></p:menuitem>
                     <p:menuitem value="Pass/Fail" onclick="PF('pass_fail').show();" icon="ui-icon-eject"></p:menuitem> 
@@ -157,6 +161,16 @@
 
             <p:menuitem value="Print Mark Sheet" onclick="PF('markSheetPrint').show();" icon="ui-icon-lightbulb"></p:menuitem>
 
+            
+            <p:submenu icon="ui-icon-lightbulb" label="Tabulation Sheet">
+             
+            <p:submenu icon="ui-icon-lightbulb" label="I-Report">
+              <p:menuitem value="One to Five" onclick="PF('demoReportFor_1-5').show();"  icon="ui-icon-lightbulb"></p:menuitem>
+              <p:menuitem value="Six to Eight"  icon="ui-icon-lightbulb"></p:menuitem>
+              
+            </p:submenu>   
+                
+            </p:submenu>
 
         </p:submenu> 
 

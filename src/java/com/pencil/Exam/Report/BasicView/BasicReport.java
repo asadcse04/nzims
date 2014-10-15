@@ -12,27 +12,29 @@ import java.io.Serializable;
  * @author SHOHUG.SQ
  */
 public class BasicReport implements Serializable {
-    
+
     private int acYr;
 
     private String className;
-    
+
+    private int classID;
+
     private String departmentName;
-    
+
     private String shiftName;
-    
+
     private String sectionName;
-    
+
     private String examName;
-    
+
     private String subjectName;
-    
+
     private String studentID;
 
     private String studentName;
 
     private int studentRoll;
-    
+
     private String shortCode1;
 
     private String shortCode2;
@@ -40,68 +42,61 @@ public class BasicReport implements Serializable {
     private String shortCode3;
 
     private String shortCode4;
-    
+
     private Double average;
 
     private Double totalScore;
 
     private Double gradePoint;
-    
-     private String letterGrade;
 
+    private String letterGrade;
 
     private Double totalMark;
 
     private Double cgpa;
 
     private String finalGrade;
-    
+
     //Subject Wise Pass/Fail Report//
-    
     private int subjectID;
-    
+
     private int totalStudent;
-    
+
     private int fail;
-    
+
     private int pass;
-    
+
     private String teacherName;
-    
+
     //Subject Wise Grading..........................
-    
     private int aplus;
-    
+
     private int aaa;
-    
+
     private int aminus;
-    
+
     private int bbb;
-    
+
     private int ccc;
-    
+
     private int ddd;
-    
+
     private int fff;
 
-    
-    
-   
-    
     ////////////////////constructors//////////
     public BasicReport() {
-        
+
     }
 
-    
-
-    public BasicReport(int acYr, String className, String departmentName, String shiftName, String sectionName) {
+    public BasicReport(int acYr, String className, String departmentName, String shiftName, String sectionName, int classId) {
         this.acYr = acYr;
         this.className = className;
         this.departmentName = departmentName;
         this.shiftName = shiftName;
         this.sectionName = sectionName;
+        this.classID = classId;
     }
+
     /// Details report ////
     public BasicReport(String studentID, String studentName, int studentRoll, String shortCode1, String shortCode2, String shortCode3, String shortCode4, Double average, Double totalScore, Double gradePoint, String letterGrade) {
         this.studentID = studentID;
@@ -117,8 +112,8 @@ public class BasicReport implements Serializable {
         this.letterGrade = letterGrade;
     }
     //for summary///
-    
-    public BasicReport(String studentID, String studentName, int studentRoll, Double totalMark,Double cgpa, String finalGrade) {
+
+    public BasicReport(String studentID, String studentName, int studentRoll, Double totalMark, Double cgpa, String finalGrade) {
         this.studentID = studentID;
         this.studentName = studentName;
         this.studentRoll = studentRoll;
@@ -126,9 +121,8 @@ public class BasicReport implements Serializable {
         this.cgpa = cgpa;
         this.finalGrade = finalGrade;
     }
-    
+
     //Subject Wise Pass/Fail Report Constructor//
-    
     public BasicReport(int subjectID, String subjectName, int totalStudent, int fail, int pass, String teacherName) {
         this.subjectID = subjectID;
         this.subjectName = subjectName;
@@ -137,9 +131,9 @@ public class BasicReport implements Serializable {
         this.pass = pass;
         this.teacherName = teacherName;
     }
-    
+
     //Subject Wise Grading Constructor...................
-    public BasicReport(int subjectID, String subjectName,int totalStudent, int aplus, int aaa, int aminus, int bbb, int ccc, int ddd, int fff) {
+    public BasicReport(int subjectID, String subjectName, int totalStudent, int aplus, int aaa, int aminus, int bbb, int ccc, int ddd, int fff) {
         this.subjectID = subjectID;
         this.subjectName = subjectName;
         this.totalStudent = totalStudent;
@@ -150,10 +144,10 @@ public class BasicReport implements Serializable {
         this.ccc = ccc;
         this.ddd = ddd;
         this.fff = fff;
-    
+
     }
 /////////////Set & Get  ////////////////
-    
+
     public int getAcYr() {
         return acYr;
     }
@@ -168,6 +162,14 @@ public class BasicReport implements Serializable {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public int getClassID() {
+        return classID;
+    }
+
+    public void setClassID(int classID) {
+        this.classID = classID;
     }
 
     public String getDepartmentName() {
@@ -417,6 +419,5 @@ public class BasicReport implements Serializable {
     public void setFff(int fff) {
         this.fff = fff;
     }
-    
-    
+
 }

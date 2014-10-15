@@ -5,12 +5,23 @@
  */
 package com.pencil.Exam.Report.BasicView;
 
+import com.pencil.Connection.DB_Connection;
 import com.pencil.Presentation.Presentation;
 import com.pencil.SubjectConfigure.SubjectConfig;
+import java.awt.Dimension;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
@@ -32,6 +43,8 @@ public class BasicReportController implements Serializable {
     private int scCnfID;
 
     private int exCnfID;
+    
+    private int classID;
 
     private List<String> examList;
 
@@ -53,6 +66,8 @@ public class BasicReportController implements Serializable {
     }
 
     public void Sc_Cnf_ID(BasicReport sq) {
+        
+        this.classID=sq.getClassID();
 
         this.scCnfID = dao.getScCnfID(sq);
 
@@ -115,6 +130,16 @@ public class BasicReportController implements Serializable {
         this.classDetList = classDetList;
     }
 
+    public int getClassID() {
+        return classID;
+    }
+
+    public void setClassID(int classID) {
+        this.classID = classID;
+    }
+
+    
+    
     public int getScCnfID() {
         return scCnfID;
     }
@@ -188,6 +213,52 @@ public class BasicReportController implements Serializable {
 
     public void setGrading__List(List<BasicReport> grading__List) {
         this.grading__List = grading__List;
+    }
+    
+    
+    /////////////////// i-Report //////////////////
+    
+    public void showReport() {
+       
+        DB_Connection o = new DB_Connection();
+
+        Connection con = o.getConnection();
+        String reportClass1_5="";
+       
+        Map<String, Object> params5 = new HashMap<String, Object>();
+        params5.put("ClassConfigId", this.scCnfID);
+         if(this.classID<=24){
+         reportClass1_5 = "com/pencil/Report1/markShitReport_1_5.jasper";
+         }
+          else if (this.classID >24 && this.classID<= 27){
+             reportClass1_5 = "com/pencil/Report1/markShitReport8.jasper"; 
+          }
+          else{
+              reportClass1_5 = "com/pencil/Report1/markShitReport9_10.jasper";
+          }
+        InputStream is1_5 = this.getClass().getClassLoader().getResourceAsStream(reportClass1_5);
+        try {
+
+            JasperPrint jp = JasperFillManager.fillReport(is1_5, params5, con);
+
+            JRViewer jv = new JRViewer(jp);
+            JFrame jf = new JFrame();
+            jf.getContentPane().add(jv);
+            jf.validate();
+            jf.setVisible(true);
+            jf.setSize(new Dimension(1000, 600));
+            jf.setLocation(300, 100);
+            jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+           
+        } 
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+        
+        
+       
+        
+       
     }
 
 }

@@ -178,7 +178,8 @@
                             <p:column styleClass="label">
                                 <h:outputText value="Photo: "/>
                             </p:column><p:column>
-                                <p:fileUpload value="#{student_Reg_Controller.photoFile}" mode="simple" style="width: 167px;"/>
+                              <h:graphicImage  value="/images/studentImages/#{student_Reg_Controller.student.imgPath}" style="height: 75px; width: 70px ;" />
+                              <p:fileUpload value="#{student_Reg_Controller.photoFile}" mode="simple" auto="true" style="width: 167px;"/>
                             </p:column>
                         </p:row>
 

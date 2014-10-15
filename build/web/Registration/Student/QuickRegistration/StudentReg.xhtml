@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <p:layout style="min-width:1310px;min-height:420px;">
+    <p:layout style="min-width:1310px;min-height:600px;">
 
         <p:layoutUnit position="west" size="25%">
 
@@ -73,7 +73,7 @@
 
                 <p:dataTable id="st_reg_tbl" value="#{studentRegController.stdViewList}" var="stdRegList" editable="true" editMode="cell" widgetVar="cellCars" scrollable="true" scrollHeight="518">
 
-                    <p:ajax event="cellEdit" listener="#{studentRegController.onCellEdit}"  update=":std_reg_tbl_frm:gwl" />
+                <!--    <p:ajax event="cellEdit" listener="#{studentRegController.onCellEdit}"  update=":std_reg_tbl_frm:gwl" />  -->
 
                     <p:column headerText="Student ID" style="width:100px;"> 
 
@@ -114,8 +114,12 @@
                                 <p:outputLabel value="#{stdRegList.gender}" style="width:100px;"/>  
                             </f:facet>
                             <f:facet name="input">     
-                                <p:inputText value="#{stdRegList.gender}" style="width:90%">          
-                                </p:inputText>  
+                                <h:selectOneMenu value="#{stdRegList.gender}" style="width:90%">
+                                    <f:selectItem itemLabel="Select Gender" itemValue=" "/>
+                                    <f:selectItem itemLabel="Male" itemValue="Male"/>
+                                    <f:selectItem itemLabel="Female" itemValue="Female"/>
+                                </h:selectOneMenu>
+                            
                             </f:facet>  
                         </p:cellEditor>  
 
@@ -142,8 +146,8 @@
                                 <p:outputLabel value="#{stdRegList.guardianContactNo}" style="width:100px;"/>  
                             </f:facet>
                             <f:facet name="input">     
-                                <p:inputText value="#{stdRegList.guardianContactNo}" style="width:90%"> 
-
+                                <p:inputText value="#{stdRegList.guardianContactNo}" style="width:90%" maxlength="11" required="true" requiredMessage="Please Enter Correct Guardian's Number."> 
+                                  <f:validateLength maximum="11" minimum="11" />
                                 </p:inputText>  
                             </f:facet>  
                         </p:cellEditor>  

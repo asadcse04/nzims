@@ -20,7 +20,12 @@
                         <p:column sortBy="#{school_Cnf_tbl.acYr}" filterBy="#{school_Cnf_tbl.acYr}">
                             <f:facet name="header">Academic Year</f:facet>  
                             <h:outputText value="#{school_Cnf_tbl.acYr}"/>
-                        </p:column> 
+                        </p:column>
+                        
+                        <p:column  sortBy="#{school_Cnf_tbl.classID}" filterBy="#{school_Cnf_tbl.classID}">
+                            <f:facet name="header">Class ID</f:facet>  
+                            <h:outputText value="#{school_Cnf_tbl.classID}"/>
+                        </p:column>
 
                         <p:column sortBy="#{school_Cnf_tbl.className}" filterBy="#{school_Cnf_tbl.className}">
                             <f:facet name="header">Class</f:facet>  
@@ -48,6 +53,12 @@
                                 <f:selectItem itemLabel="Select Exam" itemValue="" />  
                                 <f:selectItems value="#{basicReportController.examList}" />
                             </p:selectOneMenu>
+                        </p:column>
+                        
+                        <p:column style="width:3%">
+                            <f:facet name="header">Tabu</f:facet>
+                            <p:commandButton actionListener="#{basicReportController.Sc_Cnf_ID(school_Cnf_tbl)}" action="#{basicReportController.showReport()}"  icon="ui-icon-pencil" title="iReport" /> 
+
                         </p:column>
 
                         <p:column style="width:3%">

@@ -54,7 +54,9 @@
 
                         <p:column style="width:3%">  
 
-                            <p:commandButton process="@this" update=":cnfInfo_frm,:student_List_4_Attendance_frm" oncomplete="dialog_student_List_4_Attendance.show()"  actionListener="#{studentAttendanceController.student_List(school_Cnf_tbl)}" icon="ui-icon-pencil" title="Take Attendance" /> 
+                            <p:commandButton process="@this" update=":cnfInfo_frm,:student_List_4_Attendance_frm" oncomplete="dialog_student_List_4_Attendance.show()"  actionListener="#{studentAttendanceController.student_List(school_Cnf_tbl)}" icon="ui-icon-pencil" title="Take Attendance" > 
+                                <f:setPropertyActionListener value="#{school_Cnf_tbl}" target="#{studentAttendanceController.classConfig}"/>
+                            </p:commandButton>
 
                         </p:column>
 

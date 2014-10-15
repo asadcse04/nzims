@@ -11,7 +11,7 @@
 
             <p:dataTable value="#{studentListController.studentList}" var="student_tbl" filteredValue="#{studentListController.student_Filter_List}" 
 
-                         paginator="true" rows="12" paginatorPosition="bottom" style="width:80%; margin-top: -28px; margin-bottom: 15px;">
+                         paginator="true" rows="12" paginatorPosition="bottom" style="width:82%; margin-top: -28px; margin-bottom: 15px;">
                 
                 <p:column>
                     <f:facet name="header">Photos</f:facet>  
@@ -34,11 +34,11 @@
 
                 </p:column> 
 
-                <p:column sortBy="#{student_tbl.gender}" filterBy="#{student_tbl.gender}">
+                <p:column sortBy="#{student_tbl.className}" filterBy="#{student_tbl.className}">
 
-                    <f:facet name="header">Gender</f:facet>  
+                    <f:facet name="header">Class</f:facet>  
 
-                    <h:outputText value="#{student_tbl.gender}"/>
+                    <h:outputText value="#{student_tbl.className}"/>
 
                 </p:column>  
 
@@ -50,19 +50,27 @@
 
                 </p:column>  
 
-                <p:column sortBy="#{student_tbl.bloodGroup}" filterBy="#{student_tbl.bloodGroup}">
+                <p:column sortBy="#{student_tbl.shiftName}" filterBy="#{student_tbl.shiftName}">
 
-                    <f:facet name="header">Blood Group</f:facet>  
+                    <f:facet name="header">Shift</f:facet>  
 
-                    <h:outputText value="#{student_tbl.bloodGroup}"/>
+                    <h:outputText value="#{student_tbl.shiftName}"/>
 
                 </p:column>  
 
-                <p:column sortBy="#{student_tbl.religion}" filterBy="#{student_tbl.religion}">
+                <p:column sortBy="#{student_tbl.sectionName}" filterBy="#{student_tbl.sectionName}">
 
-                    <f:facet name="header">Religion</f:facet>  
+                    <f:facet name="header">Section</f:facet>  
 
-                    <h:outputText value="#{student_tbl.religion}"/>
+                    <h:outputText value="#{student_tbl.sectionName}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_tbl.studentRoll}" filterBy="#{student_tbl.studentRoll}">
+
+                    <f:facet name="header">Roll</f:facet>  
+
+                    <h:outputText value="#{student_tbl.studentRoll}"/>
 
                 </p:column>  
 

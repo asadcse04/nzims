@@ -164,7 +164,7 @@
         <ui:include src="/Registration/Student/StudentRegistration.xhtml" />          
     </p:dialog>
     
-     <p:dialog header="Quick Std Registration" draggable="true" widgetVar="QuickstdRegistration" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
+    <p:dialog header="Quick Std Registration" draggable="true" width="100%" widgetVar="QuickstdRegistration" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Registration/Student/QuickRegistration/StudentReg.xhtml" />          
     </p:dialog>
 
@@ -317,12 +317,10 @@
     <p:dialog header="Exam Startup" draggable="true" width="100%" height="70%" widgetVar="examStartup" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Settings/Exam/ExamStartup/ExamStartup.xhtml" /> 
     </p:dialog>
-
     <!-- ............................Exam Configure........................... -->
     <p:dialog header="Exam Configure" draggable="true" width="80%" height="590" widgetVar="examConfigure" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Settings/Exam/ExamConfigure/ExamConfig_Impl.xhtml" /> 
     </p:dialog>
-
     <!-- ............................Merit List Generate........................... -->
     <p:dialog header="Merit List Generate" draggable="true" width="100%" height="590" widgetVar="meritList" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Settings/Exam/MeritList/MeritListImpl.xhtml" /> 
@@ -368,7 +366,7 @@
         <ui:include src="/Exam/SubjectMarkUpdate/UpdateMarkImpl.xhtml" />            
     </p:dialog>
     
-     <p:dialog header="Student Subject Mark Update" draggable="true" widgetVar="sujectMarkUpdate" width="100%" height="590" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">    
+     <p:dialog header="Result Process" draggable="true" widgetVar="sujectMarkUpdate" width="100%" height="590" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">    
         <ui:include src="/Exam/UpdateStudentSubjectMark/UpdateStudentSubjectMark.xhtml" />            
     </p:dialog>
     
@@ -376,8 +374,6 @@
         <ui:include src="/Exam/MarkFormatSheet/MarkFormatSheet.xhtml" />            
     </p:dialog> 
     
-    
-
     <p:dialog header="Mark Sheet Print" draggable="true" widgetVar="markSheetPrint" width="100%" height="590" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">    
         <ui:include src="/Exam/PrintMarkSheet/PrintMarkSheet.xhtml" />            
     </p:dialog>  
@@ -410,6 +406,10 @@
 
     <p:dialog header="Section Wise Merit List" height="700px" draggable="true" widgetVar="section_meritList" width="100%" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Report/SectionWise/SectionWiseMeritList.xhtml"/>          
+    </p:dialog>
+    
+     <p:dialog header="Report" draggable="true" widgetVar="demoReportFor_1-5" position="center" maximizable="true" minimizable="true" width="600 px" height="600 px" showEffect="fade" hideEffect="fade" dynamic="true">
+		<ui:include src="/Report/demoReport.xhtml" />          
     </p:dialog>
 
     <!-- ******************************************************SMS Penal Start Here***************************************************** -->
@@ -532,6 +532,10 @@
     
      <p:dialog header="Present Report" height="700px" draggable="true" widgetVar="presentReportDig" width="1150px" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="../Attendance/Report/Present.xhtml"/>          
+    </p:dialog>
+    
+     <p:dialog header="All Student View" draggable="true" width="100%" height="768" widgetVar="allStudentView" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
+        <ui:include src="/Information/Student/AllStudentView/AllStudentInfo.xhtml" />
     </p:dialog>
 
     <!--*****************************Accounts Dialog***************************-->

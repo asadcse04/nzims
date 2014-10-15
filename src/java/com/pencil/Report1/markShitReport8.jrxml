@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="1444" pageHeight="595" orientation="Landscape" columnWidth="1404" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="653"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ClassConfigId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     student_tabulation.`studentroll` AS student_tabulation_studentroll,
+     student_tabulation.`studentname` AS student_tabulation_studentname,
+     student_tabulation.`Bangla_1st_total` AS student_tabulation_Bangla_1st_total,
+     student_tabulation.`Bangla_1st_CT` AS student_tabulation_Bangla_1st_CT,
+     student_tabulation.`Bangla_1st_WR` AS student_tabulation_Bangla_1st_WR,
+     student_tabulation.`Bangla_1st_OB` AS student_tabulation_Bangla_1st_OB,
+     student_tabulation.`Bangla_1st_PR` AS student_tabulation_Bangla_1st_PR,
+     student_tabulation.`Bangla_2nd_total` AS student_tabulation_Bangla_2nd_total,
+     student_tabulation.`Bangla_2nd_CT` AS student_tabulation_Bangla_2nd_CT,
+     student_tabulation.`Bangla_2nd_WR` AS student_tabulation_Bangla_2nd_WR,
+     student_tabulation.`Bangla_2nd_OB` AS student_tabulation_Bangla_2nd_OB,
+     student_tabulation.`Bangla_2nd_PR` AS student_tabulation_Bangla_2nd_PR,
+     student_tabulation.`English_1st_total` AS student_tabulation_English_1st_total,
+     student_tabulation.`English_1st_CT` AS student_tabulation_English_1st_CT,
+     student_tabulation.`English_1st_WR` AS student_tabulation_English_1st_WR,
+     student_tabulation.`English_1st_OB` AS student_tabulation_English_1st_OB,
+     student_tabulation.`English_1st_PR` AS student_tabulation_English_1st_PR,
+     student_tabulation.`English_2nd_total` AS student_tabulation_English_2nd_total,
+     student_tabulation.`English_2nd_CT` AS student_tabulation_English_2nd_CT,
+     student_tabulation.`English_2nd_WR` AS student_tabulation_English_2nd_WR,
+     student_tabulation.`English_2nd_OB` AS student_tabulation_English_2nd_OB,
+     student_tabulation.`English_2nd_PR` AS student_tabulation_English_2nd_PR,
+     student_tabulation.`Religon_total` AS student_tabulation_Religon_total,
+     student_tabulation.`Religon_CT` AS student_tabulation_Religon_CT,
+     student_tabulation.`Religon_WR` AS student_tabulation_Religon_WR,
+     student_tabulation.`Religon_OB` AS student_tabulation_Religon_OB,
+     student_tabulation.`Religon_PR` AS student_tabulation_Religon_PR,
+     student_tabulation.`Ban_Glob_Studies_total` AS student_tabulation_Ban_Glob_Studies_total,
+     student_tabulation.`Ban_Glob_Studies_CT` AS student_tabulation_Ban_Glob_Studies_CT,
+     student_tabulation.`Ban_Glob_Studies_WR` AS student_tabulation_Ban_Glob_Studies_WR,
+     student_tabulation.`Ban_Glob_Studies_OB` AS student_tabulation_Ban_Glob_Studies_OB,
+     student_tabulation.`Ban_Glob_Studies_PR` AS student_tabulation_Ban_Glob_Studies_PR,
+     student_tabulation.`General_Science_total` AS student_tabulation_General_Science_total,
+     student_tabulation.`General_Science_CT` AS student_tabulation_General_Science_CT,
+     student_tabulation.`General_Science_WR` AS student_tabulation_General_Science_WR,
+     student_tabulation.`General_Science_OB` AS student_tabulation_General_Science_OB,
+     student_tabulation.`General_Science_PR` AS student_tabulation_General_Science_PR,
+     student_tabulation.`Math_total` AS student_tabulation_Math_total,
+     student_tabulation.`Math_CT` AS student_tabulation_Math_CT,
+     student_tabulation.`Math_WR` AS student_tabulation_Math_WR,
+     student_tabulation.`Math_OB` AS student_tabulation_Math_OB,
+     student_tabulation.`Math_PR` AS student_tabulation_Math_PR
+FROM
+     `student_tabulation` student_tabulation
+WHERE
+     studentid IN ( SELECT studentid FROM `nzims_db`.`student_identification` WHERE classconfigid = '33' )]]>
+	</queryString>
+	<field name="student_tabulation_studentroll" class="java.lang.Long"/>
+	<field name="student_tabulation_studentname" class="java.lang.String"/>
+	<field name="student_tabulation_Bangla_1st_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_1st_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_1st_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_1st_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_1st_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_2nd_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_2nd_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_2nd_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_2nd_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_2nd_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_English_1st_total" class="java.lang.Double"/>
+	<field name="student_tabulation_English_1st_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_English_1st_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_English_1st_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_English_1st_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_English_2nd_total" class="java.lang.Double"/>
+	<field name="student_tabulation_English_2nd_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_English_2nd_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_English_2nd_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_English_2nd_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_General_Science_total" class="java.lang.Double"/>
+	<field name="student_tabulation_General_Science_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_General_Science_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_General_Science_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_General_Science_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Math_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Math_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Math_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Math_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Math_PR" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="383" y="0" width="317" height="46"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[XYZ Govt. College]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="46" width="215" height="33"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[DHAKA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="78" width="1400" height="1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="317" y="1" width="230" height="34"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Tapbulation Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="1" height="34"/>
+			</line>
+			<line>
+				<reportElement x="1399" y="1" width="1" height="34"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1399" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="36"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="0" width="30" height="20"/>
+				<textElement/>
+				<text><![CDATA[Roll]]></text>
+			</staticText>
+			<line>
+				<reportElement x="31" y="0" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="32" y="0" width="34" height="20"/>
+				<textElement/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bangla_1st]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="18" width="1400" height="1"/>
+			</line>
+			<line>
+				<reportElement x="139" y="1" width="1" height="36"/>
+			</line>
+			<line>
+				<reportElement x="140" y="0" width="1259" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="140" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="167" y="20" width="1" height="18"/>
+			</line>
+			<line>
+				<reportElement x="197" y="19" width="1" height="18"/>
+			</line>
+			<staticText>
+				<reportElement x="198" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="225" y="19" width="1" height="18"/>
+			</line>
+			<staticText>
+				<reportElement x="226" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="253" y="19" width="1" height="18"/>
+			</line>
+			<staticText>
+				<reportElement x="254" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="281" y="19" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement x="282" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Bangla_2nd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="308" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="309" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="336" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="337" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="364" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="365" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="392" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="393" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="420" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="421" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[English_1st]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="448" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="449" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="476" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="477" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="504" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="505" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="532" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="533" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="560" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="561" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[English_2nd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="561" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="588" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="589" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="616" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="617" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="644" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="645" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="672" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="673" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="700" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="701" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Math]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="701" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="728" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="729" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="756" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="757" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="784" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="785" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="812" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="813" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="840" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="841" y="0" width="66" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Religon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="841" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="868" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="869" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="896" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="897" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="924" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="925" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="952" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="953" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="980" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="981" y="0" width="84" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Social_Science]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="981" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1008" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1009" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1036" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1037" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1064" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1065" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1092" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1093" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1120" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1121" y="0" width="100" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Genaral_Science]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1121" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1148" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1149" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1176" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1177" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1204" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1205" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1232" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1233" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1260" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1261" y="0" width="111" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Agricalture]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1261" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[CT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1288" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1289" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[WR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1316" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1317" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[MCQ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1344" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1345" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[PR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1372" y="19" width="1" height="17"/>
+			</line>
+			<staticText>
+				<reportElement x="1373" y="20" width="27" height="17"/>
+				<textElement/>
+				<text><![CDATA[TT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1400" y="19" width="1" height="17"/>
+			</line>
+			<line>
+				<reportElement x="0" y="37" width="1400" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1399" y="0" width="1" height="17"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="139" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="1401" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="1" y="0" width="30" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_studentroll}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="31" y="0" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement x="32" y="0" width="107" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_studentname}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="281" y="0" width="1" height="20"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="167" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="168" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="197" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="198" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="225" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="226" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="253" y="0" width="1" height="18"/>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="254" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="282" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="308" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="309" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="336" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="337" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="364" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="365" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="392" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="393" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="420" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="421" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="448" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="449" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="476" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="477" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="504" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="505" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="532" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="533" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="560" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="561" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="588" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="589" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="616" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="617" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="644" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="645" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="672" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="673" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="700" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="701" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="728" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="729" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="756" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="757" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="784" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="785" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="812" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="813" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="840" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="841" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="868" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="869" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="896" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="897" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="924" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="925" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="952" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="953" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="980" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="981" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1008" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1009" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1036" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1037" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1064" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1065" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1092" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="1093" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1120" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1121" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_CT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1148" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1149" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_WR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1176" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1177" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_OB}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1204" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1205" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_PR}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1232" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1233" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1260" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1261" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1288" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1289" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1316" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1317" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1344" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1345" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1372" y="0" width="1" height="18"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="1373" y="0" width="27" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1400" y="0" width="1" height="18"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="1260" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1359" y="3" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="14" splitType="Stretch"/>
+	</summary>
+</jasperReport>
