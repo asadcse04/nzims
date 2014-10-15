@@ -9,7 +9,7 @@
 
         <title>Pencil</title>
 
-        <style type="text/css">
+         <style type="text/css">
             @import "/css/style.css";
             body {
                 background: no-repeat center center fixed;  
@@ -61,7 +61,42 @@
             .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
                 box-shadow: none!important;
             }
+            
+            .dashboard{
+                margin: 7px;
+                
+            }
+           
+            .dashboard:hover
+            {
+                margin: 7px;
+                box-shadow: 2px 2px 10px #888;
+                border-radius: 10px 10px 10px 10px;
+                opacity: .8;
+                transition: 2s;
+ 
+            }
+            .deshboardboder
+            {
+                border: none !important;
+            }
+            .textcolor:hover
+            {
+                color: #EE7F5C;
+            }
+            .School_Logo{
+          
+            }
+
+            .School_Logo:hover
+            {
+                width:120px;
+                height:100px;
+                transition:3s;
+                transform:rotateY(360deg);
+            }
         </style>
+    
     </h:head>
 
     <h:body>
@@ -69,36 +104,83 @@
         <h:form> 
 
             <p:growl autoUpdate="false" sticky="false" id="grw"/> 
-
-            <div style="width:100%; margin:0px auto;">
+            <center>
+              <div style="width:100%; margin:0px auto;">
                 <div style="width:100%; position:relative; height:80px; margin:0px auto;">
+
+                    <!-- All Menu_Item -->
                     <ui:include src="menuItem.xhtml"/>
+
+                    <!--marquee tag -->
                     <div style="width: 99%; color: green; margin:0px auto;">
                         <marquee behavior="alternate">
-                            <marquee> Welcome to #{SchoolFullName} &nbsp; &nbsp; #{SchoolAddress}
+                            <marquee>
+                                Welcome To #{SchoolFullName} &nbsp; &nbsp; &nbsp; &nbsp; #{SchoolAddress}
                             </marquee>
                         </marquee>
                     </div>
+
                 </div>
 
-                <div style="width:100%;">
+                <div style="width:100%; margin:0px auto; ">
+                    <center>
+
+                        <!-- School Name & Address-->
+                        <h1 style="margin: 0px; color: #2E90BD; text-shadow: 2px 2px black;">#{SchoolFullName}</h1>
+                        <h4 style="margin: 0px; margin-top: 6px;">#{SchoolAddress}</h4>
+
+                        <!-- School logo-->
+                        <div class="School_Logo" style=" width: 100px; height: 85px;  z-index:1;">
+                            <p:graphicImage value="/images/Header/#{SchoolLogo}"  alt="School Logo" style="width: 100px; height: 85px;"/>
+                        </div>
+
+                    </center>
+                </div>
+
+
+                <div style="width:500px; margin:90px auto; overflow:hidden;  padding: 40px;">
 
                     <center>
 
-                        <h1 style="margin: 0px; color: #2E90BD; text-shadow: 2px 2px black;">#{SchoolFullName}</h1>
+                        <!-- Student Registration -->
+                        <div Class="dashboard" style="width: 120px; height: 95px; padding: 10px; float: left;">
 
-                        <h4 style="margin: 0px; margin-top: 6px;">#{SchoolAddress}</h4>
-                        <div class="School_Logo" style=" width: 100px; height: 85px;  z-index:1;">
-
-                            <p:graphicImage value="/images/Header/#{SchoolLogo}"  alt="School Logo" style="width: 100px; height: 85px;"/> 
+                            <p:commandLink onclick="PF('studentRegistration').show();" id="title1" title="Student Registration" style="text-decoration: none !important;" styleClass="textcolor">
+                                <p:graphicImage height="75px;" value="/images/Dashboard_Img/Student.png"/><br/>
+                                <p:outputLabel value="Student" style="font-weight: bold;"/>
+                                <p:tooltip for="title1" style="font-size: 12px; color:#1B89C8;" showEffect="clip" hideEffect="explode"/>
+                            </p:commandLink>
 
                         </div>
+
+                        <!-- Teacher Registration -->
+                        <div Class="dashboard" style="width: 120px; height: 95px; padding: 10px; float: left;">
+
+                            <p:commandLink onclick="PF('teacherRegistration').show();" id="title2" title="Teacher Registration" style="text-decoration: none !important;" styleClass="textcolor">       
+                                <p:graphicImage height="75px;" value="/images/Dashboard_Img/Teacher.png"/><br/>
+                                <p:outputLabel value="Teacher" style="font-weight: bold;"/>
+                                <p:tooltip for="title2" style="font-size: 12px; color:#1B89C8;" showEffect="clip" hideEffect="explode"/>
+                            </p:commandLink>
+
+                        </div>
+
+                        <!-- Student Attendance -->
+                        <div Class="dashboard" style="width: 120px; height: 95px; padding: 10px; float: left;">
+
+                            <p:commandLink action="/DesktopPencil/Attendance/TakeAttendance/AttendencePage.xhtml" id="title3" title="Student Attendance" style="text-decoration: none !important;" styleClass="textcolor">
+                                <p:graphicImage height="75px;" value="/images/Dashboard_Img/Student-Attendence.png"/><br/>
+                                <p:outputLabel value="Attendance" style="font-weight: bold;"/>
+                                <p:tooltip for="title3" style="font-size: 12px; color:#1B89C8;" showEffect="clip" hideEffect="explode"/>
+                            </p:commandLink>
+
+                        </div>
+
                     </center>
+
                 </div>
-            
+
             </div>
-
-
+</center>
 
             <!-- ********************Main Menu bar End Here************************ -->   
 
@@ -109,12 +191,7 @@
                 <p:menuitem value="Delete" icon="ui-icon-close"/>
             </p:contextMenu> 
             <!-- ....................Bottom Dock Hover Toggle Menus.................... --> 
-            <p:dock>
-                <p:menuitem value="Student Registration" icon="/images/desktopTool/Student.png" onclick="PF('studentRegistration').show();"/>
-                <p:menuitem value="Teacher Registration" icon="/images/desktopTool/Teacher.png" onclick="PF('teacherRegistration').show();"/>
-                <p:menuitem value="Student Attendence " icon="/images/desktopTool/Student-Attendence.png" url="/DesktopPencil/Attendance/TakeAttendance/AttendencePage.xhtml" />
-
-            </p:dock> 
+           
             <!-- ...................Right Side Stack Toggle Menus..................... --> 
 
         </h:form>
@@ -261,6 +338,10 @@
 
     <p:dialog header="View Staff" draggable="true" widgetVar="staffView" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/Registration/Stuff/StaffView.xhtml"/> 
+    </p:dialog>
+    
+     <p:dialog header="View ID Card" draggable="true" widgetVar="idCard" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
+        <ui:include src="../Information/Student/IDCard/IDCard.xhtml"/> 
     </p:dialog>
     <!--*********************************Information View Student And Teacher End******************************************* -->
 
@@ -556,7 +637,7 @@
         <ui:include src="/FeeCollection/FeeCollectionStep1Impl.xhtml"/>          
     </p:dialog>
 
-    <p:dialog header="Collect Fee" height="700px" draggable="true" widgetVar="feecollection" width="100%" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
+   <p:dialog header="Collect Fee" height="700px" draggable="true" widgetVar="feecollection" width="100%" position="left top" maximizable="true" minimizable="true" showEffect="fade" hideEffect="fade" dynamic="true">
         <ui:include src="/FeeCollection/FeeCollectionStep2Impl.xhtml"/>          
     </p:dialog>
 
