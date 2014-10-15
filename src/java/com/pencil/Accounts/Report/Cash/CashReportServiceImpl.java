@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,16 +31,21 @@ public class CashReportServiceImpl implements CashReportService {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
-            prst = con.prepareStatement("select * from cash where TrnDate between ? and ? ");
+            prst = con.prepareStatement("select * from cash where TrnDate between ? and ?  and InstituteID=?");
 
             prst.setDate(1, new java.sql.Date(cashReport.getFromdate().getTime()));
             prst.setDate(2, new java.sql.Date(cashReport.getTodate().getTime()));
+            prst.setString(3, institueID);
             rs = prst.executeQuery();
 
             while (rs.next()) {
-                list.add(new CashReport(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4),rs.getDouble(5),rs.getInt(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14)));
+                list.add(new CashReport(rs.getInt(1), rs.getDate(3), rs.getString(4), rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15)));
 
             }
 
