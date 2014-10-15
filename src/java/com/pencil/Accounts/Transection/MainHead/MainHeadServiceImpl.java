@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,17 +31,20 @@ public class MainHeadServiceImpl implements Serializable,MainHeadService
         Connection con=o.getConnection();
         
         PreparedStatement  prst=null;
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
         try
         {
-            prst= con.prepareStatement("insert into transection_mainhead values(null,?,?,(select TrCatagoryID from transectioncatagory where TrCatagoryName=?),now(),null)");
-                 
-            prst.setString(1, mh.getMainHeadName());
+            prst= con.prepareStatement("insert into transection_mainhead values(null,?,?,?,(select TrCatagoryID from transectioncatagory where TrCatagoryName=? and InstituteID=?),now(),null)");
              
-            prst.setString(2, mh.getNote());
+            prst.setString(1, institueID);
+            prst.setString(2, mh.getMainHeadName());
+            prst.setString(3, mh.getNote());
+            prst.setString(4, mh.getTrCatagoryName());
+            prst.setString(5, institueID); 
             
-            prst.setString(3, mh.getTrCatagoryName());
-             
             prst.execute();
                
             prst.close();
@@ -83,9 +87,13 @@ public class MainHeadServiceImpl implements Serializable,MainHeadService
         
         PreparedStatement  prst=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try
         {        
-            prst= con.prepareStatement("update transection_mainhead set MainHeadName=?,Note=?,TrCatagoryID=(select TrCatagoryID from transectioncatagory where TrCatagoryName=?),CreateDate=now(),UserID=null where TrMainHeadID=?");
+            prst= con.prepareStatement("update transection_mainhead set MainHeadName=?,Note=?,TrCatagoryID=(select TrCatagoryID from transectioncatagory where TrCatagoryName=? and InstituteID=?),CreateDate=now(),UserID=null where TrMainHeadID=? and InstituteID=?");
       
             prst.setString(1,mhobj.getMainHeadName());
             
@@ -93,7 +101,11 @@ public class MainHeadServiceImpl implements Serializable,MainHeadService
             
             prst.setString(3,mhobj.getTrCatagoryName());
             
-            prst.setInt(4,mhobj.getTrMainHeadID());
+            prst.setString(4, institueID);
+            
+            prst.setInt(5,mhobj.getTrMainHeadID());
+            
+            prst.setString(6, institueID);
             
             prst.execute();
                
@@ -140,14 +152,20 @@ public class MainHeadServiceImpl implements Serializable,MainHeadService
         
         ResultSet rs=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         List<MainHead> main_head_list=new ArrayList<MainHead>();
         
         try
         {
-              prst = con.prepareStatement("select tmh.TrMainHeadID, tmh.MainHeadName, tmh.Note, tc.TrCatagoryName, tmh.CreateDate, tmh.UserID from transection_mainhead tmh, transectioncatagory tc"
-                    + " where tmh.TrCatagoryID = tc.TrCatagoryID");
+              prst = con.prepareStatement("select tmh.TrMainHeadID, tmh.MainHeadName, tmh.Note, tc.TrCatagoryName, tmh.CreateDate, tmh.UserID from transection_mainhead tmh, transectioncatagory tc\n" +
+                                           " where tmh.TrCatagoryID = tc.TrCatagoryID and tmh.InstituteID=tc.InstituteID and tmh.InstituteID=?");
             
-            rs = prst.executeQuery();
+            
+              prst.setString(1, institueID);
+              rs = prst.executeQuery();
             
             while(rs.next())
             {
@@ -196,13 +214,18 @@ public class MainHeadServiceImpl implements Serializable,MainHeadService
         
         ResultSet rs=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         List<String> catelist=new ArrayList<String>();
         
         try
         {
-            prst = con.prepareStatement("SELECT distinct TrCatagoryName from transectioncatagory where TrType=?");
+            prst = con.prepareStatement("SELECT distinct TrCatagoryName from transectioncatagory where TrType=? and InstituteID=?");
             
             prst.setString(1,trType);
+            prst.setString(2, institueID);
             
             rs = prst.executeQuery();
             
