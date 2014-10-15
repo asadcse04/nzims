@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="4324" pageHeight="595" orientation="Landscape" columnWidth="4284" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="3289" pageHeight="595" orientation="Landscape" columnWidth="3249" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="2124"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ClassConfigId" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -284,48 +284,44 @@ WHERE
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="1328" y="0" width="317" height="46"/>
-				<textElement>
-					<font size="36"/>
-				</textElement>
-				<text><![CDATA[XYZ Govt. College]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1428" y="45" width="215" height="33"/>
-				<textElement>
-					<font size="24"/>
-				</textElement>
-				<text><![CDATA[DHAKA]]></text>
-			</staticText>
-			<line>
-				<reportElement x="0" y="78" width="3779" height="1"/>
-			</line>
-		</band>
-	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="89" splitType="Stretch">
 			<staticText>
-				<reportElement x="1429" y="0" width="252" height="35"/>
+				<reportElement x="1645" y="56" width="252" height="33"/>
 				<textElement>
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[Student Stabulation]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="1186" y="48" width="215" height="33"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[DHAKA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1181" y="0" width="317" height="46"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[XYZ Govt. College]]></text>
+			</staticText>
 			<line>
-				<reportElement x="3778" y="0" width="1" height="35"/>
+				<reportElement x="3246" y="-3" width="1" height="92"/>
 			</line>
 			<line>
-				<reportElement x="1" y="0" width="1" height="35"/>
+				<reportElement x="-1" y="-3" width="1" height="92"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-3" width="3245" height="1"/>
 			</line>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="38" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="0" width="3779" height="1"/>
+				<reportElement x="0" y="0" width="3246" height="1"/>
 			</line>
 			<line>
 				<reportElement x="0" y="0" width="1" height="36"/>
@@ -349,7 +345,7 @@ WHERE
 				<text><![CDATA[Bangla_1st]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="18" width="3779" height="1"/>
+				<reportElement x="0" y="18" width="3246" height="1"/>
 			</line>
 			<line>
 				<reportElement x="139" y="1" width="1" height="36"/>
@@ -384,7 +380,7 @@ WHERE
 			<staticText>
 				<reportElement x="226" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="253" y="19" width="1" height="18"/>
@@ -392,20 +388,20 @@ WHERE
 			<staticText>
 				<reportElement x="254" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="281" y="19" width="1" height="19"/>
 			</line>
 			<staticText>
-				<reportElement x="282" y="0" width="66" height="17"/>
+				<reportElement x="266" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Bangla_2nd]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="283" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="308" y="19" width="1" height="17"/>
@@ -413,7 +409,7 @@ WHERE
 			<staticText>
 				<reportElement x="309" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="336" y="19" width="1" height="17"/>
@@ -421,7 +417,7 @@ WHERE
 			<staticText>
 				<reportElement x="337" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="364" y="19" width="1" height="17"/>
@@ -429,7 +425,7 @@ WHERE
 			<staticText>
 				<reportElement x="365" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="392" y="19" width="1" height="17"/>
@@ -437,20 +433,20 @@ WHERE
 			<staticText>
 				<reportElement x="393" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="420" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="421" y="0" width="66" height="17"/>
+				<reportElement x="375" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[English_1st]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="421" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="448" y="19" width="1" height="17"/>
@@ -458,7 +454,7 @@ WHERE
 			<staticText>
 				<reportElement x="449" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="476" y="19" width="1" height="17"/>
@@ -466,7 +462,7 @@ WHERE
 			<staticText>
 				<reportElement x="477" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="504" y="19" width="1" height="17"/>
@@ -474,7 +470,7 @@ WHERE
 			<staticText>
 				<reportElement x="505" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="532" y="19" width="1" height="17"/>
@@ -482,20 +478,20 @@ WHERE
 			<staticText>
 				<reportElement x="533" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="560" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="561" y="0" width="66" height="17"/>
+				<reportElement x="485" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[English_2nd]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="561" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="588" y="19" width="1" height="17"/>
@@ -503,7 +499,7 @@ WHERE
 			<staticText>
 				<reportElement x="589" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="616" y="19" width="1" height="17"/>
@@ -511,7 +507,7 @@ WHERE
 			<staticText>
 				<reportElement x="617" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="644" y="19" width="1" height="17"/>
@@ -519,7 +515,7 @@ WHERE
 			<staticText>
 				<reportElement x="645" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="672" y="19" width="1" height="17"/>
@@ -527,13 +523,13 @@ WHERE
 			<staticText>
 				<reportElement x="673" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="700" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="701" y="0" width="66" height="17"/>
+				<reportElement x="606" y="1" width="67" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Math]]></text>
 			</staticText>
@@ -564,7 +560,7 @@ WHERE
 			<staticText>
 				<reportElement x="785" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="812" y="19" width="1" height="17"/>
@@ -572,20 +568,20 @@ WHERE
 			<staticText>
 				<reportElement x="813" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="840" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="841" y="0" width="66" height="17"/>
+				<reportElement x="718" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Religon]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="841" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="868" y="19" width="1" height="17"/>
@@ -593,7 +589,7 @@ WHERE
 			<staticText>
 				<reportElement x="869" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="896" y="19" width="1" height="17"/>
@@ -601,7 +597,7 @@ WHERE
 			<staticText>
 				<reportElement x="897" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="924" y="19" width="1" height="17"/>
@@ -609,7 +605,7 @@ WHERE
 			<staticText>
 				<reportElement x="925" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="952" y="19" width="1" height="17"/>
@@ -617,20 +613,20 @@ WHERE
 			<staticText>
 				<reportElement x="953" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="980" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="981" y="0" width="66" height="17"/>
+				<reportElement x="2981" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Geography]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="981" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1008" y="19" width="1" height="17"/>
@@ -638,7 +634,7 @@ WHERE
 			<staticText>
 				<reportElement x="1009" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1036" y="19" width="1" height="17"/>
@@ -646,7 +642,7 @@ WHERE
 			<staticText>
 				<reportElement x="1037" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1064" y="19" width="1" height="17"/>
@@ -654,7 +650,7 @@ WHERE
 			<staticText>
 				<reportElement x="1065" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1092" y="19" width="1" height="17"/>
@@ -662,20 +658,20 @@ WHERE
 			<staticText>
 				<reportElement x="1093" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1120" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="1121" y="0" width="66" height="17"/>
+				<reportElement x="834" y="0" width="66" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Physics]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1121" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1148" y="19" width="1" height="17"/>
@@ -683,7 +679,7 @@ WHERE
 			<staticText>
 				<reportElement x="1149" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1176" y="19" width="1" height="17"/>
@@ -691,7 +687,7 @@ WHERE
 			<staticText>
 				<reportElement x="1177" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1204" y="19" width="1" height="17"/>
@@ -699,7 +695,7 @@ WHERE
 			<staticText>
 				<reportElement x="1205" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1232" y="19" width="1" height="17"/>
@@ -707,20 +703,20 @@ WHERE
 			<staticText>
 				<reportElement x="1233" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1260" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="1261" y="0" width="111" height="17"/>
+				<reportElement x="965" y="0" width="68" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Chymistry]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1261" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1288" y="19" width="1" height="17"/>
@@ -728,7 +724,7 @@ WHERE
 			<staticText>
 				<reportElement x="1289" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1316" y="19" width="1" height="17"/>
@@ -736,7 +732,7 @@ WHERE
 			<staticText>
 				<reportElement x="1317" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1344" y="19" width="1" height="17"/>
@@ -744,7 +740,7 @@ WHERE
 			<staticText>
 				<reportElement x="1345" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1372" y="19" width="1" height="17"/>
@@ -752,20 +748,20 @@ WHERE
 			<staticText>
 				<reportElement x="1373" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1400" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="1401" y="0" width="112" height="17"/>
+				<reportElement x="1109" y="0" width="64" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Biology]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1401" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1428" y="19" width="1" height="17"/>
@@ -773,7 +769,7 @@ WHERE
 			<staticText>
 				<reportElement x="1429" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1456" y="19" width="1" height="17"/>
@@ -781,7 +777,7 @@ WHERE
 			<staticText>
 				<reportElement x="1457" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1484" y="19" width="1" height="17"/>
@@ -789,7 +785,7 @@ WHERE
 			<staticText>
 				<reportElement x="1485" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1512" y="19" width="1" height="17"/>
@@ -797,20 +793,20 @@ WHERE
 			<staticText>
 				<reportElement x="1513" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1540" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="1541" y="0" width="128" height="17"/>
+				<reportElement x="1377" y="0" width="99" height="17"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Bangladesh Global Study]]></text>
+				<text><![CDATA[Bangladesh Study]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1541" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1568" y="19" width="1" height="17"/>
@@ -818,7 +814,7 @@ WHERE
 			<staticText>
 				<reportElement x="1569" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1596" y="19" width="1" height="17"/>
@@ -826,7 +822,7 @@ WHERE
 			<staticText>
 				<reportElement x="1597" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1624" y="19" width="1" height="17"/>
@@ -834,7 +830,7 @@ WHERE
 			<staticText>
 				<reportElement x="1625" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1652" y="19" width="1" height="17"/>
@@ -842,23 +838,23 @@ WHERE
 			<staticText>
 				<reportElement x="1653" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1680" y="19" width="1" height="18"/>
 			</line>
 			<line>
-				<reportElement x="0" y="37" width="3779" height="1"/>
+				<reportElement x="0" y="37" width="3246" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="1681" y="0" width="128" height="17"/>
+				<reportElement x="1498" y="0" width="83" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Primary Science]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1681" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1708" y="19" width="1" height="17"/>
@@ -866,7 +862,7 @@ WHERE
 			<staticText>
 				<reportElement x="1709" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1736" y="19" width="1" height="17"/>
@@ -874,7 +870,7 @@ WHERE
 			<staticText>
 				<reportElement x="1737" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1764" y="19" width="1" height="17"/>
@@ -882,7 +878,7 @@ WHERE
 			<staticText>
 				<reportElement x="1765" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1792" y="19" width="1" height="17"/>
@@ -890,20 +886,20 @@ WHERE
 			<staticText>
 				<reportElement x="1793" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1820" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="1821" y="0" width="128" height="17"/>
+				<reportElement x="1602" y="0" width="85" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[General Science]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1821" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1848" y="19" width="1" height="17"/>
@@ -911,7 +907,7 @@ WHERE
 			<staticText>
 				<reportElement x="1849" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1876" y="19" width="1" height="17"/>
@@ -919,7 +915,7 @@ WHERE
 			<staticText>
 				<reportElement x="1877" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1904" y="19" width="1" height="17"/>
@@ -927,7 +923,7 @@ WHERE
 			<staticText>
 				<reportElement x="1905" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1932" y="19" width="1" height="17"/>
@@ -935,20 +931,20 @@ WHERE
 			<staticText>
 				<reportElement x="1933" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1960" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="1961" y="0" width="128" height="17"/>
+				<reportElement x="1720" y="1" width="114" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Home Economics]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1961" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1987" y="19" width="1" height="17"/>
@@ -956,7 +952,7 @@ WHERE
 			<staticText>
 				<reportElement x="1988" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2015" y="19" width="1" height="17"/>
@@ -964,7 +960,7 @@ WHERE
 			<staticText>
 				<reportElement x="2016" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2043" y="19" width="1" height="17"/>
@@ -972,7 +968,7 @@ WHERE
 			<staticText>
 				<reportElement x="2044" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2071" y="19" width="1" height="17"/>
@@ -980,20 +976,20 @@ WHERE
 			<staticText>
 				<reportElement x="2072" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2099" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2100" y="0" width="128" height="17"/>
+				<reportElement x="1859" y="1" width="73" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[ICT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2100" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2127" y="19" width="1" height="17"/>
@@ -1001,7 +997,7 @@ WHERE
 			<staticText>
 				<reportElement x="2128" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2155" y="19" width="1" height="17"/>
@@ -1009,7 +1005,7 @@ WHERE
 			<staticText>
 				<reportElement x="2156" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2183" y="19" width="1" height="17"/>
@@ -1017,7 +1013,7 @@ WHERE
 			<staticText>
 				<reportElement x="2184" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2211" y="19" width="1" height="17"/>
@@ -1025,20 +1021,20 @@ WHERE
 			<staticText>
 				<reportElement x="2212" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2239" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2240" y="0" width="128" height="17"/>
+				<reportElement x="1996" y="0" width="104" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Physical Education]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2240" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2266" y="19" width="1" height="17"/>
@@ -1046,7 +1042,7 @@ WHERE
 			<staticText>
 				<reportElement x="2267" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2294" y="19" width="1" height="17"/>
@@ -1054,7 +1050,7 @@ WHERE
 			<staticText>
 				<reportElement x="2295" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2322" y="19" width="1" height="17"/>
@@ -1062,7 +1058,7 @@ WHERE
 			<staticText>
 				<reportElement x="2323" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2350" y="19" width="1" height="17"/>
@@ -1070,20 +1066,20 @@ WHERE
 			<staticText>
 				<reportElement x="2351" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2378" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2379" y="0" width="128" height="17"/>
+				<reportElement x="2138" y="0" width="101" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Fine Arts]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2379" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2406" y="19" width="1" height="17"/>
@@ -1091,7 +1087,7 @@ WHERE
 			<staticText>
 				<reportElement x="2407" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2434" y="19" width="1" height="17"/>
@@ -1099,7 +1095,7 @@ WHERE
 			<staticText>
 				<reportElement x="2435" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2462" y="19" width="1" height="17"/>
@@ -1107,7 +1103,7 @@ WHERE
 			<staticText>
 				<reportElement x="2463" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2490" y="19" width="1" height="17"/>
@@ -1115,13 +1111,13 @@ WHERE
 			<staticText>
 				<reportElement x="2491" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2518" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2519" y="0" width="128" height="17"/>
+				<reportElement x="2278" y="0" width="100" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Work Education]]></text>
 			</staticText>
@@ -1152,7 +1148,7 @@ WHERE
 			<staticText>
 				<reportElement x="2603" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2630" y="19" width="1" height="17"/>
@@ -1160,20 +1156,20 @@ WHERE
 			<staticText>
 				<reportElement x="2631" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2658" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2659" y="0" width="128" height="17"/>
+				<reportElement x="2418" y="0" width="72" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[History]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2659" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2686" y="19" width="1" height="17"/>
@@ -1181,7 +1177,7 @@ WHERE
 			<staticText>
 				<reportElement x="2687" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2714" y="19" width="1" height="17"/>
@@ -1189,7 +1185,7 @@ WHERE
 			<staticText>
 				<reportElement x="2715" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2742" y="19" width="1" height="17"/>
@@ -1197,7 +1193,7 @@ WHERE
 			<staticText>
 				<reportElement x="2743" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2770" y="19" width="1" height="17"/>
@@ -1205,20 +1201,20 @@ WHERE
 			<staticText>
 				<reportElement x="2771" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2798" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2799" y="0" width="128" height="17"/>
+				<reportElement x="2536" y="1" width="68" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Cvics]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2799" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2826" y="19" width="1" height="17"/>
@@ -1226,7 +1222,7 @@ WHERE
 			<staticText>
 				<reportElement x="2827" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2854" y="19" width="1" height="17"/>
@@ -1234,7 +1230,7 @@ WHERE
 			<staticText>
 				<reportElement x="2855" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2882" y="19" width="1" height="17"/>
@@ -1242,7 +1238,7 @@ WHERE
 			<staticText>
 				<reportElement x="2883" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2910" y="19" width="1" height="17"/>
@@ -1250,20 +1246,20 @@ WHERE
 			<staticText>
 				<reportElement x="2911" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2938" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="2939" y="0" width="128" height="17"/>
+				<reportElement x="2638" y="1" width="90" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Accounting]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2939" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2966" y="19" width="1" height="17"/>
@@ -1271,7 +1267,7 @@ WHERE
 			<staticText>
 				<reportElement x="2967" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2994" y="19" width="1" height="17"/>
@@ -1279,7 +1275,7 @@ WHERE
 			<staticText>
 				<reportElement x="2995" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3022" y="19" width="1" height="17"/>
@@ -1287,7 +1283,7 @@ WHERE
 			<staticText>
 				<reportElement x="3023" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3050" y="19" width="1" height="17"/>
@@ -1295,20 +1291,20 @@ WHERE
 			<staticText>
 				<reportElement x="3051" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3078" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="3079" y="0" width="128" height="17"/>
+				<reportElement x="2744" y="0" width="109" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Finnance and Banking]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3079" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3106" y="19" width="1" height="17"/>
@@ -1316,7 +1312,7 @@ WHERE
 			<staticText>
 				<reportElement x="3107" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<text><![CDATA[CT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3134" y="19" width="1" height="17"/>
@@ -1324,7 +1320,7 @@ WHERE
 			<staticText>
 				<reportElement x="3135" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[MCQ]]></text>
+				<text><![CDATA[WR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3162" y="19" width="1" height="17"/>
@@ -1332,7 +1328,7 @@ WHERE
 			<staticText>
 				<reportElement x="3163" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[PR]]></text>
+				<text><![CDATA[MCQ]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3190" y="19" width="1" height="17"/>
@@ -1340,197 +1336,40 @@ WHERE
 			<staticText>
 				<reportElement x="3191" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[PR]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3218" y="19" width="1" height="18"/>
 			</line>
 			<staticText>
-				<reportElement x="3219" y="0" width="128" height="17"/>
+				<reportElement x="2868" y="0" width="87" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Bussiness Entrep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="3219" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[CT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3246" y="19" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="3247" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[WR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3274" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3275" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[MCQ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3302" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3303" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[PR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3330" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3331" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[TT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3358" y="19" width="1" height="18"/>
-			</line>
-			<staticText>
-				<reportElement x="3359" y="0" width="128" height="17"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Higher Math]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3359" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[CT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3386" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3387" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[WR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3414" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3415" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[MCQ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3442" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3443" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[PR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3470" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3471" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[TT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3498" y="19" width="1" height="18"/>
-			</line>
-			<staticText>
-				<reportElement x="3499" y="0" width="128" height="17"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Computer]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3499" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[CT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3526" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3527" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[WR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3554" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3555" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[MCQ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3582" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3583" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[PR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3610" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3611" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[TT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3638" y="19" width="1" height="18"/>
-			</line>
-			<staticText>
-				<reportElement x="3639" y="0" width="128" height="17"/>
+				<reportElement x="3113" y="0" width="107" height="17"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Home Science]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="3639" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[CT]]></text>
-			</staticText>
 			<line>
-				<reportElement x="3666" y="19" width="1" height="17"/>
+				<reportElement x="0" y="37" width="3246" height="1"/>
+			</line>
+			<line>
+				<reportElement x="3246" y="1" width="1" height="17"/>
 			</line>
 			<staticText>
-				<reportElement x="3667" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[WR]]></text>
+				<reportElement x="1244" y="0" width="101" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Higher Math]]></text>
 			</staticText>
-			<line>
-				<reportElement x="3694" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3695" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[MCQ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3722" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3723" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[PR]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3750" y="19" width="1" height="17"/>
-			</line>
-			<staticText>
-				<reportElement x="3751" y="20" width="27" height="17"/>
-				<textElement/>
-				<text><![CDATA[TT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="3778" y="19" width="1" height="18"/>
-			</line>
-			<line>
-				<reportElement x="0" y="37" width="3779" height="1"/>
-			</line>
-			<line>
-				<reportElement x="3778" y="0" width="1" height="17"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -1542,7 +1381,7 @@ WHERE
 				<reportElement x="139" y="0" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="0" y="19" width="3779" height="1"/>
+				<reportElement x="0" y="19" width="3246" height="1"/>
 			</line>
 			<textField>
 				<reportElement x="1" y="0" width="30" height="20"/>
@@ -1587,7 +1426,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="226" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="253" y="0" width="1" height="18"/>
@@ -1595,12 +1434,12 @@ WHERE
 			<textField>
 				<reportElement x="254" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_1st_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_CT}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="282" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="308" y="0" width="1" height="18"/>
@@ -1608,7 +1447,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="309" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="336" y="0" width="1" height="18"/>
@@ -1616,7 +1455,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="337" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="364" y="0" width="1" height="18"/>
@@ -1624,7 +1463,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="365" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="392" y="0" width="1" height="18"/>
@@ -1632,7 +1471,7 @@ WHERE
 			<textField>
 				<reportElement x="393" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bangla_2nd_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="420" y="0" width="1" height="18"/>
@@ -1640,7 +1479,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="421" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="448" y="0" width="1" height="18"/>
@@ -1648,7 +1487,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="449" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="476" y="0" width="1" height="18"/>
@@ -1656,7 +1495,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="477" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="504" y="0" width="1" height="18"/>
@@ -1664,7 +1503,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="505" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="532" y="0" width="1" height="18"/>
@@ -1672,7 +1511,7 @@ WHERE
 			<textField>
 				<reportElement x="533" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_1st_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="560" y="0" width="1" height="18"/>
@@ -1680,7 +1519,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="561" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="588" y="0" width="1" height="18"/>
@@ -1688,7 +1527,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="589" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="616" y="0" width="1" height="18"/>
@@ -1696,7 +1535,7 @@ WHERE
 			<textField>
 				<reportElement x="617" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="644" y="0" width="1" height="18"/>
@@ -1704,7 +1543,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="645" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="672" y="0" width="1" height="18"/>
@@ -1712,7 +1551,7 @@ WHERE
 			<textField>
 				<reportElement x="673" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_English_2nd_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Math_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="700" y="0" width="1" height="18"/>
@@ -1720,7 +1559,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="701" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Math_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="728" y="0" width="1" height="18"/>
@@ -1728,7 +1567,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="729" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Math_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="756" y="0" width="1" height="18"/>
@@ -1736,7 +1575,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="757" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Math_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="784" y="0" width="1" height="18"/>
@@ -1744,7 +1583,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="785" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="812" y="0" width="1" height="18"/>
@@ -1752,7 +1591,7 @@ WHERE
 			<textField>
 				<reportElement x="813" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Math_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="840" y="0" width="1" height="18"/>
@@ -1760,7 +1599,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="841" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="868" y="0" width="1" height="18"/>
@@ -1768,7 +1607,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="869" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="896" y="0" width="1" height="18"/>
@@ -1776,7 +1615,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="897" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="924" y="0" width="1" height="18"/>
@@ -1784,7 +1623,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="925" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="952" y="0" width="1" height="18"/>
@@ -1792,7 +1631,7 @@ WHERE
 			<textField>
 				<reportElement x="953" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Religon_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="980" y="0" width="1" height="18"/>
@@ -1800,7 +1639,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="981" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1008" y="0" width="1" height="18"/>
@@ -1808,7 +1647,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1009" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1039" y="0" width="1" height="18"/>
@@ -1816,7 +1655,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1037" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1064" y="0" width="1" height="18"/>
@@ -1824,7 +1663,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1065" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1092" y="0" width="1" height="18"/>
@@ -1832,7 +1671,7 @@ WHERE
 			<textField>
 				<reportElement x="1093" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1120" y="0" width="1" height="18"/>
@@ -1840,7 +1679,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1121" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1148" y="0" width="1" height="18"/>
@@ -1848,7 +1687,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1149" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1176" y="0" width="1" height="18"/>
@@ -1856,7 +1695,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1177" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1204" y="0" width="1" height="18"/>
@@ -1864,7 +1703,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1205" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1232" y="0" width="1" height="18"/>
@@ -1872,7 +1711,7 @@ WHERE
 			<textField>
 				<reportElement x="1233" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physics_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1260" y="0" width="1" height="18"/>
@@ -1880,7 +1719,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1262" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1288" y="0" width="1" height="18"/>
@@ -1888,7 +1727,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1289" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1316" y="0" width="1" height="18"/>
@@ -1896,7 +1735,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1317" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1344" y="0" width="1" height="18"/>
@@ -1904,7 +1743,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1345" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1372" y="0" width="1" height="18"/>
@@ -1912,7 +1751,7 @@ WHERE
 			<textField>
 				<reportElement x="1373" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Chemistry_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1400" y="0" width="1" height="18"/>
@@ -1920,7 +1759,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1401" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1428" y="0" width="1" height="18"/>
@@ -1928,7 +1767,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1429" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1456" y="0" width="1" height="18"/>
@@ -1936,7 +1775,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1457" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1484" y="0" width="1" height="18"/>
@@ -1944,7 +1783,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1485" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1512" y="0" width="1" height="18"/>
@@ -1952,7 +1791,7 @@ WHERE
 			<textField>
 				<reportElement x="1513" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bilogy_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1540" y="0" width="1" height="18"/>
@@ -1960,7 +1799,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1541" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1568" y="0" width="1" height="18"/>
@@ -1968,7 +1807,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1569" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1596" y="0" width="1" height="18"/>
@@ -1976,7 +1815,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1597" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1624" y="0" width="1" height="18"/>
@@ -1984,7 +1823,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1625" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1652" y="0" width="1" height="20"/>
@@ -1992,7 +1831,7 @@ WHERE
 			<textField>
 				<reportElement x="1653" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1680" y="0" width="1" height="20"/>
@@ -2000,7 +1839,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1681" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1708" y="0" width="1" height="18"/>
@@ -2008,7 +1847,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1709" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1736" y="0" width="1" height="18"/>
@@ -2016,7 +1855,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1737" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1764" y="0" width="1" height="18"/>
@@ -2024,7 +1863,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1765" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1792" y="0" width="1" height="18"/>
@@ -2032,7 +1871,7 @@ WHERE
 			<textField>
 				<reportElement x="1793" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Primary_Science_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1820" y="0" width="1" height="18"/>
@@ -2040,7 +1879,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1821" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1848" y="0" width="1" height="18"/>
@@ -2048,7 +1887,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1849" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1876" y="0" width="1" height="18"/>
@@ -2056,7 +1895,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1877" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1904" y="0" width="1" height="18"/>
@@ -2064,7 +1903,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1905" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1932" y="0" width="1" height="18"/>
@@ -2072,7 +1911,7 @@ WHERE
 			<textField>
 				<reportElement x="1933" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_General_Science_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1960" y="0" width="1" height="18"/>
@@ -2080,7 +1919,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1961" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1988" y="0" width="1" height="18"/>
@@ -2088,7 +1927,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="1989" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2016" y="0" width="1" height="18"/>
@@ -2096,7 +1935,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2017" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2044" y="0" width="1" height="18"/>
@@ -2104,7 +1943,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2045" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2072" y="0" width="1" height="18"/>
@@ -2112,7 +1951,7 @@ WHERE
 			<textField>
 				<reportElement x="2073" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Economics_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2100" y="0" width="1" height="18"/>
@@ -2120,7 +1959,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2101" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2128" y="0" width="1" height="18"/>
@@ -2128,7 +1967,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2129" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2156" y="0" width="1" height="18"/>
@@ -2136,7 +1975,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2157" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2184" y="0" width="1" height="18"/>
@@ -2144,7 +1983,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2185" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2212" y="0" width="1" height="18"/>
@@ -2152,7 +1991,7 @@ WHERE
 			<textField>
 				<reportElement x="2213" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_I_C_T_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2240" y="0" width="1" height="18"/>
@@ -2160,7 +1999,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2241" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2268" y="0" width="1" height="18"/>
@@ -2168,7 +2007,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2269" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2296" y="0" width="1" height="18"/>
@@ -2176,7 +2015,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2297" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2324" y="0" width="1" height="18"/>
@@ -2184,7 +2023,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2325" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2352" y="0" width="1" height="18"/>
@@ -2192,7 +2031,7 @@ WHERE
 			<textField>
 				<reportElement x="2353" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Physical_Education_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2380" y="0" width="1" height="18"/>
@@ -2200,7 +2039,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2381" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2408" y="0" width="1" height="18"/>
@@ -2208,7 +2047,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2409" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_History_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2436" y="0" width="1" height="18"/>
@@ -2216,7 +2055,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2437" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_History_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2464" y="0" width="1" height="18"/>
@@ -2224,7 +2063,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2465" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_History_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2492" y="0" width="1" height="18"/>
@@ -2232,7 +2071,7 @@ WHERE
 			<textField>
 				<reportElement x="2493" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Fine_Arts_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_History_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2520" y="0" width="1" height="18"/>
@@ -2240,7 +2079,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2521" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2548" y="0" width="1" height="18"/>
@@ -2248,7 +2087,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2549" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2576" y="0" width="1" height="18"/>
@@ -2256,7 +2095,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2577" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2604" y="0" width="1" height="18"/>
@@ -2264,7 +2103,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2605" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2632" y="0" width="1" height="18"/>
@@ -2272,7 +2111,7 @@ WHERE
 			<textField>
 				<reportElement x="2633" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Work_Education_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2660" y="0" width="1" height="18"/>
@@ -2280,7 +2119,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2661" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_History_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2688" y="0" width="1" height="18"/>
@@ -2288,7 +2127,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2689" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_History_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2716" y="0" width="1" height="18"/>
@@ -2296,7 +2135,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2717" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_History_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2744" y="0" width="1" height="18"/>
@@ -2304,7 +2143,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2745" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_History_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2772" y="0" width="1" height="18"/>
@@ -2312,7 +2151,7 @@ WHERE
 			<textField>
 				<reportElement x="2773" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_History_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2800" y="0" width="1" height="18"/>
@@ -2320,7 +2159,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2801" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2828" y="0" width="1" height="18"/>
@@ -2328,7 +2167,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2829" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2856" y="0" width="1" height="18"/>
@@ -2336,7 +2175,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2857" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2884" y="0" width="1" height="18"/>
@@ -2344,7 +2183,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2885" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2912" y="0" width="1" height="18"/>
@@ -2352,7 +2191,7 @@ WHERE
 			<textField>
 				<reportElement x="2913" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Civics_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2940" y="0" width="1" height="18"/>
@@ -2360,7 +2199,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2941" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2968" y="0" width="1" height="18"/>
@@ -2368,7 +2207,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2969" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2996" y="0" width="1" height="18"/>
@@ -2376,7 +2215,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="2997" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3024" y="0" width="1" height="18"/>
@@ -2384,7 +2223,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="3025" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3052" y="0" width="1" height="18"/>
@@ -2392,7 +2231,7 @@ WHERE
 			<textField>
 				<reportElement x="3053" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Accounting_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3080" y="0" width="1" height="18"/>
@@ -2400,7 +2239,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="3081" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_CT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Geography_total}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3108" y="0" width="1" height="18"/>
@@ -2408,7 +2247,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="3109" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_WR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_CT}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3136" y="0" width="1" height="18"/>
@@ -2416,7 +2255,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="3137" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_OB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_WR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3164" y="0" width="1" height="18"/>
@@ -2424,7 +2263,7 @@ WHERE
 			<textField isBlankWhenNull="true">
 				<reportElement x="3165" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_PR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_OB}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3192" y="0" width="1" height="18"/>
@@ -2432,168 +2271,19 @@ WHERE
 			<textField>
 				<reportElement x="3193" y="0" width="27" height="17"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Finnance_Banking_total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_PR}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="3220" y="0" width="1" height="18"/>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="3221" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_CT}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3248" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3249" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_WR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3276" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3277" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_OB}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3304" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3305" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_PR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3332" y="0" width="1" height="18"/>
-			</line>
-			<textField>
-				<reportElement x="3333" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Bussiness_Entrep_total}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3360" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3361" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_CT}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3388" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3389" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_WR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3416" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3417" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_OB}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3444" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3445" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_PR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3472" y="0" width="1" height="18"/>
-			</line>
-			<textField>
-				<reportElement x="3473" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Higher_Mathe_total}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3500" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3501" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Computer_CT}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3528" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3529" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Computer_WR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3556" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3557" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Computer_OB}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3584" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3585" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Computer_PR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3612" y="0" width="1" height="18"/>
-			</line>
-			<textField>
-				<reportElement x="3613" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Computer_total}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3640" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3641" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_CT}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3668" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3669" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_WR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3696" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3697" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_OB}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3724" y="0" width="1" height="18"/>
-			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="3725" y="0" width="27" height="17"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_PR}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="3752" y="0" width="1" height="18"/>
-			</line>
-			<textField>
-				<reportElement x="3753" y="0" width="27" height="17"/>
+				<reportElement x="3221" y="0" width="25" height="17"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{student_tabulation_Home_Science_total}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="3246" y="0" width="1" height="18"/>
+			</line>
 			<line>
 				<reportElement x="3778" y="0" width="1" height="19"/>
 			</line>
@@ -2603,25 +2293,25 @@ WHERE
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="30" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="281" y="10" width="100" height="20"/>
+				<reportElement x="281" y="2" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="3449" y="5" width="80" height="20"/>
+				<reportElement x="2966" y="1" width="80" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="3529" y="5" width="40" height="20"/>
+				<reportElement x="3046" y="0" width="40" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="2" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -179,7 +179,7 @@ WHERE
 			<staticText>
 				<reportElement x="226" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="253" y="19" width="1" height="18"/>
@@ -216,7 +216,7 @@ WHERE
 			<staticText>
 				<reportElement x="337" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="364" y="19" width="1" height="17"/>
@@ -253,7 +253,7 @@ WHERE
 			<staticText>
 				<reportElement x="449" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="476" y="19" width="1" height="17"/>
@@ -290,7 +290,7 @@ WHERE
 			<staticText>
 				<reportElement x="561" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="588" y="19" width="1" height="17"/>
@@ -322,7 +322,7 @@ WHERE
 			<staticText>
 				<reportElement x="673" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="700" y="19" width="1" height="17"/>
@@ -330,7 +330,7 @@ WHERE
 			<staticText>
 				<reportElement x="597" y="0" width="92" height="17"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[General_Science]]></text>
+				<text><![CDATA[General Science]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="701" y="20" width="27" height="17"/>
@@ -359,7 +359,7 @@ WHERE
 			<staticText>
 				<reportElement x="785" y="20" width="27" height="17"/>
 				<textElement/>
-				<text><![CDATA[TT]]></text>
+				<text><![CDATA[TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="812" y="19" width="1" height="17"/>
@@ -367,7 +367,7 @@ WHERE
 			<staticText>
 				<reportElement x="710" y="0" width="93" height="17"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[Bangladesh Stusy]]></text>
+				<text><![CDATA[Bangladesh Study]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="37" width="812" height="1"/>
