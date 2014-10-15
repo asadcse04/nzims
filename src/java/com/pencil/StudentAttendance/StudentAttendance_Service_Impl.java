@@ -250,6 +250,8 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
        
        
        try{
+           con.setAutoCommit(false);
+           
            prst=con.prepareStatement("delete from student_attendence where AttendanceDate=? and InstituteID=? and ClassConfigID=?");
            prst.setDate(1, new java.sql.Date(ad.getTime()));
            prst.setString(2, institueID);
@@ -311,6 +313,8 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
             
             prst.execute();
             
+            con.commit();
+            
             if(!sms_with_attendance)
             {
                 if (std_list_id.length() > 0)
@@ -340,6 +344,21 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
                 if(stmt!=null)
                 {
                     stmt.close();
+                }
+                
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                
+                 if(rs!=null)
+                {
+                    rs.close();
+                }
+                 
+                  if(con!=null)
+                {
+                    con.close();
                 }
             }
             catch(SQLException ex)
