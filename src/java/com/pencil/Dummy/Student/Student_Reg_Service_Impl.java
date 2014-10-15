@@ -165,19 +165,16 @@ public class Student_Reg_Service_Impl implements Serializable, Student_Reg_Servi
 
             prst.execute();
             
-             prst=con.prepareStatement("insert into student_academic_info (StudentID,StudentRoll,Ac_Year,ClassID,DeptID,SectionID,ShiftID,InstituteID,UserID)values(?,?,?,(select ClassID from class where ClassName=?),(select DepartmentID from department where DepartmentName=?),"
-                       + "(select SectionID from section where SectionName=? and InstituteID=?),(select ShiftID from shift where ShiftName=?),?,?)");
+             prst=con.prepareStatement("insert into student_academic_info (StudentID,Ac_Year,StudentRoll,ClassConfigID,DeptID,DepartmentName,InstituteID,UserID)values(?,?,?,?,(select DepartmentID from department where DepartmentName=?),?,?,?)");
 
                prst.setString(1, stdReg.getStudentID() + "-" + instituteID);
-               prst.setInt(2,stdReg.getStudentRoll());
-               prst.setString(3, String.valueOf(stdReg.getAcyr()));
-               prst.setString(4, stdReg.getClassName());
+               prst.setString(2, String.valueOf(stdReg.getAcyr()));
+               prst.setInt(3,stdReg.getStudentRoll());
+               prst.setInt(4, scCnf_ID);
                prst.setString(5, stdReg.getDeptName());
-               prst.setString(6, stdReg.getSectionName());
+               prst.setString(6, stdReg.getDeptName());
                prst.setString(7, instituteID);
-               prst.setString(8, stdReg.getShiftName());
-               prst.setString(9, instituteID);
-               prst.setString(10, userID);
+               prst.setString(8, userID);
            
              prst.execute();
                
