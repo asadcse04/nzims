@@ -365,6 +365,21 @@ WHERE
 			<line>
 				<reportElement x="0" y="37" width="812" height="1"/>
 			</line>
+			<line>
+				<reportElement x="588" y="1" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="700" y="1" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="476" y="0" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="364" y="1" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="253" y="1" width="1" height="19"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
