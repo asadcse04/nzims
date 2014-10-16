@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="3289" pageHeight="595" orientation="Landscape" columnWidth="3249" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test1" language="groovy" pageWidth="3289" pageHeight="739" orientation="Landscape" columnWidth="3249" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9090909090909091"/>
-	<property name="ireport.x" value="2124"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ClassConfigId" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -285,36 +285,29 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="89" splitType="Stretch">
+		<band height="81" splitType="Stretch">
 			<staticText>
-				<reportElement x="1645" y="56" width="252" height="33"/>
+				<reportElement x="1181" y="47" width="252" height="33"/>
 				<textElement>
-					<font size="24"/>
+					<font size="20"/>
 				</textElement>
 				<text><![CDATA[Student Stabulation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1186" y="48" width="215" height="33"/>
+				<reportElement x="1181" y="0" width="584" height="46"/>
 				<textElement>
 					<font size="24"/>
 				</textElement>
-				<text><![CDATA[DHAKA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1181" y="0" width="317" height="46"/>
-				<textElement>
-					<font size="36"/>
-				</textElement>
-				<text><![CDATA[XYZ Govt. College]]></text>
+				<text><![CDATA[Norshingdi Govt. Girls High School]]></text>
 			</staticText>
 			<line>
-				<reportElement x="3246" y="-3" width="1" height="92"/>
+				<reportElement x="3246" y="0" width="1" height="80"/>
 			</line>
 			<line>
-				<reportElement x="-1" y="-3" width="1" height="92"/>
+				<reportElement x="0" y="0" width="1" height="80"/>
 			</line>
 			<line>
-				<reportElement x="1" y="-3" width="3245" height="1"/>
+				<reportElement x="1" y="-1" width="3245" height="1"/>
 			</line>
 		</band>
 	</pageHeader>
