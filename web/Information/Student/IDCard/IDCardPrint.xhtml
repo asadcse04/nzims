@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+            <h:form id="student_id_view_frm">
+
+                <center>
+
+                    <h:dataTable value="#"  var="Institute_setup_tbl">
+
+                        <h:column>
+
+                            <table border="0" width="300px;" >
+
+                                <tbody border="0">
+                                    <tr>
+                                        <td style="text-align: center; border: none; background: green; color: white;">
+                                            <h3 style="padding: 0px; margin: 0px;">#{SchoolFullName}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center; border: none;">
+                                            <table align="center" style="padding-top: 20px;">
+                                                <tr>
+                                                    <td>
+                                                        <p:graphicImage value="/images/Header/#{SchoolLogo}"  alt="School Logo" style="width: 100px; height: 95px;"/> 
+
+                                                    </td>
+
+                                                    <td style="padding-left: 40px;">
+
+                                                        <p:graphicImage value="/images/studentImages/#{studentListController.student.imgPath}" alt="Student Image" width="100px" height="95px"/> 
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="text-align: center; border: none;">
+
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td style="border: none;">
+
+                                            <table style="font-weight: bold; font-size: 12px; padding-top: 20px;">
+                                                 <tr>
+                                                    <td><p:outputLabel value="ID No"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.studentID}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Name"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.studentName}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Father's Name"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.fatherName}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Mother's Name"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.motherName}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Class"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.className}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Section" style="width: 10px;" /></td>
+                                                    <td><h:outputText value=":#{studentListController.student.sectionName}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <p:outputLabel value="Roll"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.studentRoll}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p:outputLabel value="Session"  style="width: 10px;"/></td>
+                                                    <td><h:outputText value=":#{studentListController.student.acyr}"/></td>
+                                                </tr>
+
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; color: white; height: 20px; border: none;"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color: green; text-align: right; color: white; border: none;"> Principal</td>
+                                    </tr>                            
+                                </tbody>
+
+                            </table>   
+
+                        </h:column>
+
+                    </h:dataTable>
+
+                </center>
+
+            </h:form>
+
+            <h:commandButton value="Print ID " type="button">
+
+                <p:printer target="student_id_view_frm" />
+
+            </h:commandButton>
+                       
+</ui:composition>  

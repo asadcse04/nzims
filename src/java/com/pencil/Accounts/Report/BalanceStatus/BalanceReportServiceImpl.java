@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,10 +32,15 @@ public class BalanceReportServiceImpl {
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
         try {
-            prst = con.prepareStatement("select cashBalance,bankBalance,checkBalance,(cashBalance+bankBalance+checkBalance) as totalBalance from cash_summery");
+            prst = con.prepareStatement("select cashBalance,bankBalance,checkBalance,(cashBalance+bankBalance+checkBalance) as totalBalance from cash_summery where InstituteID=?");
 
+            prst.setString(1, institueID);
             rs = prst.executeQuery();
 
             while (rs.next()) 

@@ -135,22 +135,37 @@ public class LoginController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
 
         context.getExternalContext().getSessionMap().put("InstituteId", instituteId);
+        
+        context.getExternalContext().getSessionMap().put("SchoolID", instituteId);
+        
+        context.getExternalContext().getSessionMap().put("UserID", username);
 
         institute = instituteService.getInstituteById(instituteId);
 
-        context.getExternalContext().getSessionMap().put("SchoolName", institute.getInstituteName());
+       if(institute.getInstituteFullName()!="")
         context.getExternalContext().getSessionMap().put("SchoolFullName", institute.getInstituteFullName());
-        context.getExternalContext().getSessionMap().put("SchoolID", institute.getInstituteID());
+
+       if(institute.getBackgroundImgPath()!="")
         context.getExternalContext().getSessionMap().put("SchoolImage", institute.getBackgroundImgPath());
+       
+       if(institute.getImgPath()!="")
         context.getExternalContext().getSessionMap().put("SchoolLogo", institute.getImgPath());
+       
+          if(institute.getAddress()!="")
         context.getExternalContext().getSessionMap().put("SchoolAddress", institute.getAddress());
-        context.getExternalContext().getSessionMap().put("UserID", username);
+          
+         if(institute.getAcdemicyear()!="")
+         context.getExternalContext().getSessionMap().put("AcademicYear", institute.getAcdemicyear());
+         
+        
+           
+         
 
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 
         HttpSession session = request.getSession();
 
-        System.out.println("School Name " + context.getExternalContext().getSessionMap().get("SchoolName").toString());
+       // System.out.println("School Name " + context.getExternalContext().getSessionMap().get("SchoolName").toString());
 
         try {
             request.login(this.username, this.password);

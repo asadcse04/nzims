@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+     <h:form id="student_id_card_tbl_frm">
+         
+        <center>
+
+            <p:dataTable id="tbl" value="#{studentListController.studentList}" var="student_idCard" filteredValue="#{studentListController.student_Filter_List}" 
+
+                         paginator="true" rows="12" paginatorPosition="bottom" style="width:80%;">
+   
+                
+                <p:column sortBy="#{student_idCard.studentID}" filterBy="#{student_idCard.studentID}">
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{student_idCard.studentID}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_idCard.studentName}" filterBy="#{student_idCard.studentName}">
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{student_idCard.studentName}"/>
+
+                </p:column> 
+
+                <p:column sortBy="#{student_idCard.gender}" filterBy="#{student_idCard.gender}">
+
+                    <f:facet name="header">Gender</f:facet>  
+
+                    <h:outputText value="#{student_idCard.gender}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_idCard.guardianContactNo}" filterBy="#{student_idCard.guardianContactNo}">
+
+                    <f:facet name="header">Guardian Mobile </f:facet>  
+
+                    <h:outputText value="#{student_idCard.guardianContactNo}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_idCard.bloodGroup}" filterBy="#{student_idCard.bloodGroup}">
+
+                    <f:facet name="header">Blood Group</f:facet>  
+
+                    <h:outputText value="#{student_idCard.bloodGroup}"/>
+
+                </p:column>  
+
+                <p:column sortBy="#{student_idCard.religion}" filterBy="#{student_idCard.religion}">
+
+                    <f:facet name="header">Religion</f:facet>  
+
+                    <h:outputText value="#{student_idCard.religion}"/>
+
+                </p:column>  
+
+               
+                <p:column style="width:3%" >  
+
+                    <f:facet name="header">ID Card</f:facet>
+
+                    <p:commandButton process="@this" update=":student_id_view_frm" oncomplete="dialog_view_student_id.show()" icon="ui-icon-contact" title="View ID Card">  
+
+                        <f:setPropertyActionListener value="#{student_idCard}" target="#{studentListController.student}"/>  
+
+                    </p:commandButton>  
+
+                </p:column>
+                
+                 
+            </p:dataTable> 
+
+        </center>
+
+    </h:form>
+    <p:dialog header="View Student ID Card" widgetVar="dialog_view_student_id" width="325" height="430" showEffect="drop" hideEffect="drop" >
+        <ui:include src="IDCardPrint.xhtml"/>
+    </p:dialog>
+
+    
+
+
+</ui:composition>

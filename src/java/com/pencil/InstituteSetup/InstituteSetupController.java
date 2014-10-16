@@ -44,16 +44,9 @@ public class InstituteSetupController implements Serializable
     {
         FacesContext context = FacesContext.getCurrentInstance();
         
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        
-        HttpSession s = request.getSession();
-        
-        System.out.println(s.getAttribute("user"));
-        
-       
-//        this.InstituteList = InstituteDao.instituteSetupList();
-//         
-//        this.invstituteNameData = InstituteDao.instituteNameList();
+        String instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+  
+         instituteSetup = InstituteDao.getInstituteById(instituteID);
          
     }
     

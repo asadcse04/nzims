@@ -31,6 +31,8 @@ public class ScClassConfig implements Serializable
     private int totalStudentCount;
     
     private String classConfigID;
+    
+    private int schoolClassConfigId;
 
     public ScClassConfig()
     {
@@ -50,12 +52,13 @@ public class ScClassConfig implements Serializable
         this.roomNum = roomNum;
     }
 
-    public ScClassConfig(int acyrID, String className, String shiftName, String sectionName,String classConfigID) { //Student Attendence purpose
+    public ScClassConfig(int acyrID, String className, String shiftName, String sectionName,String classConfigID,int schoolClassConfigId) { //Student Attendence purpose
         this.acyrID = acyrID;
         this.className = className;
         this.shiftName = shiftName;
         this.sectionName = sectionName;
         this.classConfigID=classConfigID;
+        this.schoolClassConfigId=schoolClassConfigId;
     }
     
     
@@ -180,6 +183,15 @@ public class ScClassConfig implements Serializable
     public void setClassConfigID(String classConfigID) {
         this.classConfigID = classConfigID;
     }
+
+    public int getSchoolClassConfigId() {
+        return schoolClassConfigId;
+    }
+
+    public void setSchoolClassConfigId(int schoolClassConfigId) {
+        this.schoolClassConfigId = schoolClassConfigId;
+    }
+    
     
     
 }

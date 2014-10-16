@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -31,15 +32,21 @@ public class CategoryServiceImpl implements Serializable,CategoryService
         
         PreparedStatement  prst=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try
         {
-            prst= con.prepareStatement("insert into transectioncatagory values(null,?,?,?,now(),null)");
-                 
-            prst.setString(1, cate.getTrCatagoryName());
-             
-            prst.setString(2, cate.getNote());
+            prst= con.prepareStatement("insert into transectioncatagory values(null,?,?,?,?,now(),null)");
+              
+            prst.setString(1, institueID);
             
-            prst.setString(3, cate.getTrType());
+            prst.setString(2, cate.getTrCatagoryName());
+             
+            prst.setString(3, cate.getNote());
+            
+            prst.setString(4, cate.getTrType());
              
             prst.execute();
                
@@ -83,9 +90,13 @@ public class CategoryServiceImpl implements Serializable,CategoryService
         
         PreparedStatement  prst=null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try    
         {
-            prst= con.prepareStatement("update transectioncatagory set TrCatagoryName=?, Note=?, TrType=?, CreateDate=now(), UserID=null where TrCatagoryID=?");
+            prst= con.prepareStatement("update transectioncatagory set TrCatagoryName=?, Note=?, TrType=?, CreateDate=now(), UserID=null where TrCatagoryID=? and where InstituteID=?");
        
             prst.setString(1, cateObj.getTrCatagoryName());
              
@@ -94,6 +105,8 @@ public class CategoryServiceImpl implements Serializable,CategoryService
             prst.setString(3, cateObj.getTrType());
             
             prst.setInt(4, cateObj.getTrCatagoryID());
+            
+            prst.setString(5, institueID);
             
             prst.execute();
                
@@ -140,13 +153,19 @@ public class CategoryServiceImpl implements Serializable,CategoryService
         PreparedStatement prst=null;
         
         ResultSet rs=null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
      
     
         List<Category> category_list=new ArrayList<Category>();
         
         try
         {
-            prst = con.prepareStatement("SELECT * FROM transectioncatagory");
+            prst = con.prepareStatement("SELECT * FROM transectioncatagory where InstituteID=?");
+            
+            prst.setString(1, institueID);
             
             rs = prst.executeQuery();
             

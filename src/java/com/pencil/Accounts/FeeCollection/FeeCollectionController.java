@@ -20,6 +20,10 @@ import com.pencil.Accounts.SubFeeHead.SubFeeHead;
 import com.pencil.Accounts.SubFeeHead.SubFeeHeadService;
 import com.pencil.Accounts.SubFeeHead.SubFeeHeadServiceImpl;
 import com.pencil.Presentation.Presentation;
+import com.pencil.SMS.SMS_Service;
+import com.pencil.SMS.SMS_ServiceImpl;
+import com.pencil.SMS.SendSMS.SendSMSService;
+import com.pencil.SMS.SendSMS.SendSMSServiceImpl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,6 +69,10 @@ public class FeeCollectionController implements Serializable{
        
     private FeeInvDetObj feeInvDetObj;
     
+    private int instituteId;
+    
+    private int smsBal;
+    
   
     
     Presentation pr = new Presentation();
@@ -79,10 +87,11 @@ public class FeeCollectionController implements Serializable{
     
     FeeCollectionService servicedao=new FeeCollectionServiceImpl();
     
-   
-     Map <String,FeeInvDetObj> map=new <String,FeeInvDetObj> HashMap();
+    SMS_Service msgservice=new SMS_ServiceImpl();
     
-     List<FeeInvDetObj> item=new ArrayList<FeeInvDetObj>();
+    Map <String,FeeInvDetObj> map=new <String,FeeInvDetObj> HashMap();
+    
+     List<FeeInvDetObj> item=new ArrayList<>();
 
     
      public FeeCollectionController() 
@@ -96,6 +105,16 @@ public class FeeCollectionController implements Serializable{
         this.subFeeHeadList = subHeadServiceDao.getAllSubFeeHead();
         
         this.monConfList=monConfServiceDao.getMonthConfigList();
+        
+        String instituteID="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        instituteId=Integer.valueOf(instituteID);
+        
+         this.smsBal=msgservice.getSmsCurrent_Ac_Balance(instituteId);
         
     }
   
@@ -143,7 +162,7 @@ public class FeeCollectionController implements Serializable{
      
      FacesContext context=FacesContext.getCurrentInstance();
      
-     this.studentlist=new ArrayList<FeeInvDetObj>();
+     this.studentlist=new ArrayList<>();
       
      this.studentlist=servicedao.getStudentAllinfo(this.feeInvDetObj.getStudentID());
      
@@ -210,6 +229,46 @@ public class FeeCollectionController implements Serializable{
        
         
         this.feeInvDetObj.processCalculation();
+    }
+    
+    public void addFeeRecord(){
+   
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+        if(servicedao.saveFeeRecord(item, feeInvDetObj))
+        {
+            context.addMessage(null, new FacesMessage("Successful Fee Information Saved", ""));
+            
+            this.invoiceDetail().clear();
+            
+            this.map.clear();
+            
+            sendFeeSms();
+            
+            this.feeInvDetObj=null;
+        }
+        
+        else
+        {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed,Fee Information is not Saved", ""));
+        }
+        
+    }
+    
+    public void sendFeeSms()
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (servicedao.sendSms(feeInvDetObj, smsBal))
+        {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Successfully send sms to the selected teachers."));
+        }
+        else 
+        {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Failed to send sms to the selected teachers."));
+        }
+  
     }
     
     
@@ -314,7 +373,7 @@ public class FeeCollectionController implements Serializable{
     
     public  void addFee(){
         
-        map.put(this.feeInvDetObj.getFeename(), new FeeInvDetObj(this.feeInvDetObj.getFeename().split("-")[1],this.feeInvDetObj.getAmount(),this.feeInvDetObj.getConcession(),this.feeInvDetObj.getPenalty(),this.feeInvDetObj.getActualAmount(),this.feeInvDetObj.getPaidAmount(),this.feeInvDetObj.getDue()));
+        map.put(this.feeInvDetObj.getFeename(), new FeeInvDetObj((Integer.parseInt(this.feeInvDetObj.getFeename().split("-")[0])),this.feeInvDetObj.getFeename().split("-")[1],this.feeInvDetObj.getAmount(),this.feeInvDetObj.getConcession(),this.feeInvDetObj.getPenalty(),this.feeInvDetObj.getActualAmount(),this.feeInvDetObj.getPaidAmount(),this.feeInvDetObj.getDue()));
        
     }
     
@@ -339,6 +398,8 @@ public class FeeCollectionController implements Serializable{
       while(ite.hasNext()){
           c+=ite.next().getPaidAmount();
       }
+      
+      this.feeInvDetObj.setTotalAmount(c);
       
       return c;
     }
@@ -383,6 +444,22 @@ public class FeeCollectionController implements Serializable{
      */
     public void setStudentlist(List<FeeInvDetObj> studentlist) {
         this.studentlist = studentlist;
+    }
+
+    public int getInstituteId() {
+        return instituteId;
+    }
+
+    public void setInstituteId(int instituteId) {
+        this.instituteId = instituteId;
+    }
+
+    public int getSmsBal() {
+        return smsBal;
+    }
+
+    public void setSmsBal(int smsBal) {
+        this.smsBal = smsBal;
     }
     
     

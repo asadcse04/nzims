@@ -38,7 +38,8 @@
                <p:menuitem value="All Student View" onclick="PF('allStudentView').show();" icon="ui-icon-person"></p:menuitem>   
                 <p:menuitem value="At A Glance" onclick="PF('at_A_Glance').show();" icon="ui-icon-person"></p:menuitem>   
                 <p:menuitem value="Correction Sheet" onclick="PF('correctionSheet').show();" icon="ui-icon-person"></p:menuitem>    
-           
+                <p:menuitem value="Student ID Card" onclick="PF('idCard').show();" icon="ui-icon-person" title="You can print student ID card from here."></p:menuitem>  
+
             
             </p:submenu>
 
@@ -104,20 +105,32 @@
             </p:submenu>
 
             <p:submenu label="General Accounts">
+               
                 <p:submenu icon="ui-icon-note" label="Account Setup">
-
+                    
+                    <p:menuitem value="TransectionStartUp" onclick="PF('transectionstart').show();" icon="ui-icon-script"></p:menuitem> 
+                    <p:menuitem value="BankStartUp" onclick="PF('bankstart').show();" icon="ui-icon-script"></p:menuitem> 
+                
                 </p:submenu>
 
                 <p:submenu label="Create Transection">
-
+                    <p:menuitem value="Income" onclick="PF('income').show();" icon="ui-icon-script"></p:menuitem> 
+                    <p:menuitem value="Expense" onclick="PF('expense').show();" icon="ui-icon-script"></p:menuitem> 
                 </p:submenu>
 
                 <p:submenu label="Report">
+                   
                     <p:submenu icon="ui-icon-note" label="Transection">
+                  
+                        <p:menuitem value="Cash Report" onclick="PF('CashReportDig').show();" icon="ui-icon-script"></p:menuitem> 
+                   
                     </p:submenu>
 
                     <p:submenu icon="ui-icon-note" label="Graphical View">
+                    
+                        <p:menuitem value="Balance Report" onclick="PF('BalanceReportDig').show();" icon="ui-icon-script"></p:menuitem> 
 
+                        
                     </p:submenu> 
                 </p:submenu>  
             </p:submenu>

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -32,39 +33,45 @@ public class BankAccountServiceImpl implements BankAccountService{
 
         PreparedStatement prst = null;
         
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
        
         
         try 
         {
-            prst = con.prepareStatement("insert into bank_account values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            prst = con.prepareStatement("insert into bank_account values (null, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
-            prst.setString(1, bankAccount.getBankName());
+            prst.setString(1, institueID);
             
-            prst.setString(2, bankAccount.getRemarkSymbol());
+            prst.setString(2, bankAccount.getBankName());
             
-            prst.setString(3, bankAccount.getAcName());
+            prst.setString(3, bankAccount.getRemarkSymbol());
             
-            prst.setString(4, bankAccount.getAcNumber());
+            prst.setString(4, bankAccount.getAcName());
             
-            prst.setString(5, bankAccount.getAcType());
+            prst.setString(5, bankAccount.getAcNumber());
             
-            prst.setString(6, bankAccount.getAddress());
+            prst.setString(6, bankAccount.getAcType());
             
-            prst.setString(7, bankAccount.getBranch());
+            prst.setString(7, bankAccount.getAddress());
             
-            prst.setDouble(8, bankAccount.getStartingBalance());
+            prst.setString(8, bankAccount.getBranch());
             
-            prst.setString(9, bankAccount.getNote());
+            prst.setDouble(9, bankAccount.getStartingBalance());
             
-            prst.setInt(10, bankAccount.getBankAcGroupID());
+            prst.setString(10, bankAccount.getNote());
             
-            prst.setDate(11, new java.sql.Date(new Date().getTime()));
+            prst.setInt(11, bankAccount.getBankAcGroupID());
             
-            prst.setDouble(12, bankAccount.getStartingBalance());
+            prst.setDate(12, new java.sql.Date(new Date().getTime()));
             
-            prst.setDouble(13, bankAccount.getTotalWithdraw());
+            prst.setDouble(13, bankAccount.getStartingBalance());
             
-            prst.setDouble(14, bankAccount.getStartingBalance()-bankAccount.getTotalWithdraw());
+            prst.setDouble(14, bankAccount.getTotalWithdraw());
+            
+            prst.setDouble(15, bankAccount.getStartingBalance()-bankAccount.getTotalWithdraw());
 
             int add = prst.executeUpdate();
             
@@ -120,16 +127,24 @@ public class BankAccountServiceImpl implements BankAccountService{
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        String institueID="";
+        FacesContext context=FacesContext.getCurrentInstance();
+        institueID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        
 
         try 
         {
-            prst = con.prepareStatement("select * from bank_account");
+            prst = con.prepareStatement("select * from bank_account where InstituteID=?");
 
+            prst.setString(1, institueID);
+            
             rs = prst.executeQuery();
 
             while (rs.next()) 
             {
-            bankAccountList.add(new BankAccount(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7),  rs.getString(8),rs.getDouble(9),rs.getString(10), rs.getInt(11), new Date(rs.getDate(12).getTime()),rs.getDouble(13),rs.getDouble(14),rs.getDouble(15)));
+            bankAccountList.add(new BankAccount(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8),  rs.getString(9),rs.getDouble(10),rs.getString(11), rs.getInt(12), new Date(rs.getDate(13).getTime()),rs.getDouble(14),rs.getDouble(15),rs.getDouble(16)));
 
             }
 

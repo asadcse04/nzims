@@ -7,213 +7,235 @@
     <p:layout style="min-width:1000px;min-height:500px;">
 
         <p:layoutUnit position="west" size="60%"> 
-         
-        
-            
-        <h:form id="studentsrcfrm">
-                    
-         <p:growl id="stsech"/>
 
-          <p:panelGrid styleClass="panelGrid">
 
-           <p:row>
-               <p:column colspan="4" styleClass="header" style="text-align: center">
-                   Fee Collection  
-                 </p:column>   
-             </p:row>
-              
-              <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="* " styleClass="red"/>
-                  <h:outputLabel value="Academic Year"/>
-                  </p:column><p:column>
-                    <p:selectOneMenu id="feeyear" value="#{feeCollectionController.feeInvDetObj.academicyear}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Academic Year.">
-                    <f:selectItem itemLabel="Select Year" itemValue=""/>
-                    <f:selectItems value="#{feeCollectionController.academicYearList}"/>
-                    </p:selectOneMenu>  
-                  </p:column>
-             
-                  <p:column styleClass="label">
-                  <h:outputLabel value="* " styleClass="red"/>
-                  <h:outputLabel value="Select Category"/>
-                  </p:column><p:column>
-                    <p:selectOneMenu id="fcg" value="#{feeCollectionController.feeInvDetObj.feectagoryname}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Category.">
-                    <f:selectItem itemLabel="Select Category" itemValue="0-0"/>
-                    <f:selectItems value="#{feeCollectionController.feeCatNameList}"/>
-                <p:ajax event="change" listener="#{feeCollectionController.initFeeHeadNameList()}" update="feenamelist menumonth"/>
-                    </p:selectOneMenu>  
-                  </p:column>
-              </p:row> 
 
-            
-               <p:row>
-                  <p:column styleClass="label">
-                      <h:outputLabel for="menumonth" value="Select Months:"/>
-                  </p:column><p:column>
-                    <p:selectCheckboxMenu id="menumonth" value="#{feeCollectionController.feeInvDetObj.selectedmonths}"  panelStyle="width:250px" label="Months">
-                    <f:selectItems value="#{feeCollectionController.monthList}" />
-                    </p:selectCheckboxMenu>  
-                  </p:column>
-             
-                  <p:column styleClass="label">
-                  <p:commandLink value="Submit" update="display" actionListener="#{feeCollectionController.feeInvDetObj.getArraysize()}" />
-                  </p:column><p:column>
-                    <p:outputPanel id="display" style="width:130px;padding-left:5px;margin-top:10px">
-                    <p:dataList value="#{feeCollectionController.feeInvDetObj.selectedmonths}" var="month" emptyMessage="No months selected">
-                    #{month}
-                    </p:dataList>
-                    </p:outputPanel> 
-                  </p:column>
-                </p:row>
-             
-          
-             <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="* " styleClass="red"/>
-                  <h:outputLabel value="Select Fee"/>
-                  </p:column><p:column>
-                    <p:selectOneMenu id="feenamelist" value="#{feeCollectionController.feeInvDetObj.feename}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Fee.">
-                    <f:selectItem itemLabel="Select Fee" itemValue=""/>
-                    <f:selectItems value="#{feeCollectionController.feeHeadNameList}"/>
-                <p:ajax event="change"  listener="#{feeCollectionController.feeAmount()}" update="amount actualamount due"/>
-                    </p:selectOneMenu>  
-                  </p:column>
-             
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Amount"/>
-                  </p:column><p:column>
-                   <p:inputText id="amount" value="#{feeCollectionController.feeInvDetObj.amount}" readonly="true" styleClass="inputText"/> 
-                  </p:column> 
-              </p:row> 
-                        
+            <h:form id="studentsrcfrm">
 
-              <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Consession"/>
-                  </p:column><p:column>
-                   <p:inputText id="consession" value="#{feeCollectionController.feeInvDetObj.concession}"  styleClass="inputText"> 
-            <p:ajax event="keyup" update="actualamount due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/>
-                   </p:inputText>
-                  </p:column> 
-              
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Consession Purpose"/>
-                  </p:column><p:column>
-                  <p:inputText id="consessionpurpose" value="#{feeCollectionController.feeInvDetObj.conPurpose}"  styleClass="inputText"/> 
-                  </p:column> 
-              </p:row>          
-            
-            
-               
-              <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Penalty"/>
-                  </p:column><p:column>
-                  <p:inputText id="penalty" value="#{feeCollectionController.feeInvDetObj.penalty}"  styleClass="inputText"> 
-                  <p:ajax event="keyup" update="actualamount due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/> 
-                  </p:inputText>
-                  </p:column> 
-          
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Penalty Purpose"/>
-                  </p:column><p:column>
-                  <p:inputText id="penaltypurpose" value="#{feeCollectionController.feeInvDetObj.penPurpose}"  styleClass="inputText"/> 
-                  </p:column> 
-               </p:row> 
-            
-              
-               <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Actual Amount"/>
-                  </p:column><p:column>
-                  <p:inputText id="actualamount" value="#{feeCollectionController.feeInvDetObj.actualAmount}" readonly="true"  styleClass="inputText"/> 
-                  </p:column> 
-             
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Payment Type"/>
-                  </p:column><p:column>
-                    <p:selectOneMenu  value="#{feeCollectionController.feeInvDetObj.paymentType}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Payment Type.">
-                    <f:selectItem itemLabel="Select Type" itemValue="0-0"/>
-                    <f:selectItems value="#{feeCollectionController.paymentTypes}"/>
-                    </p:selectOneMenu>  
-                  </p:column>
-              </p:row> 
-              
-           
-              
-              
-              <p:row>
-                  <p:column styleClass="label">
-                  <h:outputLabel value="* " styleClass="red"/>
-                  <h:outputLabel value="Paid"/>
-                  </p:column><p:column>
-                      <p:inputText id="paid" value="#{feeCollectionController.feeInvDetObj.paidAmount}" styleClass="inputText" required="true" requiredMessage="Please Enter Paid.">
-                <p:ajax event="keyup" update="due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/>
-                    </p:inputText> 
-                  </p:column> 
-             
-                  <p:column styleClass="label">
-                  <h:outputLabel value="Due"/>
-                  </p:column><p:column>
-                   <p:inputText id="due" value="#{feeCollectionController.feeInvDetObj.due}" styleClass="inputText" readonly="true"/> 
-                  </p:column> 
-               </p:row>
-           
-             
-            
-             </p:panelGrid>
-              
-         <p:commandButton value="Add" update=":invoice" action="#{feeCollectionController.addFee()}" style="margin-top: 8px"   icon="ui-icon-check" />
-            
-         <p:commandButton value="Reset" icon="ui-icon-refresh" action="#{feeCollectionController.feeInvDetObj.resetField()}" style="margin-top: 8px" />
-             
-             
-    </h:form>
-        
-        
-  </p:layoutUnit>
+                <p:growl id="stsech"/>
+
+                <p:panelGrid styleClass="panelGrid">
+
+                    <p:row>
+                        <p:column colspan="4" styleClass="header" style="text-align: center">
+                            Fee Collection  
+                        </p:column>   
+                    </p:row>
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Academic Year"/>
+                        </p:column><p:column>
+                            <p:selectOneMenu id="feeyear" value="#{feeCollectionController.feeInvDetObj.academicyear}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Academic Year.">
+                                <f:selectItem itemLabel="Select Year" itemValue=""/>
+                                <f:selectItems value="#{feeCollectionController.academicYearList}"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Select Category"/>
+                        </p:column><p:column>
+                            <p:selectOneMenu id="fcg" value="#{feeCollectionController.feeInvDetObj.feectagoryname}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Category.">
+                                <f:selectItem itemLabel="Select Category" itemValue="0-0"/>
+                                <f:selectItems value="#{feeCollectionController.feeCatNameList}"/>
+                                <p:ajax event="change" listener="#{feeCollectionController.initFeeHeadNameList()}" update="feenamelist menumonth"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+                    </p:row> 
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel for="menumonth" value="Select Months:"/>
+                        </p:column><p:column>
+                            <p:selectCheckboxMenu id="menumonth" value="#{feeCollectionController.feeInvDetObj.selectedmonths}"  panelStyle="width:250px" label="Months">
+                                <f:selectItems value="#{feeCollectionController.monthList}" />
+                            </p:selectCheckboxMenu>  
+                        </p:column>
+
+                        <p:column styleClass="label">
+                            <p:commandLink value="Submit" update="display" actionListener="#{feeCollectionController.feeInvDetObj.getArraysize()}" />
+                        </p:column><p:column>
+                            <p:outputPanel id="display" style="width:130px;padding-left:5px;margin-top:10px">
+                                <p:dataList value="#{feeCollectionController.feeInvDetObj.selectedmonths}" var="month" emptyMessage="No months selected">
+                                    #{month}
+                                </p:dataList>
+                            </p:outputPanel> 
+                        </p:column>
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Select Fee"/>
+                        </p:column><p:column>
+                            <p:selectOneMenu id="feenamelist" value="#{feeCollectionController.feeInvDetObj.feename}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Fee.">
+                                <f:selectItem itemLabel="Select Fee" itemValue=""/>
+                                <f:selectItems value="#{feeCollectionController.feeHeadNameList}"/>
+                                <p:ajax event="change"  listener="#{feeCollectionController.feeAmount()}" update="amount actualamount due"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Amount"/>
+                        </p:column><p:column>
+                            <p:inputText id="amount" value="#{feeCollectionController.feeInvDetObj.amount}" readonly="true" styleClass="inputText"/> 
+                        </p:column> 
+                    </p:row> 
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Consession"/>
+                        </p:column><p:column>
+                            <p:inputText id="consession" value="#{feeCollectionController.feeInvDetObj.concession}"  styleClass="inputText"> 
+                                <p:ajax event="keyup" update="actualamount due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/>
+                            </p:inputText>
+                        </p:column> 
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Consession Purpose"/>
+                        </p:column><p:column>
+                            <p:inputText id="consessionpurpose" value="#{feeCollectionController.feeInvDetObj.conPurpose}"  styleClass="inputText"/> 
+                        </p:column> 
+                    </p:row>          
+
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Penalty"/>
+                        </p:column><p:column>
+                            <p:inputText id="penalty" value="#{feeCollectionController.feeInvDetObj.penalty}"  styleClass="inputText"> 
+                                <p:ajax event="keyup" update="actualamount due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/> 
+                            </p:inputText>
+                        </p:column> 
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Penalty Purpose"/>
+                        </p:column><p:column>
+                            <p:inputText id="penaltypurpose" value="#{feeCollectionController.feeInvDetObj.penPurpose}"  styleClass="inputText"/> 
+                        </p:column> 
+                    </p:row> 
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Actual Amount"/>
+                        </p:column><p:column>
+                            <p:inputText id="actualamount" value="#{feeCollectionController.feeInvDetObj.actualAmount}" readonly="true"  styleClass="inputText"/> 
+                        </p:column> 
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Payment Type"/>
+                        </p:column><p:column>
+                            <p:selectOneMenu  value="#{feeCollectionController.feeInvDetObj.paymentType}" styleClass="inputCombo" style="width: 165px;"  requiredMessage="Please Select Payment Type.">
+                                <f:selectItem itemLabel="Select Type" itemValue="0-0"/>
+                                <f:selectItems value="#{feeCollectionController.paymentTypes}"/>
+                            </p:selectOneMenu>  
+                        </p:column>
+                    </p:row> 
+
+
+
+
+                    <p:row>
+                        <p:column styleClass="label">
+                            <h:outputLabel value="* " styleClass="red"/>
+                            <h:outputLabel value="Paid"/>
+                        </p:column><p:column>
+                            <p:inputText id="paid" value="#{feeCollectionController.feeInvDetObj.paidAmount}" styleClass="inputText" required="true" requiredMessage="Please Enter Paid.">
+                                <p:ajax event="keyup" update="due" listener="#{feeCollectionController.feeInvDetObj.processCalculation()}"/>
+                            </p:inputText> 
+                        </p:column> 
+
+                        <p:column styleClass="label">
+                            <h:outputLabel value="Due"/>
+                        </p:column><p:column>
+                            <p:inputText id="due" value="#{feeCollectionController.feeInvDetObj.due}" styleClass="inputText" readonly="true"/> 
+                        </p:column> 
+                    </p:row>
+
+
+
+                </p:panelGrid>
+
+                <p:commandButton value="Add" update=":invoice" action="#{feeCollectionController.addFee()}" style="margin-top: 8px"   icon="ui-icon-check" />
+
+                <p:commandButton value="Reset" icon="ui-icon-refresh" action="#{feeCollectionController.feeInvDetObj.resetField()}" style="margin-top: 8px" />
+
+
+            </h:form>
+
+
+        </p:layoutUnit>
 
 
 
         <p:layoutUnit position="center">
-            
-            
 
-          <h:form id="invoice" style="font-size: 12pt">
-              
-             
-      Student ID         <p:spacer width="33px" height="20px"/>  :      <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentid}"/>    <br />    
-      Student Name       <p:spacer width="8px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentname}"/>    <br />
-      Class              <p:spacer width="71px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.classname}"/>      <br />
-      Department         <p:spacer width="28px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.departname}"/>   <br />
-      Roll               <p:spacer width="82px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentroll}"/>   <br />
-      Academic Year      <p:spacer width="3px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.academicyearid}"/>
-         
-              <p:panel header="Fee List" style="width: 500px; font-size: 10pt">
-                        
-                        <p:dataTable id="feetable" value="#{feeCollectionController.invoiceDetail()}" var="detail">
-                        
+
+
+            <h:form id="invoice" style="font-size: 12pt">
+
+
+                Student ID         <p:spacer width="33px" height="20px"/>  :      <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentID}"/>    <br />    
+                Student Name       <p:spacer width="8px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentname}"/>    <br />
+                Class              <p:spacer width="71px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.classname}"/>      <br />
+                Department         <p:spacer width="28px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.departname}"/>   <br />
+                Roll               <p:spacer width="82px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.studentroll}"/>   <br />
+                Academic Year      <p:spacer width="3px" height="20px"/>  :       <h:outputText  value="#{feeCollectionController.feeInvDetObj.academicyearid}"/>
+
+
+
+                <center> 
+                    <p:dataTable id="feetable" value="#{feeCollectionController.invoiceDetail()}" var="detail">
+
                         <p:column headerText="Fee name">
-                          #{detail.feename}  
+                            #{detail.feename}  
                         </p:column>
-                        
-                            
-                            
-                         <p:column headerText="Amount">
-                          #{detail.paidAmount}   
-                         </p:column>
-                            
-                            
-                        </p:dataTable>
-                        
-                        Total Amount= <p:outputLabel value="#{feeCollectionController.countTotal()}"/>
-                        
-                </p:panel>   
-                    
-           
-          </h:form>     
-        
-              
+
+
+
+                        <p:column headerText="Amount">
+                            #{detail.paidAmount}   
+                        </p:column>
+
+
+                    </p:dataTable>
+
+                    Total Amount= <p:outputLabel value="#{feeCollectionController.countTotal()}"/>
+
+
+                </center>     
+
+            </h:form>  
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                <p:printer target="invoice" />
+
+            </h:commandButton> 
+
+
+
+            <h:form>
+
+                <p:commandButton value="Save" update=":invoice" action="#{feeCollectionController.addFeeRecord()}" oncomplete="feecollection.show()"> 
+                    <p:confirm header="Confirmation" message="Are you sure to Save this record?" icon="ui-icon-alert" />
+                </p:commandButton>
+
+                <p:confirmDialog global="true" showEffect="slide" hideEffect="slide">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </h:form>
+
+
         </p:layoutUnit>
 
     </p:layout>
