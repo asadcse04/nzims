@@ -45,7 +45,8 @@ public class BasicReportController implements Serializable {
     private int exCnfID;
     
     private int classID;
-
+    
+    private String departName;
     private List<String> examList;
 
     private List<String> subjectList;
@@ -66,6 +67,7 @@ public class BasicReportController implements Serializable {
     }
 
     public void Sc_Cnf_ID(BasicReport sq) {
+        this.departName=sq.getDepartmentName();
         
         this.classID=sq.getClassID();
 
@@ -74,6 +76,7 @@ public class BasicReportController implements Serializable {
         this.exCnfID = dao.getExCnfID(sq);
         
         this.subjectList = dao.subjectName(sq);
+        
     }
 
 
@@ -138,7 +141,15 @@ public class BasicReportController implements Serializable {
         this.classID = classID;
     }
 
-    
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
+    }
+
+ 
     
     public int getScCnfID() {
         return scCnfID;
@@ -223,20 +234,26 @@ public class BasicReportController implements Serializable {
         DB_Connection o = new DB_Connection();
 
         Connection con = o.getConnection();
-        String reportClass1_5="";
+        String tabu_report="";
        
         Map<String, Object> params5 = new HashMap<String, Object>();
         params5.put("ClassConfigId", this.scCnfID);
          if(this.classID<=24){
-         reportClass1_5 = "com/pencil/Report1/markShitReport_1_5.jasper";
+         tabu_report = "com/pencil/Report1/markShitReport_1_5.jasper";
          }
           else if (this.classID >24 && this.classID<= 27){
-             reportClass1_5 = "com/pencil/Report1/markShitReport8.jasper"; 
+             tabu_report = "com/pencil/Report1/markShitReport8.jasper"; 
           }
-          else{
-              reportClass1_5 = "com/pencil/Report1/markShitReport9_10.jasper";
+          else if(this.classID > 27 && this.departName.equals("Science")){
+              tabu_report = "com/pencil/Report1/tabulatation9-10Science.jasper";
           }
-        InputStream is1_5 = this.getClass().getClassLoader().getResourceAsStream(reportClass1_5);
+         else if(this.classID > 27 && this.departName.equals("Business Study")){
+              tabu_report = "com/pencil/Report1/tabulatation9-10Comerce.jasper";
+          }
+         else{
+                tabu_report = "com/pencil/Report1/tabulatation9-10Humanitis.jasper";
+         }
+        InputStream is1_5 = this.getClass().getClassLoader().getResourceAsStream(tabu_report);
         try {
 
             JasperPrint jp = JasperFillManager.fillReport(is1_5, params5, con);
