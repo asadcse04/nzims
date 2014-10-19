@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestExcel9-10Science" language="java" pageWidth="2137" pageHeight="595" orientation="Landscape" columnWidth="2097" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestExcel9-10Science" pageWidth="2137" pageHeight="595" orientation="Landscape" columnWidth="2097" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="899"/>
+	<property name="ireport.x" value="938"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ClassConfigId" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -11,8 +11,8 @@
      student_tabulation.`studentroll` AS student_tabulation_studentroll,
      student_tabulation.`studentname` AS student_tabulation_studentname,
      student_tabulation.`Bangla_1st_total` AS student_tabulation_Bangla_1st_total,
-     student_tabulation.`Bangla_1st_CT` AS student_tabulation_Bangla_1st_CT,
      student_tabulation.`Bangla_1st_WR` AS student_tabulation_Bangla_1st_WR,
+     student_tabulation.`Bangla_1st_CT` AS student_tabulation_Bangla_1st_CT,
      student_tabulation.`Bangla_1st_OB` AS student_tabulation_Bangla_1st_OB,
      student_tabulation.`Bangla_2nd_total` AS student_tabulation_Bangla_2nd_total,
      student_tabulation.`Bangla_2nd_CT` AS student_tabulation_Bangla_2nd_CT,
@@ -29,20 +29,17 @@
      student_tabulation.`Math_total` AS student_tabulation_Math_total,
      student_tabulation.`Math_CT` AS student_tabulation_Math_CT,
      student_tabulation.`Math_WR` AS student_tabulation_Math_WR,
-     student_tabulation.`Math_OB` AS student_tabulation_Math_OB,
+student_tabulation.`Math_OB` AS student_tabulation_Math_OB,
      student_tabulation.`Religon_total` AS student_tabulation_Religon_total,
      student_tabulation.`Religon_CT` AS student_tabulation_Religon_CT,
      student_tabulation.`Religon_WR` AS student_tabulation_Religon_WR,
+     student_tabulation.`Religon_PR` AS student_tabulation_Religon_PR,
      student_tabulation.`Religon_OB` AS student_tabulation_Religon_OB,
      student_tabulation.`Ban_Glob_Studies_total` AS student_tabulation_Ban_Glob_Studies_total,
      student_tabulation.`Ban_Glob_Studies_CT` AS student_tabulation_Ban_Glob_Studies_CT,
      student_tabulation.`Ban_Glob_Studies_WR` AS student_tabulation_Ban_Glob_Studies_WR,
      student_tabulation.`Ban_Glob_Studies_OB` AS student_tabulation_Ban_Glob_Studies_OB,
-      student_tabulation.`Home_Science_total` AS student_tabulation_Home_Science_total,
-     student_tabulation.`Home_Science_CT` AS student_tabulation_Home_Science_CT,
-     student_tabulation.`Home_Science_WR` AS student_tabulation_Home_Science_WR,
-     student_tabulation.`Home_Science_OB` AS student_tabulation_Home_Science_OB,
-     student_tabulation.`Home_Science_PR` AS student_tabulation_Home_Science_PR,
+     student_tabulation.`Ban_Glob_Studies_PR` AS student_tabulation_Ban_Glob_Studies_PR,
      student_tabulation.`I_C_T_total` AS student_tabulation_I_C_T_total,
      student_tabulation.`I_C_T_CT` AS student_tabulation_I_C_T_CT,
      student_tabulation.`I_C_T_WR` AS student_tabulation_I_C_T_WR,
@@ -70,24 +67,30 @@
      student_tabulation.`Bilogy_PR` AS student_tabulation_Bilogy_PR,
      student_tabulation.`Higher_Mathe_total` AS student_tabulation_Higher_Mathe_total,
      student_tabulation.`Higher_Mathe_CT` AS student_tabulation_Higher_Mathe_CT,
-     student_tabulation.`Higher_Mathe_OB` AS student_tabulation_Higher_Mathe_OB,
      student_tabulation.`Higher_Mathe_WR` AS student_tabulation_Higher_Mathe_WR,
+     student_tabulation.`Higher_Mathe_OB` AS student_tabulation_Higher_Mathe_OB,
      student_tabulation.`Higher_Mathe_PR` AS student_tabulation_Higher_Mathe_PR,
      student_tabulation.`Computer_total` AS student_tabulation_Computer_total,
      student_tabulation.`Computer_CT` AS student_tabulation_Computer_CT,
      student_tabulation.`Computer_WR` AS student_tabulation_Computer_WR,
      student_tabulation.`Computer_OB` AS student_tabulation_Computer_OB,
-     student_tabulation.`Computer_PR` AS student_tabulation_Computer_PR
+     student_tabulation.`Computer_PR` AS student_tabulation_Computer_PR,
+     student_tabulation.`Home_Science_total` AS student_tabulation_Home_Science_total,
+     student_tabulation.`Home_Science_CT` AS student_tabulation_Home_Science_CT,
+     student_tabulation.`Home_Science_WR` AS student_tabulation_Home_Science_WR,
+     student_tabulation.`Home_Science_OB` AS student_tabulation_Home_Science_OB,
+     student_tabulation.`Home_Science_PR` AS student_tabulation_Home_Science_PR
 FROM
      `student_tabulation` student_tabulation
+
 WHERE
      studentid IN ( SELECT studentid FROM nzims_db.`student_identification` WHERE classconfigid =$P{ClassConfigId}  );]]>
 	</queryString>
 	<field name="student_tabulation_studentroll" class="java.lang.Long"/>
 	<field name="student_tabulation_studentname" class="java.lang.String"/>
 	<field name="student_tabulation_Bangla_1st_total" class="java.lang.Double"/>
-	<field name="student_tabulation_Bangla_1st_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_Bangla_1st_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Bangla_1st_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_Bangla_1st_OB" class="java.lang.Double"/>
 	<field name="student_tabulation_Bangla_2nd_total" class="java.lang.Double"/>
 	<field name="student_tabulation_Bangla_2nd_CT" class="java.lang.Double"/>
@@ -108,16 +111,13 @@ WHERE
 	<field name="student_tabulation_Religon_total" class="java.lang.Double"/>
 	<field name="student_tabulation_Religon_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_Religon_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Religon_PR" class="java.lang.Double"/>
 	<field name="student_tabulation_Religon_OB" class="java.lang.Double"/>
 	<field name="student_tabulation_Ban_Glob_Studies_total" class="java.lang.Double"/>
 	<field name="student_tabulation_Ban_Glob_Studies_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_Ban_Glob_Studies_WR" class="java.lang.Double"/>
 	<field name="student_tabulation_Ban_Glob_Studies_OB" class="java.lang.Double"/>
-	<field name="student_tabulation_Home_Science_total" class="java.lang.Double"/>
-	<field name="student_tabulation_Home_Science_CT" class="java.lang.Double"/>
-	<field name="student_tabulation_Home_Science_WR" class="java.lang.Double"/>
-	<field name="student_tabulation_Home_Science_OB" class="java.lang.Double"/>
-	<field name="student_tabulation_Home_Science_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Ban_Glob_Studies_PR" class="java.lang.Double"/>
 	<field name="student_tabulation_I_C_T_total" class="java.lang.Double"/>
 	<field name="student_tabulation_I_C_T_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_I_C_T_WR" class="java.lang.Double"/>
@@ -145,14 +145,19 @@ WHERE
 	<field name="student_tabulation_Bilogy_PR" class="java.lang.Double"/>
 	<field name="student_tabulation_Higher_Mathe_total" class="java.lang.Double"/>
 	<field name="student_tabulation_Higher_Mathe_CT" class="java.lang.Double"/>
-	<field name="student_tabulation_Higher_Mathe_OB" class="java.lang.Double"/>
 	<field name="student_tabulation_Higher_Mathe_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Higher_Mathe_OB" class="java.lang.Double"/>
 	<field name="student_tabulation_Higher_Mathe_PR" class="java.lang.Double"/>
 	<field name="student_tabulation_Computer_total" class="java.lang.Double"/>
 	<field name="student_tabulation_Computer_CT" class="java.lang.Double"/>
 	<field name="student_tabulation_Computer_WR" class="java.lang.Double"/>
 	<field name="student_tabulation_Computer_OB" class="java.lang.Double"/>
 	<field name="student_tabulation_Computer_PR" class="java.lang.Double"/>
+	<field name="student_tabulation_Home_Science_total" class="java.lang.Double"/>
+	<field name="student_tabulation_Home_Science_CT" class="java.lang.Double"/>
+	<field name="student_tabulation_Home_Science_WR" class="java.lang.Double"/>
+	<field name="student_tabulation_Home_Science_OB" class="java.lang.Double"/>
+	<field name="student_tabulation_Home_Science_PR" class="java.lang.Double"/>
 	<variable name="bangla_1st" class="java.lang.String">
 		<variableExpression><![CDATA[$F{student_tabulation_Bangla_1st_CT}.toString() + ':' + $F{student_tabulation_Bangla_1st_WR}.toString() + ':' + $F{student_tabulation_Bangla_1st_OB}.toString() + '=' + $F{student_tabulation_Bangla_1st_total}.toString()]]></variableExpression>
 	</variable>
@@ -186,20 +191,20 @@ $F{student_tabulation_Religon_WR}.toString() + ':' +
 $F{student_tabulation_Religon_OB}.toString() + ':' +
 '=' + $F{student_tabulation_Religon_total}.toString()]]></variableExpression>
 	</variable>
-	<variable name="Bangladesh-Studies" class="java.lang.String">
-		<variableExpression><![CDATA[$F{student_tabulation_Religon_CT}.toString() + ':' +
-$F{student_tabulation_Religon_WR}.toString() + ':' +
-$F{student_tabulation_Religon_OB}.toString() + ':' +
-'=' + $F{student_tabulation_Religon_total}.toString()]]></variableExpression>
+	<variable name="Bangla-Studies" class="java.lang.String">
+		<variableExpression><![CDATA[$F{student_tabulation_Ban_Glob_Studies_CT}.toString() + ':' +
+$F{student_tabulation_Ban_Glob_Studies_WR}.toString() + ':' +
+$F{student_tabulation_Ban_Glob_Studies_OB}.toString() + ':' +
+'=' + $F{student_tabulation_Ban_Glob_Studies_total}.toString()]]></variableExpression>
 	</variable>
 	<variable name="Physics" class="java.lang.String">
-		<variableExpression><![CDATA[$F{student_tabulation_Physics_CT}.toString() + ':' +
+		<variableExpression><![CDATA[$F{student_tabulation_Physics_CT}.toString()+ ':' +
 $F{student_tabulation_Physics_WR}.toString() + ':' +
 $F{student_tabulation_Physics_OB}.toString() + ':' +
 $F{student_tabulation_Physics_PR}.toString() + ':' +
-'=' +$F{student_tabulation_Physics_total}.toString()]]></variableExpression>
+'=' + $F{student_tabulation_Physics_total}.toString()]]></variableExpression>
 	</variable>
-	<variable name="Chemis" class="java.lang.String">
+	<variable name="Chemistry" class="java.lang.String">
 		<variableExpression><![CDATA[$F{student_tabulation_Chemistry_CT}.toString() + ':' +
 $F{student_tabulation_Chemistry_WR}.toString() + ':' +
 $F{student_tabulation_Chemistry_OB}.toString() + ':' +
@@ -211,14 +216,7 @@ $F{student_tabulation_Chemistry_PR}.toString() + ':' +
 $F{student_tabulation_Bilogy_WR}.toString() + ':' +
 $F{student_tabulation_Bilogy_OB}.toString() + ':' +
 $F{student_tabulation_Bilogy_PR}.toString() + ':' +
-'=' + $F{student_tabulation_Bilogy_total}]]></variableExpression>
-	</variable>
-	<variable name="Higher-math" class="java.lang.String">
-		<variableExpression><![CDATA[$F{student_tabulation_Higher_Mathe_CT}.toString() + ':' +
-$F{student_tabulation_Higher_Mathe_WR}.toString() + ':' +
-$F{student_tabulation_Higher_Mathe_OB}.toString() + ':' +
-$F{student_tabulation_Higher_Mathe_PR}.toString() + ':' +
-'=' + $F{student_tabulation_Higher_Mathe_total}.toString()]]></variableExpression>
+'=' + $F{student_tabulation_Bilogy_total}.toString()]]></variableExpression>
 	</variable>
 	<variable name="ICT" class="java.lang.String">
 		<variableExpression><![CDATA[$F{student_tabulation_I_C_T_CT}.toString() + ':' +
@@ -256,32 +254,130 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 	</title>
 	<pageHeader>
 		<band height="70" splitType="Stretch">
-			<staticText>
-				<reportElement x="848" y="1" width="350" height="35"/>
-				<textElement>
-					<font size="24"/>
-				</textElement>
-				<text><![CDATA[Norshingdi  Govt. Girls High School ]]></text>
-			</staticText>
 			<line>
-				<reportElement x="1" y="0" width="2079" height="1"/>
+				<reportElement x="1" y="0" width="1935" height="1"/>
 			</line>
 			<line>
-				<reportElement x="1" y="69" width="2079" height="1"/>
+				<reportElement x="1" y="69" width="1935" height="1"/>
 			</line>
-			<staticText>
-				<reportElement x="905" y="36" width="252" height="33"/>
-				<textElement>
-					<font size="20"/>
-				</textElement>
-				<text><![CDATA[Student Tabulation]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="0" width="1" height="68"/>
 			</line>
 			<line>
-				<reportElement x="2080" y="0" width="1" height="68"/>
+				<reportElement x="1936" y="0" width="1" height="68"/>
 			</line>
+			<staticText>
+				<reportElement x="1" y="50" width="62" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Student]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="50" width="124" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Student]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="50" width="107" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Bangla-1st]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="50" width="108" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Bangla-2nd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="50" width="98" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[English-1st]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="50" width="102" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[English-2nd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="605" y="50" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Math]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="705" y="50" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Religon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="806" y="50" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Bangla Studies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="905" y="50" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Physics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1051" y="50" width="143" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Chymestry]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1195" y="50" width="161" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Biology]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1356" y="50" width="147" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ICT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1504" y="50" width="142" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Physical-Education]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1645" y="50" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Home-Science]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1791" y="50" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Computer]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -291,14 +387,14 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Student Roll]]></text>
+				<text><![CDATA[Roll]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="63" y="0" width="126" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Student Name]]></text>
+				<text><![CDATA[ Name]]></text>
 			</staticText>
 			<line>
 				<reportElement x="62" y="0" width="1" height="20"/>
@@ -311,130 +407,130 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Bngla-1st]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="297" y="2" width="107" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Bngla-2nd]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="21" width="2080" height="1"/>
+				<reportElement x="1" y="21" width="1936" height="1"/>
 			</line>
 			<line>
-				<reportElement x="296" y="0" width="1" height="20"/>
+				<reportElement x="296" y="2" width="1" height="20"/>
 			</line>
 			<line>
 				<reportElement x="404" y="0" width="1" height="20"/>
 			</line>
 			<staticText>
-				<reportElement x="405" y="0" width="99" height="20"/>
+				<reportElement x="405" y="2" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[English-1st]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="506" y="0" width="99" height="20"/>
+				<reportElement x="506" y="1" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[English-2nd]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="606" y="0" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Math]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="706" y="0" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Religon]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="806" y="0" width="99" height="20"/>
+				<reportElement x="806" y="2" width="99" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Bngladesh-Studies]]></text>
+				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<line>
-				<reportElement x="504" y="0" width="1" height="20"/>
+				<reportElement x="504" y="2" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="605" y="0" width="1" height="20"/>
+				<reportElement x="605" y="2" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="705" y="0" width="1" height="20"/>
+				<reportElement x="705" y="1" width="1" height="20"/>
 			</line>
 			<line>
 				<reportElement x="805" y="2" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="905" y="0" width="1" height="20"/>
+				<reportElement x="905" y="2" width="1" height="20"/>
 			</line>
 			<staticText>
 				<reportElement x="906" y="0" width="144" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Physics]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1050" y="0" width="1" height="20"/>
+				<reportElement x="1050" y="2" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="1356" y="0" width="1" height="20"/>
+				<reportElement x="1356" y="1" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="1500" y="0" width="1" height="20"/>
+				<reportElement x="1502" y="2" width="1" height="20"/>
 			</line>
 			<line>
 				<reportElement x="1647" y="0" width="1" height="20"/>
 			</line>
 			<staticText>
-				<reportElement x="1051" y="0" width="143" height="20"/>
+				<reportElement x="1051" y="2" width="143" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Chemistry]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1195" y="0" width="1" height="20"/>
 			</line>
 			<staticText>
-				<reportElement x="1198" y="0" width="158" height="20"/>
+				<reportElement x="1198" y="2" width="158" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Biology]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1358" y="0" width="142" height="20"/>
+				<reportElement x="1358" y="2" width="142" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Higher_Math]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1503" y="0" width="143" height="20"/>
+				<reportElement x="1503" y="2" width="143" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[ICT]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1648" y="0" width="143" height="20"/>
+				<reportElement x="1648" y="2" width="143" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Physical-Education]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1792" y="0" width="1" height="20"/>
@@ -444,20 +540,10 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Home-Economics]]></text>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
 			</staticText>
 			<line>
 				<reportElement x="1936" y="0" width="1" height="20"/>
-			</line>
-			<staticText>
-				<reportElement x="1937" y="0" width="143" height="20"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Computer]]></text>
-			</staticText>
-			<line>
-				<reportElement x="2080" y="0" width="1" height="20"/>
 			</line>
 			<line>
 				<reportElement x="0" y="0" width="1" height="20"/>
@@ -522,7 +608,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<reportElement x="604" y="0" width="1" height="20"/>
 			</line>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement x="604" y="0" width="98" height="20"/>
+				<reportElement x="604" y="0" width="100" height="20"/>
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
@@ -546,7 +632,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{Bangladesh-Studies}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Bangla-Studies}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="905" y="0" width="1" height="20"/>
@@ -572,7 +658,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{Chemis}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Chemistry}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1356" y="0" width="1" height="20"/>
@@ -589,14 +675,14 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{Higher-math}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{ICT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement x="1503" y="0" width="143" height="20"/>
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{ICT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Phy-Education}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1646" y="0" width="1" height="20"/>
@@ -606,7 +692,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{Phy-Education}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Home-Science}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="1792" y="0" width="1" height="20"/>
@@ -619,31 +705,21 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{Home-Science}]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="2080" y="0" width="1" height="20"/>
-			</line>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement x="1938" y="0" width="143" height="20"/>
-				<textElement>
-					<font size="12" isUnderline="true"/>
-				</textElement>
 				<textFieldExpression><![CDATA[$V{Computer}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="20" width="2079" height="1"/>
+				<reportElement x="1" y="20" width="1935" height="1"/>
 			</line>
 			<line>
 				<reportElement x="1" y="0" width="1" height="20"/>
 			</line>
 			<line>
-				<reportElement x="62" y="0" width="1" height="20"/>
+				<reportElement x="62" y="1" width="1" height="20"/>
 			</line>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField>
 				<reportElement x="31" y="0" width="100" height="20"/>
 				<textElement/>
