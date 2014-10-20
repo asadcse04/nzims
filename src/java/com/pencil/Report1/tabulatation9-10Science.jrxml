@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TestExcel9-10Science" pageWidth="2137" pageHeight="595" orientation="Landscape" columnWidth="2097" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="938"/>
+	<property name="ireport.x" value="819"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="ClassConfigId" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -218,12 +218,12 @@ $F{student_tabulation_Bilogy_OB}.toString() + ':' +
 $F{student_tabulation_Bilogy_PR}.toString() + ':' +
 '=' + $F{student_tabulation_Bilogy_total}.toString()]]></variableExpression>
 	</variable>
-	<variable name="ICT" class="java.lang.String">
-		<variableExpression><![CDATA[$F{student_tabulation_I_C_T_CT}.toString() + ':' +
-$F{student_tabulation_I_C_T_WR}.toString() + ':' +
-$F{student_tabulation_I_C_T_OB}.toString() + ':' +
-$F{student_tabulation_I_C_T_PR}.toString() + ':' +
-'=' + $F{student_tabulation_I_C_T_total}.toString()]]></variableExpression>
+	<variable name="Higher-math" class="java.lang.String">
+		<variableExpression><![CDATA[$F{student_tabulation_Higher_Mathe_CT}.toString() + ':' +
+$F{student_tabulation_Higher_Mathe_WR}.toString()+ ':' +
+$F{student_tabulation_Higher_Mathe_OB}.toString() + ':' +
+$F{student_tabulation_Higher_Mathe_PR}.toString() + ':' +
+'=' +$F{student_tabulation_Higher_Mathe_total}.toString()]]></variableExpression>
 	</variable>
 	<variable name="Phy-Education" class="java.lang.String">
 		<variableExpression><![CDATA[$F{student_tabulation_Physical_Education_CT}.toString() + ':' +
@@ -246,25 +246,67 @@ $F{student_tabulation_Computer_OB}.toString() + ':' +
 $F{student_tabulation_Computer_PR}.toString() + ':' +
 '=' + $F{student_tabulation_Computer_total}.toString()]]></variableExpression>
 	</variable>
+	<variable name="ICT" class="java.lang.String">
+		<variableExpression><![CDATA[$F{student_tabulation_I_C_T_CT}.toString() + ':' +
+$F{student_tabulation_I_C_T_WR}.toString() + ':' +
+$F{student_tabulation_I_C_T_OB}.toString() + ':' +
+$F{student_tabulation_I_C_T_PR}.toString() + ':' +
+'=' + $F{student_tabulation_I_C_T_total}.toString()]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="41" splitType="Stretch"/>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="951" y="2" width="247" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Norshingdi Govt. Girls High School]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="21" width="220" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TabulationSheet- Science]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="2" width="64" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="2" width="124" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="2" width="107" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="0" width="107" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="70" splitType="Stretch">
 			<line>
-				<reportElement x="1" y="0" width="1935" height="1"/>
+				<reportElement x="1" y="0" width="2082" height="1"/>
 			</line>
 			<line>
-				<reportElement x="1" y="69" width="1935" height="1"/>
+				<reportElement x="1" y="69" width="2082" height="1"/>
 			</line>
 			<line>
 				<reportElement x="0" y="0" width="1" height="68"/>
 			</line>
 			<line>
-				<reportElement x="1936" y="0" width="1" height="68"/>
+				<reportElement x="2083" y="0" width="1" height="68"/>
 			</line>
 			<staticText>
 				<reportElement x="1" y="50" width="62" height="20"/>
@@ -355,7 +397,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[ICT]]></text>
+				<text><![CDATA[Higher Math]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1504" y="50" width="142" height="20"/>
@@ -377,6 +419,13 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Computer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1937" y="50" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ICT]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -417,7 +466,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<text><![CDATA[CT:WR:OB=TOT]]></text>
 			</staticText>
 			<line>
-				<reportElement x="1" y="21" width="1936" height="1"/>
+				<reportElement x="1" y="21" width="2081" height="1"/>
 			</line>
 			<line>
 				<reportElement x="296" y="2" width="1" height="20"/>
@@ -548,6 +597,16 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 			<line>
 				<reportElement x="0" y="0" width="1" height="20"/>
 			</line>
+			<staticText>
+				<reportElement x="1937" y="2" width="143" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[CT:WR:OB:PR=TOT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2082" y="1" width="1" height="20"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -675,7 +734,7 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textElement>
 					<font size="12" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{ICT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{Higher-math}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement x="1503" y="0" width="143" height="20"/>
@@ -708,13 +767,21 @@ $F{student_tabulation_Computer_PR}.toString() + ':' +
 				<textFieldExpression><![CDATA[$V{Computer}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="20" width="1935" height="1"/>
+				<reportElement x="1" y="20" width="2079" height="1"/>
 			</line>
 			<line>
 				<reportElement x="1" y="0" width="1" height="20"/>
 			</line>
 			<line>
 				<reportElement x="62" y="1" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement x="1937" y="1" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{ICT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2081" y="1" width="1" height="20"/>
 			</line>
 		</band>
 	</detail>
